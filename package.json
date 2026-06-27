@@ -2,17 +2,18 @@
   "name": "parallax-watchtower",
   "version": "0.1.0",
   "private": false,
+  "type": "module",
+  "homepage": "https://michaelwave369.github.io/parallax-watchtower/",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
+    "dev": "vite --host 0.0.0.0",
+    "build": "vite build --base=/parallax-watchtower/",
+    "preview": "vite preview"
   },
   "dependencies": {
-    "next": "15.1.3",
+    "@vitejs/plugin-react": "latest",
+    "vite": "latest",
     "react": "18.3.1",
-    "react-dom": "18.3.1"
-  },
-  "devDependencies": {
+    "react-dom": "18.3.1",
     "typescript": "5.7.2",
     "@types/node": "22.10.2",
     "@types/react": "18.3.18",
