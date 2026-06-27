@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 
 type SignalType = "earthquake" | "news" | "market";
 type Confidence = "verified_official" | "reported" | "approximate" | "unknown";
+type TimeWindow = "24h" | "7d";
 
 type SignalRecord = {
   id: string;
@@ -31,6 +32,14 @@ function distanceKm(aLat: number, aLon: number, bLat: number, bLon: number) {
   const dLon = ((bLon - aLon) * Math.PI) / 180;
   const x = Math.sin(dLat / 2) ** 2 + Math.cos((aLat * Math.PI) / 180) * Math.cos((bLat * Math.PI) / 180) * Math.sin(dLon / 2) ** 2;
   return 2 * r * Math.asin(Math.sqrt(x));
+}
+
+function ageLabel(timestamp: string) {
+  const minutes = Math.max(0, Math.round((Date.now() - Number(new Date(timestamp))) / 60000));
+  if (minutes < 60) return `${minutes}m ago`;
+  const hours = Math.round(minutes / 60);
+  if (hours < 48) return `${hours}h ago`;
+  return `${Math.round(hours / 24)}d ago`;
 }
 
 function CanvasMap({ signals, selectedId, onSelect, zone, radiusKm }: { signals: SignalRecord[]; selectedId?: string; onSelect: (id: string) => void; zone: Props["defaultZone"]; radiusKm: number }) {
@@ -62,12 +71,14 @@ function CanvasMap({ signals, selectedId, onSelect, zone, radiusKm }: { signals:
     const c = project(zone.lat, zone.lon);
     ctx.strokeStyle = "rgba(84,242,255,0.65)";
     ctx.beginPath(); ctx.arc(c.x, c.y, Math.max(18, Math.min(120, radiusKm / 2.4)), 0, Math.PI * 2); ctx.stroke();
+    ctx.fillStyle = "#54f2ff";
+    ctx.beginPath(); ctx.arc(c.x, c.y, 5, 0, Math.PI * 2); ctx.fill();
     signals.filter((s) => s.lat !== undefined && s.lon !== undefined).slice(0, 900).forEach((s) => {
       const p = project(s.lat as number, s.lon as number);
       const mag = s.magnitude ?? 1;
       const size = Math.max(3, Math.min(16, mag * 2.3));
       ctx.beginPath();
-      ctx.fillStyle = s.id === selectedId ? "#ff5fa0" : s.type === "earthquake" ? "#ff9d45" : s.type === "news" ? "#54f2ff" : "#ffd66e";
+      ctx.fillStyle = s.id === selectedId ? "#ff5fa0" : s.type === "earthquake" ? (mag >= 5 ? "#ff5fa0" : mag >= 3 ? "#ff9d45" : "#ffd66e") : s.type === "news" ? "#54f2ff" : "#1ed6b7";
       ctx.shadowColor = ctx.fillStyle;
       ctx.shadowBlur = 16;
       ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
@@ -106,6 +117,10 @@ export function WatchtowerDashboard({ defaultZone }: Props) {
   const [radiusKm, setRadiusKm] = useState(defaultZone.radiusKm);
   const [activeZone, setActiveZone] = useState(defaultZone);
   const [enabled, setEnabled] = useState<SignalType[]>(["earthquake", "news", "market"]);
+  const [timeWindow, setTimeWindow] = useState<TimeWindow>("7d");
+  const [query, setQuery] = useState("");
+  const [lastUpdated, setLastUpdated] = useState<string>();
+  const [fieldNote, setFieldNote] = useState("Ready");
 
   const lenses = [defaultZone, { name: "Mt. Shasta Watch Lens", lat: 41.4099, lon: -122.1949, radiusKm: 200 }, { name: "Northern California Lens", lat: 39.6, lon: -121.9, radiusKm: 350 }, { name: "West Coast Lens", lat: 38.5, lon: -123.5, radiusKm: 900 }];
 
@@ -132,12 +147,15 @@ export function WatchtowerDashboard({ defaultZone }: Props) {
         privacyClass: "public"
       }));
       const demos: SignalRecord[] = [
-        { id: "demo-news-shasta", type: "news", title: "Demo news lens: Mt. Shasta infrastructure watch", summary: "Placeholder for the upcoming GDELT/news adapter.", source: "Demo News Adapter", timestamp: now, lat: 41.4099, lon: -122.1949, confidence: "reported", privacyClass: "public" },
+        { id: "demo-news-shasta", type: "news", title: "Demo news lens: Mt. Shasta infrastructure watch", summary: "Placeholder for the upcoming news adapter.", source: "Demo News Adapter", timestamp: now, lat: 41.4099, lon: -122.1949, confidence: "reported", privacyClass: "public" },
         { id: "demo-market-btc", type: "market", title: "Demo BTC market pulse", summary: "Placeholder for future market adapter with delay labels.", source: "Demo Market Adapter", timestamp: now, confidence: "reported", privacyClass: "public" }
       ];
       setSignals([...quakes, ...demos].sort((a, b) => Number(new Date(b.timestamp)) - Number(new Date(a.timestamp))));
+      setLastUpdated(now);
+      setFieldNote(`Loaded ${quakes.length} USGS earthquake records`);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Signal load failed");
+      setFieldNote("Source check failed; retry when network clears");
     } finally {
       setLoading(false);
     }
@@ -145,18 +163,46 @@ export function WatchtowerDashboard({ defaultZone }: Props) {
 
   useEffect(() => { load(); const timer = window.setInterval(load, 60000); return () => window.clearInterval(timer); }, []);
 
-  const visible = useMemo(() => signals.filter((s) => enabled.includes(s.type) && (s.type !== "earthquake" || (s.magnitude ?? 0) >= minMag) && (!localOnly || (s.lat !== undefined && s.lon !== undefined && distanceKm(activeZone.lat, activeZone.lon, s.lat, s.lon) <= radiusKm))), [signals, enabled, minMag, localOnly, activeZone, radiusKm]);
+  const visible = useMemo(() => signals.filter((s) => {
+    if (!enabled.includes(s.type)) return false;
+    if (s.type === "earthquake" && (s.magnitude ?? 0) < minMag) return false;
+    if (timeWindow === "24h" && Number(new Date(s.timestamp)) < Date.now() - 24 * 60 * 60 * 1000) return false;
+    if (query.trim()) {
+      const haystack = `${s.title} ${s.summary ?? ""} ${s.source}`.toLowerCase();
+      if (!haystack.includes(query.trim().toLowerCase())) return false;
+    }
+    if (localOnly) {
+      if (s.lat === undefined || s.lon === undefined) return false;
+      if (distanceKm(activeZone.lat, activeZone.lon, s.lat, s.lon) > radiusKm) return false;
+    }
+    return true;
+  }), [signals, enabled, minMag, localOnly, activeZone, radiusKm, timeWindow, query]);
+
   const selected = visible.find((s) => s.id === selectedId) ?? visible[0];
   const maxMag = visible.reduce((m, s) => Math.max(m, s.magnitude ?? 0), 0);
-  const localHits = visible.filter((s) => s.lat !== undefined && s.lon !== undefined && distanceKm(activeZone.lat, activeZone.lon, s.lat, s.lon) <= radiusKm).length;
+  const localSignals = visible.filter((s) => s.lat !== undefined && s.lon !== undefined && distanceKm(activeZone.lat, activeZone.lon, s.lat, s.lon) <= radiusKm);
+  const localHits = localSignals.length;
+  const localM3 = localSignals.filter((s) => s.type === "earthquake" && (s.magnitude ?? 0) >= 3).length;
+  const regionalM5 = visible.filter((s) => s.type === "earthquake" && (s.magnitude ?? 0) >= 5).length;
+
+  const alertCards = [
+    { title: "Local M3+", value: localM3, detail: `${radiusKm} km around ${activeZone.name}` },
+    { title: "Visible M5+", value: regionalM5, detail: "Strong events in current filters" },
+    { title: "Source Freshness", value: lastUpdated ? ageLabel(lastUpdated) : "pending", detail: "USGS feed refresh target: 60s" }
+  ];
 
   function toggle(type: SignalType) { setEnabled((old) => old.includes(type) ? old.filter((t) => t !== type) : [...old, type]); }
   function useMyLocation() { navigator.geolocation?.getCurrentPosition((p) => setActiveZone({ name: "My Local Lens", lat: p.coords.latitude, lon: p.coords.longitude, radiusKm })); }
+  async function copyFieldReport() {
+    const report = `Parallax Watchtower field report\nLens: ${activeZone.name}\nVisible signals: ${visible.length}\nLocal radius hits: ${localHits}\nLocal M3+: ${localM3}\nVisible M5+: ${regionalM5}\nMax magnitude: ${maxMag.toFixed(1)}\nUpdated: ${lastUpdated ?? "pending"}`;
+    await navigator.clipboard?.writeText(report);
+    setFieldNote("Field report copied to clipboard");
+  }
 
   return <main className="shell">
     <header className="header"><div className="brand"><div className="mark">⌂</div><div><div className="eyebrow">PARALLAX</div><h1>WATCHTOWER</h1><div className="subtitle">Real-time signal atlas & OSINT field ledger. See more. Know sooner. Act smarter.</div></div></div><div className="stats"><div className="stat"><strong>{visible.length}</strong><span>Visible signals</span></div><div className="stat"><strong>{localHits}</strong><span>Local radius hits</span></div><div className="stat"><strong>{maxMag.toFixed(1)}</strong><span>Max magnitude</span></div></div></header>
-    <div className="status-strip"><span className="pill good">Field online</span><span className="pill">USGS feed {loading ? "loading" : "loaded"}</span><span className="pill">Lite Atlas mode</span></div>
+    <div className="status-strip"><span className="pill good">Field online</span><span className="pill">USGS feed {loading ? "loading" : "loaded"}</span><span className="pill">Lite Atlas mode</span><span className="pill">{fieldNote}</span></div>
     {error && <p className="error">{error}</p>}
-    <section className="grid"><aside className="panel panel-pad"><h2 className="panel-title">Controls</h2><div className="control-group"><div className="label">Signal layers</div><div className="toggle-row">{(["earthquake", "news", "market"] as SignalType[]).map((t) => <button className={`toggle ${enabled.includes(t) ? "" : "off"}`} key={t} onClick={() => toggle(t)}>{t}</button>)}</div></div><div className="control-group"><div className="label">Minimum earthquake magnitude</div><input className="slider" type="range" min="0" max="7" step="0.1" value={minMag} onChange={(e) => setMinMag(Number(e.target.value))}/><p className="small">M {minMag.toFixed(1)}+</p></div><div className="control-group zone-card"><div className="label">Local lens</div><strong>{activeZone.name}</strong><p className="small">{activeZone.lat.toFixed(4)}, {activeZone.lon.toFixed(4)}</p><select className="toggle" value={activeZone.name} onChange={(e) => { const z = lenses.find((l) => l.name === e.target.value); if (z) { setActiveZone(z); setRadiusKm(z.radiusKm); } }}>{lenses.map((z) => <option key={z.name}>{z.name}</option>)}</select><div className="zone-row"><button className="btn" onClick={useMyLocation}>Use my location</button><button className="btn" onClick={() => setActiveZone(defaultZone)}>Reset Corning</button></div><label className="checkline"><input type="checkbox" checked={localOnly} onChange={(e) => setLocalOnly(e.target.checked)}/> show local radius only</label><input className="slider" type="range" min="25" max="900" step="25" value={radiusKm} onChange={(e) => setRadiusKm(Number(e.target.value))}/><p className="small">{radiusKm} km radius</p></div><ul className="boundary-list"><li>Consent-based location only</li><li>Public/official sources preferred</li><li>Receipts over hype</li><li>Correlation does not equal causation</li></ul></aside><section className="panel map-panel"><div className="map-head"><div><h2 className="panel-title">Lite Atlas Field Map</h2><div className="small">Canvas fallback: no external map tiles, Android-safe first.</div></div><div className="legend"><span className="badge verified_official">Verified official</span><span className="badge reported">Reported</span></div></div><div className="canvas-wrap"><span className="map-chip">{visible.filter((s) => s.lat !== undefined).length} mapped signals • tap marker for receipt</span><CanvasMap signals={visible} selectedId={selected?.id} onSelect={setSelectedId} zone={activeZone} radiusKm={radiusKm}/></div></section><aside className="panel panel-pad"><h2 className="panel-title">Signal Feed</h2><div className="feed-list">{visible.slice(0, 28).map((s) => <button key={s.id} className={`feed-item ${s.id === selected?.id ? "active" : ""}`} onClick={() => setSelectedId(s.id)}><div className="feed-title">{s.magnitude ? `M ${s.magnitude.toFixed(1)} - ` : ""}{s.title}</div><div className="small">{s.source} • {new Date(s.timestamp).toLocaleString()}</div><span className={`badge ${s.confidence}`}>{s.confidence.replace("_", " ")}</span></button>)}</div>{selected && <div className="receipt"><h2 className="panel-title">Event Receipt</h2><dl><dt>Title</dt><dd>{selected.title}</dd><dt>Source</dt><dd>{selected.source}</dd><dt>Time</dt><dd>{new Date(selected.timestamp).toLocaleString()}</dd><dt>Location</dt><dd>{selected.lat?.toFixed(4) ?? "unmapped"}, {selected.lon?.toFixed(4) ?? ""}</dd><dt>Magnitude</dt><dd>{selected.magnitude ?? "n/a"}</dd><dt>Depth</dt><dd>{selected.depthKm ?? "n/a"} km</dd><dt>Privacy</dt><dd>{selected.privacyClass}</dd><dt>Receipt</dt><dd>{selected.sourceUrl ? <a href={selected.sourceUrl} target="_blank">Open source</a> : "demo record"}</dd></dl></div>}</aside></section>
+    <section className="grid"><aside className="panel panel-pad"><h2 className="panel-title">Controls</h2><div className="control-group"><div className="label">Signal layers</div><div className="toggle-row">{(["earthquake", "news", "market"] as SignalType[]).map((t) => <button className={`toggle ${enabled.includes(t) ? "" : "off"}`} key={t} onClick={() => toggle(t)}>{t}</button>)}</div></div><div className="control-group"><div className="label">Time window</div><div className="toggle-row"><button className={`toggle ${timeWindow === "24h" ? "" : "off"}`} onClick={() => setTimeWindow("24h")}>24h</button><button className={`toggle ${timeWindow === "7d" ? "" : "off"}`} onClick={() => setTimeWindow("7d")}>7d</button></div></div><div className="control-group"><div className="label">Search field</div><input className="toggle" style={{ width: "100%" }} value={query} placeholder="place, source, keyword" onChange={(e) => setQuery(e.target.value)}/></div><div className="control-group"><div className="label">Minimum earthquake magnitude</div><input className="slider" type="range" min="0" max="7" step="0.1" value={minMag} onChange={(e) => setMinMag(Number(e.target.value))}/><p className="small">M {minMag.toFixed(1)}+</p></div><div className="control-group zone-card"><div className="label">Local lens</div><strong>{activeZone.name}</strong><p className="small">{activeZone.lat.toFixed(4)}, {activeZone.lon.toFixed(4)}</p><select className="toggle" value={activeZone.name} onChange={(e) => { const z = lenses.find((l) => l.name === e.target.value); if (z) { setActiveZone(z); setRadiusKm(z.radiusKm); } }}>{lenses.map((z) => <option key={z.name}>{z.name}</option>)}</select><div className="zone-row"><button className="btn" onClick={useMyLocation}>Use my location</button><button className="btn" onClick={() => setActiveZone(defaultZone)}>Reset Corning</button></div><label className="checkline"><input type="checkbox" checked={localOnly} onChange={(e) => setLocalOnly(e.target.checked)}/> show local radius only</label><input className="slider" type="range" min="25" max="900" step="25" value={radiusKm} onChange={(e) => setRadiusKm(Number(e.target.value))}/><p className="small">{radiusKm} km radius</p></div><div className="control-group zone-card"><div className="label">Alert preview</div>{alertCards.map((card) => <p className="small" key={card.title}><strong>{card.title}: {card.value}</strong><br />{card.detail}</p>)}<button className="btn" onClick={copyFieldReport}>Copy field report</button></div><ul className="boundary-list"><li>Consent-based location only</li><li>Public/official sources preferred</li><li>Receipts over hype</li><li>Correlation does not equal causation</li></ul></aside><section className="panel map-panel"><div className="map-head"><div><h2 className="panel-title">Lite Atlas Field Map</h2><div className="small">Canvas fallback: no external map tiles, Android-safe first.</div></div><div className="legend"><span className="badge verified_official">Verified official</span><span className="badge reported">Reported</span></div></div><div className="canvas-wrap"><span className="map-chip">{visible.filter((s) => s.lat !== undefined).length} mapped signals • tap marker for receipt</span><CanvasMap signals={visible} selectedId={selected?.id} onSelect={setSelectedId} zone={activeZone} radiusKm={radiusKm}/></div></section><aside className="panel panel-pad"><h2 className="panel-title">Signal Feed</h2><div className="feed-list">{visible.slice(0, 28).map((s) => <button key={s.id} className={`feed-item ${s.id === selected?.id ? "active" : ""}`} onClick={() => setSelectedId(s.id)}><div className="feed-title">{s.magnitude ? `M ${s.magnitude.toFixed(1)} - ` : ""}{s.title}</div><div className="small">{s.source} • {ageLabel(s.timestamp)} • {new Date(s.timestamp).toLocaleString()}</div><span className={`badge ${s.confidence}`}>{s.confidence.replace("_", " ")}</span></button>)}</div>{selected && <div className="receipt"><h2 className="panel-title">Event Receipt</h2><dl><dt>Title</dt><dd>{selected.title}</dd><dt>Source</dt><dd>{selected.source}</dd><dt>Time</dt><dd>{new Date(selected.timestamp).toLocaleString()}</dd><dt>Age</dt><dd>{ageLabel(selected.timestamp)}</dd><dt>Location</dt><dd>{selected.lat?.toFixed(4) ?? "unmapped"}, {selected.lon?.toFixed(4) ?? ""}</dd><dt>Distance</dt><dd>{selected.lat !== undefined && selected.lon !== undefined ? `${distanceKm(activeZone.lat, activeZone.lon, selected.lat, selected.lon).toFixed(1)} km from ${activeZone.name}` : "n/a"}</dd><dt>Magnitude</dt><dd>{selected.magnitude ?? "n/a"}</dd><dt>Depth</dt><dd>{selected.depthKm ?? "n/a"} km</dd><dt>Privacy</dt><dd>{selected.privacyClass}</dd><dt>Receipt</dt><dd>{selected.sourceUrl ? <a href={selected.sourceUrl} target="_blank">Open source</a> : "demo record"}</dd></dl></div>}</aside></section>
   </main>;
 }
