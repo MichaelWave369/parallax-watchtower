@@ -5,6 +5,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 type SignalType = "earthquake" | "news" | "market";
 type Confidence = "verified_official" | "reported" | "approximate" | "unknown";
 type TimeWindow = "24h" | "7d";
+type SourceStatus = "fresh" | "stale" | "down" | "demo";
 
 type SignalRecord = {
   id: string;
@@ -19,7 +20,16 @@ type SignalRecord = {
   depthKm?: number;
   magnitude?: number;
   confidence: Confidence;
+  confidenceNotes?: string;
   privacyClass: "public" | "consent_based" | "private_local";
+  facts?: Record<string, string | number | null | undefined>;
+};
+
+type SourceLedgerEntry = {
+  name: string;
+  status: SourceStatus;
+  lastChecked?: string;
+  message: string;
 };
 
 type Props = { defaultZone: { name: string; lat: number; lon: number; radiusKm: number } };
@@ -34,7 +44,8 @@ function distanceKm(aLat: number, aLon: number, bLat: number, bLon: number) {
   return 2 * r * Math.asin(Math.sqrt(x));
 }
 
-function ageLabel(timestamp: string) {
+function ageLabel(timestamp?: string) {
+  if (!timestamp) return "pending";
   const minutes = Math.max(0, Math.round((Date.now() - Number(new Date(timestamp))) / 60000));
   if (minutes < 60) return `${minutes}m ago`;
   const hours = Math.round(minutes / 60);
@@ -121,14 +132,26 @@ export function WatchtowerDashboard({ defaultZone }: Props) {
   const [query, setQuery] = useState("");
   const [lastUpdated, setLastUpdated] = useState<string>();
   const [fieldNote, setFieldNote] = useState("Ready");
+  const [sourceLedger, setSourceLedger] = useState<SourceLedgerEntry[]>([
+    { name: "USGS Earthquake Feed", status: "stale", message: "Waiting for first pull" },
+    { name: "Demo News Adapter", status: "demo", message: "Placeholder until real news adapter lands" },
+    { name: "Demo Market Adapter", status: "demo", message: "Placeholder until real market adapter lands" }
+  ]);
+  const [watchtowerLog, setWatchtowerLog] = useState<string[]>(["Watchtower booted in Lite Atlas mode"]);
 
   const lenses = [defaultZone, { name: "Mt. Shasta Watch Lens", lat: 41.4099, lon: -122.1949, radiusKm: 200 }, { name: "Northern California Lens", lat: 39.6, lon: -121.9, radiusKm: 350 }, { name: "West Coast Lens", lat: 38.5, lon: -123.5, radiusKm: 900 }];
+
+  function pushLog(message: string) {
+    setWatchtowerLog((old) => [`${new Date().toLocaleTimeString()} — ${message}`, ...old].slice(0, 8));
+  }
 
   async function load() {
     setLoading(true);
     setError(undefined);
     try {
+      const started = Date.now();
       const res = await fetch(FEED_URL, { cache: "no-store" });
+      if (!res.ok) throw new Error(`USGS returned ${res.status}`);
       const json = await res.json();
       const now = new Date().toISOString();
       const quakes: SignalRecord[] = (json.features ?? []).filter((f: any) => f.properties?.type === "earthquake").map((f: any) => ({
@@ -144,18 +167,41 @@ export function WatchtowerDashboard({ defaultZone }: Props) {
         depthKm: f.geometry?.coordinates?.[2],
         magnitude: typeof f.properties.mag === "number" ? f.properties.mag : undefined,
         confidence: "verified_official",
-        privacyClass: "public"
+        confidenceNotes: f.properties.status === "reviewed" ? "USGS reviewed event" : "USGS automatic event",
+        privacyClass: "public",
+        facts: {
+          usgsId: f.id,
+          status: f.properties.status,
+          magType: f.properties.magType,
+          feltReports: f.properties.felt,
+          cdi: f.properties.cdi,
+          mmi: f.properties.mmi,
+          alert: f.properties.alert,
+          tsunamiFlag: f.properties.tsunami,
+          significance: f.properties.sig,
+          network: f.properties.net,
+          code: f.properties.code
+        }
       }));
       const demos: SignalRecord[] = [
-        { id: "demo-news-shasta", type: "news", title: "Demo news lens: Mt. Shasta infrastructure watch", summary: "Placeholder for the upcoming news adapter.", source: "Demo News Adapter", timestamp: now, lat: 41.4099, lon: -122.1949, confidence: "reported", privacyClass: "public" },
-        { id: "demo-market-btc", type: "market", title: "Demo BTC market pulse", summary: "Placeholder for future market adapter with delay labels.", source: "Demo Market Adapter", timestamp: now, confidence: "reported", privacyClass: "public" }
+        { id: "demo-news-shasta", type: "news", title: "Demo news lens: Mt. Shasta infrastructure watch", summary: "Placeholder for the upcoming news adapter.", source: "Demo News Adapter", timestamp: now, lat: 41.4099, lon: -122.1949, confidence: "reported", privacyClass: "public", facts: { adapter: "demo", nextStep: "news source route" } },
+        { id: "demo-market-btc", type: "market", title: "Demo BTC market pulse", summary: "Placeholder for future market adapter with delay labels.", source: "Demo Market Adapter", timestamp: now, confidence: "reported", privacyClass: "public", facts: { adapter: "demo", delay: "not live market data" } }
       ];
       setSignals([...quakes, ...demos].sort((a, b) => Number(new Date(b.timestamp)) - Number(new Date(a.timestamp))));
       setLastUpdated(now);
       setFieldNote(`Loaded ${quakes.length} USGS earthquake records`);
+      setSourceLedger([
+        { name: "USGS Earthquake Feed", status: "fresh", lastChecked: now, message: `${quakes.length} earthquake records in ${Date.now() - started}ms` },
+        { name: "Demo News Adapter", status: "demo", lastChecked: now, message: "UI placeholder only" },
+        { name: "Demo Market Adapter", status: "demo", lastChecked: now, message: "UI placeholder only" }
+      ]);
+      pushLog(`USGS feed passed with ${quakes.length} records`);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Signal load failed");
+      const message = err instanceof Error ? err.message : "Signal load failed";
+      setError(message);
       setFieldNote("Source check failed; retry when network clears");
+      setSourceLedger((old) => old.map((source) => source.name === "USGS Earthquake Feed" ? { ...source, status: "down", lastChecked: new Date().toISOString(), message } : source));
+      pushLog(`USGS feed failed: ${message}`);
     } finally {
       setLoading(false);
     }
@@ -197,12 +243,13 @@ export function WatchtowerDashboard({ defaultZone }: Props) {
     const report = `Parallax Watchtower field report\nLens: ${activeZone.name}\nVisible signals: ${visible.length}\nLocal radius hits: ${localHits}\nLocal M3+: ${localM3}\nVisible M5+: ${regionalM5}\nMax magnitude: ${maxMag.toFixed(1)}\nUpdated: ${lastUpdated ?? "pending"}`;
     await navigator.clipboard?.writeText(report);
     setFieldNote("Field report copied to clipboard");
+    pushLog("Field report copied");
   }
 
   return <main className="shell">
     <header className="header"><div className="brand"><div className="mark">⌂</div><div><div className="eyebrow">PARALLAX</div><h1>WATCHTOWER</h1><div className="subtitle">Real-time signal atlas & OSINT field ledger. See more. Know sooner. Act smarter.</div></div></div><div className="stats"><div className="stat"><strong>{visible.length}</strong><span>Visible signals</span></div><div className="stat"><strong>{localHits}</strong><span>Local radius hits</span></div><div className="stat"><strong>{maxMag.toFixed(1)}</strong><span>Max magnitude</span></div></div></header>
     <div className="status-strip"><span className="pill good">Field online</span><span className="pill">USGS feed {loading ? "loading" : "loaded"}</span><span className="pill">Lite Atlas mode</span><span className="pill">{fieldNote}</span></div>
     {error && <p className="error">{error}</p>}
-    <section className="grid"><aside className="panel panel-pad"><h2 className="panel-title">Controls</h2><div className="control-group"><div className="label">Signal layers</div><div className="toggle-row">{(["earthquake", "news", "market"] as SignalType[]).map((t) => <button className={`toggle ${enabled.includes(t) ? "" : "off"}`} key={t} onClick={() => toggle(t)}>{t}</button>)}</div></div><div className="control-group"><div className="label">Time window</div><div className="toggle-row"><button className={`toggle ${timeWindow === "24h" ? "" : "off"}`} onClick={() => setTimeWindow("24h")}>24h</button><button className={`toggle ${timeWindow === "7d" ? "" : "off"}`} onClick={() => setTimeWindow("7d")}>7d</button></div></div><div className="control-group"><div className="label">Search field</div><input className="toggle" style={{ width: "100%" }} value={query} placeholder="place, source, keyword" onChange={(e) => setQuery(e.target.value)}/></div><div className="control-group"><div className="label">Minimum earthquake magnitude</div><input className="slider" type="range" min="0" max="7" step="0.1" value={minMag} onChange={(e) => setMinMag(Number(e.target.value))}/><p className="small">M {minMag.toFixed(1)}+</p></div><div className="control-group zone-card"><div className="label">Local lens</div><strong>{activeZone.name}</strong><p className="small">{activeZone.lat.toFixed(4)}, {activeZone.lon.toFixed(4)}</p><select className="toggle" value={activeZone.name} onChange={(e) => { const z = lenses.find((l) => l.name === e.target.value); if (z) { setActiveZone(z); setRadiusKm(z.radiusKm); } }}>{lenses.map((z) => <option key={z.name}>{z.name}</option>)}</select><div className="zone-row"><button className="btn" onClick={useMyLocation}>Use my location</button><button className="btn" onClick={() => setActiveZone(defaultZone)}>Reset Corning</button></div><label className="checkline"><input type="checkbox" checked={localOnly} onChange={(e) => setLocalOnly(e.target.checked)}/> show local radius only</label><input className="slider" type="range" min="25" max="900" step="25" value={radiusKm} onChange={(e) => setRadiusKm(Number(e.target.value))}/><p className="small">{radiusKm} km radius</p></div><div className="control-group zone-card"><div className="label">Alert preview</div>{alertCards.map((card) => <p className="small" key={card.title}><strong>{card.title}: {card.value}</strong><br />{card.detail}</p>)}<button className="btn" onClick={copyFieldReport}>Copy field report</button></div><ul className="boundary-list"><li>Consent-based location only</li><li>Public/official sources preferred</li><li>Receipts over hype</li><li>Correlation does not equal causation</li></ul></aside><section className="panel map-panel"><div className="map-head"><div><h2 className="panel-title">Lite Atlas Field Map</h2><div className="small">Canvas fallback: no external map tiles, Android-safe first.</div></div><div className="legend"><span className="badge verified_official">Verified official</span><span className="badge reported">Reported</span></div></div><div className="canvas-wrap"><span className="map-chip">{visible.filter((s) => s.lat !== undefined).length} mapped signals • tap marker for receipt</span><CanvasMap signals={visible} selectedId={selected?.id} onSelect={setSelectedId} zone={activeZone} radiusKm={radiusKm}/></div></section><aside className="panel panel-pad"><h2 className="panel-title">Signal Feed</h2><div className="feed-list">{visible.slice(0, 28).map((s) => <button key={s.id} className={`feed-item ${s.id === selected?.id ? "active" : ""}`} onClick={() => setSelectedId(s.id)}><div className="feed-title">{s.magnitude ? `M ${s.magnitude.toFixed(1)} - ` : ""}{s.title}</div><div className="small">{s.source} • {ageLabel(s.timestamp)} • {new Date(s.timestamp).toLocaleString()}</div><span className={`badge ${s.confidence}`}>{s.confidence.replace("_", " ")}</span></button>)}</div>{selected && <div className="receipt"><h2 className="panel-title">Event Receipt</h2><dl><dt>Title</dt><dd>{selected.title}</dd><dt>Source</dt><dd>{selected.source}</dd><dt>Time</dt><dd>{new Date(selected.timestamp).toLocaleString()}</dd><dt>Age</dt><dd>{ageLabel(selected.timestamp)}</dd><dt>Location</dt><dd>{selected.lat?.toFixed(4) ?? "unmapped"}, {selected.lon?.toFixed(4) ?? ""}</dd><dt>Distance</dt><dd>{selected.lat !== undefined && selected.lon !== undefined ? `${distanceKm(activeZone.lat, activeZone.lon, selected.lat, selected.lon).toFixed(1)} km from ${activeZone.name}` : "n/a"}</dd><dt>Magnitude</dt><dd>{selected.magnitude ?? "n/a"}</dd><dt>Depth</dt><dd>{selected.depthKm ?? "n/a"} km</dd><dt>Privacy</dt><dd>{selected.privacyClass}</dd><dt>Receipt</dt><dd>{selected.sourceUrl ? <a href={selected.sourceUrl} target="_blank">Open source</a> : "demo record"}</dd></dl></div>}</aside></section>
+    <section className="grid"><aside className="panel panel-pad"><h2 className="panel-title">Controls</h2><div className="control-group"><div className="label">Signal layers</div><div className="toggle-row">{(["earthquake", "news", "market"] as SignalType[]).map((t) => <button className={`toggle ${enabled.includes(t) ? "" : "off"}`} key={t} onClick={() => toggle(t)}>{t}</button>)}</div></div><div className="control-group"><div className="label">Time window</div><div className="toggle-row"><button className={`toggle ${timeWindow === "24h" ? "" : "off"}`} onClick={() => setTimeWindow("24h")}>24h</button><button className={`toggle ${timeWindow === "7d" ? "" : "off"}`} onClick={() => setTimeWindow("7d")}>7d</button></div></div><div className="control-group"><div className="label">Search field</div><input className="toggle" style={{ width: "100%" }} value={query} placeholder="place, source, keyword" onChange={(e) => setQuery(e.target.value)}/></div><div className="control-group"><div className="label">Minimum earthquake magnitude</div><input className="slider" type="range" min="0" max="7" step="0.1" value={minMag} onChange={(e) => setMinMag(Number(e.target.value))}/><p className="small">M {minMag.toFixed(1)}+</p></div><div className="control-group zone-card"><div className="label">Local lens</div><strong>{activeZone.name}</strong><p className="small">{activeZone.lat.toFixed(4)}, {activeZone.lon.toFixed(4)}</p><select className="toggle" value={activeZone.name} onChange={(e) => { const z = lenses.find((l) => l.name === e.target.value); if (z) { setActiveZone(z); setRadiusKm(z.radiusKm); } }}>{lenses.map((z) => <option key={z.name}>{z.name}</option>)}</select><div className="zone-row"><button className="btn" onClick={useMyLocation}>Use my location</button><button className="btn" onClick={() => setActiveZone(defaultZone)}>Reset Corning</button></div><label className="checkline"><input type="checkbox" checked={localOnly} onChange={(e) => setLocalOnly(e.target.checked)}/> show local radius only</label><input className="slider" type="range" min="25" max="900" step="25" value={radiusKm} onChange={(e) => setRadiusKm(Number(e.target.value))}/><p className="small">{radiusKm} km radius</p></div><div className="control-group zone-card"><div className="label">Alert preview</div>{alertCards.map((card) => <p className="small" key={card.title}><strong>{card.title}: {card.value}</strong><br />{card.detail}</p>)}<button className="btn" onClick={copyFieldReport}>Copy field report</button></div><div className="control-group zone-card"><div className="label">Source Ledger</div>{sourceLedger.map((source) => <p className="small" key={source.name}><span className={`badge ${source.status === "fresh" ? "verified_official" : source.status === "demo" ? "reported" : "unknown"}`}>{source.status}</span><br /><strong>{source.name}</strong><br />{source.message}<br />{source.lastChecked ? ageLabel(source.lastChecked) : "not checked"}</p>)}</div><div className="control-group zone-card"><div className="label">Watchtower Log</div>{watchtowerLog.map((entry) => <p className="small" key={entry}>{entry}</p>)}</div><ul className="boundary-list"><li>Consent-based location only</li><li>Public/official sources preferred</li><li>Receipts over hype</li><li>Correlation does not equal causation</li></ul></aside><section className="panel map-panel"><div className="map-head"><div><h2 className="panel-title">Lite Atlas Field Map</h2><div className="small">Canvas fallback: no external map tiles, Android-safe first.</div></div><div className="legend"><span className="badge verified_official">Verified official</span><span className="badge reported">Reported</span></div></div><div className="canvas-wrap"><span className="map-chip">{visible.filter((s) => s.lat !== undefined).length} mapped signals • tap marker for receipt</span><CanvasMap signals={visible} selectedId={selected?.id} onSelect={setSelectedId} zone={activeZone} radiusKm={radiusKm}/></div></section><aside className="panel panel-pad"><h2 className="panel-title">Signal Feed</h2><div className="feed-list">{visible.slice(0, 28).map((s) => <button key={s.id} className={`feed-item ${s.id === selected?.id ? "active" : ""}`} onClick={() => setSelectedId(s.id)}><div className="feed-title">{s.magnitude ? `M ${s.magnitude.toFixed(1)} - ` : ""}{s.title}</div><div className="small">{s.source} • {ageLabel(s.timestamp)} • {new Date(s.timestamp).toLocaleString()}</div><span className={`badge ${s.confidence}`}>{s.confidence.replace("_", " ")}</span></button>)}</div>{selected && <div className="receipt"><h2 className="panel-title">Event Receipt</h2><dl><dt>Title</dt><dd>{selected.title}</dd><dt>Source</dt><dd>{selected.source}</dd><dt>Time</dt><dd>{new Date(selected.timestamp).toLocaleString()}</dd><dt>Age</dt><dd>{ageLabel(selected.timestamp)}</dd><dt>Confidence</dt><dd>{selected.confidenceNotes ?? selected.confidence}</dd><dt>Location</dt><dd>{selected.lat?.toFixed(4) ?? "unmapped"}, {selected.lon?.toFixed(4) ?? ""}</dd><dt>Distance</dt><dd>{selected.lat !== undefined && selected.lon !== undefined ? `${distanceKm(activeZone.lat, activeZone.lon, selected.lat, selected.lon).toFixed(1)} km from ${activeZone.name}` : "n/a"}</dd><dt>Magnitude</dt><dd>{selected.magnitude ?? "n/a"}</dd><dt>Depth</dt><dd>{selected.depthKm ?? "n/a"} km</dd><dt>Privacy</dt><dd>{selected.privacyClass}</dd><dt>Receipt</dt><dd>{selected.sourceUrl ? <a href={selected.sourceUrl} target="_blank">Open source</a> : "demo record"}</dd>{selected.facts && Object.entries(selected.facts).filter(([, value]) => value !== undefined && value !== null && value !== "").map(([key, value]) => <><dt key={`${key}-dt`}>{key}</dt><dd key={`${key}-dd`}>{String(value)}</dd></>)}</dl></div>}</aside></section>
   </main>;
 }
