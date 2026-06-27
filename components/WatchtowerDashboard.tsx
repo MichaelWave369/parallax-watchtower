@@ -48,6 +48,8 @@ type Props = { defaultZone: { name: string; lat: number; lon: number; radiusKm: 
 
 const FEED_URL = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
 const GDELT_DOC_URL = "https://api.gdeltproject.org/api/v2/doc/doc";
+const NEWS_QUERY = "\"Northern California\" OR \"Mt Shasta\" OR Redding OR \"Tehama County\" OR Sacramento OR earthquake OR wildfire OR infrastructure";
+const PROXY_STORAGE_KEY = "watchtower:gdeltProxyUrl";
 
 function distanceKm(aLat: number, aLon: number, bLat: number, bLon: number) {
   const r = 6371;
@@ -93,49 +95,77 @@ function inferNewsLocation(article: GdeltArticle) {
   return {};
 }
 
-async function fetchNewsSignals(now: string) {
+function buildDirectGdeltUrl() {
   const url = new URL(GDELT_DOC_URL);
-  url.searchParams.set("query", "\"Northern California\" OR \"Mt Shasta\" OR \"Redding\" OR \"Tehama County\" OR \"Sacramento\" OR earthquake OR wildfire OR infrastructure");
+  url.searchParams.set("query", NEWS_QUERY);
   url.searchParams.set("mode", "ArtList");
   url.searchParams.set("format", "json");
   url.searchParams.set("maxrecords", "20");
   url.searchParams.set("sort", "HybridRel");
+  return url.toString();
+}
 
-  const started = Date.now();
-  const res = await fetch(url.toString(), { cache: "no-store" });
-  if (!res.ok) throw new Error(`GDELT returned ${res.status}`);
-  const json = await res.json();
-  const articles: GdeltArticle[] = Array.isArray(json.articles) ? json.articles : [];
-  const records: SignalRecord[] = articles.slice(0, 20).map((article, index) => {
-    const location = inferNewsLocation(article);
-    return {
-      id: `gdelt-${index}-${encodeURIComponent(article.url ?? article.title ?? String(index)).slice(0, 64)}`,
-      type: "news",
-      title: article.title ?? "Untitled public news signal",
-      summary: article.sourceCommonName ?? article.domain ?? "GDELT public news article",
-      source: "GDELT News Adapter",
-      sourceUrl: article.url,
-      timestamp: parseGdeltDate(article.seendate),
-      confidence: location.lat ? "reported" : "approximate",
-      confidenceNotes: location.lat ? "Public article with approximate place lens" : "Public article; no precise location inferred",
-      privacyClass: "public",
-      tags: [],
-      facts: {
-        domain: article.domain,
-        sourceCommonName: article.sourceCommonName,
-        language: article.language,
-        sourceCountry: article.sourceCountry,
-        seendate: article.seendate
-      },
-      ...location
-    } as SignalRecord;
-  });
+function buildProxyUrl(rawProxyUrl: string) {
+  const trimmed = rawProxyUrl.trim();
+  if (!trimmed) return "";
+  const url = new URL(trimmed, window.location.origin);
+  url.searchParams.set("query", NEWS_QUERY);
+  url.searchParams.set("maxrecords", "20");
+  return url.toString();
+}
 
-  return {
-    records,
-    ledger: { name: "GDELT News Adapter", status: records.length ? "fresh" as SourceStatus : "stale" as SourceStatus, lastChecked: now, message: `${records.length} public news records in ${Date.now() - started}ms` },
-    log: `GDELT news adapter returned ${records.length} records`
-  };
+async function fetchNewsSignals(now: string, proxyUrl: string) {
+  const endpoints = [] as { name: string; url: string; mode: "proxy" | "direct" }[];
+  const builtProxy = buildProxyUrl(proxyUrl);
+  if (builtProxy) endpoints.push({ name: "Proxy GDELT News Adapter", url: builtProxy, mode: "proxy" });
+  endpoints.push({ name: "GDELT News Adapter", url: buildDirectGdeltUrl(), mode: "direct" });
+
+  let lastError = "No news endpoint attempted";
+
+  for (const endpoint of endpoints) {
+    const started = Date.now();
+    try {
+      const res = await fetch(endpoint.url, { cache: "no-store" });
+      if (!res.ok) throw new Error(`${endpoint.name} returned ${res.status}`);
+      const json = await res.json();
+      const articles: GdeltArticle[] = Array.isArray(json.articles) ? json.articles : [];
+      const records: SignalRecord[] = articles.slice(0, 20).map((article, index) => {
+        const location = inferNewsLocation(article);
+        return {
+          id: `gdelt-${endpoint.mode}-${index}-${encodeURIComponent(article.url ?? article.title ?? String(index)).slice(0, 64)}`,
+          type: "news",
+          title: article.title ?? "Untitled public news signal",
+          summary: article.sourceCommonName ?? article.domain ?? "GDELT public news article",
+          source: endpoint.name,
+          sourceUrl: article.url,
+          timestamp: parseGdeltDate(article.seendate),
+          confidence: location.lat ? "reported" : "approximate",
+          confidenceNotes: location.lat ? `Public article via ${endpoint.mode} news path with approximate place lens` : `Public article via ${endpoint.mode} news path; no precise location inferred`,
+          privacyClass: "public",
+          facts: {
+            sourceMode: endpoint.mode,
+            domain: article.domain,
+            sourceCommonName: article.sourceCommonName,
+            language: article.language,
+            sourceCountry: article.sourceCountry,
+            seendate: article.seendate
+          },
+          ...location
+        } as SignalRecord;
+      });
+
+      return {
+        records,
+        ledger: { name: endpoint.name, status: records.length ? "fresh" as SourceStatus : "stale" as SourceStatus, lastChecked: now, message: `${records.length} public news records in ${Date.now() - started}ms via ${endpoint.mode}` },
+        log: `${endpoint.name} returned ${records.length} records`,
+        mode: endpoint.mode
+      };
+    } catch (error) {
+      lastError = error instanceof Error ? error.message : `${endpoint.name} failed`;
+    }
+  }
+
+  throw new Error(lastError);
 }
 
 function CanvasMap({ signals, selectedId, onSelect, zone, radiusKm }: { signals: SignalRecord[]; selectedId?: string; onSelect: (id: string) => void; zone: Props["defaultZone"]; radiusKm: number }) {
@@ -217,6 +247,7 @@ export function WatchtowerDashboard({ defaultZone }: Props) {
   const [query, setQuery] = useState("");
   const [lastUpdated, setLastUpdated] = useState<string>();
   const [fieldNote, setFieldNote] = useState("Ready");
+  const [proxyUrl, setProxyUrl] = useState(() => localStorage.getItem(PROXY_STORAGE_KEY) ?? "");
   const [sourceLedger, setSourceLedger] = useState<SourceLedgerEntry[]>([
     { name: "USGS Earthquake Feed", status: "stale", message: "Waiting for first pull" },
     { name: "GDELT News Adapter", status: "stale", message: "Waiting for first pull" },
@@ -237,7 +268,7 @@ export function WatchtowerDashboard({ defaultZone }: Props) {
     let quakes: SignalRecord[] = [];
     let newsRecords: SignalRecord[] = [];
     let usgsLedger: SourceLedgerEntry = { name: "USGS Earthquake Feed", status: "stale", lastChecked: now, message: "No records loaded yet" };
-    let newsLedger: SourceLedgerEntry = { name: "GDELT News Adapter", status: "stale", lastChecked: now, message: "No records loaded yet" };
+    let newsLedger: SourceLedgerEntry = { name: proxyUrl.trim() ? "Proxy GDELT News Adapter" : "GDELT News Adapter", status: "stale", lastChecked: now, message: "No records loaded yet" };
 
     try {
       const started = Date.now();
@@ -283,15 +314,15 @@ export function WatchtowerDashboard({ defaultZone }: Props) {
     }
 
     try {
-      const newsResult = await fetchNewsSignals(now);
+      const newsResult = await fetchNewsSignals(now, proxyUrl);
       newsRecords = newsResult.records;
       newsLedger = newsResult.ledger;
       pushLog(newsResult.log);
     } catch (err) {
       const message = err instanceof Error ? err.message : "GDELT load failed";
       newsRecords = [{ id: "demo-news-shasta", type: "news", title: "Fallback news lens: Mt. Shasta infrastructure watch", summary: "GDELT did not load in this browser session, so Watchtower kept a safe placeholder record.", source: "Fallback News Adapter", timestamp: now, lat: 41.4099, lon: -122.1949, radiusKm: 90, locationLabel: "Mt. Shasta fallback lens", confidence: "approximate", confidenceNotes: "Fallback record only", privacyClass: "public", facts: { adapter: "fallback", reason: message } }];
-      newsLedger = { name: "GDELT News Adapter", status: "down", lastChecked: now, message: `Fallback active: ${message}` };
-      pushLog(`GDELT news adapter failed: ${message}`);
+      newsLedger = { name: proxyUrl.trim() ? "Proxy GDELT News Adapter" : "GDELT News Adapter", status: "down", lastChecked: now, message: `Fallback active: ${message}` };
+      pushLog(`News adapter failed: ${message}`);
     }
 
     const marketDemo: SignalRecord = { id: "demo-market-btc", type: "market", title: "Demo BTC market pulse", summary: "Placeholder for future market adapter with delay labels.", source: "Demo Market Adapter", timestamp: now, confidence: "reported", privacyClass: "public", facts: { adapter: "demo", delay: "not live market data" } };
@@ -340,8 +371,9 @@ export function WatchtowerDashboard({ defaultZone }: Props) {
 
   function toggle(type: SignalType) { setEnabled((old) => old.includes(type) ? old.filter((t) => t !== type) : [...old, type]); }
   function useMyLocation() { navigator.geolocation?.getCurrentPosition((p) => setActiveZone({ name: "My Local Lens", lat: p.coords.latitude, lon: p.coords.longitude, radiusKm })); }
+  function saveProxy() { localStorage.setItem(PROXY_STORAGE_KEY, proxyUrl.trim()); setFieldNote(proxyUrl.trim() ? "News proxy saved" : "News proxy cleared"); pushLog(proxyUrl.trim() ? "News proxy URL saved" : "News proxy URL cleared"); }
   async function copyFieldReport() {
-    const report = `Parallax Watchtower field report\nLens: ${activeZone.name}\nVisible signals: ${visible.length}\nLocal radius hits: ${localHits}\nLocal M3+: ${localM3}\nVisible M5+: ${regionalM5}\nNews signals: ${newsCount}\nMax magnitude: ${maxMag.toFixed(1)}\nUpdated: ${lastUpdated ?? "pending"}`;
+    const report = `Parallax Watchtower field report\nLens: ${activeZone.name}\nVisible signals: ${visible.length}\nLocal radius hits: ${localHits}\nLocal M3+: ${localM3}\nVisible M5+: ${regionalM5}\nNews signals: ${newsCount}\nNews proxy: ${proxyUrl.trim() ? "configured" : "direct/fallback"}\nMax magnitude: ${maxMag.toFixed(1)}\nUpdated: ${lastUpdated ?? "pending"}`;
     await navigator.clipboard?.writeText(report);
     setFieldNote("Field report copied to clipboard");
     pushLog("Field report copied");
@@ -349,8 +381,8 @@ export function WatchtowerDashboard({ defaultZone }: Props) {
 
   return <main className="shell">
     <header className="header"><div className="brand"><div className="mark">⌂</div><div><div className="eyebrow">PARALLAX</div><h1>WATCHTOWER</h1><div className="subtitle">Real-time signal atlas & OSINT field ledger. See more. Know sooner. Act smarter.</div></div></div><div className="stats"><div className="stat"><strong>{visible.length}</strong><span>Visible signals</span></div><div className="stat"><strong>{localHits}</strong><span>Local radius hits</span></div><div className="stat"><strong>{maxMag.toFixed(1)}</strong><span>Max magnitude</span></div></div></header>
-    <div className="status-strip"><span className="pill good">Field online</span><span className="pill">Feeds {loading ? "loading" : "loaded"}</span><span className="pill">Lite Atlas mode</span><span className="pill">{fieldNote}</span></div>
+    <div className="status-strip"><span className="pill good">Field online</span><span className="pill">Feeds {loading ? "loading" : "loaded"}</span><span className="pill">Lite Atlas mode</span><span className="pill">News {proxyUrl.trim() ? "proxy-ready" : "direct/fallback"}</span><span className="pill">{fieldNote}</span></div>
     {error && <p className="error">{error}</p>}
-    <section className="grid"><aside className="panel panel-pad"><h2 className="panel-title">Controls</h2><div className="control-group"><div className="label">Signal layers</div><div className="toggle-row">{(["earthquake", "news", "market"] as SignalType[]).map((t) => <button className={`toggle ${enabled.includes(t) ? "" : "off"}`} key={t} onClick={() => toggle(t)}>{t}</button>)}</div></div><div className="control-group"><div className="label">Time window</div><div className="toggle-row"><button className={`toggle ${timeWindow === "24h" ? "" : "off"}`} onClick={() => setTimeWindow("24h")}>24h</button><button className={`toggle ${timeWindow === "7d" ? "" : "off"}`} onClick={() => setTimeWindow("7d")}>7d</button></div></div><div className="control-group"><div className="label">Search field</div><input className="toggle" style={{ width: "100%" }} value={query} placeholder="place, source, keyword" onChange={(e) => setQuery(e.target.value)}/></div><div className="control-group"><div className="label">Minimum earthquake magnitude</div><input className="slider" type="range" min="0" max="7" step="0.1" value={minMag} onChange={(e) => setMinMag(Number(e.target.value))}/><p className="small">M {minMag.toFixed(1)}+</p></div><div className="control-group zone-card"><div className="label">Local lens</div><strong>{activeZone.name}</strong><p className="small">{activeZone.lat.toFixed(4)}, {activeZone.lon.toFixed(4)}</p><select className="toggle" value={activeZone.name} onChange={(e) => { const z = lenses.find((l) => l.name === e.target.value); if (z) { setActiveZone(z); setRadiusKm(z.radiusKm); } }}>{lenses.map((z) => <option key={z.name}>{z.name}</option>)}</select><div className="zone-row"><button className="btn" onClick={useMyLocation}>Use my location</button><button className="btn" onClick={() => setActiveZone(defaultZone)}>Reset Corning</button></div><label className="checkline"><input type="checkbox" checked={localOnly} onChange={(e) => setLocalOnly(e.target.checked)}/> show local radius only</label><input className="slider" type="range" min="25" max="900" step="25" value={radiusKm} onChange={(e) => setRadiusKm(Number(e.target.value))}/><p className="small">{radiusKm} km radius</p></div><div className="control-group zone-card"><div className="label">Alert preview</div>{alertCards.map((card) => <p className="small" key={card.title}><strong>{card.title}: {card.value}</strong><br />{card.detail}</p>)}<button className="btn" onClick={copyFieldReport}>Copy field report</button></div><div className="control-group zone-card"><div className="label">Source Ledger</div>{sourceLedger.map((source) => <p className="small" key={source.name}><span className={`badge ${source.status === "fresh" ? "verified_official" : source.status === "demo" ? "reported" : "unknown"}`}>{source.status}</span><br /><strong>{source.name}</strong><br />{source.message}<br />{source.lastChecked ? ageLabel(source.lastChecked) : "not checked"}</p>)}</div><div className="control-group zone-card"><div className="label">Watchtower Log</div>{watchtowerLog.map((entry) => <p className="small" key={entry}>{entry}</p>)}</div><ul className="boundary-list"><li>Consent-based location only</li><li>Public/official sources preferred</li><li>Receipts over hype</li><li>Correlation does not equal causation</li></ul></aside><section className="panel map-panel"><div className="map-head"><div><h2 className="panel-title">Lite Atlas Field Map</h2><div className="small">Canvas fallback: no external map tiles, Android-safe first.</div></div><div className="legend"><span className="badge verified_official">Verified official</span><span className="badge reported">Reported</span></div></div><div className="canvas-wrap"><span className="map-chip">{visible.filter((s) => s.lat !== undefined).length} mapped signals • tap marker for receipt</span><CanvasMap signals={visible} selectedId={selected?.id} onSelect={setSelectedId} zone={activeZone} radiusKm={radiusKm}/></div></section><aside className="panel panel-pad"><h2 className="panel-title">Signal Feed</h2><div className="feed-list">{visible.slice(0, 36).map((s) => <button key={s.id} className={`feed-item ${s.id === selected?.id ? "active" : ""}`} onClick={() => setSelectedId(s.id)}><div className="feed-title">{s.magnitude ? `M ${s.magnitude.toFixed(1)} - ` : ""}{s.title}</div><div className="small">{s.source} • {ageLabel(s.timestamp)} • {s.locationLabel ?? new Date(s.timestamp).toLocaleString()}</div><span className={`badge ${s.confidence}`}>{s.confidence.replace("_", " ")}</span></button>)}</div>{selected && <div className="receipt"><h2 className="panel-title">Event Receipt</h2><dl><dt>Title</dt><dd>{selected.title}</dd><dt>Source</dt><dd>{selected.source}</dd><dt>Time</dt><dd>{new Date(selected.timestamp).toLocaleString()}</dd><dt>Age</dt><dd>{ageLabel(selected.timestamp)}</dd><dt>Confidence</dt><dd>{selected.confidenceNotes ?? selected.confidence}</dd><dt>Location</dt><dd>{selected.locationLabel ?? ""} {selected.lat?.toFixed(4) ?? "unmapped"}, {selected.lon?.toFixed(4) ?? ""}</dd><dt>Distance</dt><dd>{selected.lat !== undefined && selected.lon !== undefined ? `${distanceKm(activeZone.lat, activeZone.lon, selected.lat, selected.lon).toFixed(1)} km from ${activeZone.name}` : "n/a"}</dd><dt>Magnitude</dt><dd>{selected.magnitude ?? "n/a"}</dd><dt>Depth</dt><dd>{selected.depthKm ?? "n/a"} km</dd><dt>Privacy</dt><dd>{selected.privacyClass}</dd><dt>Receipt</dt><dd>{selected.sourceUrl ? <a href={selected.sourceUrl} target="_blank">Open source</a> : "demo record"}</dd>{selected.facts && Object.entries(selected.facts).filter(([, value]) => value !== undefined && value !== null && value !== "").flatMap(([key, value]) => [<dt key={`${key}-dt`}>{key}</dt>, <dd key={`${key}-dd`}>{String(value)}</dd>])}</dl></div>}</aside></section>
+    <section className="grid"><aside className="panel panel-pad"><h2 className="panel-title">Controls</h2><div className="control-group"><div className="label">Signal layers</div><div className="toggle-row">{(["earthquake", "news", "market"] as SignalType[]).map((t) => <button className={`toggle ${enabled.includes(t) ? "" : "off"}`} key={t} onClick={() => toggle(t)}>{t}</button>)}</div></div><div className="control-group"><div className="label">Time window</div><div className="toggle-row"><button className={`toggle ${timeWindow === "24h" ? "" : "off"}`} onClick={() => setTimeWindow("24h")}>24h</button><button className={`toggle ${timeWindow === "7d" ? "" : "off"}`} onClick={() => setTimeWindow("7d")}>7d</button></div></div><div className="control-group"><div className="label">Search field</div><input className="toggle" style={{ width: "100%" }} value={query} placeholder="place, source, keyword" onChange={(e) => setQuery(e.target.value)}/></div><div className="control-group"><div className="label">Minimum earthquake magnitude</div><input className="slider" type="range" min="0" max="7" step="0.1" value={minMag} onChange={(e) => setMinMag(Number(e.target.value))}/><p className="small">M {minMag.toFixed(1)}+</p></div><div className="control-group zone-card"><div className="label">Local lens</div><strong>{activeZone.name}</strong><p className="small">{activeZone.lat.toFixed(4)}, {activeZone.lon.toFixed(4)}</p><select className="toggle" value={activeZone.name} onChange={(e) => { const z = lenses.find((l) => l.name === e.target.value); if (z) { setActiveZone(z); setRadiusKm(z.radiusKm); } }}>{lenses.map((z) => <option key={z.name}>{z.name}</option>)}</select><div className="zone-row"><button className="btn" onClick={useMyLocation}>Use my location</button><button className="btn" onClick={() => setActiveZone(defaultZone)}>Reset Corning</button></div><label className="checkline"><input type="checkbox" checked={localOnly} onChange={(e) => setLocalOnly(e.target.checked)}/> show local radius only</label><input className="slider" type="range" min="25" max="900" step="25" value={radiusKm} onChange={(e) => setRadiusKm(Number(e.target.value))}/><p className="small">{radiusKm} km radius</p></div><div className="control-group zone-card"><div className="label">News Proxy Mode</div><p className="small">Optional Netlify/Vercel function URL for GDELT. Leave blank for direct browser pull + safe fallback.</p><input className="toggle" style={{ width: "100%" }} value={proxyUrl} placeholder="https://your-site.netlify.app/.netlify/functions/gdelt-proxy" onChange={(e) => setProxyUrl(e.target.value)}/><div className="zone-row"><button className="btn" onClick={saveProxy}>Save proxy</button><button className="btn" onClick={() => { setProxyUrl(""); localStorage.removeItem(PROXY_STORAGE_KEY); setFieldNote("News proxy cleared"); pushLog("News proxy cleared"); }}>Clear</button></div></div><div className="control-group zone-card"><div className="label">Alert preview</div>{alertCards.map((card) => <p className="small" key={card.title}><strong>{card.title}: {card.value}</strong><br />{card.detail}</p>)}<button className="btn" onClick={copyFieldReport}>Copy field report</button></div><div className="control-group zone-card"><div className="label">Source Ledger</div>{sourceLedger.map((source) => <p className="small" key={source.name}><span className={`badge ${source.status === "fresh" ? "verified_official" : source.status === "demo" ? "reported" : "unknown"}`}>{source.status}</span><br /><strong>{source.name}</strong><br />{source.message}<br />{source.lastChecked ? ageLabel(source.lastChecked) : "not checked"}</p>)}</div><div className="control-group zone-card"><div className="label">Watchtower Log</div>{watchtowerLog.map((entry) => <p className="small" key={entry}>{entry}</p>)}</div><ul className="boundary-list"><li>Consent-based location only</li><li>Public/official sources preferred</li><li>Receipts over hype</li><li>Correlation does not equal causation</li></ul></aside><section className="panel map-panel"><div className="map-head"><div><h2 className="panel-title">Lite Atlas Field Map</h2><div className="small">Canvas fallback: no external map tiles, Android-safe first.</div></div><div className="legend"><span className="badge verified_official">Verified official</span><span className="badge reported">Reported</span></div></div><div className="canvas-wrap"><span className="map-chip">{visible.filter((s) => s.lat !== undefined).length} mapped signals • tap marker for receipt</span><CanvasMap signals={visible} selectedId={selected?.id} onSelect={setSelectedId} zone={activeZone} radiusKm={radiusKm}/></div></section><aside className="panel panel-pad"><h2 className="panel-title">Signal Feed</h2><div className="feed-list">{visible.slice(0, 36).map((s) => <button key={s.id} className={`feed-item ${s.id === selected?.id ? "active" : ""}`} onClick={() => setSelectedId(s.id)}><div className="feed-title">{s.magnitude ? `M ${s.magnitude.toFixed(1)} - ` : ""}{s.title}</div><div className="small">{s.source} • {ageLabel(s.timestamp)} • {s.locationLabel ?? new Date(s.timestamp).toLocaleString()}</div><span className={`badge ${s.confidence}`}>{s.confidence.replace("_", " ")}</span></button>)}</div>{selected && <div className="receipt"><h2 className="panel-title">Event Receipt</h2><dl><dt>Title</dt><dd>{selected.title}</dd><dt>Source</dt><dd>{selected.source}</dd><dt>Time</dt><dd>{new Date(selected.timestamp).toLocaleString()}</dd><dt>Age</dt><dd>{ageLabel(selected.timestamp)}</dd><dt>Confidence</dt><dd>{selected.confidenceNotes ?? selected.confidence}</dd><dt>Location</dt><dd>{selected.locationLabel ?? ""} {selected.lat?.toFixed(4) ?? "unmapped"}, {selected.lon?.toFixed(4) ?? ""}</dd><dt>Distance</dt><dd>{selected.lat !== undefined && selected.lon !== undefined ? `${distanceKm(activeZone.lat, activeZone.lon, selected.lat, selected.lon).toFixed(1)} km from ${activeZone.name}` : "n/a"}</dd><dt>Magnitude</dt><dd>{selected.magnitude ?? "n/a"}</dd><dt>Depth</dt><dd>{selected.depthKm ?? "n/a"} km</dd><dt>Privacy</dt><dd>{selected.privacyClass}</dd><dt>Receipt</dt><dd>{selected.sourceUrl ? <a href={selected.sourceUrl} target="_blank">Open source</a> : "demo record"}</dd>{selected.facts && Object.entries(selected.facts).filter(([, value]) => value !== undefined && value !== null && value !== "").flatMap(([key, value]) => [<dt key={`${key}-dt`}>{key}</dt>, <dd key={`${key}-dd`}>{String(value)}</dd>])}</dl></div>}</aside></section>
   </main>;
 }
