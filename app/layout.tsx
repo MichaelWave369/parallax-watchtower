@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description: "Real-time signal atlas and OSINT field ledger."
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: { children: any }) {
   return (
     <html lang="en">
       <body>{children}</body>
