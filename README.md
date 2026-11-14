@@ -100,3 +100,15 @@ Feed status indicates an adapter fetch succeeded, not that the underlying event 
 - The Peekaboo shortcut now opens **Public Views** centered on the current Watchtower lens using Peekaboo's supported map URL. Peekaboo remains a separate app; nothing is scraped or silently scanned.
 
 See `docs/iss-peekaboo-bridge.md` for exact data constraints and tests.
+
+## Shared orbital catalog: CelesTrak SGP4 predictions
+
+- Select **orbit** in the signal layers to see predicted ground positions of the public STATIONS and VISUAL orbital groups (the ISS is excluded to avoid duplicating the separate sampled ISS source).
+- A **GitHub Action**, not every browser, downloads CelesTrak JSON OMM once per three-hour update cycle and publishes `public/data/orbits.json` through GitHub Pages. It observes a minimum 2h15m time gap and stops, without retrying, on non-200 HTTP responses.
+- Orbital elements are **not** live telemetry. The browser uses satellite.js SGP4 to propagate each validated element set to the current time; each signal carries element epoch, cache-fetch time, and propagation time.
+- Stale shared cache (older than 12h), old elements (over 7d), or invalid propagation mean **no marker**. The Source Ledger explains unavailable data.
+- The initial placeholder intentionally contains zero records; the first successful scheduled/manual catalog workflow must run after merge before orbit markers appear.
+- Scheduled cache updates build and deploy Pages directly because GitHub-token commits do not trigger downstream `push` workflows.
+- CelesTrak use is governed by [their published usage policy](https://celestrak.org/usage-policy.php). Groups are small and cached, with no direct end-user fetches.
+
+This is a limited visual/space-station catalog, not an unrestricted military or all-satellites tracker.

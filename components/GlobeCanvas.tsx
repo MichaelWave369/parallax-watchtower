@@ -82,7 +82,7 @@ export function GlobeCanvas({ signals, selectedId, onSelect, zone }: Props) {
         if (!p) continue;
         const x = cx + p.x * radius, y = cy + p.y * radius;
         const selected = signal.id === selectedId;
-        const color = selected ? "#ff8ad2" : signal.type === "wildfire" ? "#ff8a38" : signal.type === "satellite" ? "#aea7ff"
+        const color = selected ? "#ff8ad2" : signal.type === "wildfire" ? "#ff8a38" : signal.type === "satellite" ? "#aea7ff" : signal.type === "orbit" ? "#83b7ff"
           : signal.type === "earthquake" ? "#ffcd70" : signal.type === "news" ? "#70e7ff" : "#82e4bc";
         const size = selected ? 7 : Math.min(6, Math.max(2.4, (signal.magnitude ?? 1) * 1.2));
         ctx.fillStyle = color;
