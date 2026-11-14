@@ -1,25 +1,25 @@
-# Incident Room · Evidence Ledger v1
+# Incident Library · evidence-ledger v1
 
-This adds a manually sourced historical case room inside WATCHTOWER LIVE. The first recorded case covers the November 13, 2026 FAA ground stop, using only U.S. Department of Transportation statements from November 13 and 14.
+WATCHTOWER LIVE now includes **two separate public-source historical cases**:
 
-## Evidence model
-- **Officially confirmed** = event/status confirmed in a named official statement.
-- **Officially reported** = details as attributed to an official statement, not independently established telemetry.
-- **Preliminary account** = investigation hypotheses that might change.
-- Dates with no cited exact time are shown explicitly as **time not specified**.
-- Every event carries one or more source IDs mapping to HTTPS evidence receipts.
-- Context research portals link to separate websites and **are not supporting evidence** of the incident.
-- Not a live FAA API, not flight-tracking history, and not a real-time safety alert. Never use it to infer flight safety or operational status after the as-of date.
+- November 13, 2026: nationwide FAA ground stop during ATC telecommunications and radar-data instability. Evidence: DOT November 13 and 14 statements, plus FAA ATCSCC Advisory 111. The advisory signing time is **not** a measured universal operational stop time.
+- January 11, 2023: NOTAM outage and a nationwide departure ground stop. Evidence: FAA's January 11/19 statements and Acting Administrator Billy Nolen's February 15 Senate testimony. A stated approximately 7:15 a.m. stop time is marked as approximate; the 9:07 a.m. release is attributed to testimony.
 
-## Export and privacy
-- `lib/incidentLedger.mjs`: canonical editorial case and readable brief builder.
-- `public/data/incident-ledger.v1.json`: static versioned snapshot for optional PhiOS and PhiDiscovery consumers.
-- Copy brief is user-initiated, and includes per-event source receipts.
-- No tracking pixels, third-party script embeds, browser location, saved watch zones or automatic uploads.
-- Incident Room data does **not** enter `phi.fieldpack.v1` because that format remains for active, public feed signal records.
+## Directory and evidence boundaries
+- Search cases by year, title, system or description.
+- Choose a case to see its independent summary, facts, timeline, source receipts, contextual discovery links, and copyable sourced brief.
+- The "Compare with..." jump means **related category**, not established technical equivalence, a shared underlying failure, or causal linkage.
+- Official statements are cited as statements, not independently verified telemetry or complete engineering root-cause reports.
+- Distinguish `minute`, `approximate_minute` and `day` precision in records, with explicit user-facing labels.
+- Notes labeled preliminary are not presented as settled final causes.
+- Context links into the Explore catalog are **not** case evidence.
+- No client scraping, third-party embeds, personal user location, automatic downloads or new live feeds.
 
-## Verification
-Run `npm test`, `npm run build`, `npm run test:browser`. The browser smoke covers opening Incident Room and navigating timeline, evidence, contextual references and back to the default Lite Atlas.
+## Catalog and consumers
+- Canonical editorial cases and helpers: `lib/incidentLedger.mjs`.
+- Machine-readable static export: `public/data/incident-ledger.v1.json`, preserving the v1 schema.
+- New code should use `validateIncidentLibrary` before adding cases, verifying evidence references, timestamps and known related-case IDs.
+- FieldPack v1 stays limited to public live-signal records.
 
-## Future case work
-New cases must be checked against their primary source and given explicit as-of dates. Only introduce data adapters after API permission, rate limits, retention and provenance are reviewed.
+## Validation
+`npm test`, `npm run build`, `npm run test:browser`. Browser smoke covers both cases, the detailed timeline/source view, context disclaimers, and returning to Live Signals.

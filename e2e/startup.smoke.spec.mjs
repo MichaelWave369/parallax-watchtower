@@ -63,11 +63,32 @@ test("Incident Room documents ground stop with receipts, uncertainty and discove
   await expect(page.locator(".incident-event")).toHaveCount(5);
   await expect(page.getByText("Preliminary account", {exact:true})).toBeVisible();
   await page.getByRole("button", {name:"Evidence sources",exact:true}).click();
-  await expect(page.locator(".incident-source")).toHaveCount(2);
+  await expect(page.locator(".incident-source")).toHaveCount(3);
   await expect(page.getByRole("link", {name:/Read source statement/i}).first()).toHaveAttribute("rel", /noopener noreferrer/);
   await page.getByRole("button", {name:"Read evidence method"}).click();
   await expect(page.getByText("Receipts over conclusions")).toBeVisible();
   await expect(page.getByText(/not evidence about this specific outage/i)).toBeVisible();
   await page.getByRole("button", {name:"Live signals",exact:true}).click();
+  await expect(page.locator('canvas[aria-label*="Lite Atlas"]')).toBeVisible();
+});
+
+test("Incident Library switches between independent FAA cases with their own evidence", async ({ page }) => {
+  await page.route("**/*", route =>
+    route.request().url().startsWith(local) ? route.continue() : route.abort("failed")
+  );
+  await page.goto("/parallax-watchtower/", {waitUntil:"domcontentloaded"});
+  await page.getByRole("button",{name:"Incident Room",exact:true}).click();
+  await expect(page.locator(".incident-case")).toHaveCount(2);
+  await page.getByRole("button",{name:/Compare with 2023-01-11/i}).click();
+  await expect(page.getByRole("heading",{name:"FAA NOTAM system outage"})).toBeVisible();
+  await expect(page.locator(".incident-event")).toHaveCount(5);
+  await expect(page.getByText("Preliminary account",{exact:true})).toBeVisible();
+  await page.getByRole("button",{name:"Evidence sources",exact:true}).click();
+  await expect(page.locator(".incident-source")).toHaveCount(2);
+  await page.getByLabel("Find a historical case").fill("2026");
+  await expect(page.locator(".incident-case")).toHaveCount(1);
+  await page.getByRole("button",{name:/Compare with 2026-11-13/i}).click();
+  await expect(page.getByRole("heading",{name:"FAA nationwide ground stop"})).toBeVisible();
+  await page.getByRole("button",{name:"Live signals",exact:true}).click();
   await expect(page.locator('canvas[aria-label*="Lite Atlas"]')).toBeVisible();
 });
