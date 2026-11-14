@@ -34,3 +34,21 @@ test("switching between Lite Atlas and Globe never removes the dashboard shell",
   await expect(page.locator('canvas[aria-label*="Lite Atlas"]')).toBeVisible();
   await expect(page.getByRole("heading", { name: /WATCHTOWER LIVE/i })).toBeVisible();
 });
+
+test("Explore opens 50 curated external resources without breaking Live signals", async ({ page }) => {
+  await page.route("**/*", route =>
+    route.request().url().startsWith(local) ? route.continue() : route.abort("failed")
+  );
+  await page.goto("/parallax-watchtower/", { waitUntil: "domcontentloaded" });
+  await page.getByRole("button", { name: /Explore · 50 sources/ }).click();
+  await expect(page.getByRole("heading", { name: /Explore the Knowledge Atlas/i })).toBeVisible();
+  await expect(page.locator(".explore-card")).toHaveCount(50);
+  await page.getByLabel("Search the catalog").fill("submarine");
+  await expect(page.locator(".explore-card")).toHaveCount(1);
+  await expect(page.getByRole("link", { name: /Open Submarine Cable Map in a new tab/i })).toHaveAttribute("rel", /noopener noreferrer/);
+  await page.getByLabel("Search the catalog").fill("");
+  await page.getByRole("button", { name: "Space & Sky" }).click();
+  await expect(page.locator(".explore-card")).toHaveCount(4);
+  await page.getByRole("button", { name: "Live signals", exact: true }).click();
+  await expect(page.locator('canvas[aria-label*="Lite Atlas"]')).toBeVisible();
+});
