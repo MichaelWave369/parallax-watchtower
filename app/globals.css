@@ -191,3 +191,35 @@ h1 { margin: 2px 0 0; font-size: clamp(2rem, 5vw, 4rem); line-height: 0.9; lette
 .incident-compare p { max-width: 80ch; line-height: 1.55; color: var(--muted); }
 .incident-compare button { text-align: left; white-space: normal; }
 @media(max-width:650px){ .incident-case-grid { grid-template-columns:1fr; } }
+
+
+/* Discovery Inbox: manual review staging, independent of live signal and case ledgers. */
+.discovery-inbox { display: grid; gap: 14px; padding-bottom: 26px; }
+.discovery-hero, .discovery-section { padding: clamp(16px, 3vw, 24px); }
+.discovery-hero h2 { font-size: clamp(1.55rem, 3vw, 2.2rem); margin: 14px 0 10px; }
+.discovery-hero p, .discovery-section p { color: var(--muted); max-width: 85ch; line-height: 1.55; }
+.discovery-hero strong, .discovery-section strong { color: var(--text); }
+.discovery-metrics { display: flex; flex-wrap: wrap; gap: 9px; padding: 8px 0; }
+.discovery-metrics span { border: 1px solid var(--line); border-radius: 999px; padding: 8px 12px; color: #a8d4df; font-size: .82rem; }
+.discovery-metrics strong { color: var(--cyan); }
+.discovery-section h3 { margin: 0 0 8px; font-size: 1.2rem; }
+.discovery-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; max-height: 620px; overflow-y: auto; padding: 4px 4px 8px 0; }
+.discovery-card, .discovery-saved { border: 1px solid var(--line); border-radius: 12px; background: rgba(5,23,39,.95); padding: 14px; display: grid; gap: 9px; min-width: 0; }
+.discovery-card h4, .discovery-saved h4 { margin: 0; font-size: 1rem; }
+.discovery-card p { flex:1; margin: 0; font-size: .85rem; }
+.discovery-kind { font-size: .74rem; font-weight: 800; letter-spacing: .06em; color: var(--teal); text-transform: uppercase; }
+.discovery-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.discovery-actions a { font-size: .86rem; }
+.discovery-actions .btn:disabled { opacity: .45; cursor: default; }
+.discovery-form { display: grid; gap: 9px; max-width: 780px; }
+.discovery-form label { font-weight: 750; font-size: .82rem; color: #c5edf7; margin-top: 6px; }
+.discovery-form button { width: fit-content; }
+.discovery-textarea { width: 100%; background: #071c30; border: 1px solid var(--line); border-radius: 11px; padding: 11px 13px; color: var(--text); resize: vertical; font: inherit; }
+.discovery-textarea:focus-visible, .discovery-card .btn:focus-visible, .discovery-saved .btn:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+.discovery-head { display: flex; justify-content: space-between; flex-wrap: wrap; align-items: flex-start; gap: 12px; }
+.discovery-saved-list { display: grid; gap: 12px; }
+.discovery-saved h4 { margin-top: 5px; }
+.discovery-filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0; }
+.discovery-muted { padding: 14px; border: 1px dashed var(--line); border-radius: 10px; }
+@media (max-width: 1100px) { .discovery-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+@media (max-width: 650px) { .discovery-grid { grid-template-columns: 1fr; } .discovery-head { flex-direction: column; } .discovery-actions .btn { flex: 1; } }
