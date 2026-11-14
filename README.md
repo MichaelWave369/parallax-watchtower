@@ -112,3 +112,11 @@ See `docs/iss-peekaboo-bridge.md` for exact data constraints and tests.
 - CelesTrak use is governed by [their published usage policy](https://celestrak.org/usage-policy.php). Groups are small and cached, with no direct end-user fetches.
 
 This is a limited visual/space-station catalog, not an unrestricted military or all-satellites tracker.
+
+## Portable Φ FieldPack v1 for ecosystem integrations
+
+The **Φ FieldPack v1** card includes **Download FieldPack JSON** and **Copy FieldPack JSON**. It packages currently visible **public** source-receipted signals into a bounded, user-triggered JSON artifact; excluded records include private/local signals, fallback/demo placeholders and missing/unsafe source URLs. It includes provenance semantics, source health and timestamps.
+
+**Privacy:** browser location and saved watch-zone coordinates, notes, search history and raw source errors are not exported. Public source event coordinates can be present, including approximate region or predicted orbital subpoints with their proper labels. Nothing is uploaded automatically.
+
+See `docs/fieldpack-v1.md` for the schema, privacy guarantees, an example, and consumer guidance. `/data/field-sources.v1.json` exposes machine-readable federation metadata, but external companion apps remain **linked**, not silently synchronized.
