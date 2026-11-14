@@ -85,6 +85,7 @@ This release adds:
 - NASA EONET open, curated wildfire records (not every active wildfire; locations are **not** incident perimeters)
 - NOAA SWPC planetary Kp observations (global context only, never pinned on the local map)
 - Companion entry points into Peekaboo and EIRM; these links do not imply shared camera ingestion
+- Orthographic draggable globe view with marker selection and regional map toggle
 - Adapter tests in `npm test` and a pull-request CI workflow
 
 The visible product has been renamed to **WATCHTOWER LIVE**. The old `parallax-watchtower` GitHub repository slug and Pages base path are temporarily retained for backward compatibility. A repository rename requires a separate migration of URLs and hosting settings. See `docs/watchtower-live-plan.md`.

@@ -8,12 +8,13 @@
 - Add direct exits to companion public maps: Peekaboo (published public cameras) and EIRM (space weather).
 - Preserve existing USGS, news, market, alerts, watch zones, and source-ledger behavior.
 - Add adapter normalization tests and PR CI.
+- Introduce an optional orthographic globe projection with draggable center, mapped public markers and clickable receipts. This is a visual projection, not a terrain globe or a replacement for a full geospatial engine.
 
 ## Next passes (not yet implemented)
 1. Extract shared source-adapter contracts (id, source, observedAt, retrievedAt, coordinates, evidence, freshness, status).
 2. Introduce actual Peekaboo source packages by agreement with its existing safety/provenance boundary; do not scrape the UI or turn surveillance map markers into viewable cameras.
 3. Add opt-in public flight, maritime, and satellite adapters. Verify licensing, CORS, rate limits and privacy constraints before enabling.
-4. Introduce a globe view with the Lite Atlas map maintained as a lightweight fallback.
+4. Upgrade the simple orthographic globe into a full geospatial globe (terrain/land layers, broader zoom navigation) while retaining the Lite Atlas fallback.
 5. Add PhiStream explanations grounded in explicit source receipts, not invented cross-source causality.
 6. Connect through PhiOS Web/XR after contract tests and accessibility checks.
 
