@@ -223,3 +223,29 @@ h1 { margin: 2px 0 0; font-size: clamp(2rem, 5vw, 4rem); line-height: 0.9; lette
 .discovery-muted { padding: 14px; border: 1px dashed var(--line); border-radius: 10px; }
 @media (max-width: 1100px) { .discovery-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
 @media (max-width: 650px) { .discovery-grid { grid-template-columns: 1fr; } .discovery-head { flex-direction: column; } .discovery-actions .btn { flex: 1; } }
+
+
+/* Temporal source-comparison lens. No automatic cause or geographic inference. */
+.temporal-trails h3 { margin-top: 10px; }
+.temporal-window-list { display: flex; overflow-x: auto; gap: 10px; padding: 4px 2px 12px; }
+.temporal-window { min-width: 194px; max-width: 260px; display: grid; gap: 7px; text-align: left; padding: 12px 14px; color: var(--text); background: rgba(4,22,40,.92); border: 1px solid var(--line); border-radius: 12px; }
+.temporal-window.selected { border-color: var(--cyan); background: rgba(20,89,112,.42); }
+.temporal-window:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+.temporal-window strong { font-size: .86rem; line-height: 1.4; }
+.temporal-window span { color: #a4d6e3; font-size: .8rem; }
+.temporal-window small { color: var(--teal); font-size: .75rem; }
+.temporal-detail { padding: clamp(12px,2vw,18px); background: rgba(5,20,37,.9); border: 1px solid var(--line); border-radius: 15px; }
+.temporal-detail-head { display: flex; justify-content: space-between; align-items: start; flex-wrap: wrap; gap: 15px; }
+.temporal-detail-head h4 { font-size: 1.1rem; margin: 4px 0; }
+.temporal-source-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 14px; margin-top: 14px; }
+.temporal-source-column { min-width: 0; background: rgba(4,15,29,.8); border: 1px solid var(--line); border-radius: 13px; padding: 12px; }
+.temporal-source-heading { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.temporal-source-heading span { font-size: .82rem; color: var(--cyan); }
+.temporal-source-rows { display: grid; align-content: start; gap: 10px; max-height: 500px; overflow-y: auto; padding-right: 4px; }
+.temporal-source-item { display: grid; gap: 7px; border-radius: 10px; border: 1px solid var(--line); padding: 12px; background: rgba(10,38,60,.64); }
+.temporal-source-item time { color: #9be4e2; font-size: .75rem; }
+.temporal-source-item strong { line-height: 1.35; }
+.temporal-source-item p { margin: 0; }
+.temporal-source-item a { font-size: .82rem; }
+.temporal-source-item .btn { font-size: .82rem; }
+@media (max-width: 750px) { .temporal-source-grid { grid-template-columns: 1fr; } .temporal-detail-head { display: grid; } }
