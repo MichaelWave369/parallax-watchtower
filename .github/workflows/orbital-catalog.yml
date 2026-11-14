@@ -1,0 +1,60 @@
+name: Refresh Cached Orbital Catalog
+
+on:
+  schedule:
+    - cron: "17 */3 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/orbital-catalog.yml"
+      - "scripts/refreshOrbitalCatalog.mjs"
+      - "lib/orbitalCatalog.mjs"
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  catalog-and-deploy:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install packages
+        run: npm install
+      - name: Validate adapters and math
+        run: npm test
+      - name: Read exactly one new CelesTrak snapshot per 3-hour cycle
+        run: node scripts/refreshOrbitalCatalog.mjs
+      - name: Commit cached public data
+        run: |
+          if ! git diff --quiet -- public/data/orbits.json; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add public/data/orbits.json
+            git commit -m "data: refresh cached public orbital elements"
+            git push origin HEAD:main
+          fi
+      - name: Build site with latest cached orbital data
+        run: npm run build
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+      - name: Deploy cache-inclusive site
+        id: deployment
+        uses: actions/deploy-pages@v4

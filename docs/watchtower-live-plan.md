@@ -31,3 +31,10 @@ Do not pre-change the base before renaming: it would break the existing Pages UR
 - Sampled ISS ground-position layer using a third-party API, with a freshness cutoff and fail-closed errors.
 - Context-preserving Peekaboo public views deep-link based on the selected local watch zone.
 - Six tests for ISS normalization and federation, in addition to the existing eight adapter/globe tests.
+
+## Phase 1.2: shared orbital catalog (this PR)
+- CelesTrak STATIONS and VISUAL OMM catalogs fetched by one centrally scheduled GitHub Action every three hours.
+- Cache snapshot published as a static JSON asset on GitHub Pages, with source timestamp, provider and deduplicated objects.
+- Client-side satellite.js SGP4 models for estimated positions; separate visual layer and source ledger from the observed ISS sample.
+- Fail-closed for stale catalog, old element epoch, invalid geodetic output, propagation failures or upstream errors.
+- Next: expand the versioned cross-repo source contract and add provider-authenticated aircraft/maritime layers only after reviewing data permissions.
