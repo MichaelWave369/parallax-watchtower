@@ -170,3 +170,24 @@ h1 { margin: 2px 0 0; font-size: clamp(2rem, 5vw, 4rem); line-height: 0.9; lette
 .incident-method div { margin-top: 12px; }
 @media (max-width: 950px) { .incident-facts { grid-template-columns: 1fr; } .incident-context-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
 @media (max-width: 650px) { .incident-hero-head { display: grid; } .incident-source-grid, .incident-context-grid { grid-template-columns: 1fr; } }
+
+
+/* Incident Library: searchable, source-backed multi-case entry. */
+.incident-library { padding: clamp(17px,3vw,25px); }
+.incident-library h2 { margin: 12px 0; font-size: clamp(1.45rem,2.6vw,2rem); }
+.incident-library p { color: var(--muted); max-width: 76ch; line-height: 1.6; }
+.incident-library label { display: block; color: var(--cyan); text-transform: uppercase; letter-spacing: .1em; font-size: .78rem; font-weight: 800; margin: 16px 0 8px; }
+.incident-case-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; margin-top: 15px; }
+.incident-case { display: flex; flex-direction: column; gap: 7px; min-width: 0; text-align: left; padding: 16px; background: rgba(6,24,43,.9); color: var(--text); border: 1px solid var(--line); border-radius: 14px; }
+.incident-case:hover, .incident-case:focus-visible { border-color: var(--cyan); }
+.incident-case:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+.incident-case.active { background: rgba(23,101,115,.38); border-color: var(--teal); }
+.incident-case span { color: #a4d8e1; font-size: .75rem; }
+.incident-case strong { font-size: 1rem; line-height: 1.35; }
+.incident-case small { color: #a2bbcb; line-height: 1.35; }
+.incident-case em { font-size: .75rem; color: var(--teal); font-style: normal; }
+.incident-compare { padding: 20px; border-color: rgba(30,214,183,.45); }
+.incident-compare h2 { margin: 12px 0; }
+.incident-compare p { max-width: 80ch; line-height: 1.55; color: var(--muted); }
+.incident-compare button { text-align: left; white-space: normal; }
+@media(max-width:650px){ .incident-case-grid { grid-template-columns:1fr; } }
