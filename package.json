@@ -19,6 +19,6 @@
     "@types/node": "22.12.0",
     "@types/react": "18.3.18",
     "@types/react-dom": "18.3.5",
-    "satellite.js": "7.1.0"
+    "satellite.js": "6.0.2"
   }
 }

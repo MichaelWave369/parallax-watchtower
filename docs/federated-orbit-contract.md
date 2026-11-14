@@ -37,3 +37,6 @@ Since a commit pushed by GitHub Actions using GITHUB_TOKEN does not trigger regu
 
 ### Future federation
 Peekaboo's public-view link stays a separate action. EIRM's NOAA measurements remain a separate evidence family. Later `source-contract/v1` can unify identity, timestamps, health and receipts without collapsing source semantics.
+
+### Build compatibility
+The app pins satellite.js **6.0.2** for stable JSON OMM/SGP4 support under Vite's worker bundler. Satellite.js v7.1.0 introduced an optional WASM worker import that causes the Vite 8 default build to fail with a top-level-await/IIFE error even though WATCHTOWER does not use the WASM API. Upgrade only after the Vite compatibility issue is resolved and CI verifies the bundle.
