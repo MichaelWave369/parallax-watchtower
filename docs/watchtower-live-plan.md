@@ -26,3 +26,8 @@ If renamed to `Watchtower-Live`, update:
 - integrations pointing at the current repo path
 
 Do not pre-change the base before renaming: it would break the existing Pages URL.
+
+## Phase 1.1 completed on branch
+- Sampled ISS ground-position layer using a third-party API, with a freshness cutoff and fail-closed errors.
+- Context-preserving Peekaboo public views deep-link based on the selected local watch zone.
+- Six tests for ISS normalization and federation, in addition to the existing eight adapter/globe tests.
