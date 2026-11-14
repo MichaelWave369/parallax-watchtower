@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
-import maplibregl, { type GeoJSONSource, type Map as MapLibreMap } from "maplibre-gl";
+import * as maplibregl from "maplibre-gl";
+import type { GeoJSONSource, Map as MapLibreMap } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { OPENFREE_MAP_STYLE, toMapFeatures } from "../lib/vectorMap.mjs";
 
