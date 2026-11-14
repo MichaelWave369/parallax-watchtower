@@ -138,3 +138,7 @@ The default mode is temporarily **Lite Atlas** so a third-party WebGL dependency
 A twice-daily GitHub Actions job requests the official USGS M4.5+ earthquake GeoJSON feed and NASA EONET curated open-wildfire references. It publishes only a bounded, HTTPS-receipted, **unreviewed candidate snapshot** at `/data/discovery-candidates.v1.json` for Discovery Inbox to load. The browser never polls these providers separately for the scheduled snapshot.
 
 Source-health and age are visible; cache snapshots older than 36 hours cannot be queued as fresh. Every candidate requires a click to enter the existing local review inbox. **No candidate is automatically published as an Incident Room case or represented as an emergency alert.** NASA event references are not wildfire boundaries. See `docs/discovery-cache.md`.
+
+## Cross-source Discovery Trails
+
+Discovery Inbox now includes a source-backed temporal comparison view. Browse USGS and NASA EONET records side by side by UTC day or calendar week, inspect primary receipts, and explicitly export a research timeline. A shared time interval is **not evidence of geography, causality or a verified incident**. See `docs/discovery-trails.md`.

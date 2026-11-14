@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { readDiscoveryCache } from "../lib/discoveryCache.mjs";
+import { DiscoveryTrails } from "./DiscoveryTrails";
 import {
   DISCOVERY_STORAGE_KEY, MAX_DISCOVERY_ITEMS, addCandidate, candidateFromLink,
   candidateFromSignal, createReviewPacket, encodeInbox, readInbox, receiptKey,
@@ -174,6 +175,13 @@ export function DiscoveryInbox({ signals }: Props) {
         })}
       </div> : <p className="discovery-muted">No fresh scheduled leads are available right now. The normal public-signal and manual-source inboxes remain usable.</p>}
     </section>
+    <DiscoveryTrails
+      candidates={scheduled.candidates}
+      cacheState={scheduled.state}
+      generatedAt={scheduled.generatedAt}
+      savedKeys={savedKeys}
+      onQueue={queue}
+    />
     <section className="panel discovery-section" aria-label="Source-linked candidates">
       <h3>Public-source leads</h3>
       <p className="small">USGS earthquakes M4.5+, NASA EONET wildfire references, and directly sourced public news. Click Queue to nominate a record; there is no automatic intake.</p>

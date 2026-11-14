@@ -131,3 +131,64 @@ test("scheduled discovery cache has source-health messaging and never impersonat
   await page.getByRole("button", {name: "Live signals", exact: true}).click();
   await expect(page.locator('canvas[aria-label*="Lite Atlas"]')).toBeVisible();
 });
+
+test("Discovery Trails compares official records by UTC week without inventing same-day or causal links", async ({ page }) => {
+  await page.route("**/*", route =>
+    route.request().url().startsWith(local) ? route.continue() : route.abort("failed")
+  );
+  const now = new Date();
+  const todayStart = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
+  const currentMonday = todayStart - ((now.getUTCDay() + 6) % 7) * 86400000;
+  const previousMonday = currentMonday - 7 * 86400000;
+  const quakeTimestamp = new Date(previousMonday + 86400000 + 12 * 3600000).toISOString();
+  const fireTimestamp = new Date(previousMonday + 3 * 86400000 + 11 * 3600000).toISOString();
+  const capturedAt = now.toISOString();
+  const candidate = (type, sourceTimestamp, id, sourceUrl) => ({
+    id: "signal:" + type + ":" + id,
+    origin: "public-signal",
+    signalType: type,
+    title: type === "earthquake" ? "M 5.0 example quake" : "Curated wildfire reference",
+    summary: "Research candidate only",
+    sourceName: type === "earthquake" ? "USGS Earthquake Feed" : "NASA EONET wildfire catalog",
+    sourceUrl,
+    sourceTimestamp,
+    capturedAt,
+    status: "pending",
+    reviewNote: ""
+  });
+  const payload = {
+    schema: "phi.watchtower.discovery-cache.v1", version: 1,
+    status: "ok", generatedAt: capturedAt,
+    sources: [
+      {id:"usgs", name:"USGS earthquakes M4.5+",status:"ok",accepted:1},
+      {id:"eonet", name:"NASA EONET curated wildfires",status:"ok",accepted:1}
+    ],
+    candidates: [
+      candidate("earthquake", quakeTimestamp, "usgs-example",
+        "https://earthquake.usgs.gov/earthquakes/eventpage/usgs-example"),
+      candidate("wildfire", fireTimestamp, "eonet-example",
+        "https://eonet.gsfc.nasa.gov/api/v3/events/eonet-example")
+    ]
+  };
+  await page.route("**/data/discovery-candidates.v1.json", route =>
+    route.fulfill({status: 200, contentType: "application/json", body: JSON.stringify(payload)})
+  );
+  await page.goto("/parallax-watchtower/", {waitUntil:"domcontentloaded"});
+  await page.getByRole("button", {name:"Discovery Inbox",exact:true}).click();
+  const trails = page.getByRole("region", {name:"Cross-source discovery trails"});
+  await expect(trails.getByRole("heading", {name:"Cross-source Discovery Trails"})).toBeVisible();
+  await expect(trails.locator(".temporal-window")).toHaveCount(1);
+  await expect(trails.locator(".temporal-source-item")).toHaveCount(2);
+  await expect(trails.getByText("Two source families")).toBeVisible();
+  await expect(trails.getByText(/Matching a time window is/)).toBeVisible();
+  await expect(trails.getByRole("button", {name:"Copy sourced timeline"})).toBeVisible();
+  await trails.getByRole("button", {name:"UTC day"}).click();
+  await expect(trails.locator(".temporal-window")).toHaveCount(2);
+  await expect(trails.getByText(/0 windows contain records from both provider families/)).toBeVisible();
+  await trails.getByRole("button", {name:"UTC week"}).click();
+  await trails.locator(".temporal-source-item").first().getByRole("button", {name:"Queue for review"}).click();
+  await expect(page.locator(".discovery-saved")).toHaveCount(1);
+  await expect(trails.locator(".temporal-source-item").first().getByRole("button", {name:"In inbox"})).toBeDisabled();
+  await page.getByRole("button", {name:"Live signals", exact:true}).click();
+  await expect(page.locator('canvas[aria-label*="Lite Atlas"]')).toBeVisible();
+});
