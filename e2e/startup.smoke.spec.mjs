@@ -92,3 +92,26 @@ test("Incident Library switches between independent FAA cases with their own evi
   await page.getByRole("button",{name:"Live signals",exact:true}).click();
   await expect(page.locator('canvas[aria-label*="Lite Atlas"]')).toBeVisible();
 });
+
+test("Discovery Inbox stages a manual source without claiming it is a published incident", async ({ page }) => {
+  await page.route("**/*", route =>
+    route.request().url().startsWith(local) ? route.continue() : route.abort("failed")
+  );
+  await page.goto("/parallax-watchtower/", { waitUntil: "domcontentloaded" });
+  await page.getByRole("button", { name: "Discovery Inbox" }).click();
+  await expect(page.getByRole("heading", { name: "Incident Discovery Inbox" })).toBeVisible();
+  await page.getByLabel("Research lead title").fill("FAA official communications statement");
+  await page.getByLabel("Source URL (HTTPS)").fill("https://www.faa.gov/newsroom/faa-statement-nationwide-ground-stop");
+  await page.getByLabel("Context note (optional)").fill("Review this official notice before publishing.");
+  await page.getByRole("button", { name: "Add to local inbox" }).click();
+  await expect(page.getByText("Manual source saved for human review, not published.")).toBeVisible();
+  await expect(page.locator(".discovery-saved")).toHaveCount(1);
+  await expect(page.locator(".discovery-saved").getByRole("link", { name: /Source receipt/ })).toHaveAttribute("rel", /noopener noreferrer/);
+  await page.getByRole("button", { name: "Mark reviewing" }).click();
+  await expect(page.locator(".discovery-saved .discovery-kind")).toContainText("reviewing");
+  await page.getByRole("button", { name: "Dismiss lead" }).click();
+  await page.getByRole("button", { name: "Dismissed", exact: true }).click();
+  await expect(page.locator(".discovery-saved")).toHaveCount(1);
+  await page.getByRole("button", { name: "Live signals", exact: true }).click();
+  await expect(page.locator('canvas[aria-label*="Lite Atlas"]')).toBeVisible();
+});
