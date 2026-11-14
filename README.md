@@ -120,3 +120,11 @@ The **Φ FieldPack v1** card includes **Download FieldPack JSON** and **Copy Fie
 **Privacy:** browser location and saved watch-zone coordinates, notes, search history and raw source errors are not exported. Public source event coordinates can be present, including approximate region or predicted orbital subpoints with their proper labels. Nothing is uploaded automatically.
 
 See `docs/fieldpack-v1.md` for the schema, privacy guarantees, an example, and consumer guidance. `/data/field-sources.v1.json` exposes machine-readable federation metadata, but external companion apps remain **linked**, not silently synchronized.
+
+## Vector basemap repair and marker clustering
+
+The original OpenStreetMap raster tile canvas was blocked (403) because it explicitly omitted the HTTP Referer. It also recreated tile images on every selection and feed refresh. **Map** now uses MapLibre GL JS with [OpenFreeMap's key-free vector tiles](https://openfreemap.org/) and honors their attribution requirements; it makes **no requests to the OpenStreetMap Foundation's raster tile service**.
+
+A new **Lite** mode uses a local, tile-free grid when WebGL or the vector source fails, while the existing **Globe** remains available. MapLibre clusters public events at broad zoom levels so earthquake, fire and orbital layers can be explored without overlapping thousands of markers. Click a cluster to expand, and a point to inspect its source receipt. The source feed/alert data is unaffected.
+
+See `docs/map-403-repair.md` for diagnosis, policy links, acceptance checks and limitations.

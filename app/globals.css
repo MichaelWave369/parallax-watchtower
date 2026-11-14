@@ -60,7 +60,7 @@ h1 { margin: 2px 0 0; font-size: clamp(2rem, 5vw, 4rem); line-height: 0.9; lette
 .badge.reported { color: #ffe493; border-color: rgba(255,214,110,0.45); background: rgba(255,214,110,0.12); }
 .badge.approximate, .badge.unknown { color: #ffc096; border-color: rgba(255,157,69,0.45); background: rgba(255,157,69,0.12); }
 .canvas-wrap { position: relative; flex: 1; min-height: 520px; background: linear-gradient(180deg, rgba(3,19,36,0.96), rgba(2,9,19,0.98)); }
-.canvas-wrap canvas { width: 100%; height: 100%; display: block; touch-action: manipulation; }
+.canvas-wrap > canvas { width: 100%; height: 100%; display: block; touch-action: manipulation; }
 .map-chip { position: absolute; left: 18px; top: 18px; border: 1px solid var(--line); border-radius: 999px; padding: 8px 12px; background: rgba(1,8,16,0.75); color: #bffaff; font-size: 0.8rem; z-index: 2; backdrop-filter: blur(8px); }
 .feed-list { display: flex; flex-direction: column; gap: 10px; max-height: 515px; overflow: auto; padding-right: 4px; scroll-behavior: smooth; }
 .feed-list::-webkit-scrollbar { width: 10px; }
@@ -81,3 +81,16 @@ h1 { margin: 2px 0 0; font-size: clamp(2rem, 5vw, 4rem); line-height: 0.9; lette
 .live-word { color: var(--teal); text-shadow: 0 0 25px rgba(30,214,183,0.25); }
 .federated-link { display: block; padding: 10px; border-radius: 9px; border: 1px solid var(--line); margin-top: 8px; font-size: .8rem; text-decoration: none; background: rgba(30,214,183,.05); }
 .federated-link:hover, .federated-link:focus-visible { border-color: var(--teal); text-decoration: underline; }
+
+/* Full-bleed vector map. Scope canvas defaults so MapLibre can manage WebGL sizing. */
+.vector-map { position: absolute; inset: 0; min-height: 100%; width: 100%; }
+.vector-map .maplibregl-control-container { z-index: 3; }
+.map-attribution {
+  position: absolute; bottom: 9px; right: 9px; max-width: calc(100% - 18px);
+  padding: 5px 8px; border: 1px solid rgba(84,242,255,.25); border-radius: 7px;
+  background: rgba(2,10,19,.90); color: #c9e7e9; font-size: 11px; line-height: 1.25;
+  z-index: 5; text-align: right;
+}
+.map-attribution a { color: #ccf5fa; text-decoration: underline; }
+.map-attribution a:focus-visible { outline: 2px solid #54f2ff; outline-offset: 2px; }
+.vector-map .maplibregl-ctrl-top-right { top: 51px; }
