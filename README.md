@@ -1,8 +1,8 @@
-# Parallax Watchtower
+# WATCHTOWER LIVE
 
 **Real-time signal atlas and OSINT field ledger** for earthquakes, news, maps, markets, watch zones, and receipt-based situational awareness.
 
-Parallax Watchtower is built around a simple rule: **see more, know sooner, act smarter — without turning public intelligence into stalker tech.** Every signal is treated as a ledger record with a source, timestamp, location/radius when available, confidence label, privacy class, and receipt link.
+Watchtower Live is built around a simple rule: **see more, know sooner, act smarter — without turning public intelligence into stalker tech.** Every signal is treated as a ledger record with a source, timestamp, location/radius when available, confidence label, privacy class, and receipt link.
 
 Live GitHub Pages dashboard:
 
@@ -10,7 +10,7 @@ Live GitHub Pages dashboard:
 https://michaelwave369.github.io/parallax-watchtower/
 ```
 
-## v0.1 Field Atlas
+## Source-integrated field atlas
 
 This public repo starts with a mobile-safe MVP:
 
@@ -78,3 +78,16 @@ docs/source-proxy-strategy.md
 
 > The Watchtower does not control the sea.  
 > It helps people see the conditions clearly.
+
+## Federated source expansion
+
+This release adds:
+- NASA EONET open, curated wildfire records (not every active wildfire; locations are **not** incident perimeters)
+- NOAA SWPC planetary Kp observations (global context only, never pinned on the local map)
+- Companion entry points into Peekaboo and EIRM; these links do not imply shared camera ingestion
+- Orthographic draggable globe view with marker selection and regional map toggle
+- Adapter tests in `npm test` and a pull-request CI workflow
+
+The visible product has been renamed to **WATCHTOWER LIVE**. The old `parallax-watchtower` GitHub repository slug and Pages base path are temporarily retained for backward compatibility. A repository rename requires a separate migration of URLs and hosting settings. See `docs/watchtower-live-plan.md`.
+
+Feed status indicates an adapter fetch succeeded, not that the underlying event is happening in real time or that the source is complete.

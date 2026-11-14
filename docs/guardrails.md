@@ -1,6 +1,6 @@
 # Guardrails
 
-Parallax Watchtower is a public-signal awareness tool. It must not become a stalking, doxxing, or private-surveillance system.
+Watchtower Live is a public-signal awareness tool. It must not become a stalking, doxxing, or private-surveillance system.
 
 ## Allowed
 
