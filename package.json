@@ -8,7 +8,8 @@
     "dev": "vite --host 0.0.0.0",
     "build": "vite build --base=/parallax-watchtower/",
     "preview": "vite preview",
-    "test": "node --test tests/*.test.mjs"
+    "test": "node --test tests/*.test.mjs",
+    "test:browser": "playwright test"
   },
   "dependencies": {
     "@vitejs/plugin-react": "latest",
@@ -21,5 +22,8 @@
     "@types/react-dom": "18.3.5",
     "satellite.js": "6.0.2",
     "maplibre-gl": "6.18.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.56.1"
   }
 }

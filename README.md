@@ -128,3 +128,7 @@ The original OpenStreetMap raster tile canvas was blocked (403) because it expli
 A new **Lite** mode uses a local, tile-free grid when WebGL or the vector source fails, while the existing **Globe** remains available. MapLibre clusters public events at broad zoom levels so earthquake, fire and orbital layers can be explored without overlapping thousands of markers. Click a cluster to expand, and a point to inspect its source receipt. The source feed/alert data is unaffected.
 
 See `docs/map-403-repair.md` for diagnosis, policy links, acceptance checks and limitations.
+
+## Startup recovery and browser smoke tests
+
+The default mode is temporarily **Lite Atlas** so a third-party WebGL dependency cannot blank the entire page at boot. Choose **Map** to load the OpenFreeMap/MapLibre map on demand; a map crash or provider failure switches back to Lite. A top-level application error boundary shows a readable recovery screen instead of an empty page. The GitHub Actions CI now includes a real Chromium/Playwright smoke test of the production Pages base path with external sources blocked. Run with `npm run build && npm run test:browser` after installing Playwright Chromium.

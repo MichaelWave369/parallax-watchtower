@@ -23,3 +23,7 @@ jobs:
         run: npm test
       - name: Build Vite
         run: npm run build
+      - name: Install browser for real runtime smoke checks
+        run: npx playwright install --with-deps chromium
+      - name: Smoke test published-path page and map recovery
+        run: npm run test:browser

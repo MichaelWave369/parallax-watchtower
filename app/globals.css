@@ -94,3 +94,5 @@ h1 { margin: 2px 0 0; font-size: clamp(2rem, 5vw, 4rem); line-height: 0.9; lette
 .map-attribution a { color: #ccf5fa; text-decoration: underline; }
 .map-attribution a:focus-visible { outline: 2px solid #54f2ff; outline-offset: 2px; }
 .vector-map .maplibregl-ctrl-top-right { top: 51px; }
+
+.vector-map-loading { position:absolute; inset:0; display:grid; place-items:center; padding:20px; text-align:center; color:var(--cyan); background:#041728; }
