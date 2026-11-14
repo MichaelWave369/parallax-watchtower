@@ -38,3 +38,10 @@ Do not pre-change the base before renaming: it would break the existing Pages UR
 - Client-side satellite.js SGP4 models for estimated positions; separate visual layer and source ledger from the observed ISS sample.
 - Fail-closed for stale catalog, old element epoch, invalid geodetic output, propagation failures or upstream errors.
 - Next: expand the versioned cross-repo source contract and add provider-authenticated aircraft/maritime layers only after reviewing data permissions.
+
+## Phase 1.3: FieldPack producer and source registry
+- Public `phi.fieldpack.v1` evidence envelope exported through explicit browser Download/Copy actions.
+- Schema records provenance URL, source, observed time, confidence and geographic interpretation for every included record.
+- Only public, source-receipted records; no saved watch zones, browser location, local notes or diagnostic messages.
+- Static `/data/field-sources.v1.json` manifest distinguishes WATCHTOWER's local exporter, its orbital data asset and navigable Peekaboo/EIRM companion apps.
+- Six normalization/privacy/consumer-gate tests. Next: validated consumer imports in PhiOS and PhiStream.

@@ -1,0 +1,40 @@
+{
+  "schema": "phi.field-sources.v1",
+  "version": 1,
+  "publisher": "WATCHTOWER LIVE",
+  "publishedBy": "MichaelWave369",
+  "note": "This is a public source/interop manifest, not an assertion that every upstream feed is currently healthy.",
+  "capabilities": [
+    {
+      "id": "watchtower-live",
+      "label": "WATCHTOWER LIVE",
+      "mode": "interactive-browser",
+      "url": "https://michaelwave369.github.io/parallax-watchtower/",
+      "produces": "phi.fieldpack.v1",
+      "output": "User-triggered JSON download or clipboard; no server-side live JSON API",
+      "privacy": "No browser location or saved watch-zone coordinates in exported packs"
+    },
+    {
+      "id": "watchtower-orbit-cache",
+      "label": "CelesTrak orbit catalog",
+      "mode": "static-cached-json",
+      "url": "https://michaelwave369.github.io/parallax-watchtower/data/orbits.json",
+      "dataKind": "Orbital elements; calculate positions with SGP4, not observed positions",
+      "freshness": "Scheduled source refresh about every three hours; no cache means no orbital positions"
+    },
+    {
+      "id": "peekaboo",
+      "label": "Peekaboo public views",
+      "mode": "explicit-federated-navigation",
+      "url": "https://michaelwave369.github.io/Peekaboo/",
+      "contract": "map=zoom/lat/lon&mode=public; user-triggered only; no camera scraping or private feeds"
+    },
+    {
+      "id": "eirm",
+      "label": "Earth-Ionosphere Resonance Monitor",
+      "mode": "explicit-federated-navigation",
+      "url": "https://michaelwave369.github.io/schumann-live-react/",
+      "contract": "Separate NOAA and visual Schumann context; no implied shared measurements"
+    }
+  ]
+}
