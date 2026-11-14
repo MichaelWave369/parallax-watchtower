@@ -1,0 +1,58 @@
+name: Refresh Public Discovery Leads
+
+on:
+  schedule:
+    - cron: "43 6,18 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/discovery-leads.yml"
+      - "scripts/refreshDiscoveryLeads.mjs"
+      - "lib/discoveryCache.mjs"
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  cache-and-deploy:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    environment: github-pages
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install dependencies
+        run: npm install
+      - name: Validate adapters and discovery rules
+        run: npm test
+      - name: Read two official public feeds once
+        run: node scripts/refreshDiscoveryLeads.mjs
+      - name: Commit only unreviewed candidate cache
+        run: |
+          if ! git diff --quiet -- public/data/discovery-candidates.v1.json; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add public/data/discovery-candidates.v1.json
+            git commit -m "data: refresh unreviewed public discovery leads"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+      - name: Build site including candidate cache
+        run: npm run build
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+      - name: Deploy updated candidate cache
+        uses: actions/deploy-pages@v4

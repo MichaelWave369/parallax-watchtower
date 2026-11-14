@@ -115,3 +115,19 @@ test("Discovery Inbox stages a manual source without claiming it is a published 
   await page.getByRole("button", { name: "Live signals", exact: true }).click();
   await expect(page.locator('canvas[aria-label*="Lite Atlas"]')).toBeVisible();
 });
+
+test("scheduled discovery cache has source-health messaging and never impersonates approved incidents", async ({ page }) => {
+  await page.route("**/*", route =>
+    route.request().url().startsWith(local) ? route.continue() : route.abort("failed")
+  );
+  await page.goto("/parallax-watchtower/", {waitUntil: "domcontentloaded"});
+  await page.getByRole("button", {name: "Discovery Inbox"}).click();
+  const cache = page.getByRole("region", {name: "Scheduled source cache"});
+  await expect(cache.getByRole("heading", {name: "Scheduled official-source snapshot"})).toBeVisible();
+  await expect(cache.getByText(/unreviewed research leads, not confirmed incidents/i)).toBeVisible();
+  await expect(cache.getByRole("status")).toContainText(/Cache:/);
+  await page.getByRole("button", {name: "Incident Room", exact: true}).click();
+  await expect(page.getByRole("heading", {name: "Explore documented disruptions"})).toBeVisible();
+  await page.getByRole("button", {name: "Live signals", exact: true}).click();
+  await expect(page.locator('canvas[aria-label*="Lite Atlas"]')).toBeVisible();
+});

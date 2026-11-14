@@ -132,3 +132,9 @@ See `docs/map-403-repair.md` for diagnosis, policy links, acceptance checks and 
 ## Startup recovery and browser smoke tests
 
 The default mode is temporarily **Lite Atlas** so a third-party WebGL dependency cannot blank the entire page at boot. Choose **Map** to load the OpenFreeMap/MapLibre map on demand; a map crash or provider failure switches back to Lite. A top-level application error boundary shows a readable recovery screen instead of an empty page. The GitHub Actions CI now includes a real Chromium/Playwright smoke test of the production Pages base path with external sources blocked. Run with `npm run build && npm run test:browser` after installing Playwright Chromium.
+
+## Scheduled Discovery Inbox cache (review-only)
+
+A twice-daily GitHub Actions job requests the official USGS M4.5+ earthquake GeoJSON feed and NASA EONET curated open-wildfire references. It publishes only a bounded, HTTPS-receipted, **unreviewed candidate snapshot** at `/data/discovery-candidates.v1.json` for Discovery Inbox to load. The browser never polls these providers separately for the scheduled snapshot.
+
+Source-health and age are visible; cache snapshots older than 36 hours cannot be queued as fresh. Every candidate requires a click to enter the existing local review inbox. **No candidate is automatically published as an Incident Room case or represented as an emergency alert.** NASA event references are not wildfire boundaries. See `docs/discovery-cache.md`.
