@@ -1,4 +1,5 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { readDiscoveryCache } from "../lib/discoveryCache.mjs";
 import {
   DISCOVERY_STORAGE_KEY, MAX_DISCOVERY_ITEMS, addCandidate, candidateFromLink,
   candidateFromSignal, createReviewPacket, encodeInbox, readInbox, receiptKey,
@@ -32,6 +33,24 @@ export function DiscoveryInbox({ signals }: Props) {
   const [summary, setSummary] = useState("");
   const [message, setMessage] = useState("");
   const [filter, setFilter] = useState("all");
+  const [scheduled, setScheduled] = useState<{state:string; generatedAt:string|null; sources:Array<{id:string;status:string;name?:string;accepted?:number}>;candidates:Lead[]}>({
+    state: "loading", generatedAt: null, sources: [], candidates: []
+  });
+
+  useEffect(() => {
+    const controller = new AbortController();
+    fetch(import.meta.env.BASE_URL + "data/discovery-candidates.v1.json", {
+      cache: "no-store", signal: controller.signal
+    }).then(async (response) => {
+      if (!response.ok) throw new Error("Cache returned HTTP " + response.status);
+      return response.json();
+    }).then((payload) => {
+      if (!controller.signal.aborted) setScheduled(readDiscoveryCache(payload));
+    }).catch(() => {
+      if (!controller.signal.aborted) setScheduled({state:"unavailable", generatedAt:null, sources:[], candidates:[]});
+    });
+    return () => controller.abort();
+  }, []);
 
   // Reuse Watchtower's already-loaded public signals. No new feed fetches occur here.
   const leads = useMemo(() => {
@@ -133,6 +152,28 @@ export function DiscoveryInbox({ signals }: Props) {
       <p className="small">Data comes from Watchtower's existing public feeds when reachable. News fallbacks, low-magnitude earthquakes, private/local data, orbit predictions and market records are excluded. This is not an emergency-alert service.</p>
     </div>
 
+    <section className="panel discovery-section" aria-label="Scheduled source cache">
+      <h3>Scheduled official-source snapshot</h3>
+      <p className="small">Twice-daily centralized collection from USGS and NASA EONET. <strong>These are unreviewed research leads, not confirmed incidents or live safety alerts.</strong> An unavailable or stale cache fails closed, with no synthetic replacements.</p>
+      <p role="status" className="small">Cache: {scheduled.state === "fresh" ? "Updated" : scheduled.state === "partial" ? "Partial provider coverage" : scheduled.state === "pending" ? "First scheduled collection pending" : scheduled.state === "stale" ? "Stale, hidden until refreshed" : scheduled.state === "loading" ? "Loading snapshot" : "Unavailable"}{scheduled.generatedAt ? " · fetched " + new Date(scheduled.generatedAt).toLocaleString() : ""}</p>
+      {scheduled.sources.length > 0 && <div className="discovery-metrics">
+        {scheduled.sources.map((provider) => <span key={provider.id}>{provider.name ?? provider.id}: <strong>{provider.status}</strong></span>)}
+      </div>}
+      {scheduled.candidates.length > 0 ? <div className="discovery-grid">
+        {scheduled.candidates.map((lead) => {
+          const saved = savedKeys.has(receiptKey(lead.sourceUrl));
+          return <article className="discovery-card" key={lead.id}>
+            <span className="discovery-kind">Unreviewed · {lead.signalType}</span>
+            <h4>{lead.title}</h4><p>{lead.summary || "Read original source for details."}</p>
+            <div className="small">{lead.sourceName} · record time {new Date(lead.sourceTimestamp!).toLocaleString()}</div>
+            <div className="discovery-actions">
+              <a href={lead.sourceUrl} target="_blank" rel="noopener noreferrer">Read receipt ↗</a>
+              <button type="button" className="btn" disabled={saved} onClick={() => queue(lead)}>{saved ? "In inbox" : "Queue for review"}</button>
+            </div>
+          </article>;
+        })}
+      </div> : <p className="discovery-muted">No fresh scheduled leads are available right now. The normal public-signal and manual-source inboxes remain usable.</p>}
+    </section>
     <section className="panel discovery-section" aria-label="Source-linked candidates">
       <h3>Public-source leads</h3>
       <p className="small">USGS earthquakes M4.5+, NASA EONET wildfire references, and directly sourced public news. Click Queue to nominate a record; there is no automatic intake.</p>

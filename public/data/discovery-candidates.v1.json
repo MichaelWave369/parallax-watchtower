@@ -1,0 +1,26 @@
+{
+  "schema": "phi.watchtower.discovery-cache.v1",
+  "version": 1,
+  "generatedAt": null,
+  "status": "pending",
+  "sources": [
+    {
+      "id": "usgs",
+      "name": "USGS earthquakes M4.5+",
+      "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_week.geojson",
+      "status": "pending",
+      "accepted": 0,
+      "checkedAt": null
+    },
+    {
+      "id": "eonet",
+      "name": "NASA EONET curated wildfires",
+      "url": "https://eonet.gsfc.nasa.gov/api/v3/events?category=wildfires&status=open&days=14&limit=100",
+      "status": "pending",
+      "accepted": 0,
+      "checkedAt": null
+    }
+  ],
+  "candidates": [],
+  "notice": "Scheduled collection pending. No candidate is a verified incident."
+}
