@@ -91,3 +91,12 @@ This release adds:
 The visible product has been renamed to **WATCHTOWER LIVE**. The old `parallax-watchtower` GitHub repository slug and Pages base path are temporarily retained for backward compatibility. A repository rename requires a separate migration of URLs and hosting settings. See `docs/watchtower-live-plan.md`.
 
 Feed status indicates an adapter fetch succeeded, not that the underlying event is happening in real time or that the source is complete.
+
+## ISS satellite positions and Peekaboo regional handoff
+
+- Displays a single sampled **International Space Station** ground position from the [Where the ISS at? API](https://docs.wheretheiss.at/w/developer), when the source responds with a fresh timestamp. No fake trail or continuously interpolated track.
+- ISS sampling inherits the one-minute refresh interval; only the ISS is supported at this stage.
+- No marker is shown when the position is missing, malformed or stale. The Source Ledger reports the failure.
+- The Peekaboo shortcut now opens **Public Views** centered on the current Watchtower lens using Peekaboo's supported map URL. Peekaboo remains a separate app; nothing is scraped or silently scanned.
+
+See `docs/iss-peekaboo-bridge.md` for exact data constraints and tests.
