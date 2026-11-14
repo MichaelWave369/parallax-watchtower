@@ -11,7 +11,8 @@ permissions:
 
 jobs:
   test-build:
-    runs-on: ubuntu-latest
+    # Playwright 1.56 Chromium depends on Ubuntu 24.04; ubuntu-latest moved to 26.04.
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
