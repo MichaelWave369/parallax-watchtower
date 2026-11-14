@@ -52,3 +52,22 @@ test("Explore opens 50 curated external resources without breaking Live signals"
   await page.getByRole("button", { name: "Live signals", exact: true }).click();
   await expect(page.locator('canvas[aria-label*="Lite Atlas"]')).toBeVisible();
 });
+
+test("Incident Room documents ground stop with receipts, uncertainty and discovery trails", async ({ page }) => {
+  await page.route("**/*", route =>
+    route.request().url().startsWith(local) ? route.continue() : route.abort("failed")
+  );
+  await page.goto("/parallax-watchtower/", { waitUntil: "domcontentloaded" });
+  await page.getByRole("button", { name: "Incident Room", exact: true }).click();
+  await expect(page.getByRole("heading", { name: "FAA nationwide ground stop" })).toBeVisible();
+  await expect(page.locator(".incident-event")).toHaveCount(5);
+  await expect(page.getByText("Preliminary account", {exact:true})).toBeVisible();
+  await page.getByRole("button", {name:"Evidence sources",exact:true}).click();
+  await expect(page.locator(".incident-source")).toHaveCount(2);
+  await expect(page.getByRole("link", {name:/Read source statement/i}).first()).toHaveAttribute("rel", /noopener noreferrer/);
+  await page.getByRole("button", {name:"Read evidence method"}).click();
+  await expect(page.getByText("Receipts over conclusions")).toBeVisible();
+  await expect(page.getByText(/not evidence about this specific outage/i)).toBeVisible();
+  await page.getByRole("button", {name:"Live signals",exact:true}).click();
+  await expect(page.locator('canvas[aria-label*="Lite Atlas"]')).toBeVisible();
+});
