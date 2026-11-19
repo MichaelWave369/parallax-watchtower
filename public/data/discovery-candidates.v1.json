@@ -1,7 +1,7 @@
 {
   "schema": "phi.watchtower.discovery-cache.v1",
   "version": 1,
-  "generatedAt": "2026-11-18T15:57:52.577Z",
+  "generatedAt": "2026-11-19T00:43:26.854Z",
   "status": "ok",
   "sources": [
     {
@@ -10,7 +10,7 @@
       "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_week.geojson",
       "status": "ok",
       "accepted": 25,
-      "checkedAt": "2026-11-18T15:57:52.577Z"
+      "checkedAt": "2026-11-19T00:43:26.854Z"
     },
     {
       "id": "eonet",
@@ -18,10 +18,101 @@
       "url": "https://eonet.gsfc.nasa.gov/api/v3/events?category=wildfires&status=open&days=14&limit=100",
       "status": "ok",
       "accepted": 9,
-      "checkedAt": "2026-11-18T15:57:52.577Z"
+      "checkedAt": "2026-11-19T00:43:26.854Z"
     }
   ],
   "candidates": [
+    {
+      "id": "signal:earthquake:usgs-us6000ubw3",
+      "origin": "public-signal",
+      "signalType": "earthquake",
+      "title": "M 5.2 - 169 km S of Attu Station, Alaska",
+      "summary": "169 km S of Attu Station, Alaska",
+      "sourceName": "USGS Earthquake Feed",
+      "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000ubw3",
+      "sourceTimestamp": "2026-11-18T21:28:47.088Z",
+      "capturedAt": "2026-11-19T00:43:26.854Z",
+      "status": "pending",
+      "reviewNote": ""
+    },
+    {
+      "id": "signal:earthquake:usgs-us6000ubvu",
+      "origin": "public-signal",
+      "signalType": "earthquake",
+      "title": "M 4.7 - 134 km SW of Lorengau, Papua New Guinea",
+      "summary": "134 km SW of Lorengau, Papua New Guinea",
+      "sourceName": "USGS Earthquake Feed",
+      "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000ubvu",
+      "sourceTimestamp": "2026-11-18T20:38:39.129Z",
+      "capturedAt": "2026-11-19T00:43:26.854Z",
+      "status": "pending",
+      "reviewNote": ""
+    },
+    {
+      "id": "signal:earthquake:usgs-us7000tz37",
+      "origin": "public-signal",
+      "signalType": "earthquake",
+      "title": "M 6.1 - Pacific-Antarctic Ridge",
+      "summary": "Pacific-Antarctic Ridge",
+      "sourceName": "USGS Earthquake Feed",
+      "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tz37",
+      "sourceTimestamp": "2026-11-18T19:14:23.713Z",
+      "capturedAt": "2026-11-19T00:43:26.854Z",
+      "status": "pending",
+      "reviewNote": ""
+    },
+    {
+      "id": "signal:earthquake:usgs-us7000tz33",
+      "origin": "public-signal",
+      "signalType": "earthquake",
+      "title": "M 4.5 - 23 km SSW of Ollagüe, Chile",
+      "summary": "23 km SSW of Ollagüe, Chile",
+      "sourceName": "USGS Earthquake Feed",
+      "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tz33",
+      "sourceTimestamp": "2026-11-18T18:46:53.317Z",
+      "capturedAt": "2026-11-19T00:43:26.854Z",
+      "status": "pending",
+      "reviewNote": ""
+    },
+    {
+      "id": "signal:earthquake:usgs-us7000tz2w",
+      "origin": "public-signal",
+      "signalType": "earthquake",
+      "title": "M 5.0 - 46 km NNE of Kilimatinde, Tanzania",
+      "summary": "46 km NNE of Kilimatinde, Tanzania",
+      "sourceName": "USGS Earthquake Feed",
+      "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tz2w",
+      "sourceTimestamp": "2026-11-18T18:08:00.785Z",
+      "capturedAt": "2026-11-19T00:43:26.854Z",
+      "status": "pending",
+      "reviewNote": ""
+    },
+    {
+      "id": "signal:earthquake:usgs-us7000tz1n",
+      "origin": "public-signal",
+      "signalType": "earthquake",
+      "title": "M 5.3 - 4 km NNW of Tsunagi, Japan",
+      "summary": "4 km NNW of Tsunagi, Japan",
+      "sourceName": "USGS Earthquake Feed",
+      "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tz1n",
+      "sourceTimestamp": "2026-11-18T17:22:23.454Z",
+      "capturedAt": "2026-11-19T00:43:26.854Z",
+      "status": "pending",
+      "reviewNote": ""
+    },
+    {
+      "id": "signal:earthquake:usgs-us7000tz1a",
+      "origin": "public-signal",
+      "signalType": "earthquake",
+      "title": "M 5.3 - 149 km SSW of Merizo Village, Guam",
+      "summary": "149 km SSW of Merizo Village, Guam",
+      "sourceName": "USGS Earthquake Feed",
+      "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tz1a",
+      "sourceTimestamp": "2026-11-18T16:06:51.220Z",
+      "capturedAt": "2026-11-19T00:43:26.854Z",
+      "status": "pending",
+      "reviewNote": ""
+    },
     {
       "id": "signal:earthquake:usgs-us7000tyza",
       "origin": "public-signal",
@@ -31,7 +122,7 @@
       "sourceName": "USGS Earthquake Feed",
       "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tyza",
       "sourceTimestamp": "2026-11-18T11:10:57.037Z",
-      "capturedAt": "2026-11-18T15:57:52.577Z",
+      "capturedAt": "2026-11-19T00:43:26.854Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -44,7 +135,7 @@
       "sourceName": "USGS Earthquake Feed",
       "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tyyw",
       "sourceTimestamp": "2026-11-18T09:37:00.617Z",
-      "capturedAt": "2026-11-18T15:57:52.577Z",
+      "capturedAt": "2026-11-19T00:43:26.854Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -57,7 +148,7 @@
       "sourceName": "USGS Earthquake Feed",
       "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tyy8",
       "sourceTimestamp": "2026-11-18T06:07:42.780Z",
-      "capturedAt": "2026-11-18T15:57:52.577Z",
+      "capturedAt": "2026-11-19T00:43:26.854Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -70,7 +161,7 @@
       "sourceName": "USGS Earthquake Feed",
       "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tyxz",
       "sourceTimestamp": "2026-11-18T05:25:43.280Z",
-      "capturedAt": "2026-11-18T15:57:52.577Z",
+      "capturedAt": "2026-11-19T00:43:26.854Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -83,7 +174,7 @@
       "sourceName": "USGS Earthquake Feed",
       "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tyy2",
       "sourceTimestamp": "2026-11-18T05:24:55.060Z",
-      "capturedAt": "2026-11-18T15:57:52.577Z",
+      "capturedAt": "2026-11-19T00:43:26.854Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -96,7 +187,7 @@
       "sourceName": "USGS Earthquake Feed",
       "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tyxi",
       "sourceTimestamp": "2026-11-18T04:41:32.015Z",
-      "capturedAt": "2026-11-18T15:57:52.577Z",
+      "capturedAt": "2026-11-19T00:43:26.854Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -109,7 +200,7 @@
       "sourceName": "USGS Earthquake Feed",
       "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tyxc",
       "sourceTimestamp": "2026-11-18T04:21:35.658Z",
-      "capturedAt": "2026-11-18T15:57:52.577Z",
+      "capturedAt": "2026-11-19T00:43:26.854Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -122,7 +213,7 @@
       "sourceName": "USGS Earthquake Feed",
       "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tyx2",
       "sourceTimestamp": "2026-11-18T03:42:34.269Z",
-      "capturedAt": "2026-11-18T15:57:52.577Z",
+      "capturedAt": "2026-11-19T00:43:26.854Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -135,7 +226,7 @@
       "sourceName": "USGS Earthquake Feed",
       "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tywx",
       "sourceTimestamp": "2026-11-18T03:23:58.023Z",
-      "capturedAt": "2026-11-18T15:57:52.577Z",
+      "capturedAt": "2026-11-19T00:43:26.854Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -148,7 +239,7 @@
       "sourceName": "USGS Earthquake Feed",
       "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tywi",
       "sourceTimestamp": "2026-11-18T02:22:56.671Z",
-      "capturedAt": "2026-11-18T15:57:52.577Z",
+      "capturedAt": "2026-11-19T00:43:26.854Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -161,7 +252,7 @@
       "sourceName": "USGS Earthquake Feed",
       "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tyw8",
       "sourceTimestamp": "2026-11-18T00:48:56.089Z",
-      "capturedAt": "2026-11-18T15:57:52.577Z",
+      "capturedAt": "2026-11-19T00:43:26.854Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -174,7 +265,7 @@
       "sourceName": "USGS Earthquake Feed",
       "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tyw6",
       "sourceTimestamp": "2026-11-18T00:46:31.418Z",
-      "capturedAt": "2026-11-18T15:57:52.577Z",
+      "capturedAt": "2026-11-19T00:43:26.854Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -187,7 +278,20 @@
       "sourceName": "USGS Earthquake Feed",
       "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tyvt",
       "sourceTimestamp": "2026-11-17T23:25:33.527Z",
-      "capturedAt": "2026-11-18T15:57:52.577Z",
+      "capturedAt": "2026-11-19T00:43:26.854Z",
+      "status": "pending",
+      "reviewNote": ""
+    },
+    {
+      "id": "signal:earthquake:usgs-us7000tyyp",
+      "origin": "public-signal",
+      "signalType": "earthquake",
+      "title": "M 4.6 - 10 km ESE of Metahāra, Ethiopia",
+      "summary": "10 km ESE of Metahāra, Ethiopia",
+      "sourceName": "USGS Earthquake Feed",
+      "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tyyp",
+      "sourceTimestamp": "2026-11-17T22:52:05.954Z",
+      "capturedAt": "2026-11-19T00:43:26.854Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -200,7 +304,7 @@
       "sourceName": "USGS Earthquake Feed",
       "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tytz",
       "sourceTimestamp": "2026-11-17T18:15:19.134Z",
-      "capturedAt": "2026-11-18T15:57:52.577Z",
+      "capturedAt": "2026-11-19T00:43:26.854Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -213,7 +317,7 @@
       "sourceName": "USGS Earthquake Feed",
       "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tyt9",
       "sourceTimestamp": "2026-11-17T16:35:58.497Z",
-      "capturedAt": "2026-11-18T15:57:52.577Z",
+      "capturedAt": "2026-11-19T00:43:26.854Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -226,7 +330,7 @@
       "sourceName": "USGS Earthquake Feed",
       "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tyt4",
       "sourceTimestamp": "2026-11-17T15:49:27.642Z",
-      "capturedAt": "2026-11-18T15:57:52.577Z",
+      "capturedAt": "2026-11-19T00:43:26.854Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -239,111 +343,7 @@
       "sourceName": "USGS Earthquake Feed",
       "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tyt3",
       "sourceTimestamp": "2026-11-17T15:48:48.868Z",
-      "capturedAt": "2026-11-18T15:57:52.577Z",
-      "status": "pending",
-      "reviewNote": ""
-    },
-    {
-      "id": "signal:earthquake:usgs-us7000tysq",
-      "origin": "public-signal",
-      "signalType": "earthquake",
-      "title": "M 5.2 - south of the Kermadec Islands",
-      "summary": "south of the Kermadec Islands",
-      "sourceName": "USGS Earthquake Feed",
-      "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tysq",
-      "sourceTimestamp": "2026-11-17T14:20:36.814Z",
-      "capturedAt": "2026-11-18T15:57:52.577Z",
-      "status": "pending",
-      "reviewNote": ""
-    },
-    {
-      "id": "signal:earthquake:usgs-us7000tysa",
-      "origin": "public-signal",
-      "signalType": "earthquake",
-      "title": "M 4.5 - 95 km W of Alotau, Papua New Guinea",
-      "summary": "95 km W of Alotau, Papua New Guinea",
-      "sourceName": "USGS Earthquake Feed",
-      "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tysa",
-      "sourceTimestamp": "2026-11-17T12:26:16.641Z",
-      "capturedAt": "2026-11-18T15:57:52.577Z",
-      "status": "pending",
-      "reviewNote": ""
-    },
-    {
-      "id": "signal:earthquake:usgs-us7000tysm",
-      "origin": "public-signal",
-      "signalType": "earthquake",
-      "title": "M 4.5 - 8 km WNW of Piti Village, Guam",
-      "summary": "8 km WNW of Piti Village, Guam",
-      "sourceName": "USGS Earthquake Feed",
-      "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tysm",
-      "sourceTimestamp": "2026-11-17T11:12:59.760Z",
-      "capturedAt": "2026-11-18T15:57:52.577Z",
-      "status": "pending",
-      "reviewNote": ""
-    },
-    {
-      "id": "signal:earthquake:usgs-us7000tyrw",
-      "origin": "public-signal",
-      "signalType": "earthquake",
-      "title": "M 4.9 - 173 km ENE of Noda, Japan",
-      "summary": "173 km ENE of Noda, Japan",
-      "sourceName": "USGS Earthquake Feed",
-      "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tyrw",
-      "sourceTimestamp": "2026-11-17T10:32:58.639Z",
-      "capturedAt": "2026-11-18T15:57:52.577Z",
-      "status": "pending",
-      "reviewNote": ""
-    },
-    {
-      "id": "signal:earthquake:usgs-us7000tyrv",
-      "origin": "public-signal",
-      "signalType": "earthquake",
-      "title": "M 4.9 - 43 km NW of Oxford, New Zealand",
-      "summary": "43 km NW of Oxford, New Zealand",
-      "sourceName": "USGS Earthquake Feed",
-      "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tyrv",
-      "sourceTimestamp": "2026-11-17T10:30:48.773Z",
-      "capturedAt": "2026-11-18T15:57:52.577Z",
-      "status": "pending",
-      "reviewNote": ""
-    },
-    {
-      "id": "signal:earthquake:usgs-us7000tyqi",
-      "origin": "public-signal",
-      "signalType": "earthquake",
-      "title": "M 4.9 - 26 km E of Port-Olry, Vanuatu",
-      "summary": "26 km E of Port-Olry, Vanuatu",
-      "sourceName": "USGS Earthquake Feed",
-      "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tyqi",
-      "sourceTimestamp": "2026-11-17T03:52:32.360Z",
-      "capturedAt": "2026-11-18T15:57:52.577Z",
-      "status": "pending",
-      "reviewNote": ""
-    },
-    {
-      "id": "signal:earthquake:usgs-us7000tyq5",
-      "origin": "public-signal",
-      "signalType": "earthquake",
-      "title": "M 5.0 - 137 km SSE of Kirakira, Solomon Islands",
-      "summary": "137 km SSE of Kirakira, Solomon Islands",
-      "sourceName": "USGS Earthquake Feed",
-      "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tyq5",
-      "sourceTimestamp": "2026-11-17T02:00:17.654Z",
-      "capturedAt": "2026-11-18T15:57:52.577Z",
-      "status": "pending",
-      "reviewNote": ""
-    },
-    {
-      "id": "signal:earthquake:usgs-us7000tyny",
-      "origin": "public-signal",
-      "signalType": "earthquake",
-      "title": "M 4.6 - 130 km N of Caluula, Somalia",
-      "summary": "130 km N of Caluula, Somalia",
-      "sourceName": "USGS Earthquake Feed",
-      "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tyny",
-      "sourceTimestamp": "2026-11-16T22:21:25.970Z",
-      "capturedAt": "2026-11-18T15:57:52.577Z",
+      "capturedAt": "2026-11-19T00:43:26.854Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -356,7 +356,7 @@
       "sourceName": "NASA EONET wildfire catalog",
       "sourceUrl": "https://eonet.gsfc.nasa.gov/api/v3/events/EONET_26465",
       "sourceTimestamp": "2026-11-13T15:18:00.000Z",
-      "capturedAt": "2026-11-18T15:57:52.577Z",
+      "capturedAt": "2026-11-19T00:43:26.854Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -369,7 +369,7 @@
       "sourceName": "NASA EONET wildfire catalog",
       "sourceUrl": "https://eonet.gsfc.nasa.gov/api/v3/events/EONET_26464",
       "sourceTimestamp": "2026-11-13T13:31:00.000Z",
-      "capturedAt": "2026-11-18T15:57:52.577Z",
+      "capturedAt": "2026-11-19T00:43:26.854Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -382,7 +382,7 @@
       "sourceName": "NASA EONET wildfire catalog",
       "sourceUrl": "https://eonet.gsfc.nasa.gov/api/v3/events/EONET_26469",
       "sourceTimestamp": "2026-11-13T10:30:00.000Z",
-      "capturedAt": "2026-11-18T15:57:52.577Z",
+      "capturedAt": "2026-11-19T00:43:26.854Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -395,7 +395,7 @@
       "sourceName": "NASA EONET wildfire catalog",
       "sourceUrl": "https://eonet.gsfc.nasa.gov/api/v3/events/EONET_26467",
       "sourceTimestamp": "2026-11-12T11:59:00.000Z",
-      "capturedAt": "2026-11-18T15:57:52.577Z",
+      "capturedAt": "2026-11-19T00:43:26.854Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -408,7 +408,7 @@
       "sourceName": "NASA EONET wildfire catalog",
       "sourceUrl": "https://eonet.gsfc.nasa.gov/api/v3/events/EONET_26468",
       "sourceTimestamp": "2026-11-12T09:20:00.000Z",
-      "capturedAt": "2026-11-18T15:57:52.577Z",
+      "capturedAt": "2026-11-19T00:43:26.854Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -421,7 +421,7 @@
       "sourceName": "NASA EONET wildfire catalog",
       "sourceUrl": "https://eonet.gsfc.nasa.gov/api/v3/events/EONET_26331",
       "sourceTimestamp": "2026-11-12T00:22:00.000Z",
-      "capturedAt": "2026-11-18T15:57:52.577Z",
+      "capturedAt": "2026-11-19T00:43:26.854Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -434,7 +434,7 @@
       "sourceName": "NASA EONET wildfire catalog",
       "sourceUrl": "https://eonet.gsfc.nasa.gov/api/v3/events/EONET_26332",
       "sourceTimestamp": "2026-11-11T09:57:00.000Z",
-      "capturedAt": "2026-11-18T15:57:52.577Z",
+      "capturedAt": "2026-11-19T00:43:26.854Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -447,7 +447,7 @@
       "sourceName": "NASA EONET wildfire catalog",
       "sourceUrl": "https://eonet.gsfc.nasa.gov/api/v3/events/EONET_26333",
       "sourceTimestamp": "2026-11-09T16:30:00.000Z",
-      "capturedAt": "2026-11-18T15:57:52.577Z",
+      "capturedAt": "2026-11-19T00:43:26.854Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -460,7 +460,7 @@
       "sourceName": "NASA EONET wildfire catalog",
       "sourceUrl": "https://eonet.gsfc.nasa.gov/api/v3/events/EONET_26258",
       "sourceTimestamp": "2026-11-05T16:11:00.000Z",
-      "capturedAt": "2026-11-18T15:57:52.577Z",
+      "capturedAt": "2026-11-19T00:43:26.854Z",
       "status": "pending",
       "reviewNote": ""
     }
