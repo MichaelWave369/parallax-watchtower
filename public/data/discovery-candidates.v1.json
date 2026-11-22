@@ -1,7 +1,7 @@
 {
   "schema": "phi.watchtower.discovery-cache.v1",
   "version": 1,
-  "generatedAt": "2026-11-21T23:35:17.611Z",
+  "generatedAt": "2026-11-22T14:53:34.973Z",
   "status": "ok",
   "sources": [
     {
@@ -10,7 +10,7 @@
       "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_week.geojson",
       "status": "ok",
       "accepted": 25,
-      "checkedAt": "2026-11-21T23:35:17.611Z"
+      "checkedAt": "2026-11-22T14:53:34.973Z"
     },
     {
       "id": "eonet",
@@ -18,10 +18,88 @@
       "url": "https://eonet.gsfc.nasa.gov/api/v3/events?category=wildfires&status=open&days=14&limit=100",
       "status": "ok",
       "accepted": 16,
-      "checkedAt": "2026-11-21T23:35:17.611Z"
+      "checkedAt": "2026-11-22T14:53:34.973Z"
     }
   ],
   "candidates": [
+    {
+      "id": "signal:earthquake:usgs-us6000ucs1",
+      "origin": "public-signal",
+      "signalType": "earthquake",
+      "title": "M 4.9 - south of the Fiji Islands",
+      "summary": "south of the Fiji Islands",
+      "sourceName": "USGS Earthquake Feed",
+      "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000ucs1",
+      "sourceTimestamp": "2026-11-22T10:46:07.004Z",
+      "capturedAt": "2026-11-22T14:53:34.973Z",
+      "status": "pending",
+      "reviewNote": ""
+    },
+    {
+      "id": "signal:earthquake:usgs-us6000ucrp",
+      "origin": "public-signal",
+      "signalType": "earthquake",
+      "title": "M 5.1 - 45 km SE of Ürümqi, China",
+      "summary": "45 km SE of Ürümqi, China",
+      "sourceName": "USGS Earthquake Feed",
+      "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000ucrp",
+      "sourceTimestamp": "2026-11-22T09:08:28.009Z",
+      "capturedAt": "2026-11-22T14:53:34.973Z",
+      "status": "pending",
+      "reviewNote": ""
+    },
+    {
+      "id": "signal:earthquake:usgs-us6000ucrb",
+      "origin": "public-signal",
+      "signalType": "earthquake",
+      "title": "M 5.4 - 224 km NE of Bitung, Indonesia",
+      "summary": "224 km NE of Bitung, Indonesia",
+      "sourceName": "USGS Earthquake Feed",
+      "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000ucrb",
+      "sourceTimestamp": "2026-11-22T07:54:40.056Z",
+      "capturedAt": "2026-11-22T14:53:34.973Z",
+      "status": "pending",
+      "reviewNote": ""
+    },
+    {
+      "id": "signal:earthquake:usgs-us6000ucr3",
+      "origin": "public-signal",
+      "signalType": "earthquake",
+      "title": "M 4.9 - 246 km ESE of Sarangani, Philippines",
+      "summary": "246 km ESE of Sarangani, Philippines",
+      "sourceName": "USGS Earthquake Feed",
+      "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000ucr3",
+      "sourceTimestamp": "2026-11-22T07:06:58.521Z",
+      "capturedAt": "2026-11-22T14:53:34.973Z",
+      "status": "pending",
+      "reviewNote": ""
+    },
+    {
+      "id": "signal:earthquake:usgs-us6000ucqu",
+      "origin": "public-signal",
+      "signalType": "earthquake",
+      "title": "M 5.0 - 15 km NNE of Carhuamayo, Peru",
+      "summary": "15 km NNE of Carhuamayo, Peru",
+      "sourceName": "USGS Earthquake Feed",
+      "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000ucqu",
+      "sourceTimestamp": "2026-11-22T05:51:58.624Z",
+      "capturedAt": "2026-11-22T14:53:34.973Z",
+      "status": "pending",
+      "reviewNote": ""
+    },
+    {
+      "id": "signal:earthquake:usgs-us6000ucpj",
+      "origin": "public-signal",
+      "signalType": "earthquake",
+      "title": "M 4.6 - 60 km WNW of Abepura, Indonesia",
+      "summary": "60 km WNW of Abepura, Indonesia",
+      "sourceName": "USGS Earthquake Feed",
+      "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000ucpj",
+      "sourceTimestamp": "2026-11-21T23:16:05.571Z",
+      "capturedAt": "2026-11-22T14:53:34.973Z",
+      "status": "pending",
+      "reviewNote": ""
+    },
     {
       "id": "signal:earthquake:usgs-us6000ucni",
       "origin": "public-signal",
@@ -31,7 +109,7 @@
       "sourceName": "USGS Earthquake Feed",
       "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000ucni",
       "sourceTimestamp": "2026-11-21T19:03:04.170Z",
-      "capturedAt": "2026-11-21T23:35:17.611Z",
+      "capturedAt": "2026-11-22T14:53:34.973Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -44,7 +122,7 @@
       "sourceName": "USGS Earthquake Feed",
       "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000ucn8",
       "sourceTimestamp": "2026-11-21T17:30:44.504Z",
-      "capturedAt": "2026-11-21T23:35:17.611Z",
+      "capturedAt": "2026-11-22T14:53:34.973Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -57,7 +135,7 @@
       "sourceName": "USGS Earthquake Feed",
       "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000ucn2",
       "sourceTimestamp": "2026-11-21T17:14:21.477Z",
-      "capturedAt": "2026-11-21T23:35:17.611Z",
+      "capturedAt": "2026-11-22T14:53:34.973Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -70,7 +148,7 @@
       "sourceName": "USGS Earthquake Feed",
       "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/pr2026325000",
       "sourceTimestamp": "2026-11-21T15:00:13.140Z",
-      "capturedAt": "2026-11-21T23:35:17.611Z",
+      "capturedAt": "2026-11-22T14:53:34.973Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -83,7 +161,7 @@
       "sourceName": "USGS Earthquake Feed",
       "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000ucly",
       "sourceTimestamp": "2026-11-21T10:45:33.230Z",
-      "capturedAt": "2026-11-21T23:35:17.611Z",
+      "capturedAt": "2026-11-22T14:53:34.973Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -96,7 +174,7 @@
       "sourceName": "USGS Earthquake Feed",
       "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000ucky",
       "sourceTimestamp": "2026-11-21T10:09:05.474Z",
-      "capturedAt": "2026-11-21T23:35:17.611Z",
+      "capturedAt": "2026-11-22T14:53:34.973Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -109,7 +187,7 @@
       "sourceName": "USGS Earthquake Feed",
       "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000ucij",
       "sourceTimestamp": "2026-11-21T09:42:09.120Z",
-      "capturedAt": "2026-11-21T23:35:17.611Z",
+      "capturedAt": "2026-11-22T14:53:34.973Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -122,7 +200,7 @@
       "sourceName": "USGS Earthquake Feed",
       "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000uci2",
       "sourceTimestamp": "2026-11-21T07:20:44.218Z",
-      "capturedAt": "2026-11-21T23:35:17.611Z",
+      "capturedAt": "2026-11-22T14:53:34.973Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -135,7 +213,7 @@
       "sourceName": "USGS Earthquake Feed",
       "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000uchd",
       "sourceTimestamp": "2026-11-21T05:12:04.898Z",
-      "capturedAt": "2026-11-21T23:35:17.611Z",
+      "capturedAt": "2026-11-22T14:53:34.973Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -148,7 +226,7 @@
       "sourceName": "USGS Earthquake Feed",
       "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000ucgj",
       "sourceTimestamp": "2026-11-21T02:24:37.289Z",
-      "capturedAt": "2026-11-21T23:35:17.611Z",
+      "capturedAt": "2026-11-22T14:53:34.973Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -161,7 +239,7 @@
       "sourceName": "USGS Earthquake Feed",
       "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000ucga",
       "sourceTimestamp": "2026-11-21T01:26:19.109Z",
-      "capturedAt": "2026-11-21T23:35:17.611Z",
+      "capturedAt": "2026-11-22T14:53:34.973Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -174,7 +252,7 @@
       "sourceName": "USGS Earthquake Feed",
       "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000ucg8",
       "sourceTimestamp": "2026-11-21T01:24:09.274Z",
-      "capturedAt": "2026-11-21T23:35:17.611Z",
+      "capturedAt": "2026-11-22T14:53:34.973Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -187,7 +265,7 @@
       "sourceName": "USGS Earthquake Feed",
       "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000ucfm",
       "sourceTimestamp": "2026-11-21T00:09:19.667Z",
-      "capturedAt": "2026-11-21T23:35:17.611Z",
+      "capturedAt": "2026-11-22T14:53:34.973Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -200,7 +278,7 @@
       "sourceName": "USGS Earthquake Feed",
       "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000ucf0",
       "sourceTimestamp": "2026-11-20T22:34:39.096Z",
-      "capturedAt": "2026-11-21T23:35:17.611Z",
+      "capturedAt": "2026-11-22T14:53:34.973Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -213,7 +291,7 @@
       "sourceName": "USGS Earthquake Feed",
       "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000ucd6",
       "sourceTimestamp": "2026-11-20T17:53:15.442Z",
-      "capturedAt": "2026-11-21T23:35:17.611Z",
+      "capturedAt": "2026-11-22T14:53:34.973Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -226,7 +304,7 @@
       "sourceName": "USGS Earthquake Feed",
       "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000uc9c",
       "sourceTimestamp": "2026-11-20T14:16:15.225Z",
-      "capturedAt": "2026-11-21T23:35:17.611Z",
+      "capturedAt": "2026-11-22T14:53:34.973Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -239,7 +317,7 @@
       "sourceName": "USGS Earthquake Feed",
       "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000uc96",
       "sourceTimestamp": "2026-11-20T13:09:04.057Z",
-      "capturedAt": "2026-11-21T23:35:17.611Z",
+      "capturedAt": "2026-11-22T14:53:34.973Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -252,7 +330,7 @@
       "sourceName": "USGS Earthquake Feed",
       "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000uc8k",
       "sourceTimestamp": "2026-11-20T10:48:44.362Z",
-      "capturedAt": "2026-11-21T23:35:17.611Z",
+      "capturedAt": "2026-11-22T14:53:34.973Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -265,85 +343,7 @@
       "sourceName": "USGS Earthquake Feed",
       "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000uc8g",
       "sourceTimestamp": "2026-11-20T10:30:01.069Z",
-      "capturedAt": "2026-11-21T23:35:17.611Z",
-      "status": "pending",
-      "reviewNote": ""
-    },
-    {
-      "id": "signal:earthquake:usgs-us6000uc8d",
-      "origin": "public-signal",
-      "signalType": "earthquake",
-      "title": "M 4.6 - 40 km SSE of Koróni, Greece",
-      "summary": "40 km SSE of Koróni, Greece",
-      "sourceName": "USGS Earthquake Feed",
-      "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000uc8d",
-      "sourceTimestamp": "2026-11-20T10:16:14.294Z",
-      "capturedAt": "2026-11-21T23:35:17.611Z",
-      "status": "pending",
-      "reviewNote": ""
-    },
-    {
-      "id": "signal:earthquake:usgs-us6000uc82",
-      "origin": "public-signal",
-      "signalType": "earthquake",
-      "title": "M 5.4 - Carlsberg Ridge",
-      "summary": "Carlsberg Ridge",
-      "sourceName": "USGS Earthquake Feed",
-      "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000uc82",
-      "sourceTimestamp": "2026-11-20T08:44:11.644Z",
-      "capturedAt": "2026-11-21T23:35:17.611Z",
-      "status": "pending",
-      "reviewNote": ""
-    },
-    {
-      "id": "signal:earthquake:usgs-us6000uc81",
-      "origin": "public-signal",
-      "signalType": "earthquake",
-      "title": "M 4.7 - Carlsberg Ridge",
-      "summary": "Carlsberg Ridge",
-      "sourceName": "USGS Earthquake Feed",
-      "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000uc81",
-      "sourceTimestamp": "2026-11-20T08:42:54.187Z",
-      "capturedAt": "2026-11-21T23:35:17.611Z",
-      "status": "pending",
-      "reviewNote": ""
-    },
-    {
-      "id": "signal:earthquake:usgs-nc75468702",
-      "origin": "public-signal",
-      "signalType": "earthquake",
-      "title": "M 5.0 - 10 km NW of Pinnacles, CA",
-      "summary": "10 km NW of Pinnacles, CA",
-      "sourceName": "USGS Earthquake Feed",
-      "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/nc75468702",
-      "sourceTimestamp": "2026-11-20T06:49:16.340Z",
-      "capturedAt": "2026-11-21T23:35:17.611Z",
-      "status": "pending",
-      "reviewNote": ""
-    },
-    {
-      "id": "signal:earthquake:usgs-us6000uc6c",
-      "origin": "public-signal",
-      "signalType": "earthquake",
-      "title": "M 4.9 - 54 km W of Madang, Papua New Guinea",
-      "summary": "54 km W of Madang, Papua New Guinea",
-      "sourceName": "USGS Earthquake Feed",
-      "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000uc6c",
-      "sourceTimestamp": "2026-11-20T05:17:45.106Z",
-      "capturedAt": "2026-11-21T23:35:17.611Z",
-      "status": "pending",
-      "reviewNote": ""
-    },
-    {
-      "id": "signal:earthquake:usgs-us6000uc5s",
-      "origin": "public-signal",
-      "signalType": "earthquake",
-      "title": "M 4.8 - 24 km ESE of Calingasta, Argentina",
-      "summary": "24 km ESE of Calingasta, Argentina",
-      "sourceName": "USGS Earthquake Feed",
-      "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000uc5s",
-      "sourceTimestamp": "2026-11-20T02:57:18.070Z",
-      "capturedAt": "2026-11-21T23:35:17.611Z",
+      "capturedAt": "2026-11-22T14:53:34.973Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -356,7 +356,7 @@
       "sourceName": "NASA EONET wildfire catalog",
       "sourceUrl": "https://eonet.gsfc.nasa.gov/api/v3/events/EONET_26568",
       "sourceTimestamp": "2026-11-18T14:11:00.000Z",
-      "capturedAt": "2026-11-21T23:35:17.611Z",
+      "capturedAt": "2026-11-22T14:53:34.973Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -369,7 +369,7 @@
       "sourceName": "NASA EONET wildfire catalog",
       "sourceUrl": "https://eonet.gsfc.nasa.gov/api/v3/events/EONET_26569",
       "sourceTimestamp": "2026-11-18T09:44:00.000Z",
-      "capturedAt": "2026-11-21T23:35:17.611Z",
+      "capturedAt": "2026-11-22T14:53:34.973Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -382,7 +382,7 @@
       "sourceName": "NASA EONET wildfire catalog",
       "sourceUrl": "https://eonet.gsfc.nasa.gov/api/v3/events/EONET_26571",
       "sourceTimestamp": "2026-11-18T09:18:00.000Z",
-      "capturedAt": "2026-11-21T23:35:17.611Z",
+      "capturedAt": "2026-11-22T14:53:34.973Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -395,7 +395,7 @@
       "sourceName": "NASA EONET wildfire catalog",
       "sourceUrl": "https://eonet.gsfc.nasa.gov/api/v3/events/EONET_26572",
       "sourceTimestamp": "2026-11-18T08:47:00.000Z",
-      "capturedAt": "2026-11-21T23:35:17.611Z",
+      "capturedAt": "2026-11-22T14:53:34.973Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -408,7 +408,7 @@
       "sourceName": "NASA EONET wildfire catalog",
       "sourceUrl": "https://eonet.gsfc.nasa.gov/api/v3/events/EONET_26573",
       "sourceTimestamp": "2026-11-16T11:32:00.000Z",
-      "capturedAt": "2026-11-21T23:35:17.611Z",
+      "capturedAt": "2026-11-22T14:53:34.973Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -421,7 +421,7 @@
       "sourceName": "NASA EONET wildfire catalog",
       "sourceUrl": "https://eonet.gsfc.nasa.gov/api/v3/events/EONET_26575",
       "sourceTimestamp": "2026-11-16T09:06:00.000Z",
-      "capturedAt": "2026-11-21T23:35:17.611Z",
+      "capturedAt": "2026-11-22T14:53:34.973Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -434,7 +434,7 @@
       "sourceName": "NASA EONET wildfire catalog",
       "sourceUrl": "https://eonet.gsfc.nasa.gov/api/v3/events/EONET_26465",
       "sourceTimestamp": "2026-11-13T15:18:00.000Z",
-      "capturedAt": "2026-11-21T23:35:17.611Z",
+      "capturedAt": "2026-11-22T14:53:34.973Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -447,7 +447,7 @@
       "sourceName": "NASA EONET wildfire catalog",
       "sourceUrl": "https://eonet.gsfc.nasa.gov/api/v3/events/EONET_26464",
       "sourceTimestamp": "2026-11-13T13:31:00.000Z",
-      "capturedAt": "2026-11-21T23:35:17.611Z",
+      "capturedAt": "2026-11-22T14:53:34.973Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -460,7 +460,7 @@
       "sourceName": "NASA EONET wildfire catalog",
       "sourceUrl": "https://eonet.gsfc.nasa.gov/api/v3/events/EONET_26469",
       "sourceTimestamp": "2026-11-13T10:30:00.000Z",
-      "capturedAt": "2026-11-21T23:35:17.611Z",
+      "capturedAt": "2026-11-22T14:53:34.973Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -473,7 +473,7 @@
       "sourceName": "NASA EONET wildfire catalog",
       "sourceUrl": "https://eonet.gsfc.nasa.gov/api/v3/events/EONET_26467",
       "sourceTimestamp": "2026-11-12T11:59:00.000Z",
-      "capturedAt": "2026-11-21T23:35:17.611Z",
+      "capturedAt": "2026-11-22T14:53:34.973Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -486,7 +486,7 @@
       "sourceName": "NASA EONET wildfire catalog",
       "sourceUrl": "https://eonet.gsfc.nasa.gov/api/v3/events/EONET_26468",
       "sourceTimestamp": "2026-11-12T09:20:00.000Z",
-      "capturedAt": "2026-11-21T23:35:17.611Z",
+      "capturedAt": "2026-11-22T14:53:34.973Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -499,7 +499,7 @@
       "sourceName": "NASA EONET wildfire catalog",
       "sourceUrl": "https://eonet.gsfc.nasa.gov/api/v3/events/EONET_26331",
       "sourceTimestamp": "2026-11-12T00:22:00.000Z",
-      "capturedAt": "2026-11-21T23:35:17.611Z",
+      "capturedAt": "2026-11-22T14:53:34.973Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -512,7 +512,7 @@
       "sourceName": "NASA EONET wildfire catalog",
       "sourceUrl": "https://eonet.gsfc.nasa.gov/api/v3/events/EONET_26332",
       "sourceTimestamp": "2026-11-11T09:57:00.000Z",
-      "capturedAt": "2026-11-21T23:35:17.611Z",
+      "capturedAt": "2026-11-22T14:53:34.973Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -525,7 +525,7 @@
       "sourceName": "NASA EONET wildfire catalog",
       "sourceUrl": "https://eonet.gsfc.nasa.gov/api/v3/events/EONET_26576",
       "sourceTimestamp": "2026-11-11T08:18:00.000Z",
-      "capturedAt": "2026-11-21T23:35:17.611Z",
+      "capturedAt": "2026-11-22T14:53:34.973Z",
       "status": "pending",
       "reviewNote": ""
     },
@@ -538,7 +538,7 @@
       "sourceName": "NASA EONET wildfire catalog",
       "sourceUrl": "https://eonet.gsfc.nasa.gov/api/v3/events/EONET_26577",
       "sourceTimestamp": "2026-11-10T17:06:00.000Z",
-      "capturedAt": "2026-11-21T23:35:17.611Z",
+      "capturedAt": "2026-11-22T14:53:34.973Z",
       "status": "pending",
       "reviewNote": ""
     }
