@@ -200,3 +200,24 @@ test('coverage matrix exposes regional blind spots and shared record count', asy
  await page.setViewportSize({width:390,height:844});
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBe(true);
 });
+
+test('publisher and language filters compose, persist, and reset on desk change',async({page})=>{
+ const {data}=await setup(page);
+ const spanish={...data.records[2],language:'es',title:'TEST FIXTURE: Política económica'};
+ const snapshot={...data,records:data.records.map(r=>r.id===spanish.id?spanish:r)};
+ await page.route('**/data/news.v1.json',route=>route.fulfill({json:snapshot}));
+ await page.reload();
+ await expect(page.getByLabel('Filter news language').locator('option[value="es"]')).toHaveCount(1);
+ await page.getByLabel('Filter news language').selectOption('es');
+ await expect(page.locator('.nr-story')).toHaveCount(1);
+ await expect(page.locator('.nr-headline')).toHaveAttribute('lang','es');
+ await page.getByLabel('Filter news publisher').selectOption('ecb-press');
+ await expect(page.locator('.nr-story')).toHaveCount(1);
+ await page.reload();
+ await expect(page.getByLabel('Filter news language')).toHaveValue('es');
+ await expect(page.getByLabel('Filter news publisher')).toHaveValue('ecb-press');
+ await expect(page.locator('.nr-story')).toHaveCount(1);
+ await desk(page,'Science & Technology').click();
+ await expect(page.getByLabel('Filter news language')).toHaveValue('');
+ await expect(page.getByLabel('Filter news publisher')).toHaveValue('');
+});
