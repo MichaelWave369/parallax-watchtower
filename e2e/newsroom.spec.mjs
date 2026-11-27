@@ -221,3 +221,28 @@ test('publisher and language filters compose, persist, and reset on desk change'
  await expect(page.getByLabel('Filter news language')).toHaveValue('');
  await expect(page.getByLabel('Filter news publisher')).toHaveValue('');
 });
+
+test('observed metadata revisions survive reload and remain outside public archive exports',async({page})=>{
+ const {data}=await setup(page);
+ await expect.poll(()=>page.evaluate(()=>new Promise(resolve=>{
+   const req=indexedDB.open('watchtower-news-v1',1);
+   req.onsuccess=()=>{const db=req.result;const tx=db.transaction('state');const get=tx.objectStore('state').get('revisions');tx.oncomplete=()=>{db.close();resolve(get.result?.length||0);};};
+ }))).toBe(5);
+ const old=data.records[0];
+ const revised={...old,title:'TEST FIXTURE: Revised orbital headline',retrievedAt:new Date(Date.parse(old.retrievedAt)+1000).toISOString()};
+ const snapshot={...data,generatedAt:revised.retrievedAt,records:data.records.map(r=>r.id===old.id?revised:r)};
+ await page.route('**/data/news.v1.json',route=>route.fulfill({json:snapshot}));
+ await page.reload();
+ await page.getByRole('button',{name:revised.title,exact:true}).click();
+ await inspector(page).getByText('Observed metadata history (2)',{exact:true}).click();
+ await expect(page.locator('.nr-revision')).toHaveCount(2);
+ await expect(page.locator('.nr-revision').last()).toContainText(old.title);
+ await expect(page.locator('.nr-revision').first()).toContainText(revised.title);
+ await page.getByText('Local history & portable data',{exact:true}).click();
+ const promise=page.waitForEvent('download');
+ await page.getByRole('button',{name:'Export public archive',exact:true}).click();
+ const exported=JSON.parse(await readFile(await (await promise).path(),'utf8'));
+ expect(exported.records.filter(r=>r.id===old.id)).toHaveLength(1);
+ expect(exported.records.find(r=>r.id===old.id).title).toBe(revised.title);
+ expect(exported.revisions).toBeUndefined();
+});

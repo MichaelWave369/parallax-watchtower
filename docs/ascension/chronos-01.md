@@ -1,0 +1,7 @@
+# Chronos 01: observed metadata revisions
+
+The previous local archive intentionally kept only the newest normalized record for each source receipt. This slice preserves a separate bounded history from validated shared snapshots. Identity is source ID plus canonical receipt URL. Equal-clock conflicts retain the first observation, and adjacent unchanged content collapses; a later reversal is retained. Retrieval clocks are source cache receipts, not exact publication, correction or event times. History is incomplete when the device misses snapshots, and it does not establish that a publisher corrected or withdrew anything.
+
+History is stored alongside the existing archive and snapshot in the same IndexedDB transaction without a database version migration. Old clients and prior stores remain compatible. Limits: six versions per receipt, 1,200 total, existing 7/30/90-day retention; newest retained observations win on global overflow. On startup, the most recent cached shared snapshot can seed a baseline. Manual nominations and imports are not admitted; normalization excludes private fields and demo records. Clear local news clears revision history too. Public exports remain latest-record only and do not include the revision store. No new remote request, source or automatic cross-device synchronization.
+
+The Evidence Inspector shows observed versions and their distinct source timestamps. This is metadata history, not durable event or claim history. Four unit tests and one browser regression added. Full CI and browser validation pending.
