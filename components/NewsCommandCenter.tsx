@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { NEWS_SOURCES } from '../lib/newsSources.mjs';
+import { buildCoverage } from '../lib/newsCoverage.mjs';
 import { normalizeNewsRecord, validateNewsSnapshot, validateNewsHealth } from '../lib/newsContract.mjs';
 import { clusterEvents, deduplicateNews, makeNewsBriefing, briefingToMarkdown, newsRecordFreshness } from '../lib/newsIntelligence.mjs';
 import { loadNewsPreferences, normalizeNewsPreferences, saveNewsPreferences, mergeNewsArchive, makeNewsArchive, readNewsArchiveImport, matchesNewsQuery, readNewsStorage, writeNewsStorage, NEWS_ARCHIVE_BYTES } from '../lib/newsWorkspace.mjs';
@@ -147,6 +148,7 @@ export function NewsCommandCenter({ onOpenAtlas }: { onOpenAtlas: () => void }) 
   const dedup = useMemo(() => deduplicateNews(archive, { now: Date.parse(now) }), [archive, now]);
   const records = dedup.records as NewsRecord[];
   const sourceHealth = health && (!snapshot || health.generatedAt >= snapshot.generatedAt) ? health.sources : (snapshot?.sources || []);
+  const coverage = buildCoverage(NEWS_SOURCES, snapshot?.records || [], sourceHealth, now);
   const healthy = sourceHealth.filter((s: any) => s.status === 'ok' && s.lastSuccessAt && Date.parse(now) - Date.parse(s.lastSuccessAt) <= 36 * 3600000).length;
   const snapshotStale = !snapshot || Date.parse(now) - Date.parse(snapshot.generatedAt) > 36 * 3600000;
   const topics = useMemo(() => [...new Set(records.flatMap(row => row.topics))].sort(), [records]);
@@ -248,6 +250,15 @@ export function NewsCommandCenter({ onOpenAtlas }: { onOpenAtlas: () => void }) 
         <div className="nr-metrics"><div><span>PUBLIC RECORDS</span><strong>{records.length.toString().padStart(2, '0')}</strong><small>{dedup.duplicates.length} duplicates collapsed</small></div><div><span>REPORT GROUPS</span><strong>{events.length.toString().padStart(2, '0')}</strong><small>Heuristic · reviewable</small></div><div><span>SOURCE RETRIEVAL</span><strong>{healthy}<em> / {NEWS_SOURCES.length}</em></strong><small>{snapshot ? stamp(snapshot.generatedAt) : 'No successful snapshot'}</small></div></div>
         {prefs.desk === 'sources' ? <div className="nr-observatory">
           <p className="nr-muted">Adapter availability describes retrieval. It is not a rating of the publisher or independent confirmation of its claims. Only these adapters are in the news cache; the atlas has a separate source ledger.</p>
+          <section className="nr-coverage-matrix" aria-label="Planetary coverage matrix">
+<h3>Planetary coverage matrix</h3>
+<p className="nr-muted">Current shared snapshot only; local submissions and archived copies are excluded. A global remit is not evidence of local coverage. Publisher remit does not locate a story.</p>
+<p>{coverage.configured} configured feeds · {coverage.originFamilies} origin families · {coverage.healthy} healthy retrievals · {coverage.freshRecords} recently retrieved records of {coverage.records}</p>
+<div className="nr-coverage-grid">{coverage.regions.map(row => <div key={String(row.label)} className="nr-coverage-cell"><strong>{String(row.label)}</strong><span>{row.feeds ? `${row.feeds} declared feed(s) · ${row.originFamilies} origin families` : 'No dedicated remit'}</span><span>{row.healthy} healthy · {row.freshRecords} recent records</span></div>)}</div>
+<h4>Languages in shared metadata</h4><div className="nr-coverage-grid">{coverage.languages.map(row => <div key={String(row.language)} className="nr-coverage-cell"><strong>{String(row.language).toUpperCase()}</strong><span>{row.feeds} configured · {row.records} records</span><span>{row.freshRecords} recently retrieved</span></div>)}</div>
+<h4>Record types</h4><div className="nr-coverage-grid">{coverage.kinds.map(row => <div key={row.kind} className="nr-coverage-cell"><strong>{label(row.kind)}</strong><span>{row.records} records</span></div>)}</div>
+<p className="nr-muted">Regions may overlap. Recent retrieval means within 36 hours, not that the event is recent or true. Article metadata does not establish independent reporting.</p>
+</section>
           {NEWS_SOURCES.map((source: any) => { const status = sourceHealth.find((row: any) => row.id === source.id); const stale = !status?.lastSuccessAt || Date.parse(now) - Date.parse(status.lastSuccessAt) > 36 * 3600000; return <article className="nr-source" key={source.id}><header><div><span className="nr-overline">{source.format?.toUpperCase()} / {source.language}</span><h3>{source.name}</h3></div><span className={`nr-tag ${status?.status === 'ok' && !stale ? 'nr-ok' : 'nr-warning'}`}>{status?.status === 'ok' && stale ? 'stale snapshot' : status?.status || 'not checked'}</span></header><p>{source.knownLimitations || source.limitations}</p><dl><dt>Coverage</dt><dd>{Array.isArray(source.geographicCoverage) ? source.geographicCoverage.join(', ') : source.geographicCoverage || source.coverage}</dd><dt>Last success</dt><dd>{stamp(status?.lastSuccessAt)}</dd><dt>Last failure</dt><dd>{stamp(status?.lastFailureAt)}</dd><dt>Records</dt><dd>{status?.recordCount ?? 0}</dd><dt>Retrieval note</dt><dd>{status?.message || 'No collection receipt available.'}</dd><dt>Attribution</dt><dd>{source.attributionRequirements || source.attribution}</dd><dt>License limits</dt><dd>{source.licensingConstraints || source.license}</dd><dt>Update interval</dt><dd>{source.expectedUpdateFrequency || `${source.minIntervalMs / 3600000} hours`}</dd></dl><div className="nr-link-row"><a href={source.documentationUrl || source.policyUrls?.[0] || source.homepage || source.url} target="_blank" rel="noopener noreferrer">Provider documentation ↗</a><a href={source.policyUrl || source.policyUrls?.[source.policyUrls.length - 1] || source.licenseUrl || source.url} target="_blank" rel="noopener noreferrer">Usage policy ↗</a></div></article>; })}
           <a href={import.meta.env.BASE_URL + 'data/news-sources.v1.json'} target="_blank" rel="noopener noreferrer">Machine-readable news source registry ↗</a>
         </div> : <>
