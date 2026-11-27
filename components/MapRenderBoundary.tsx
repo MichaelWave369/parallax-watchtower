@@ -18,7 +18,7 @@ export class MapRenderBoundary extends Component<Props, State> {
   }
 
   render() {
-    if (this.state.failed) return <div className="vector-map-loading" role="alert">Vector map failed. Switching to Lite Atlas.</div>;
+    if (this.state.failed) return null;
     return this.props.children;
   }
 }

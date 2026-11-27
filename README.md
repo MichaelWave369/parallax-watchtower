@@ -158,3 +158,7 @@ Source-health and age are visible; cache snapshots older than 36 hours cannot be
 ## Cross-source Discovery Trails
 
 Discovery Inbox now includes a source-backed temporal comparison view. Browse USGS and NASA EONET records side by side by UTC day or calendar week, inspect primary receipts, and explicitly export a research timeline. A shared time interval is **not evidence of geography, causality or a verified incident**. See `docs/discovery-trails.md`.
+
+## Cartographer map reliability
+
+The map progressively renders verified OpenFreeMap geography, independent bundled Natural Earth vector geography, and a Canvas2D geographic atlas. Country boundaries and public signal markers remain usable without external providers or WebGL. See the [root-cause report, acceptance matrix, and screenshots](docs/cartographer/mission-report.md).

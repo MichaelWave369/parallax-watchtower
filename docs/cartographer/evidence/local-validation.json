@@ -1,0 +1,32 @@
+{
+  "checkedAt": "2026-11-27T01:32:26.913388+00:00",
+  "baseSha": "3f967492b3c8ae190b589093d681fc9e88b4a05c",
+  "unitTests": {
+    "passed": 144,
+    "failed": 0
+  },
+  "browserTests": {
+    "passed": 31,
+    "failed": 0
+  },
+  "typecheck": "passed",
+  "productionBuild": "passed",
+  "browser": "Chromium 141.0.7390.37",
+  "gpu": "SwiftShader WebGL2; separate disabled-WebGL runs",
+  "liveNetwork": "actual OpenFreeMap style, TileJSON, pbf, raster tiles, glyphs and sprites; browser TLS and CORS enabled",
+  "signals": "2400 deterministic public test fixtures, not 2400 new real events",
+  "digests": {
+    "components/GeographicAtlas.tsx": "6d92e39953d59357c223d08597139493c9e4a1c31e28d6299fd5f58a004e5d19",
+    "components/GlobeCanvas.tsx": "9e5208cc86a9840d5db9f09802dc0ae29ba06b39351313eb7d416d14e37f8c2b",
+    "components/MapRenderBoundary.tsx": "4f4b3e38a2e5acd032584d9d345228f9391c3d617c8ccdc5d8bdd1d5cbd977fd",
+    "components/MapWorkspace.tsx": "d7909c59e7ee1bedbe362fe92ee96d2f39c17371d57dba655a2c1eb18a7811d0",
+    "components/SignalVectorMap.tsx": "ac601f425761be9cbdfd75ab3b4b03f7474334c45de1fdd474b4b765e7880eb8",
+    "components/WatchtowerDashboard.tsx": "2930efb1dd855a8254faa797327d0fbd23704fe2daa22271af01028f9eae7194",
+    "lib/data/world-atlas.v1.json": "9d39e64688edfde0fd63a9ea596f34355fd6c8f86cf2f5ecc9a240ddaab77bcf",
+    "lib/legacyNews.mjs": "d67c398315a7d34ae32907108a3b7fd4a3d5ae4888ddf2bcedc7c508eda7c554",
+    "lib/mapGeometry.mjs": "813e45d4fd5b9a9236d0480326f7b6a05c8aec5fa617007ca8a3857db46f72d3",
+    "lib/mapLifecycle.mjs": "56a67387df83261565d0863d188c61e3f4baf8b3b2e418313243558a9fcae79f",
+    "lib/worldAtlas.ts": "8828c388ae9ce4aab0defcd248eddbe43b8026b9bf1625018acec44ef919c527",
+    "package-lock.json": "0eee5e1d6c250797d5124ef6c22d1c376865b568eefe7df2ace887d1ebd9e90f"
+  }
+}

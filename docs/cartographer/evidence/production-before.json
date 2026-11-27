@@ -1,0 +1,93 @@
+{
+  "checkedAt": "2026-11-27T01:05:39.965Z",
+  "tlsValidation": "enabled; platform-managed CA trusted by test Chromium",
+  "url": "https://michaelwave369.github.io/parallax-watchtower/",
+  "console": [
+    {
+      "type": "error",
+      "message": "Error: Worker failed to load. Check that the worker URL is correct.\n    at Worker.<anonymous> (https://michaelwave369.github.io/parallax-watchtower/assets/SignalVectorMap-Di_X_VpQ.js:1:185545)"
+    },
+    {
+      "type": "error",
+      "message": "Access to fetch at 'https://api.gdeltproject.org/api/v2/doc/doc?query=%22Northern+California%22+OR+%22Mt+Shasta%22+OR+Redding+OR+%22Tehama+County%22+OR+Sacramento+OR+earthquake+OR+wildfire+OR+infrastructure&mode=ArtList&format=json&maxrecords=20&sort=HybridRel' from origin 'https://michaelwave369.github.io' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource."
+    },
+    {
+      "type": "error",
+      "message": "Failed to load resource: net::ERR_FAILED"
+    }
+  ],
+  "requests": [
+    {
+      "url": "https://michaelwave369.github.io/parallax-watchtower/data/news.v1.json",
+      "type": "fetch",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "url": "https://michaelwave369.github.io/parallax-watchtower/data/news-health.v1.json",
+      "type": "fetch",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "url": "https://michaelwave369.github.io/parallax-watchtower/assets/maplibre-gl-worker.mjs?v=6.18.0",
+      "status": 404,
+      "type": "script",
+      "contentType": "text/html; charset=utf-8",
+      "cors": "*"
+    },
+    {
+      "url": "https://michaelwave369.github.io/parallax-watchtower/assets/maplibre-gl-worker.mjs?v=6.18.0",
+      "type": "script",
+      "error": "net::ERR_FAILED"
+    },
+    {
+      "url": "https://tiles.openfreemap.org/styles/dark",
+      "status": 200,
+      "type": "fetch",
+      "contentType": "application/json",
+      "cors": "*"
+    },
+    {
+      "url": "https://tiles.openfreemap.org/sprites/ofm_f384/ofm.json",
+      "status": 200,
+      "type": "fetch",
+      "contentType": "application/json",
+      "cors": "*"
+    },
+    {
+      "url": "https://tiles.openfreemap.org/sprites/ofm_f384/ofm.png",
+      "status": 200,
+      "type": "fetch",
+      "contentType": "image/png",
+      "cors": "*"
+    },
+    {
+      "url": "https://tiles.openfreemap.org/backup_planet",
+      "status": 200,
+      "type": "fetch",
+      "contentType": "application/json",
+      "cors": "*"
+    },
+    {
+      "url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%22Northern+California%22+OR+%22Mt+Shasta%22+OR+Redding+OR+%22Tehama+County%22+OR+Sacramento+OR+earthquake+OR+wildfire+OR+infrastructure&mode=ArtList&format=json&maxrecords=20&sort=HybridRel",
+      "type": "fetch",
+      "error": "net::ERR_FAILED"
+    }
+  ],
+  "workers": [
+    "https://michaelwave369.github.io/parallax-watchtower/assets/maplibre-gl-worker.mjs?v=6.18.0"
+  ],
+  "httpStatus": 200,
+  "mapHeading": "LITE ATLAS · TILE-FREE\nNo external tiles. Local grid with public event points for WebGL/network-limited devices.\nMap\nGlobe\nLite\nVERIFIED OFFICIAL\nREPORTED",
+  "status": "Watchtower running\nFeeds loading\nVector map + globe + Lite fallback\nNews direct\nMarket pending\nVector basemap did not load; showing Lite Atlas.",
+  "canvases": [
+    {
+      "width": 814,
+      "height": 550,
+      "rect": {
+        "width": 814,
+        "height": 550
+      },
+      "aria": "Lite Atlas local grid showing public-event locations; no external map tiles"
+    }
+  ]
+}

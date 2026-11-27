@@ -10,13 +10,17 @@
     "preview": "vite preview",
     "test": "node --test tests/*.test.mjs",
     "test:browser": "playwright test",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test:map:live": "node scripts/probeCartographer.mjs --live",
+    "test:map:blocked": "node scripts/probeCartographer.mjs --live --blocked-tiles",
+    "diagnose:map:production": "node scripts/diagnoseProductionMap.mjs"
   },
   "dependencies": {
     "@types/node": "22.12.0",
     "@types/react": "18.3.18",
     "@types/react-dom": "18.3.5",
     "@vitejs/plugin-react": "6.3.0",
+    "d3-geo": "3.1.2",
     "maplibre-gl": "6.18.0",
     "react": "18.3.1",
     "react-dom": "18.3.1",
@@ -28,7 +32,9 @@
   "devDependencies": {
     "@axe-core/playwright": "4.14.1",
     "@playwright/test": "1.56.1",
+    "@types/d3-geo": "3.1.1",
     "ajv": "8.20.0",
-    "ajv-formats": "3.0.1"
+    "ajv-formats": "3.0.1",
+    "pngjs": "7.0.0"
   }
 }

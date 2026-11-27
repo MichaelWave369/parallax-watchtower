@@ -141,3 +141,11 @@ test('proxy rejects oversized streamed data even when upstream cancellation neve
     assert.equal(response.statusCode,502);assert.equal(cancelled,true);
   }finally{clearTimeout(timer);}
 });
+
+test('news geography requires an explicit source receipt from the configured proxy, never publisher country or title',()=>{
+ const article={title:'Regional source statement',url:'https://news.un.org/en/story/2026/11/123456',seendate:'20261126T120000Z',sourceCountry:'United States',geography:{kind:'source-published-area',receipt:'https://news.un.org/en/story/2026/11/123456',lat:20,lon:25,radiusKm:1200,label:'Published approximate region'}};
+ const proxied=normalizeGdeltArticle(article,'proxy',Date.parse('2026-11-27T00:00:00Z'));
+ assert.equal(proxied.lat,20);assert.equal(proxied.radiusKm,1200);assert.match(proxied.confidenceNotes,/not independently verified/);
+ assert.equal(normalizeGdeltArticle(article,'direct',Date.parse('2026-11-27T00:00:00Z')).lat,undefined);
+ for(const geography of [{...article.geography,receipt:'https://other.org/'},{...article.geography,radiusKm:-1},{...article.geography,lat:NaN},{...article.geography,kind:'guessed-country-centroid'}])assert.equal(normalizeGdeltArticle({...article,geography},'proxy',Date.parse('2026-11-27T00:00:00Z')).lat,undefined);
+});

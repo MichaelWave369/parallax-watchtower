@@ -1,0 +1,197 @@
+{
+  "checkedAt": "2026-11-27T01:28:22.553Z",
+  "console": [
+    {
+      "type": "error",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "type": "error",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "type": "error",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "type": "error",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "type": "error",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    }
+  ],
+  "requests": [
+    {
+      "url": "http://127.0.0.1:4173/parallax-watchtower/assets/maplibre-gl-worker-_7o9IRfC.js",
+      "status": 200,
+      "type": "script"
+    },
+    {
+      "url": "http://127.0.0.1:4173/parallax-watchtower/assets/maplibre-gl-worker-_7o9IRfC.js",
+      "status": 200,
+      "type": "script"
+    },
+    {
+      "url": "https://tiles.openfreemap.org/styles/liberty",
+      "status": 200,
+      "type": "fetch"
+    },
+    {
+      "url": "https://tiles.openfreemap.org/sprites/ofm_f384/ofm.png",
+      "status": 200,
+      "type": "fetch"
+    },
+    {
+      "url": "https://tiles.openfreemap.org/backup_planet",
+      "status": 200,
+      "type": "fetch"
+    },
+    {
+      "url": "https://tiles.openfreemap.org/sprites/ofm_f384/ofm.json",
+      "status": 200,
+      "type": "fetch"
+    },
+    {
+      "url": "https://tiles.openfreemap.org/natural_earth/ne2sr/1/1/1.png",
+      "status": 200,
+      "type": "fetch"
+    },
+    {
+      "url": "https://tiles.openfreemap.org/natural_earth/ne2sr/1/1/0.png",
+      "status": 200,
+      "type": "fetch"
+    },
+    {
+      "url": "https://tiles.openfreemap.org/natural_earth/ne2sr/1/1/0.png",
+      "status": 200,
+      "type": "fetch"
+    },
+    {
+      "url": "https://tiles.openfreemap.org/natural_earth/ne2sr/1/1/1.png",
+      "status": 200,
+      "type": "fetch"
+    },
+    {
+      "url": "https://tiles.openfreemap.org/natural_earth/ne2sr/1/0/0.png",
+      "status": 200,
+      "type": "fetch"
+    },
+    {
+      "url": "https://tiles.openfreemap.org/natural_earth/ne2sr/1/0/1.png",
+      "status": 200,
+      "type": "fetch"
+    },
+    {
+      "url": "https://tiles.openfreemap.org/natural_earth/ne2sr/1/0/0.png",
+      "status": 200,
+      "type": "fetch"
+    },
+    {
+      "url": "https://tiles.openfreemap.org/natural_earth/ne2sr/1/0/1.png",
+      "status": 200,
+      "type": "fetch"
+    },
+    {
+      "url": "https://tiles.openfreemap.org/backup_planet/20261122_124456_pt/0/0/0.pbf",
+      "status": 200,
+      "type": "fetch"
+    },
+    {
+      "url": "https://tiles.openfreemap.org/backup_planet/20261122_124456_pt/0/0/0.pbf",
+      "status": 200,
+      "type": "fetch"
+    },
+    {
+      "url": "https://tiles.openfreemap.org/backup_planet/20261122_124456_pt/0/0/0.pbf",
+      "status": 200,
+      "type": "fetch"
+    },
+    {
+      "url": "https://tiles.openfreemap.org/fonts/Noto%20Sans%20Bold/1024-1279.pbf",
+      "status": 200,
+      "type": "fetch"
+    },
+    {
+      "url": "https://tiles.openfreemap.org/fonts/Noto%20Sans%20Bold/64256-64511.pbf",
+      "status": 200,
+      "type": "fetch"
+    },
+    {
+      "url": "https://tiles.openfreemap.org/fonts/Noto%20Sans%20Italic/0-255.pbf",
+      "status": 200,
+      "type": "fetch"
+    },
+    {
+      "url": "https://tiles.openfreemap.org/fonts/Noto%20Sans%20Bold/0-255.pbf",
+      "status": 200,
+      "type": "fetch"
+    },
+    {
+      "url": "https://tiles.openfreemap.org/fonts/Noto%20Sans%20Bold/65024-65279.pbf",
+      "status": 200,
+      "type": "fetch"
+    },
+    {
+      "url": "https://tiles.openfreemap.org/fonts/Noto%20Sans%20Bold/4864-5119.pbf",
+      "status": 200,
+      "type": "fetch"
+    },
+    {
+      "url": "https://tiles.openfreemap.org/fonts/Noto%20Sans%20Bold/4608-4863.pbf",
+      "status": 200,
+      "type": "fetch"
+    }
+  ],
+  "workers": [
+    "http://127.0.0.1:4173/parallax-watchtower/assets/maplibre-gl-worker-_7o9IRfC.js",
+    "http://127.0.0.1:4173/parallax-watchtower/assets/maplibre-gl-worker-_7o9IRfC.js"
+  ],
+  "visuals": {
+    "vector": {
+      "width": 914,
+      "height": 551,
+      "colors": 957,
+      "dominantFraction": 0.4708923898064788,
+      "landPixels": 3815,
+      "oceanPixels": 236156,
+      "signalPixels": 45996
+    },
+    "offline": {
+      "width": 914,
+      "height": 551,
+      "colors": 392,
+      "dominantFraction": 0.6382805084846728,
+      "landPixels": 71692,
+      "oceanPixels": 320109,
+      "signalPixels": 45529
+    },
+    "globe": {
+      "width": 914,
+      "height": 551,
+      "colors": 493,
+      "dominantFraction": 0.6495113320916416,
+      "landPixels": 24649,
+      "oceanPixels": 43704,
+      "signalPixels": 51149
+    }
+  },
+  "environment": {
+    "browser": "141.0.7390.37",
+    "tlsValidation": "enabled",
+    "geography": "real external style/tiles; signal records are deterministic test fixtures",
+    "gpu": {
+      "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    }
+  },
+  "state": {
+    "mapState": "ready",
+    "mapProvider": "openfreemap",
+    "mapRenderer": "vector",
+    "mapView": "0.00000,14.00000,-0.05445",
+    "health": "ready · Active: OpenFreeMap vector. OpenFreeMap geography rendered.",
+    "features": "77"
+  }
+}

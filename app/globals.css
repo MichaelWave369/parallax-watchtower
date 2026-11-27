@@ -252,3 +252,23 @@ h1 { margin: 2px 0 0; font-size: clamp(2rem, 5vw, 4rem); line-height: 0.9; lette
 .temporal-source-item a { font-size: .82rem; }
 .temporal-source-item .btn { font-size: .82rem; }
 @media (max-width: 750px) { .temporal-source-grid { grid-template-columns: 1fr; } .temporal-detail-head { display: grid; } }
+
+/* Cartographer: geographic fallback is painted below the verified vector layer. */
+.cartographer { min-width: 0; overflow: hidden; }
+.cartographer .canvas-wrap { flex: none; position: relative; height: 550px; min-height: 360px; overflow: hidden; background: #0c2334; }
+.cartographer .canvas-wrap > canvas, .cartographer .vector-geography, .cartographer .vector-map.maplibregl-map { position: absolute; inset: 0; width: 100%; height: 100%; min-height: 0; }
+.cartographer .geographic-atlas-geography { z-index: 0; pointer-events: none; }
+.cartographer .vector-geography { z-index: 1; visibility: hidden; pointer-events: none; }
+.cartographer .vector-geography.geography-ready { visibility: visible; }
+.cartographer .geographic-atlas-signals { z-index: 2; touch-action: none; cursor: grab; }
+.cartographer .geographic-globe { z-index: 2; }
+.cartographer .map-chip { z-index: 3; pointer-events: none; max-width: calc(100% - 24px); white-space: normal; }
+.cartographer .map-attribution { z-index: 3; pointer-events: auto; font-size: 10px; padding: 4px 7px; background: #081d2bea; }
+.map-toolbar { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px 14px; border-bottom: 1px solid var(--line); }
+.map-health { font-size: 12px; line-height: 1.6; padding: 8px 14px; background: #0c2735; color: #c1e4df; }
+.map-health strong { text-transform: capitalize; }
+.map-precision, .map-diagnostics { padding: 8px 14px; margin: 0; }
+.map-diagnostics { font-size: 12px; overflow-wrap: anywhere; color: #b4cbd4; }
+.map-expanded, .cartographer:fullscreen { position: fixed; inset: 0; z-index: 1000; background: #071321; overflow: auto; border-radius: 0; }
+.map-expanded .canvas-wrap, .cartographer:fullscreen .canvas-wrap { height: calc(100vh - 250px); min-height: 300px; }
+@media (max-width: 600px) { .cartographer .canvas-wrap { height: 440px; } .map-health { font-size: 11px; } }
