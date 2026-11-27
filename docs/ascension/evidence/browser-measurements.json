@@ -1,0 +1,28 @@
+{
+  "checkedAt": "2026-11-27T00:35:57.396Z",
+  "kind": "local production bundle; actual checked-in provider snapshot; external requests blocked",
+  "browser": "141.0.7390.37",
+  "readyMs": 316,
+  "performance": {
+    "navigation": [
+      {
+        "domContentLoadedMs": 56.799999999813735,
+        "loadMs": 56.89999999990687
+      }
+    ],
+    "resourceBytes": 130033,
+    "renderedStories": 30,
+    "documentWidth": 1600,
+    "viewportWidth": 1600
+  },
+  "mobileWidth": {
+    "document": 390,
+    "viewport": 390
+  },
+  "pageErrors": [],
+  "externalRequests": [],
+  "axe": {
+    "desktop": [],
+    "light": []
+  }
+}

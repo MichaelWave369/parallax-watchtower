@@ -1,0 +1,72 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+
+> watchtower-live@2.0.0-alpha.1 test:browser
+> playwright test
+
+[1A[2K[2m[WebServer] [22m(node:319) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1A[2K[2m[WebServer] [22mnpm warn Unknown env config "http-proxy". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+
+[1A[2K[2m[WebServer] [22m(node:332) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+Running 23 tests using 4 workers
+
+[1A[2K(node:369) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:370) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:382) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:376) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:369) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:370) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[1/23] e2e/newsroom-security.spec.mjs:92:1 › malformed shared cache rejects the whole snapshot without displaying a safe-looking subset
+[1A[2K(node:382) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:376) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[2/23] e2e/vectorMap-runtime.spec.mjs:8:1 › actual MapLibre 6 renderer initializes against a controlled local style without the removed supported API
+[1A[2K[3/23] e2e/startup.smoke.spec.mjs:3:1 › boots a visible dashboard and keeps it visible when every external source is unavailable
+[1A[2K[4/23] e2e/newsroom.spec.mjs:121:1 › default command center reads only shared cache, preserves unknown times, and renders hostile feed text safely
+[1A[2K[5/23] e2e/newsroom-security.spec.mjs:108:1 › manual nominations reject executable, credentialed and private destinations before saving or fetching
+[1A[2K[6/23] e2e/newsroom.spec.mjs:145:1 › source-attributed report groups can be compared and separated without losing articles
+[1A[2K[7/23] e2e/newsroom-security.spec.mjs:131:1 › hostile archive import is atomic and accepted imports cannot impersonate provider verification
+[1A[2K[8/23] e2e/newsroom.spec.mjs:174:1 › watchlist and research persist locally; public briefing and archive exports exclude private research
+[1A[2K[9/23] e2e/newsroom-security.spec.mjs:193:1 › denied localStorage and IndexedDB leave a usable in-memory newsroom
+[1A[2K[10/23] e2e/newsroom-security.spec.mjs:222:1 › source observatory distinguishes stale retrieval from successful historical fetch and links exact policies
+[1A[2K[11/23] e2e/newsroom.spec.mjs:228:1 › source outages recover cached records after a fresh browser load without retiming them
+[1A[2K[12/23] e2e/newsroom-security.spec.mjs:252:1 › legacy atlas controls survive denied writes, reject invalid lenses, and retain direct news with a corrupt saved proxy
+[1A[2K[13/23] e2e/newsroom.spec.mjs:273:1 › offline first visit contains no invented headlines and the retained Lite Atlas works without WebGL
+[1A[2K[14/23] e2e/newsroom.spec.mjs:302:1 › mobile layout, keyboard search, reduced motion and both themes pass accessibility checks
+[1A[2K[15/23] e2e/newsroom.spec.mjs:340:1 › production policy blocks inline script execution while the newsroom remains usable
+[1A[2K[16/23] e2e/newsroom.spec.mjs:371:1 › manual saved-source comparison stays attributed and note drafts cannot cross report boundaries
+[1A[2K[17/23] e2e/startup.smoke.spec.mjs:44:1 › switching between Lite Atlas and Globe never removes the dashboard shell
+[1A[2K[18/23] e2e/startup.smoke.spec.mjs:72:1 › Explore opens 50 curated external resources without breaking Live signals
+[1A[2K[19/23] e2e/startup.smoke.spec.mjs:102:1 › Incident Room documents ground stop with receipts, uncertainty and discovery trails
+[1A[2K[20/23] e2e/startup.smoke.spec.mjs:139:1 › Incident Library switches between independent FAA cases with their own evidence
+[1A[2K[21/23] e2e/startup.smoke.spec.mjs:180:1 › Discovery Inbox stages a manual source without claiming it is a published incident
+[1A[2K[22/23] e2e/startup.smoke.spec.mjs:222:1 › scheduled discovery cache has source-health messaging and never impersonates approved incidents
+[1A[2K[23/23] e2e/startup.smoke.spec.mjs:253:1 › Discovery Trails compares official records by UTC week without inventing same-day or causal links
+[1A[2K  23 passed (22.5s)

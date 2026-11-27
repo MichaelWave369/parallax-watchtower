@@ -1,0 +1,1054 @@
+{
+  "schema": "phi.watchtower.briefing.v1",
+  "version": 1,
+  "generatedAt": "2026-11-27T00:35:54.011Z",
+  "from": "2026-11-20T00:35:54.011Z",
+  "through": "2026-11-27T00:35:54.011Z",
+  "windowHours": 168,
+  "rankingMethod": "Apply explicit topic, region and keyword filters, then order by known publication time (or event occurrence, then modification when publication is unknown), newest first; stable ID breaks ties. No engagement or inferred impact score.",
+  "coverage": {
+    "inputCount": 77,
+    "acceptedCount": 77,
+    "inWindowCount": 77,
+    "matchedCount": 77,
+    "includedCount": 30,
+    "excludedUndated": 0,
+    "duplicatesRemoved": 0,
+    "omittedCount": 47,
+    "staleCount": 0,
+    "sourceCount": 4,
+    "truncatedInput": false,
+    "oldestRetrievalAt": "2026-11-27T00:09:46.540Z",
+    "newestRetrievalAt": "2026-11-27T00:09:46.540Z"
+  },
+  "items": [
+    {
+      "id": "usgs-us6000udry",
+      "title": "M 5.1 - Bonin Islands, Japan region",
+      "publisher": "U.S. Geological Survey",
+      "sourceId": "usgs-earthquakes",
+      "kind": "public_data",
+      "evidenceType": "primary_documentation",
+      "publishedAt": null,
+      "eventAt": "2026-11-26T19:33:08.628Z",
+      "modifiedAt": "2026-11-26T19:50:51.040Z",
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "timeBasis": "event",
+      "freshness": "fresh",
+      "region": {
+        "code": "GLOBAL",
+        "label": "Bonin Islands, Japan region",
+        "precision": "region"
+      },
+      "topics": [
+        "hazards",
+        "earthquakes",
+        "environment"
+      ],
+      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000udry",
+      "referenceIds": [
+        "source-1"
+      ]
+    },
+    {
+      "id": "usgs-us6000udqa",
+      "title": "M 4.5 - 95 km SSE of Sarangani, Philippines",
+      "publisher": "U.S. Geological Survey",
+      "sourceId": "usgs-earthquakes",
+      "kind": "public_data",
+      "evidenceType": "primary_documentation",
+      "publishedAt": null,
+      "eventAt": "2026-11-26T16:18:00.760Z",
+      "modifiedAt": "2026-11-26T16:42:40.040Z",
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "timeBasis": "event",
+      "freshness": "fresh",
+      "region": {
+        "code": "GLOBAL",
+        "label": "95 km SSE of Sarangani, Philippines",
+        "precision": "region"
+      },
+      "topics": [
+        "hazards",
+        "earthquakes",
+        "environment"
+      ],
+      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000udqa",
+      "referenceIds": [
+        "source-2"
+      ]
+    },
+    {
+      "id": "usgs-us6000udq5",
+      "title": "M 5.7 - Revilla Gigedo Islands region",
+      "publisher": "U.S. Geological Survey",
+      "sourceId": "usgs-earthquakes",
+      "kind": "public_data",
+      "evidenceType": "primary_documentation",
+      "publishedAt": null,
+      "eventAt": "2026-11-26T15:26:44.294Z",
+      "modifiedAt": "2026-11-26T19:09:05.216Z",
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "timeBasis": "event",
+      "freshness": "fresh",
+      "region": {
+        "code": "GLOBAL",
+        "label": "Revilla Gigedo Islands region",
+        "precision": "region"
+      },
+      "topics": [
+        "hazards",
+        "earthquakes",
+        "environment"
+      ],
+      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000udq5",
+      "referenceIds": [
+        "source-3"
+      ]
+    },
+    {
+      "id": "ecb-press-0a4be006",
+      "title": "Meeting of 28-29 October 2026",
+      "publisher": "European Central Bank",
+      "sourceId": "ecb-press",
+      "kind": "official_statement",
+      "evidenceType": "official_statement",
+      "publishedAt": "2026-11-26T12:30:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "timeBasis": "publication",
+      "freshness": "fresh",
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "topics": [
+        "economics",
+        "policy",
+        "markets"
+      ],
+      "url": "https://www.ecb.europa.eu//press/accounts/2026/html/ecb.mg261126~ccf28c8071.en.html",
+      "referenceIds": [
+        "source-4"
+      ]
+    },
+    {
+      "id": "usgs-us6000udmc",
+      "title": "M 5.2 - 265 km WNW of Houma, Tonga",
+      "publisher": "U.S. Geological Survey",
+      "sourceId": "usgs-earthquakes",
+      "kind": "public_data",
+      "evidenceType": "primary_documentation",
+      "publishedAt": null,
+      "eventAt": "2026-11-26T09:22:45.352Z",
+      "modifiedAt": "2026-11-26T09:34:36.040Z",
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "timeBasis": "event",
+      "freshness": "fresh",
+      "region": {
+        "code": "GLOBAL",
+        "label": "265 km WNW of Houma, Tonga",
+        "precision": "region"
+      },
+      "topics": [
+        "hazards",
+        "earthquakes",
+        "environment"
+      ],
+      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000udmc",
+      "referenceIds": [
+        "source-5"
+      ]
+    },
+    {
+      "id": "usgs-us6000udm8",
+      "title": "M 5.5 - 204 km S of Taliwang, Indonesia",
+      "publisher": "U.S. Geological Survey",
+      "sourceId": "usgs-earthquakes",
+      "kind": "public_data",
+      "evidenceType": "primary_documentation",
+      "publishedAt": null,
+      "eventAt": "2026-11-26T09:08:40.640Z",
+      "modifiedAt": "2026-11-26T11:16:25.729Z",
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "timeBasis": "event",
+      "freshness": "fresh",
+      "region": {
+        "code": "GLOBAL",
+        "label": "204 km S of Taliwang, Indonesia",
+        "precision": "region"
+      },
+      "topics": [
+        "hazards",
+        "earthquakes",
+        "environment"
+      ],
+      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000udm8",
+      "referenceIds": [
+        "source-6"
+      ]
+    },
+    {
+      "id": "usgs-us6000udm5",
+      "title": "M 4.8 - 225 km S of Taliwang, Indonesia",
+      "publisher": "U.S. Geological Survey",
+      "sourceId": "usgs-earthquakes",
+      "kind": "public_data",
+      "evidenceType": "primary_documentation",
+      "publishedAt": null,
+      "eventAt": "2026-11-26T09:00:41.073Z",
+      "modifiedAt": "2026-11-26T12:34:23.040Z",
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "timeBasis": "event",
+      "freshness": "fresh",
+      "region": {
+        "code": "GLOBAL",
+        "label": "225 km S of Taliwang, Indonesia",
+        "precision": "region"
+      },
+      "topics": [
+        "hazards",
+        "earthquakes",
+        "environment"
+      ],
+      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000udm5",
+      "referenceIds": [
+        "source-7"
+      ]
+    },
+    {
+      "id": "nasa-news-aa745b97",
+      "title": "APOD: 2026 November 26 – Eye in the Sky: The Milky Way over Lençóis",
+      "publisher": "NASA",
+      "sourceId": "nasa-news",
+      "kind": "official_statement",
+      "evidenceType": "official_statement",
+      "publishedAt": "2026-11-26T05:05:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "timeBasis": "publication",
+      "freshness": "fresh",
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "topics": [
+        "science",
+        "space",
+        "technology"
+      ],
+      "url": "https://science.nasa.gov/image-article/apod-2026-november-26-eye-in-the-sky-the-milky-way-over-lencois/",
+      "referenceIds": [
+        "source-8"
+      ]
+    },
+    {
+      "id": "nasa-news-16d65a7e",
+      "title": "Seeking Refuge on Resolution Island",
+      "publisher": "NASA",
+      "sourceId": "nasa-news",
+      "kind": "official_statement",
+      "evidenceType": "official_statement",
+      "publishedAt": "2026-11-26T05:01:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "timeBasis": "publication",
+      "freshness": "fresh",
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "topics": [
+        "science",
+        "space",
+        "technology"
+      ],
+      "url": "https://science.nasa.gov/earth/earth-observatory/seeking-refuge-on-resolution-island/",
+      "referenceIds": [
+        "source-9"
+      ]
+    },
+    {
+      "id": "arxiv-ai-0db228e7",
+      "title": "What, Who, and When: Structured Harm Assessment for Mental Health Safety via Short Reasoning",
+      "publisher": "arXiv",
+      "sourceId": "arxiv-ai",
+      "kind": "research",
+      "evidenceType": "uncorroborated_claim",
+      "publishedAt": "2026-11-26T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "timeBasis": "publication",
+      "freshness": "fresh",
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "topics": [
+        "science",
+        "technology",
+        "research"
+      ],
+      "url": "https://arxiv.org/abs/2611.33263",
+      "referenceIds": [
+        "source-10"
+      ]
+    },
+    {
+      "id": "arxiv-ai-417cc46c",
+      "title": "General-Purpose Decision Models for AI Configuration Tuning",
+      "publisher": "arXiv",
+      "sourceId": "arxiv-ai",
+      "kind": "research",
+      "evidenceType": "uncorroborated_claim",
+      "publishedAt": "2026-11-26T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "timeBasis": "publication",
+      "freshness": "fresh",
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "topics": [
+        "science",
+        "technology",
+        "research"
+      ],
+      "url": "https://arxiv.org/abs/2611.33190",
+      "referenceIds": [
+        "source-11"
+      ]
+    },
+    {
+      "id": "arxiv-ai-472b36e2",
+      "title": "SlicePlanner: Logic-Guided Agentic AI for Online QoS-Aware Network Slicing in Open RAN",
+      "publisher": "arXiv",
+      "sourceId": "arxiv-ai",
+      "kind": "research",
+      "evidenceType": "uncorroborated_claim",
+      "publishedAt": "2026-11-26T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "timeBasis": "publication",
+      "freshness": "fresh",
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "topics": [
+        "science",
+        "technology",
+        "research"
+      ],
+      "url": "https://arxiv.org/abs/2611.33664",
+      "referenceIds": [
+        "source-12"
+      ]
+    },
+    {
+      "id": "arxiv-ai-472d7579",
+      "title": "Interactive Proofs as a Unified Framework for Evaluating and Leveraging Verifiable Proof Generation by LLM Agents",
+      "publisher": "arXiv",
+      "sourceId": "arxiv-ai",
+      "kind": "research",
+      "evidenceType": "uncorroborated_claim",
+      "publishedAt": "2026-11-26T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "timeBasis": "publication",
+      "freshness": "fresh",
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "topics": [
+        "science",
+        "technology",
+        "research"
+      ],
+      "url": "https://arxiv.org/abs/2611.33676",
+      "referenceIds": [
+        "source-13"
+      ]
+    },
+    {
+      "id": "arxiv-ai-502d83a4",
+      "title": "Faster and Better Query (FBQ): Learning Future-Position Probes from the First Generated Token",
+      "publisher": "arXiv",
+      "sourceId": "arxiv-ai",
+      "kind": "research",
+      "evidenceType": "uncorroborated_claim",
+      "publishedAt": "2026-11-26T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "timeBasis": "publication",
+      "freshness": "fresh",
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "topics": [
+        "science",
+        "technology",
+        "research"
+      ],
+      "url": "https://arxiv.org/abs/2611.33679",
+      "referenceIds": [
+        "source-14"
+      ]
+    },
+    {
+      "id": "arxiv-ai-67380bb2",
+      "title": "Confidence scores for gated automation of large language models",
+      "publisher": "arXiv",
+      "sourceId": "arxiv-ai",
+      "kind": "research",
+      "evidenceType": "uncorroborated_claim",
+      "publishedAt": "2026-11-26T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "timeBasis": "publication",
+      "freshness": "fresh",
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "topics": [
+        "science",
+        "technology",
+        "research"
+      ],
+      "url": "https://arxiv.org/abs/2611.33394",
+      "referenceIds": [
+        "source-15"
+      ]
+    },
+    {
+      "id": "arxiv-ai-6b495b1f",
+      "title": "Brand Recall and Category Accuracy in Language Models: An Audit of 1,000 B2B SaaS Brands",
+      "publisher": "arXiv",
+      "sourceId": "arxiv-ai",
+      "kind": "research",
+      "evidenceType": "uncorroborated_claim",
+      "publishedAt": "2026-11-26T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "timeBasis": "publication",
+      "freshness": "fresh",
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "topics": [
+        "science",
+        "technology",
+        "research"
+      ],
+      "url": "https://arxiv.org/abs/2611.33322",
+      "referenceIds": [
+        "source-16"
+      ]
+    },
+    {
+      "id": "arxiv-ai-8a0971bc",
+      "title": "Aligned Machine: A Benchmark for Evaluating Multimodal Embedding Similarity via Human Comparative Judgements",
+      "publisher": "arXiv",
+      "sourceId": "arxiv-ai",
+      "kind": "research",
+      "evidenceType": "uncorroborated_claim",
+      "publishedAt": "2026-11-26T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "timeBasis": "publication",
+      "freshness": "fresh",
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "topics": [
+        "science",
+        "technology",
+        "research"
+      ],
+      "url": "https://arxiv.org/abs/2611.33594",
+      "referenceIds": [
+        "source-17"
+      ]
+    },
+    {
+      "id": "arxiv-ai-8b278863",
+      "title": "PeerReveal: Learning to Generalize in AI Peer Review Detection",
+      "publisher": "arXiv",
+      "sourceId": "arxiv-ai",
+      "kind": "research",
+      "evidenceType": "uncorroborated_claim",
+      "publishedAt": "2026-11-26T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "timeBasis": "publication",
+      "freshness": "fresh",
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "topics": [
+        "science",
+        "technology",
+        "research"
+      ],
+      "url": "https://arxiv.org/abs/2611.33555",
+      "referenceIds": [
+        "source-18"
+      ]
+    },
+    {
+      "id": "arxiv-ai-991d1111",
+      "title": "Learning to Reason in Real-Time",
+      "publisher": "arXiv",
+      "sourceId": "arxiv-ai",
+      "kind": "research",
+      "evidenceType": "uncorroborated_claim",
+      "publishedAt": "2026-11-26T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "timeBasis": "publication",
+      "freshness": "fresh",
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "topics": [
+        "science",
+        "technology",
+        "research"
+      ],
+      "url": "https://arxiv.org/abs/2611.33513",
+      "referenceIds": [
+        "source-19"
+      ]
+    },
+    {
+      "id": "arxiv-ai-9b88b490",
+      "title": "Partial Routing: Trace-Tuned Delegation for Resource-Efficient Agentic Workflows",
+      "publisher": "arXiv",
+      "sourceId": "arxiv-ai",
+      "kind": "research",
+      "evidenceType": "uncorroborated_claim",
+      "publishedAt": "2026-11-26T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "timeBasis": "publication",
+      "freshness": "fresh",
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "topics": [
+        "science",
+        "technology",
+        "research"
+      ],
+      "url": "https://arxiv.org/abs/2611.33402",
+      "referenceIds": [
+        "source-20"
+      ]
+    },
+    {
+      "id": "arxiv-ai-9f7beee9",
+      "title": "Dynamic Reasoning in Next-Gen Detection and Response: An Empirical Study of LLM Triage, Reinforcement Tuning, and Adversarial Evasion",
+      "publisher": "arXiv",
+      "sourceId": "arxiv-ai",
+      "kind": "research",
+      "evidenceType": "uncorroborated_claim",
+      "publishedAt": "2026-11-26T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "timeBasis": "publication",
+      "freshness": "fresh",
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "topics": [
+        "science",
+        "technology",
+        "research"
+      ],
+      "url": "https://arxiv.org/abs/2611.33470",
+      "referenceIds": [
+        "source-21"
+      ]
+    },
+    {
+      "id": "arxiv-ai-a12e66ca",
+      "title": "FIG-MAC: A Fine-grained Inspiration Graph Empowered Multi-Agent Collaboration for Automated Scientific Hypothesis Generation",
+      "publisher": "arXiv",
+      "sourceId": "arxiv-ai",
+      "kind": "research",
+      "evidenceType": "uncorroborated_claim",
+      "publishedAt": "2026-11-26T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "timeBasis": "publication",
+      "freshness": "fresh",
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "topics": [
+        "science",
+        "technology",
+        "research"
+      ],
+      "url": "https://arxiv.org/abs/2611.33563",
+      "referenceIds": [
+        "source-22"
+      ]
+    },
+    {
+      "id": "arxiv-ai-a28afe2c",
+      "title": "Collaborative Language Models for Semantic IoT Data Processing: Validation through Zero-Shot Human Activity Recognition",
+      "publisher": "arXiv",
+      "sourceId": "arxiv-ai",
+      "kind": "research",
+      "evidenceType": "uncorroborated_claim",
+      "publishedAt": "2026-11-26T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "timeBasis": "publication",
+      "freshness": "fresh",
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "topics": [
+        "science",
+        "technology",
+        "research"
+      ],
+      "url": "https://arxiv.org/abs/2611.33411",
+      "referenceIds": [
+        "source-23"
+      ]
+    },
+    {
+      "id": "arxiv-ai-b09e9bee",
+      "title": "CA-RAG: Constraint-Aligned Retrieval for Structurally Faithful Long-Form Generation",
+      "publisher": "arXiv",
+      "sourceId": "arxiv-ai",
+      "kind": "research",
+      "evidenceType": "uncorroborated_claim",
+      "publishedAt": "2026-11-26T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "timeBasis": "publication",
+      "freshness": "fresh",
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "topics": [
+        "science",
+        "technology",
+        "research"
+      ],
+      "url": "https://arxiv.org/abs/2611.33497",
+      "referenceIds": [
+        "source-24"
+      ]
+    },
+    {
+      "id": "arxiv-ai-b0acb5af",
+      "title": "JOVE ICE: Intent Guided Cloud Edge Device Collaboration for AI Glasses",
+      "publisher": "arXiv",
+      "sourceId": "arxiv-ai",
+      "kind": "research",
+      "evidenceType": "uncorroborated_claim",
+      "publishedAt": "2026-11-26T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "timeBasis": "publication",
+      "freshness": "fresh",
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "topics": [
+        "science",
+        "technology",
+        "research"
+      ],
+      "url": "https://arxiv.org/abs/2611.33735",
+      "referenceIds": [
+        "source-25"
+      ]
+    },
+    {
+      "id": "arxiv-ai-b0bdfed0",
+      "title": "WhatIf: Counterfactual World Models over Action-Grounded Causal Graphs for Robotic Manipulation",
+      "publisher": "arXiv",
+      "sourceId": "arxiv-ai",
+      "kind": "research",
+      "evidenceType": "uncorroborated_claim",
+      "publishedAt": "2026-11-26T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "timeBasis": "publication",
+      "freshness": "fresh",
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "topics": [
+        "science",
+        "technology",
+        "research"
+      ],
+      "url": "https://arxiv.org/abs/2611.33745",
+      "referenceIds": [
+        "source-26"
+      ]
+    },
+    {
+      "id": "arxiv-ai-b4b13929",
+      "title": "KeyDeck: Multi-Paper-to-Slide Generation via Cross-Paper Synthesis and Reference-Guided Personalization",
+      "publisher": "arXiv",
+      "sourceId": "arxiv-ai",
+      "kind": "research",
+      "evidenceType": "uncorroborated_claim",
+      "publishedAt": "2026-11-26T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "timeBasis": "publication",
+      "freshness": "fresh",
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "topics": [
+        "science",
+        "technology",
+        "research"
+      ],
+      "url": "https://arxiv.org/abs/2611.33715",
+      "referenceIds": [
+        "source-27"
+      ]
+    },
+    {
+      "id": "arxiv-ai-b5b13abc",
+      "title": "PowerFix: Physics-Guided Iterative Repair for LLM-Assisted Power Converter Design",
+      "publisher": "arXiv",
+      "sourceId": "arxiv-ai",
+      "kind": "research",
+      "evidenceType": "uncorroborated_claim",
+      "publishedAt": "2026-11-26T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "timeBasis": "publication",
+      "freshness": "fresh",
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "topics": [
+        "science",
+        "technology",
+        "research"
+      ],
+      "url": "https://arxiv.org/abs/2611.33712",
+      "referenceIds": [
+        "source-28"
+      ]
+    },
+    {
+      "id": "arxiv-ai-b9af0271",
+      "title": "Asset4D-Bench: Benchmarking Coding Agents for Editable 3D and 4D Reconstruction",
+      "publisher": "arXiv",
+      "sourceId": "arxiv-ai",
+      "kind": "research",
+      "evidenceType": "uncorroborated_claim",
+      "publishedAt": "2026-11-26T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "timeBasis": "publication",
+      "freshness": "fresh",
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "topics": [
+        "science",
+        "technology",
+        "research"
+      ],
+      "url": "https://arxiv.org/abs/2611.33728",
+      "referenceIds": [
+        "source-29"
+      ]
+    },
+    {
+      "id": "arxiv-ai-c2b38dca",
+      "title": "P-FedSkill: A Personalized Federated Skill Learning Framework under Task Heterogeneity",
+      "publisher": "arXiv",
+      "sourceId": "arxiv-ai",
+      "kind": "research",
+      "evidenceType": "uncorroborated_claim",
+      "publishedAt": "2026-11-26T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "timeBasis": "publication",
+      "freshness": "fresh",
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "topics": [
+        "science",
+        "technology",
+        "research"
+      ],
+      "url": "https://arxiv.org/abs/2611.33707",
+      "referenceIds": [
+        "source-30"
+      ]
+    }
+  ],
+  "references": [
+    {
+      "id": "source-1",
+      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000udry",
+      "publisher": "U.S. Geological Survey",
+      "title": "M 5.1 - Bonin Islands, Japan region"
+    },
+    {
+      "id": "source-2",
+      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000udqa",
+      "publisher": "U.S. Geological Survey",
+      "title": "M 4.5 - 95 km SSE of Sarangani, Philippines"
+    },
+    {
+      "id": "source-3",
+      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000udq5",
+      "publisher": "U.S. Geological Survey",
+      "title": "M 5.7 - Revilla Gigedo Islands region"
+    },
+    {
+      "id": "source-4",
+      "url": "https://www.ecb.europa.eu//press/accounts/2026/html/ecb.mg261126~ccf28c8071.en.html",
+      "publisher": "European Central Bank",
+      "title": "Meeting of 28-29 October 2026"
+    },
+    {
+      "id": "source-5",
+      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000udmc",
+      "publisher": "U.S. Geological Survey",
+      "title": "M 5.2 - 265 km WNW of Houma, Tonga"
+    },
+    {
+      "id": "source-6",
+      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000udm8",
+      "publisher": "U.S. Geological Survey",
+      "title": "M 5.5 - 204 km S of Taliwang, Indonesia"
+    },
+    {
+      "id": "source-7",
+      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000udm5",
+      "publisher": "U.S. Geological Survey",
+      "title": "M 4.8 - 225 km S of Taliwang, Indonesia"
+    },
+    {
+      "id": "source-8",
+      "url": "https://science.nasa.gov/image-article/apod-2026-november-26-eye-in-the-sky-the-milky-way-over-lencois/",
+      "publisher": "NASA",
+      "title": "APOD: 2026 November 26 – Eye in the Sky: The Milky Way over Lençóis"
+    },
+    {
+      "id": "source-9",
+      "url": "https://science.nasa.gov/earth/earth-observatory/seeking-refuge-on-resolution-island/",
+      "publisher": "NASA",
+      "title": "Seeking Refuge on Resolution Island"
+    },
+    {
+      "id": "source-10",
+      "url": "https://arxiv.org/abs/2611.33263",
+      "publisher": "arXiv",
+      "title": "What, Who, and When: Structured Harm Assessment for Mental Health Safety via Short Reasoning"
+    },
+    {
+      "id": "source-11",
+      "url": "https://arxiv.org/abs/2611.33190",
+      "publisher": "arXiv",
+      "title": "General-Purpose Decision Models for AI Configuration Tuning"
+    },
+    {
+      "id": "source-12",
+      "url": "https://arxiv.org/abs/2611.33664",
+      "publisher": "arXiv",
+      "title": "SlicePlanner: Logic-Guided Agentic AI for Online QoS-Aware Network Slicing in Open RAN"
+    },
+    {
+      "id": "source-13",
+      "url": "https://arxiv.org/abs/2611.33676",
+      "publisher": "arXiv",
+      "title": "Interactive Proofs as a Unified Framework for Evaluating and Leveraging Verifiable Proof Generation by LLM Agents"
+    },
+    {
+      "id": "source-14",
+      "url": "https://arxiv.org/abs/2611.33679",
+      "publisher": "arXiv",
+      "title": "Faster and Better Query (FBQ): Learning Future-Position Probes from the First Generated Token"
+    },
+    {
+      "id": "source-15",
+      "url": "https://arxiv.org/abs/2611.33394",
+      "publisher": "arXiv",
+      "title": "Confidence scores for gated automation of large language models"
+    },
+    {
+      "id": "source-16",
+      "url": "https://arxiv.org/abs/2611.33322",
+      "publisher": "arXiv",
+      "title": "Brand Recall and Category Accuracy in Language Models: An Audit of 1,000 B2B SaaS Brands"
+    },
+    {
+      "id": "source-17",
+      "url": "https://arxiv.org/abs/2611.33594",
+      "publisher": "arXiv",
+      "title": "Aligned Machine: A Benchmark for Evaluating Multimodal Embedding Similarity via Human Comparative Judgements"
+    },
+    {
+      "id": "source-18",
+      "url": "https://arxiv.org/abs/2611.33555",
+      "publisher": "arXiv",
+      "title": "PeerReveal: Learning to Generalize in AI Peer Review Detection"
+    },
+    {
+      "id": "source-19",
+      "url": "https://arxiv.org/abs/2611.33513",
+      "publisher": "arXiv",
+      "title": "Learning to Reason in Real-Time"
+    },
+    {
+      "id": "source-20",
+      "url": "https://arxiv.org/abs/2611.33402",
+      "publisher": "arXiv",
+      "title": "Partial Routing: Trace-Tuned Delegation for Resource-Efficient Agentic Workflows"
+    },
+    {
+      "id": "source-21",
+      "url": "https://arxiv.org/abs/2611.33470",
+      "publisher": "arXiv",
+      "title": "Dynamic Reasoning in Next-Gen Detection and Response: An Empirical Study of LLM Triage, Reinforcement Tuning, and Adversarial Evasion"
+    },
+    {
+      "id": "source-22",
+      "url": "https://arxiv.org/abs/2611.33563",
+      "publisher": "arXiv",
+      "title": "FIG-MAC: A Fine-grained Inspiration Graph Empowered Multi-Agent Collaboration for Automated Scientific Hypothesis Generation"
+    },
+    {
+      "id": "source-23",
+      "url": "https://arxiv.org/abs/2611.33411",
+      "publisher": "arXiv",
+      "title": "Collaborative Language Models for Semantic IoT Data Processing: Validation through Zero-Shot Human Activity Recognition"
+    },
+    {
+      "id": "source-24",
+      "url": "https://arxiv.org/abs/2611.33497",
+      "publisher": "arXiv",
+      "title": "CA-RAG: Constraint-Aligned Retrieval for Structurally Faithful Long-Form Generation"
+    },
+    {
+      "id": "source-25",
+      "url": "https://arxiv.org/abs/2611.33735",
+      "publisher": "arXiv",
+      "title": "JOVE ICE: Intent Guided Cloud Edge Device Collaboration for AI Glasses"
+    },
+    {
+      "id": "source-26",
+      "url": "https://arxiv.org/abs/2611.33745",
+      "publisher": "arXiv",
+      "title": "WhatIf: Counterfactual World Models over Action-Grounded Causal Graphs for Robotic Manipulation"
+    },
+    {
+      "id": "source-27",
+      "url": "https://arxiv.org/abs/2611.33715",
+      "publisher": "arXiv",
+      "title": "KeyDeck: Multi-Paper-to-Slide Generation via Cross-Paper Synthesis and Reference-Guided Personalization"
+    },
+    {
+      "id": "source-28",
+      "url": "https://arxiv.org/abs/2611.33712",
+      "publisher": "arXiv",
+      "title": "PowerFix: Physics-Guided Iterative Repair for LLM-Assisted Power Converter Design"
+    },
+    {
+      "id": "source-29",
+      "url": "https://arxiv.org/abs/2611.33728",
+      "publisher": "arXiv",
+      "title": "Asset4D-Bench: Benchmarking Coding Agents for Editable 3D and 4D Reconstruction"
+    },
+    {
+      "id": "source-30",
+      "url": "https://arxiv.org/abs/2611.33707",
+      "publisher": "arXiv",
+      "title": "P-FedSkill: A Personalized Federated Skill Learning Framework under Task Heterogeneity"
+    }
+  ],
+  "limitations": [
+    "This is a deterministic selection of public source metadata, not original reporting or independent claim verification.",
+    "Publication, event occurrence, modification and retrieval times have different meanings; unknown times remain unknown.",
+    "Coverage depends on configured feeds and cache freshness. Missing reports do not establish that nothing happened.",
+    "Publisher origin groups describe configured relationships; a count of groups is not a count of independent confirmations."
+  ]
+}

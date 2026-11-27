@@ -1,0 +1,21 @@
+{
+  "checkedAt": "2026-11-27T00:31:29.295Z",
+  "runtime": "v24.22.3",
+  "limits": "Single local Node run, not mobile or global network performance; synthetic inputs are never shipped to public/data.",
+  "actualCache": {
+    "inputRecords": 115,
+    "eventSuggestions": 115,
+    "clusterMs": 34.24,
+    "briefMs": 9.06,
+    "briefItems": 30,
+    "citationsValid": true
+  },
+  "synthetic600": {
+    "inputRecords": 600,
+    "eventSuggestions": 600,
+    "clusterMs": 128.42,
+    "briefMs": 14.37,
+    "briefItems": 30,
+    "citationsValid": true
+  }
+}

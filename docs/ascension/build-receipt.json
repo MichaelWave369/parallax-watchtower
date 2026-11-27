@@ -1,0 +1,68 @@
+{
+  "schema": "phi.watchtower.ascension-build.v1",
+  "candidate": "Ascension 01 / Watchtower Live 2.0 foundation candidate",
+  "recordedDate": "2026-11-26 America/Los_Angeles",
+  "controllingSpecification": {
+    "path": "docs/ascension/controlling-spec.md",
+    "sha256": "7a3e2a7c06ead9bef9421ab30de100afc93623a55fa3a28fad59a998a7a52724"
+  },
+  "baseCommit": "b44e36ec5a87d585e4b6799f9e81d74afea64136",
+  "authority": "User-authored OPERATION WATCHTOWER ASCENSION authorized implementation, tests, feature branches and draft pull requests. Main merge is explicitly excluded.",
+  "milestone": "An integrated static news workflow: reviewed source adapters \u2192 public cached metadata \u2192 newsroom \u2192 evidence comparison/research \u2192 source-backed brief and public export.",
+  "deliverables": [
+    "Six-source metadata collector and health ledger",
+    "Nine functional newsroom desks with local persistence",
+    "Conservative report grouping and source-attributed timelines",
+    "Public metadata schemas, deterministic briefing and privacy-minimal export",
+    "Legacy defects repaired; locked installs, active-app types and browser regressions",
+    "Draft PR with screenshots and evidence; no release action"
+  ],
+  "preserved": [
+    "GitHub Pages repository/base path",
+    "Lite/Map/Globe atlas and startup recovery",
+    "Original incident ledgers, discovery inbox/trails and FieldPack v1",
+    "Consent-based browser location boundaries"
+  ],
+  "deferred": [
+    "Complete worldwide/local/multilingual journalism",
+    "Claim-by-claim adjudication and correction history",
+    "Permanent event identities and versioned historical events",
+    "Notification thresholds/cooldowns/quiet hours",
+    "LLM/Ollama/PhiBuddy runtime integration and fidelity evaluations",
+    "SQLite self-hosted node and containers",
+    "Downstream ecosystem consumers"
+  ],
+  "decisions": [
+    {
+      "kind": "architecture",
+      "choice": "Retain Vite/React static deployment; add modular pure metadata tools and scheduled cache rather than mandatory backend.",
+      "authorization": "Specification asks for evidence-based architecture and progressive tiers."
+    },
+    {
+      "kind": "scope",
+      "choice": "Implement the highest-value coherent slice and record remaining requirements; do not label nine phases complete.",
+      "authorization": "Specification requests as many validated phases as safely possible."
+    },
+    {
+      "kind": "privacy",
+      "choice": "Imported archives become unreviewed user submissions; private notes/watchlists never enter public exports.",
+      "authorization": "Specification requires privacy boundaries and safe untrusted imports."
+    }
+  ],
+  "dependencyChanges": {
+    "runtime": [
+      "saxes@6.0.0 strict XML parser; archived upstream documented, DTD/entity/size/depth guards required"
+    ],
+    "dev": [
+      "@axe-core/playwright@4.14.1 browser accessibility",
+      "ajv@8.20.0 + ajv-formats@3.0.1 schema regressions"
+    ],
+    "pinned": [
+      "vite@8.4.0",
+      "@vitejs/plugin-react@6.3.0"
+    ],
+    "lockfile": "package-lock.json; workflows now npm ci"
+  },
+  "releaseAuthority": "Michael Wayne Hughes. Draft candidate only; no main merge or new production deployment authorized or performed.",
+  "independentReview": "docs/ascension/independent-review.md; separate reviewer exercised additional browser security tests. This is engineering peer review, not external certification."
+}

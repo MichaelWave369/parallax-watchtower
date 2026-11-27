@@ -1,6 +1,6 @@
 # WATCHTOWER LIVE
 
-**Real-time signal atlas and OSINT field ledger** for earthquakes, news, maps, markets, watch zones, and receipt-based situational awareness.
+**A public news command center and source-receipted signal atlas** for understanding reports, inspecting evidence, building local research, and exporting transparent briefings.
 
 Watchtower Live is built around a simple rule: **see more, know sooner, act smarter — without turning public intelligence into stalker tech.** Every signal is treated as a ledger record with a source, timestamp, location/radius when available, confidence label, privacy class, and receipt link.
 
@@ -9,6 +9,22 @@ Live GitHub Pages dashboard:
 ```text
 https://michaelwave369.github.io/parallax-watchtower/
 ```
+
+## Ascension 01 candidate
+
+The default **News Command** workspace now contains nine working desks: Global Command, World Affairs, Science & Technology, Natural Hazards, Policy & Economics, My Watchlist, Intelligence Brief, Research Room, and Source Observatory. The existing **Live signals**, **Explore**, **Incident Room**, and **Discovery Inbox** remain available from the top navigation.
+
+- **Six reviewed metadata adapters:** NASA, UN Geneva, ECB, arXiv, Federal Register, and USGS. RSS, Atom, JSON and GeoJSON collection runs centrally, with a six-hour minimum cooldown and per-source backoff. The browser reads the same-origin cache rather than polling publishers.
+- **Evidence first:** separate publication, occurrence, modification and retrieval clocks; original receipts; explainable evidence labels; conservative, reversible report groups; side-by-side source comparison. Grouping does not verify claims or independence.
+- **Local research:** saved workspaces and keyword watches, pinned public evidence, hypotheses, disputed claims, corrections to review and disconfirming evidence. No automatic notifications or personal-data synchronization.
+- **Portable briefings:** deterministic, source-linked Markdown/JSON and printable output. IndexedDB keeps at most 2,000 public metadata records with 7/30/90-day retention; public archive imports remain unreviewed. Notes, watches, browser location and saved views stay out of public exports.
+- **Responsive UI:** dark/light themes, compact mode, keyboard search (`/`), fullscreen, and local history that can recover after feed failures. Old feed failures no longer generate synthetic headlines or market prices.
+
+The reviewed collection initially returned **115 real public metadata records** on November 26, 2026, at approximately 4:10 p.m. Pacific. This is a dated source snapshot, not a claim of continuous live verification. Coverage is institutional and research-focused, currently English, and incomplete. arXiv announcements and date-only Federal Register documents have no invented precise publication time; use the all-dates archive to inspect undated metadata.
+
+This is a candidate branch. Main and the public deployment are changed only after explicit merge authorization. The scheduled news workflow is installed on the branch and becomes operational on main after merge; its first deployed run still needs verification.
+
+See [source policies](docs/news-sources.md), [intelligence method](docs/news-intelligence.md), [mission report](docs/ascension/mission-report.md), [requirements register](docs/ascension/requirements-register.md), and [remaining roadmap](docs/ascension/roadmap.md).
 
 ## Source-integrated field atlas
 
@@ -40,7 +56,7 @@ Core boundaries:
 ## Run locally
 
 ```bash
-npm install
+npm ci
 npm run dev
 ```
 
@@ -58,7 +74,7 @@ npm run build
 
 ## Source notes
 
-The earthquake layer uses the public USGS all-week GeoJSON feed. The news layer attempts a public GDELT DOC 2.0 article-list pull and falls back safely when browser CORS or network conditions block it.
+The Live signals earthquake layer uses the public USGS all-week GeoJSON feed. Its legacy GDELT adapter remains available, but failed requests produce an unavailable source state and no synthetic news. The new newsroom uses the six-source scheduled metadata cache documented above.
 
 ## Optional source proxy
 
