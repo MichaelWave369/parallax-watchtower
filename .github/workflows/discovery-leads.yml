@@ -18,6 +18,7 @@ permissions:
 
 concurrency:
   group: pages
+  queue: max
   cancel-in-progress: false
 
 jobs:
@@ -28,6 +29,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          ref: main
+          fetch-depth: 0
           persist-credentials: true
       - uses: actions/setup-node@v4
         with:
