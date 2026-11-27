@@ -186,3 +186,7 @@ html[data-news-theme] body::before { display:none; }
 .nr-coverage-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,145px),1fr)); gap:7px; }
 .nr-coverage-cell { border:1px solid var(--nr-line); padding:9px; display:grid; gap:5px; min-width:0; overflow-wrap:anywhere; font-size:11px; }
 .nr-coverage-cell span { color:var(--nr-muted); font-size:10px; }
+
+.nr-revision { display:grid; gap:6px; padding:12px 0; border-bottom:1px solid var(--nr-line); overflow-wrap:anywhere; }
+.nr-revision time,.nr-revision span { color:var(--nr-muted); font-size:10px; }
+.nr-revision strong { font-size:12px; }

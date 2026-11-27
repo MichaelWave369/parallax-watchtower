@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { NEWS_SOURCES } from '../lib/newsSources.mjs';
+import { mergeNewsRevisions, revisionsForRecord } from '../lib/newsRevisions.mjs';
 import { buildCoverage } from '../lib/newsCoverage.mjs';
 import { normalizeNewsRecord, validateNewsSnapshot, validateNewsHealth } from '../lib/newsContract.mjs';
 import { clusterEvents, deduplicateNews, makeNewsBriefing, briefingToMarkdown, newsRecordFreshness } from '../lib/newsIntelligence.mjs';
@@ -53,6 +54,7 @@ export function NewsCommandCenter({ onOpenAtlas }: { onOpenAtlas: () => void }) 
     try { return loadNewsPreferences(window.localStorage) as Preferences; } catch { return normalizeNewsPreferences({}) as Preferences; }
   });
   const [archive, setArchive] = useState<NewsRecord[]>([]);
+  const [revisions, setRevisions] = useState<NewsRecord[]>([]);
   const [snapshot, setSnapshot] = useState<Snapshot | null>(null);
   const [health, setHealth] = useState<any>(null);
   const [now, setNow] = useState(clock);
@@ -104,6 +106,7 @@ export function NewsCommandCenter({ onOpenAtlas }: { onOpenAtlas: () => void }) 
         const good = validateNewsSnapshot(news.value, Date.parse(time)) as Snapshot | null;
         if (good) {
           setSnapshot(good);
+          setRevisions(old => mergeNewsRevisions(old, good.records, { now: Date.parse(time), retentionDays: preferencesRef.current.retentionDays }) as NewsRecord[]);
           setArchive(old => mergeNewsArchive(old, good.records, { now: Date.parse(time), retentionDays: preferencesRef.current.retentionDays }));
           setNetworkNote('Shared snapshot loaded. Retrieval success does not verify an event.');
         } else setNetworkNote('The source snapshot failed validation. Showing previously stored public records, if available.');
@@ -117,6 +120,7 @@ export function NewsCommandCenter({ onOpenAtlas }: { onOpenAtlas: () => void }) 
         if (disposed) return;
         setArchive(mergeNewsArchive([], stored.archive, { retentionDays: prefs.retentionDays }));
         const cached = validateNewsSnapshot(stored.snapshot);
+        setRevisions(mergeNewsRevisions(stored.revisions, cached?.records || [], { retentionDays: preferencesRef.current.retentionDays }) as NewsRecord[]);
         if (cached) setSnapshot(cached as Snapshot);
       } catch { if (!disposed) setStorageNote('Local history is unavailable. Records will remain in memory for this session.'); }
       if (!disposed) { initialized.current = true; await refresh(); }
@@ -129,11 +133,11 @@ export function NewsCommandCenter({ onOpenAtlas }: { onOpenAtlas: () => void }) 
     if (!initialized.current) return;
     let cancelled = false;
     const timer = window.setTimeout(() => {
-      writeNewsStorage(archive, snapshot).catch(() => { if (!cancelled) setStorageNote('Local history could not be saved. This session still works.'); });
+      writeNewsStorage(archive, snapshot, undefined, revisions).catch(() => { if (!cancelled) setStorageNote('Local history could not be saved. This session still works.'); });
     }, 250);
     return () => { cancelled = true; window.clearTimeout(timer); };
-  }, [archive, snapshot]);
-  useEffect(() => { setArchive(old => mergeNewsArchive([], old, { retentionDays: prefs.retentionDays })); }, [prefs.retentionDays]);
+  }, [archive, snapshot, revisions]);
+  useEffect(() => { setArchive(old => mergeNewsArchive([], old, { retentionDays: prefs.retentionDays })); setRevisions(old => mergeNewsRevisions(old, [], { retentionDays: prefs.retentionDays }) as NewsRecord[]); }, [prefs.retentionDays]);
   useEffect(() => {
     const timer = window.setInterval(() => setNow(clock()), 60000);
     const handler = (event: KeyboardEvent) => {
@@ -173,6 +177,7 @@ export function NewsCommandCenter({ onOpenAtlas }: { onOpenAtlas: () => void }) 
   const selected = (filtered.find(row => row.id === selectedId) || filtered[0]) as NewsRecord | undefined;
   const selectedEvent: any = selected ? events.find((event: any) => event.articles.some((row: NewsRecord) => row.id === selected.id)) : null;
   const brief = useMemo(() => makeNewsBriefing(filtered, { now: Date.parse(now), windowHours: prefs.timeWindow === '24' ? 24 : 168, maxItems: 30 }), [filtered, now, prefs.timeWindow]);
+  const observedRevisions = revisionsForRecord(revisions, selected) as NewsRecord[];
   const notes = selected ? prefs.notes.filter(note => note.recordId === selected.id) : [];
   const compareRows: NewsRecord[] = [...(selectedEvent?.articles || (selected ? [selected] : []))];
   const manualComparison = records.find(row => row.id === comparisonId && row.id !== selected?.id);
@@ -226,7 +231,7 @@ export function NewsCommandCenter({ onOpenAtlas }: { onOpenAtlas: () => void }) 
     finally { setImporting(false); }
   }
   function clearArchive() {
-    setArchive([]); setSnapshot(null); setHealth(null); update({ pins: [], separateIds: [], notes: [] });
+    setArchive([]); setRevisions([]); setSnapshot(null); setHealth(null); update({ pins: [], separateIds: [], notes: [] });
     setActionNote('Local news history and research annotations cleared. A future refresh can load the public snapshot again.');
   }
 
@@ -285,6 +290,7 @@ export function NewsCommandCenter({ onOpenAtlas }: { onOpenAtlas: () => void }) 
           <div className="nr-inspector-title"><span className="nr-tag">{label(selected.evidenceType)}</span><h3>{selected.title}</h3><a href={selected.url} target="_blank" rel="noopener noreferrer">Read original source ↗</a></div>
           <nav className="nr-inspector-tabs" aria-label="Evidence views">{(['evidence', 'compare', 'timeline'] as const).map(view => <button aria-pressed={inspector === view} key={view} onClick={() => setInspector(view)}>{view === 'evidence' ? 'Receipt' : view === 'compare' ? 'Compare' : 'Timeline'}</button>)}</nav>
           {inspector === 'evidence' ? <div className="nr-receipt"><dl><dt>Attributed to</dt><dd>{selected.publisher}</dd><dt>Publication</dt><dd>{stamp(selected.publishedAt)}</dd><dt>Occurrence</dt><dd>{stamp(selected.eventAt)}</dd><dt>Modification</dt><dd>{stamp(selected.modifiedAt)}</dd><dt>Retrieval</dt><dd>{stamp(selected.retrievedAt)}</dd><dt>Geography</dt><dd>{selected.region.label} · {selected.region.precision}</dd><dt>Evidence state</dt><dd>Source-attributed · not independently verified</dd><dt>Origin family</dt><dd>{selected.originGroup}</dd></dl><p className="nr-caveat">A feed receipt records what the publisher supplied. It does not establish that every claim is true.</p></div> : inspector === 'compare' ? <div className="nr-comparison"><label className="nr-compare-select">Compare another saved report<select aria-label="Compare saved evidence" value={comparisonId} onChange={event => setComparisonId(event.target.value)}><option value="">Suggested group only</option>{records.filter(row => prefs.pins.includes(row.id) && row.id !== selected.id).map(row => <option key={row.id} value={row.id}>{row.publisher}: {row.title}</option>)}</select></label>{manualComparison && <p className="nr-muted">User-selected comparison; no relationship is inferred.</p>}<p className="nr-caveat">Headline and metadata comparison only. Quoted parties, factual disagreements, omissions, and causality require human review.</p>{compareRows.map((row: NewsRecord) => <article key={row.id}><strong>{row.publisher}</strong><p>{row.title}</p><span>{stamp(row.publishedAt)} / {row.originGroup}</span><a href={row.url} target="_blank" rel="noopener noreferrer">Inspect report ↗</a></article>)}<p className="nr-muted">{new Set(compareRows.map(row => row.originGroup)).size} origin families. Independence not assessed; syndicated copies are not confirmations.</p></div> : <ol className="nr-timeline">{(selectedEvent?.timeline || []).map((entry: { type: string; at: string; recordId: string; sourceUrl: string }) => <li key={entry.recordId + entry.type + entry.at}><time dateTime={entry.at}>{stamp(entry.at)}</time><strong>{records.find(row => row.id === entry.recordId)?.publisher || 'Attributed source'}</strong><span>{entry.type === 'event' ? 'Source-reported occurrence' : entry.type === 'publication' ? 'Publication; occurrence may differ' : entry.type === 'modification' ? 'Source modification' : 'Retrieval receipt; not occurrence'}</span><a href={entry.sourceUrl} target="_blank" rel="noopener noreferrer">Source receipt ↗</a></li>)}</ol>}
+          <details className="nr-revisions"><summary>Observed metadata history ({observedRevisions.length})</summary><p className="nr-muted">Only shared-feed versions observed on this device. Retrieval timestamps are not publication or correction times. Missing intermediate versions are possible; changes do not prove a correction or a false claim. Local retention and storage limits apply.</p>{observedRevisions.length === 0 && <p className="nr-muted">No shared-feed observations retained for this receipt.</p>}{observedRevisions.map((version, index) => <article className="nr-revision" key={version.retrievedAt}><time dateTime={version.retrievedAt}>Retrieved {stamp(version.retrievedAt)}</time><strong>{version.title}</strong>{version.summary && <p>{version.summary}</p>}<span>Publication: {stamp(version.publishedAt)} · Modification: {stamp(version.modifiedAt)}</span><span>{index === observedRevisions.length - 1 ? 'Earliest retained metadata' : 'Later observed metadata'}</span><a href={version.url} target="_blank" rel="noopener noreferrer">Original receipt ↗</a></article>)}</details>
           <details className="nr-grouping"><summary>Report grouping method</summary><p>Group {selectedEvent?.id || "unassigned"} · {selectedEvent?.reportCount || 1} reports. Conservative headline, topic, location, and time comparison suggests related reports. Groups are provisional and do not establish corroboration or causation.</p><button className="nr-button" onClick={() => update({ separateIds: prefs.separateIds.includes(selected.id) ? prefs.separateIds.filter(id => id !== selected.id) : [...prefs.separateIds, selected.id] })}>{prefs.separateIds.includes(selected.id) ? 'Allow automatic grouping' : 'Keep this report separate'}</button></details>
           <details className="nr-annotations" open={prefs.desk === 'research'}><summary>Local research annotations ({notes.length})</summary><p className="nr-muted">Personal notes and hypotheses stay distinct from source claims.</p>{notes.map(note => <article key={note.id} className="nr-note"><span>{label(note.kind)} · user annotation</span><p>{note.text}</p>{note.referenceUrl && <a href={note.referenceUrl} target="_blank" rel="noopener noreferrer">Supporting / challenging receipt ↗</a>}<button aria-label="Delete research annotation" onClick={() => update({ notes: prefs.notes.filter(row => row.id !== note.id) })}>Remove</button></article>)}<label>Annotation type<select aria-label="Research annotation type" value={noteKind} onChange={event => setNoteKind(event.target.value)}><option value="note">Personal note</option><option value="hypothesis">Hypothesis</option><option value="counterevidence">Disconfirming evidence</option><option value="disputed">Disputed claim</option><option value="correction">Correction to review</option></select></label><label>Research annotation<textarea aria-label="Research annotation" maxLength={1200} rows={3} value={noteText} onChange={event => setNoteText(event.target.value)} /></label><label>Evidence URL (optional)<input aria-label="Annotation evidence URL" type="url" value={noteUrl} onChange={event => setNoteUrl(event.target.value)} maxLength={2048} /></label><button className="nr-button" onClick={addNote} disabled={!noteText.trim()}>Save local annotation</button></details>
         </> : <p className="nr-inspector-empty">Select a report to inspect its receipt, timestamps, source family, and open questions.</p>}
