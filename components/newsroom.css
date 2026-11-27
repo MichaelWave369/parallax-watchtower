@@ -190,3 +190,11 @@ html[data-news-theme] body::before { display:none; }
 .nr-revision { display:grid; gap:6px; padding:12px 0; border-bottom:1px solid var(--nr-line); overflow-wrap:anywhere; }
 .nr-revision time,.nr-revision span { color:var(--nr-muted); font-size:10px; }
 .nr-revision strong { font-size:12px; }
+
+.nr-visit-changes { border:1px solid var(--nr-line); padding:12px; margin:0 0 18px; font-size:11px; overflow-wrap:anywhere; }
+.nr-visit-changes summary { cursor:pointer; color:var(--nr-text); font-weight:600; }
+.nr-visit-changes p { margin:9px 0; line-height:1.65; }
+.nr-visit-changes h3 { font-size:13px; margin:14px 0 6px; }
+.nr-visit-changes ul { list-style:none; padding:0; margin:0 0 12px; max-height:320px; overflow:auto; }
+.nr-visit-changes li { display:grid; gap:5px; padding:9px 0; border-bottom:1px solid var(--nr-line); }
+.nr-visit-changes li span { color:var(--nr-muted); }

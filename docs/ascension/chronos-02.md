@@ -1,0 +1,7 @@
+# Chronos 02: changes since previous visit
+
+The Global Command desk compares the previous locally saved shared snapshot at newsroom mount against the latest successfully loaded shared snapshot. The baseline stays fixed during that newsroom session until the user marks the current snapshot reviewed. No additional network requests or storage keys are introduced. The existing cached snapshot remains the baseline on a subsequent mount; this is not a durable unread queue, nor a per-user server history. If local storage or a valid prior snapshot is unavailable, no change claims are made. On an older snapshot, comparison is unavailable.
+
+Source ID plus canonical receipt URL identifies a record. A receipt absent from the prior snapshot is newly listed, not necessarily newly published/retrieved. A changed content key requires a strictly later retrieval timestamp; same-clock conflicts are excluded. Identical metadata at later retrieval is unchanged. Disappearance, source outages and capacity eviction do not imply retraction. Shared snapshots must validate; manual imports and unregistered sources are excluded. The UI retains direct receipts and source clocks, does not infer factual corrections, and leaves public exports unchanged.
+
+Three deterministic unit tests and one Chromium regression cover new/revised/unchanged distinctions, absent baseline, rollback, same-clock conflicts and review reset. Full hosted CI remains outstanding.
