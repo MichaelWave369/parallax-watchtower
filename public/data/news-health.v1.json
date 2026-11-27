@@ -1,72 +1,72 @@
 {
   "schema": "phi.watchtower.news-health.v1",
-  "generatedAt": "2026-11-27T00:09:46.540Z",
+  "generatedAt": "2026-11-27T16:54:18.176Z",
   "sources": [
     {
       "id": "nasa-news",
       "status": "ok",
-      "lastSuccessAt": "2026-11-27T00:09:46.540Z",
+      "lastSuccessAt": "2026-11-27T16:54:18.176Z",
       "lastFailureAt": null,
-      "attemptedAt": "2026-11-27T00:09:46.540Z",
+      "attemptedAt": "2026-11-27T16:54:18.176Z",
       "recordCount": 10,
       "message": "Metadata retrieved; underlying claims are not automatically verified.",
       "consecutiveFailures": 0,
-      "nextAttemptAt": "2026-11-27T06:09:46.540Z"
+      "nextAttemptAt": "2026-11-27T22:54:18.176Z"
     },
     {
       "id": "un-geneva",
       "status": "ok",
-      "lastSuccessAt": "2026-11-27T00:09:46.540Z",
+      "lastSuccessAt": "2026-11-27T16:54:18.176Z",
       "lastFailureAt": null,
-      "attemptedAt": "2026-11-27T00:09:46.540Z",
+      "attemptedAt": "2026-11-27T16:54:18.176Z",
       "recordCount": 10,
       "message": "Metadata retrieved; underlying claims are not automatically verified.",
       "consecutiveFailures": 0,
-      "nextAttemptAt": "2026-11-27T06:09:46.540Z"
+      "nextAttemptAt": "2026-11-27T22:54:18.176Z"
     },
     {
       "id": "ecb-press",
       "status": "ok",
-      "lastSuccessAt": "2026-11-27T00:09:46.540Z",
+      "lastSuccessAt": "2026-11-27T16:54:18.176Z",
       "lastFailureAt": null,
-      "attemptedAt": "2026-11-27T00:09:46.540Z",
+      "attemptedAt": "2026-11-27T16:54:18.176Z",
       "recordCount": 15,
       "message": "Metadata retrieved; underlying claims are not automatically verified.",
       "consecutiveFailures": 0,
-      "nextAttemptAt": "2026-11-27T06:09:46.540Z"
+      "nextAttemptAt": "2026-11-27T22:54:18.176Z"
     },
     {
       "id": "arxiv-ai",
       "status": "ok",
-      "lastSuccessAt": "2026-11-27T00:09:46.540Z",
+      "lastSuccessAt": "2026-11-27T16:54:18.176Z",
       "lastFailureAt": null,
-      "attemptedAt": "2026-11-27T00:09:46.540Z",
-      "recordCount": 30,
+      "attemptedAt": "2026-11-27T16:54:18.176Z",
+      "recordCount": 0,
       "message": "Metadata retrieved; underlying claims are not automatically verified.",
       "consecutiveFailures": 0,
-      "nextAttemptAt": "2026-11-27T06:09:46.540Z"
+      "nextAttemptAt": "2026-11-27T22:54:18.176Z"
     },
     {
       "id": "federal-register",
       "status": "ok",
-      "lastSuccessAt": "2026-11-27T00:09:46.540Z",
+      "lastSuccessAt": "2026-11-27T16:54:18.176Z",
       "lastFailureAt": null,
-      "attemptedAt": "2026-11-27T00:09:46.540Z",
+      "attemptedAt": "2026-11-27T16:54:18.176Z",
       "recordCount": 20,
       "message": "Metadata retrieved; underlying claims are not automatically verified.",
       "consecutiveFailures": 0,
-      "nextAttemptAt": "2026-11-27T06:09:46.540Z"
+      "nextAttemptAt": "2026-11-27T22:54:18.176Z"
     },
     {
       "id": "usgs-earthquakes",
       "status": "ok",
-      "lastSuccessAt": "2026-11-27T00:09:46.540Z",
+      "lastSuccessAt": "2026-11-27T16:54:18.176Z",
       "lastFailureAt": null,
-      "attemptedAt": "2026-11-27T00:09:46.540Z",
+      "attemptedAt": "2026-11-27T16:54:18.176Z",
       "recordCount": 30,
       "message": "Metadata retrieved; underlying claims are not automatically verified.",
       "consecutiveFailures": 0,
-      "nextAttemptAt": "2026-11-27T06:09:46.540Z"
+      "nextAttemptAt": "2026-11-27T22:54:18.176Z"
     }
   ]
 }
