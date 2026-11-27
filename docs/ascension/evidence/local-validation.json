@@ -1,0 +1,69 @@
+{
+  "checkedAt": "2026-11-27T00:35:33Z",
+  "runtime": "v24.22.3",
+  "checks": [
+    {
+      "check": "install",
+      "command": "npm ci",
+      "exitCode": 0,
+      "durationSeconds": 2.013,
+      "log": "local-checks/install.txt"
+    },
+    {
+      "check": "typecheck",
+      "command": "npm run typecheck",
+      "exitCode": 0,
+      "durationSeconds": 3.584,
+      "log": "local-checks/typecheck.txt"
+    },
+    {
+      "check": "unit",
+      "command": "npm test",
+      "exitCode": 0,
+      "durationSeconds": 0.817,
+      "log": "local-checks/unit.txt",
+      "tests": 136,
+      "pass": 136,
+      "fail": 0,
+      "skipped": 0
+    },
+    {
+      "check": "build",
+      "command": "npm run build",
+      "exitCode": 0,
+      "durationSeconds": 0.649,
+      "log": "local-checks/build.txt"
+    },
+    {
+      "check": "browser",
+      "command": "npm run test:browser",
+      "exitCode": 0,
+      "durationSeconds": 23.411,
+      "log": "local-checks/browser.txt",
+      "passed": 23
+    },
+    {
+      "check": "audit",
+      "command": "npm audit --json",
+      "exitCode": 0,
+      "durationSeconds": 3.805,
+      "log": "local-checks/audit.txt",
+      "vulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 0,
+        "critical": 0,
+        "total": 0
+      }
+    },
+    {
+      "check": "diff",
+      "command": "git diff --check",
+      "exitCode": 0,
+      "durationSeconds": 0.006,
+      "log": "local-checks/diff.txt"
+    }
+  ],
+  "logFormatting": "Trailing whitespace and blank EOF lines normalized; command output text and results retained."
+}

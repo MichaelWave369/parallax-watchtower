@@ -1,0 +1,24 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+
+> watchtower-live@2.0.0-alpha.1 build
+> vite build --base=/parallax-watchtower/
+
+vite v8.4.0 building client environment for production...
+transforming...
+✓ 49 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                 1.04 kB │ gzip:   0.51 kB
+dist/assets/NewsCommandCenter-8S6ajH46.css     18.01 kB │ gzip:   4.19 kB
+dist/assets/index-CSu6yQqM.css                 19.54 kB │ gzip:   4.76 kB
+dist/assets/SignalVectorMap-qvkd0SPb.css       71.33 kB │ gzip:  10.25 kB
+dist/assets/NewsCommandCenter-ZH2ZX8cs.js      58.63 kB │ gzip:  18.97 kB
+dist/assets/index-DL1bicDE.js                 276.22 kB │ gzip:  91.16 kB
+dist/assets/SignalVectorMap-Di_X_VpQ.js     1,068.66 kB │ gzip: 291.70 kB
+
+[plugin builtin:vite-reporter]
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 382ms

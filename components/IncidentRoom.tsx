@@ -24,9 +24,9 @@ export function IncidentRoom() {
   const incident = INCIDENT_CASES.find((record) => record.id === selectedCaseId) ?? INCIDENT_CASES[0];
   const sourcesById = useMemo(() => Object.fromEntries(incident.sources.map((item) => [item.id, item])), [incident]);
   const contextResources = useMemo(() => incident.contextResourceIds
-    .map((id) => EXPLORE_SOURCES.find((source) => source.id === id)).filter(Boolean), [incident]);
+    .map((id) => EXPLORE_SOURCES.find((source) => source.id === id)).filter((resource): resource is (typeof EXPLORE_SOURCES)[number] => resource !== undefined), [incident]);
   const related = useMemo(() => INCIDENT_CASES.filter((c) => incident.relatedCaseIds?.includes(c.id)), [incident]);
-  const matches = useMemo(() => filterIncidentCases(INCIDENT_CASES, caseQuery), [caseQuery]);
+  const matches = useMemo<Array<(typeof INCIDENT_CASES)[number]>>(() => filterIncidentCases(INCIDENT_CASES, caseQuery), [caseQuery]);
 
   function openCase(id: string) {
     setSelectedCaseId(id);

@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Deterministic arXiv fixture</title><updated>2026-11-26T05:04:00Z</updated><entry><id>oai:arXiv.org:2611.00001v1</id><title>Testing retrieval with attributed evidence</title><updated>2026-11-26T05:04:00Z</updated><link href="https://arxiv.org/abs/2611.00001"/><summary>This abstract must never enter the metadata cache.</summary></entry></feed>

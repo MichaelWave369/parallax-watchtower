@@ -12,6 +12,7 @@ test("boots a visible dashboard and keeps it visible when every external source 
   });
   await page.goto("/parallax-watchtower/", { waitUntil: "domcontentloaded" });
   await expect(page.getByRole("heading", { name: /WATCHTOWER LIVE/i })).toBeVisible();
+  await page.getByRole("button", { name: "Live signals", exact: true }).click();
   await expect(page.getByRole("heading", { name: /Controls/i })).toBeVisible();
   await expect(page.getByRole("button", { name: "Lite", exact: true })).toBeVisible();
   await expect(page.locator('canvas[aria-label*="Lite Atlas"]')).toBeVisible();
@@ -28,6 +29,7 @@ test("switching between Lite Atlas and Globe never removes the dashboard shell",
   );
   await page.goto("/parallax-watchtower/", { waitUntil: "domcontentloaded" });
   await expect(page.getByRole("heading", { name: /WATCHTOWER LIVE/i })).toBeVisible();
+  await page.getByRole("button", { name: "Live signals", exact: true }).click();
   await page.getByRole("button", { name: "Globe", exact: true }).click();
   await expect(page.locator('canvas[aria-label*="Interactive orthographic globe"]')).toBeVisible();
   await page.getByRole("button", { name: "Lite", exact: true }).click();

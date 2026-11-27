@@ -35,7 +35,7 @@ jobs:
         with:
           node-version: 22
       - name: Install packages
-        run: npm install
+        run: npm ci
       - name: Validate adapters and math
         run: npm test
       - name: Read exactly one new CelesTrak snapshot per 3-hour cycle

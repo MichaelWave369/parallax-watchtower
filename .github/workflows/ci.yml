@@ -19,7 +19,9 @@ jobs:
         with:
           node-version: 22
       - name: Install
-        run: npm install
+        run: npm ci
+      - name: Typecheck active Vite application
+        run: npm run typecheck
       - name: Test adapters
         run: npm test
       - name: Build Vite

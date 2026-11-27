@@ -4,7 +4,7 @@ import { EXPLORE_CATEGORIES, EXPLORE_SOURCES, filterExploreSources } from "../li
 export function ExplorePanel() {
   const [category, setCategory] = useState("all");
   const [query, setQuery] = useState("");
-  const results = useMemo(() => filterExploreSources(EXPLORE_SOURCES, { category, query }), [category, query]);
+  const results = useMemo<Array<(typeof EXPLORE_SOURCES)[number]>>(() => filterExploreSources(EXPLORE_SOURCES, { category, query }), [category, query]);
   const categoryLabels = useMemo(() => Object.fromEntries(EXPLORE_CATEGORIES.map((entry) => [entry.id, entry.label])), []);
 
   return <section className="explore-panel" aria-label="Explore source catalog">

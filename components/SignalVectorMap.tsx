@@ -47,10 +47,8 @@ export function SignalVectorMap({ signals, selectedId, onSelect, onUnavailable, 
     if (!div) return;
     let disposed = false;
     let errors = 0;
-    if (!maplibregl.supported()) {
-      unavailableRef.current("WebGL is unavailable; showing the built-in Lite Atlas.");
-      return;
-    }
+    // MapLibre 6 has no supported() export. Construction below is the actual
+    // capability check; its failure restores Lite without a runtime TypeError.
     let map: MapLibreMap;
     try {
       map = new maplibregl.Map({

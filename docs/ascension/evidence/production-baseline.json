@@ -1,0 +1,13 @@
+{
+  "checkedAt": "2026-11-27T00:24:30Z",
+  "url": "https://michaelwave369.github.io/parallax-watchtower/",
+  "method": "Independent cloud browser UI observation",
+  "heading": "WATCHTOWER LIVE",
+  "liteAtlasVisible": true,
+  "globeControlVerified": true,
+  "returnedToLiteAtlas": true,
+  "newsCommandPresent": false,
+  "gdeltStatus": "down; old deployment reports a fallback placeholder",
+  "newCandidateDeployed": false,
+  "limits": "Read-only verification of existing main deployment. No HTTP status captured. Earlier local Chromium navigation returned ERR_EMPTY_RESPONSE; cloud browser succeeded."
+}

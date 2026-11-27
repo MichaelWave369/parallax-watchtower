@@ -1,0 +1,554 @@
+{
+  "schema": "phi.watchtower.changed-files.v1",
+  "baseCommit": "b44e36ec5a87d585e4b6799f9e81d74afea64136",
+  "note": "Content checksums of changed files, excluding this register itself; not a signature or trust certification. Git history is the canonical publication record.",
+  "count": 91,
+  "files": [
+    {
+      "path": ".github/workflows/ci.yml",
+      "change": "modified",
+      "bytes": 818,
+      "sha256": "860862f3ee4bc24b72f641c4a479833e3c1c5c0c90b376e6e3ad562a7763cdc3"
+    },
+    {
+      "path": ".github/workflows/discovery-leads.yml",
+      "change": "modified",
+      "bytes": 1727,
+      "sha256": "a73578d67f21aa53e81cd186c4f5763b947392c4f117a45e1fd6408028c0439a"
+    },
+    {
+      "path": ".github/workflows/news-cache.yml",
+      "change": "added",
+      "bytes": 2206,
+      "sha256": "61016d71d5c080c7cc966ec1e0a249cc9cc7f91a5f7253d25dba87d38047cd0a"
+    },
+    {
+      "path": ".github/workflows/orbital-catalog.yml",
+      "change": "modified",
+      "bytes": 1733,
+      "sha256": "b55b1ce99ef08c02bac73aaee717b7bc21790a115bbd7951b511b85f6e20d6cd"
+    },
+    {
+      "path": ".github/workflows/pages.yml",
+      "change": "modified",
+      "bytes": 959,
+      "sha256": "902611e81f03b5ebc35d448e157611a1954cc4b3257b9b7d22160e0c8ad04bca"
+    },
+    {
+      "path": ".gitignore",
+      "change": "modified",
+      "bytes": 154,
+      "sha256": "f3103b28b0181a7609c935da07cc132b43c2a4913705e529cfdf5117e411c027"
+    },
+    {
+      "path": "README.md",
+      "change": "modified",
+      "bytes": 11896,
+      "sha256": "b073b5d5a09614605f17f308d0ab390ca38371a47b83bb9cc60b90588301e288"
+    },
+    {
+      "path": "app/globals.css",
+      "change": "modified",
+      "bytes": 23512,
+      "sha256": "737296787e58ca7e31f1685aee536a5f92cd5c003d68e19197bd3b6316f23a40"
+    },
+    {
+      "path": "components/DiscoveryInbox.tsx",
+      "change": "modified",
+      "bytes": 15096,
+      "sha256": "583106ef1352b560f2d32fa6cefd6e48012d68caa68373b55120bb6c7dad85ad"
+    },
+    {
+      "path": "components/DiscoveryTrails.tsx",
+      "change": "modified",
+      "bytes": 7742,
+      "sha256": "79666a12a08cc14f122d2ecb5410cd8af1b703e38a1188f9a4e34dbf09567e5e"
+    },
+    {
+      "path": "components/ExplorePanel.tsx",
+      "change": "modified",
+      "bytes": 3395,
+      "sha256": "161ac70d02973e0caeea83bf28d9c99febaba975f059125a551fe5317f6bcd44"
+    },
+    {
+      "path": "components/GlobeCanvas.tsx",
+      "change": "modified",
+      "bytes": 6971,
+      "sha256": "52fe2c7655ce306e149d9cd9c8b9fad618b0ea94d65e8364df814a8c3f5c0fb5"
+    },
+    {
+      "path": "components/IncidentRoom.tsx",
+      "change": "modified",
+      "bytes": 8355,
+      "sha256": "68ad5151fba8f3214600c5d15051fdadc929486bfbbfcc5e122f48eae21d7ec1"
+    },
+    {
+      "path": "components/NewsCommandCenter.tsx",
+      "change": "added",
+      "bytes": 36741,
+      "sha256": "bb47a01f2a144e06182ad688db1b0d659a48c65a3afbc34024f9245fcf79576f"
+    },
+    {
+      "path": "components/SignalVectorMap.tsx",
+      "change": "modified",
+      "bytes": 7377,
+      "sha256": "60ae30452bf3198ad971541147dff498ff0d329fe624025d865274ddcbbfd8df"
+    },
+    {
+      "path": "components/WatchtowerDashboard.tsx",
+      "change": "modified",
+      "bytes": 48604,
+      "sha256": "54ce285a2706cd94b6fb97259f3ecc299afd009f770d917a78abb36467653b8c"
+    },
+    {
+      "path": "components/newsroom.css",
+      "change": "added",
+      "bytes": 19897,
+      "sha256": "f9c096ad26214a40a6c7490c75e64a6a8f5d015dc1ec9fa7782407e4b4423e3e"
+    },
+    {
+      "path": "docs/ascension-audit.md",
+      "change": "added",
+      "bytes": 13264,
+      "sha256": "4b995fee75f43843a23c76be0616caafa7e8727d82e6856a8ced3d338dd791f3"
+    },
+    {
+      "path": "docs/ascension/build-receipt.json",
+      "change": "added",
+      "bytes": 3456,
+      "sha256": "07f86a7d9fb3003fb39e9fe4ef91b04d50a27f220117fa4adf198994ad7c2036"
+    },
+    {
+      "path": "docs/ascension/controlling-spec.md",
+      "change": "added",
+      "bytes": 23234,
+      "sha256": "7a3e2a7c06ead9bef9421ab30de100afc93623a55fa3a28fad59a998a7a52724"
+    },
+    {
+      "path": "docs/ascension/evidence/actual-brief.json",
+      "change": "added",
+      "bytes": 32521,
+      "sha256": "91dfc7830cfed7a07bc3f45c86c885943755bc75cf354084f960198b8c607865"
+    },
+    {
+      "path": "docs/ascension/evidence/actual-brief.md",
+      "change": "added",
+      "bytes": 11036,
+      "sha256": "e3c364da2dae032b11d4f39c12afeb136b19ffee9dc6cf1ca75c1eeedb858e41"
+    },
+    {
+      "path": "docs/ascension/evidence/browser-measurements.json",
+      "change": "added",
+      "bytes": 619,
+      "sha256": "c08b98ab3b02d635c0fb5cbf23bb83d9f741f8be5016cce2ba7d441e2864e473"
+    },
+    {
+      "path": "docs/ascension/evidence/intelligence-benchmark.json",
+      "change": "added",
+      "bytes": 549,
+      "sha256": "52201cc424284b8a2406e4fcbce0d8f9446a0755f5c14d3bba970231d9feb8b2"
+    },
+    {
+      "path": "docs/ascension/evidence/local-checks/audit.txt",
+      "change": "added",
+      "bytes": 512,
+      "sha256": "fd5793f7401bb57c9a09b386642468f13c9cafe19165c8942aa80b70df7e0ebe"
+    },
+    {
+      "path": "docs/ascension/evidence/local-checks/browser.txt",
+      "change": "added",
+      "bytes": 5565,
+      "sha256": "fc62ad2ae825a21ae68a35ab6e0eec5a7eaac07d609273d8993d91a330fdd323"
+    },
+    {
+      "path": "docs/ascension/evidence/local-checks/build.txt",
+      "change": "added",
+      "bytes": 1288,
+      "sha256": "0a4d32dffbf7314f54e7f3a417eb75f9138850dcc9457aef91c485f08a12e354"
+    },
+    {
+      "path": "docs/ascension/evidence/local-checks/diff.txt",
+      "change": "added",
+      "bytes": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "docs/ascension/evidence/local-checks/install.txt",
+      "change": "added",
+      "bytes": 175,
+      "sha256": "e8129a2362e72f21054e0931fe67aa69cf6fc16874a93ff9cd137a0f6fc83779"
+    },
+    {
+      "path": "docs/ascension/evidence/local-checks/typecheck.txt",
+      "change": "added",
+      "bytes": 208,
+      "sha256": "df7386f01166e2a8e281b30aa078aed14b6ddea6d3242a9973b9da44e17d2fe7"
+    },
+    {
+      "path": "docs/ascension/evidence/local-checks/unit.txt",
+      "change": "added",
+      "bytes": 13738,
+      "sha256": "edd341f244259b7a4ddd5e43025e6f0658182657138b2d61300499f00147a2c4"
+    },
+    {
+      "path": "docs/ascension/evidence/local-validation.json",
+      "change": "added",
+      "bytes": 1606,
+      "sha256": "2e7b1b9057d3b969376c15b202ce5537cdacc1178566bac904f6a59231acec44"
+    },
+    {
+      "path": "docs/ascension/evidence/production-baseline.json",
+      "change": "added",
+      "bytes": 603,
+      "sha256": "bcfcc71165e554b5b5fb20d9105e0a61eb4f6895808645745b592a9c9e7950ac"
+    },
+    {
+      "path": "docs/ascension/independent-review.md",
+      "change": "added",
+      "bytes": 5631,
+      "sha256": "5cc34fcf2af6e7a29d8f587787611594ab80aaca88994bc2c6b6c1b86e1e967a"
+    },
+    {
+      "path": "docs/ascension/mission-report.md",
+      "change": "added",
+      "bytes": 16587,
+      "sha256": "132d01db687bc2f8ce1a48c687bbd05d680df9882cc707064414ceac60eb10cb"
+    },
+    {
+      "path": "docs/ascension/operations.md",
+      "change": "added",
+      "bytes": 6260,
+      "sha256": "bbf5e38d06f20aa2db8590e552cd7cbd6c697581e93debb1881f94f82190e89c"
+    },
+    {
+      "path": "docs/ascension/requirements-register.md",
+      "change": "added",
+      "bytes": 22893,
+      "sha256": "d84e1ad7f7cc49a60ef5c9791ad6552f3c43854a153827533c8886882ea55b8c"
+    },
+    {
+      "path": "docs/ascension/roadmap.md",
+      "change": "added",
+      "bytes": 11914,
+      "sha256": "f9b46ae3894594cdd7e72dc5c4fe07f03d129d66f6ae492b948c54d9f78a9ab0"
+    },
+    {
+      "path": "docs/ascension/screenshots/newsroom-desktop.png",
+      "change": "added",
+      "bytes": 203296,
+      "sha256": "32f4a8ed672a50a171ad03bf552b6fbe54e3da0afc19ae15b437f0d254ab26ce"
+    },
+    {
+      "path": "docs/ascension/screenshots/newsroom-light.png",
+      "change": "added",
+      "bytes": 202336,
+      "sha256": "53e738f974e64d8da9af9cb250477a0b22183e27d97baaf31c427fd8f4ae6289"
+    },
+    {
+      "path": "docs/ascension/screenshots/newsroom-mobile.png",
+      "change": "added",
+      "bytes": 62969,
+      "sha256": "0475812e33def740400efef23d6187443996f8f062a037921d4343348313b8ea"
+    },
+    {
+      "path": "docs/news-intelligence.md",
+      "change": "added",
+      "bytes": 9909,
+      "sha256": "43863ebc95275fa243d53732b906d1294b6850126094c58c32481bb31ba085f7"
+    },
+    {
+      "path": "docs/news-sources.md",
+      "change": "added",
+      "bytes": 12217,
+      "sha256": "711f0d058f45207c235a6adc4cdfbb88fd4fb71c5fa505b5647e2c42be7934a9"
+    },
+    {
+      "path": "e2e/newsroom-security.spec.mjs",
+      "change": "added",
+      "bytes": 11628,
+      "sha256": "55ce7db92fd6af20b7bbd08a213c6c8d3e96ccdcff9646d08d2e04fad63515ce"
+    },
+    {
+      "path": "e2e/newsroom.spec.mjs",
+      "change": "added",
+      "bytes": 14226,
+      "sha256": "d5ac198ec1fb78948d05549a4ed6e3b26aba8b42d871ac137a1368d16a853177"
+    },
+    {
+      "path": "e2e/startup.smoke.spec.mjs",
+      "change": "modified",
+      "bytes": 12448,
+      "sha256": "71a1a0a94405e21bbb5b165dad222b907f6f8d96877618bc88335e370334906c"
+    },
+    {
+      "path": "e2e/vectorMap-runtime.spec.mjs",
+      "change": "added",
+      "bytes": 1601,
+      "sha256": "4d0c10bf76a9e9e11300ee401ed8de06fb3bc9f412236d338eed867ecb5097e4"
+    },
+    {
+      "path": "index.html",
+      "change": "modified",
+      "bytes": 525,
+      "sha256": "6196ed8be1a8b5e344fe32d94764e928697ca5c5f1d1b86ae09c9e5a7af08525"
+    },
+    {
+      "path": "lib/browserRequests.mjs",
+      "change": "added",
+      "bytes": 2251,
+      "sha256": "6b8904f95a4a5ecfd53fd0c6f379e685f797d86ee528392841cc23a71f3d4d96"
+    },
+    {
+      "path": "lib/discoveryTrails.mjs",
+      "change": "modified",
+      "bytes": 5456,
+      "sha256": "2a9245415fb0b54820883c31db9b63f74ab9a7ca993b0f771b9b704c3b59f982"
+    },
+    {
+      "path": "lib/fieldPack.mjs",
+      "change": "modified",
+      "bytes": 5926,
+      "sha256": "c6d6e32e70d1ef710f21f695da11363bc06ac70f969ddf82800bae9379929337"
+    },
+    {
+      "path": "lib/legacyMarket.mjs",
+      "change": "added",
+      "bytes": 2181,
+      "sha256": "8224f8909696619fa14f4f1c51f15d10ac153a1c11daf6a1a3de6cf87f9a4e7b"
+    },
+    {
+      "path": "lib/legacyNews.mjs",
+      "change": "added",
+      "bytes": 4942,
+      "sha256": "b950b9663a58df0c6669312585e56d23c72b1c05158f021c5d3b130b02b320e0"
+    },
+    {
+      "path": "lib/newsAdapters.mjs",
+      "change": "added",
+      "bytes": 13959,
+      "sha256": "a0821df1b6f183423a06c9d856c5d9fe8891f4082168df8fcdc0b21555c3c693"
+    },
+    {
+      "path": "lib/newsContract.mjs",
+      "change": "added",
+      "bytes": 7872,
+      "sha256": "992c7de031d7b4fdfb44453b782bd1f218ea6b6b8180bc387d8c27536e77c9a9"
+    },
+    {
+      "path": "lib/newsIntelligence.mjs",
+      "change": "added",
+      "bytes": 19660,
+      "sha256": "daad64d438c31b53c869bee439a57ef7565ca07e3b47fa3b97030a472ea00b5e"
+    },
+    {
+      "path": "lib/newsSources.mjs",
+      "change": "added",
+      "bytes": 8106,
+      "sha256": "67fb04026de97523afeb498b673057e1c8e86c237336441634f3c3a8eb62cc03"
+    },
+    {
+      "path": "lib/newsWorkspace.mjs",
+      "change": "added",
+      "bytes": 9257,
+      "sha256": "77fd5161b9720098f2238b82dccb11f76f288b3446f5ed5a3210fcd45bd50df4"
+    },
+    {
+      "path": "lib/scheduledJson.mjs",
+      "change": "added",
+      "bytes": 1691,
+      "sha256": "766a756b81398917319289e23509c30daef1332e0b83651efc58512e67dd58fb"
+    },
+    {
+      "path": "lib/watchZoneValidation.mjs",
+      "change": "added",
+      "bytes": 1444,
+      "sha256": "2c3ecc38d0b38ce79236bebcaefce9cdfc48887465be111bbe3d3fe6552bb10e"
+    },
+    {
+      "path": "netlify.toml",
+      "change": "modified",
+      "bytes": 321,
+      "sha256": "f938ea97e7bd429074c504936c2e53d7bb33ed1f6917e315cc8939de3a9f5b93"
+    },
+    {
+      "path": "netlify/functions/gdelt-proxy.mjs",
+      "change": "modified",
+      "bytes": 4710,
+      "sha256": "930af81b2ae717eb931846bc0e9afe70e1a43fc5c8622e7faa70a2dd79169218"
+    },
+    {
+      "path": "package-lock.json",
+      "change": "added",
+      "bytes": 47153,
+      "sha256": "fbd319821ad2b78741ee00ef352d8ce40f9342185966b62b75e81638c9462953"
+    },
+    {
+      "path": "package.json",
+      "change": "modified",
+      "bytes": 911,
+      "sha256": "553e7f8cf38bbffb2e307ed400d85647ccf8df40d937a0c9b9218061f4c5013d"
+    },
+    {
+      "path": "public/data/news-health.v1.json",
+      "change": "added",
+      "bytes": 2441,
+      "sha256": "a5d055a4cab4228ce205dc9fb7b60cf7bb6b267e54566108ba67ef03e101db8b"
+    },
+    {
+      "path": "public/data/news-sources.v1.json",
+      "change": "added",
+      "bytes": 13357,
+      "sha256": "6191d53e78fbac6380fb00e39507b157c3d5f3259c7d8c51a1aaf700b766b4e5"
+    },
+    {
+      "path": "public/data/news.v1.json",
+      "change": "added",
+      "bytes": 121392,
+      "sha256": "8ee77f0c7902b3912e7d7ab04f7ee4e9142c30871853b51458c31390265dd804"
+    },
+    {
+      "path": "public/schemas/news-briefing.schema.json",
+      "change": "added",
+      "bytes": 7266,
+      "sha256": "9cd30bbdcc192c2b6bc94e663cd8681f4eff3894e98816aca4358f137868744d"
+    },
+    {
+      "path": "public/schemas/news-event.schema.json",
+      "change": "added",
+      "bytes": 3976,
+      "sha256": "c5578e9378eeae8ef24e528963c99c084aa2d461d38549656e30d623b77c60c5"
+    },
+    {
+      "path": "public/schemas/news-record.schema.json",
+      "change": "added",
+      "bytes": 3144,
+      "sha256": "7e831f0718852409666f393c3503d7c39ad3bb0c7ad421396e6d0b03856daa83"
+    },
+    {
+      "path": "public/schemas/news-snapshot.schema.json",
+      "change": "added",
+      "bytes": 2309,
+      "sha256": "fd414a8d8b7e434e3f6650975a25224c27d84f3487ff19a86941ef26afe721c6"
+    },
+    {
+      "path": "scripts/captureNewsroom.mjs",
+      "change": "added",
+      "bytes": 4692,
+      "sha256": "762fa92905f22497596a9657460da380292de40219582b520230dd4087cdf1dd"
+    },
+    {
+      "path": "scripts/refreshDiscoveryLeads.mjs",
+      "change": "modified",
+      "bytes": 2782,
+      "sha256": "8ff1cf76fbc0418feb9683ffb2d1f406d0add4a15df95e82a81b0f095ef5616a"
+    },
+    {
+      "path": "scripts/refreshNews.mjs",
+      "change": "added",
+      "bytes": 2089,
+      "sha256": "bc655e4b6c05206a8989b764ee68dc0dbcceed405d38becee65c70fa51e147ae"
+    },
+    {
+      "path": "scripts/refreshOrbitalCatalog.mjs",
+      "change": "modified",
+      "bytes": 2191,
+      "sha256": "a8c642db151e01f83ece7f50ad9ee1740022e3e44f5414d5acfdd3cdd89d5e8d"
+    },
+    {
+      "path": "src/vite-env.d.ts",
+      "change": "added",
+      "bytes": 38,
+      "sha256": "65996936fbb042915f7b74a200fcdde7e410f32a669b1ab9597cfaa4b0faddb5"
+    },
+    {
+      "path": "tests/browserRequests.test.mjs",
+      "change": "added",
+      "bytes": 2168,
+      "sha256": "84df1c9021e0abeea7f18e5774b6abad53a3ee8f1c0d922918ab90769e2dbcd5"
+    },
+    {
+      "path": "tests/fieldPack.test.mjs",
+      "change": "modified",
+      "bytes": 4946,
+      "sha256": "f9504401610a8bc2179747334f7f48a7ed69aaecce60ad18308023dcef5c07ae"
+    },
+    {
+      "path": "tests/fixtures/news/news.atom.xml",
+      "change": "added",
+      "bytes": 432,
+      "sha256": "5e5a1c3e37485da3bfe068ef899b7a2c55a4c3d60a3c90c4f27ac6de286192c5"
+    },
+    {
+      "path": "tests/fixtures/news/news.rss.xml",
+      "change": "added",
+      "bytes": 655,
+      "sha256": "383c2a720ae85538a01269933e3aca2ef3063c843a729c3027f7b012961e5a47"
+    },
+    {
+      "path": "tests/legacyMarket.test.mjs",
+      "change": "added",
+      "bytes": 3644,
+      "sha256": "644a7c7d08f45c3d911ea9d84712e72bc4a6f507e385aa7d0a3b3198285c9c1a"
+    },
+    {
+      "path": "tests/legacyNews.test.mjs",
+      "change": "added",
+      "bytes": 8899,
+      "sha256": "a2080fc458e0f4efa9c13cc55d4d6d0da664f7808566873bd88eb28405e17877"
+    },
+    {
+      "path": "tests/newsAdapters.test.mjs",
+      "change": "added",
+      "bytes": 14238,
+      "sha256": "e95e3fadaab90f6ffb62a7c8ed25cea337288dc46883ce1c6b9182f3235f3088"
+    },
+    {
+      "path": "tests/newsIntelligence.test.mjs",
+      "change": "added",
+      "bytes": 13448,
+      "sha256": "526bb10483f80423e77a8a6bcd1ac0a610d3937032d8163cd26b34ef712816d1"
+    },
+    {
+      "path": "tests/newsSchemas.test.mjs",
+      "change": "added",
+      "bytes": 1822,
+      "sha256": "fc139854fb410e510fe19a87f261d5b74c7cb0ea555c0b0bf74f56d5debd7b40"
+    },
+    {
+      "path": "tests/newsStorageRecovery.test.mjs",
+      "change": "added",
+      "bytes": 953,
+      "sha256": "561a027a934601cfdeeb494cc0936e4d1d3c104cc3602dcb104c4258378cd7b0"
+    },
+    {
+      "path": "tests/newsWorkspace.test.mjs",
+      "change": "added",
+      "bytes": 4924,
+      "sha256": "48cb0b49925827bd0979357611d1bb5205ad44342548cb1e17d701fb1fed38d7"
+    },
+    {
+      "path": "tests/scheduledJson.test.mjs",
+      "change": "added",
+      "bytes": 6338,
+      "sha256": "218821fe30e5ff3bc6a82bc660962d60dfcfc6f37533fc8b610021480e757c13"
+    },
+    {
+      "path": "tests/watchZoneValidation.test.mjs",
+      "change": "added",
+      "bytes": 1549,
+      "sha256": "78935d4a78ee11528495a4a98f401e309958d396a041bb963502715ce68cb07b"
+    },
+    {
+      "path": "tsconfig.json",
+      "change": "modified",
+      "bytes": 585,
+      "sha256": "cd3f18d6cf02e8a7bcc7718dc1c25c8e22b597ea4cf9696ba2dab3eeaef2bea1"
+    },
+    {
+      "path": "vite.config.ts",
+      "change": "modified",
+      "bytes": 722,
+      "sha256": "ec81d9eff9bc8dd7cca2b591c40342e0c8f90909bc97d6bd4b69f88dc56cdc4a"
+    }
+  ]
+}

@@ -1,0 +1,159 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://michaelwave369.github.io/parallax-watchtower/schemas/news-record.schema.json",
+  "title": "Watchtower public news metadata record v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "sourceId",
+    "publisher",
+    "originGroup",
+    "title",
+    "url",
+    "canonicalUrl",
+    "summary",
+    "language",
+    "topics",
+    "region",
+    "publishedAt",
+    "eventAt",
+    "modifiedAt",
+    "retrievedAt",
+    "kind",
+    "evidenceType",
+    "fingerprint",
+    "privacyClass",
+    "demo"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,159}$"
+    },
+    "sourceId": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,159}$"
+    },
+    "publisher": {
+      "type": "string",
+      "maxLength": 120
+    },
+    "originGroup": {
+      "type": "string",
+      "maxLength": 120
+    },
+    "title": {
+      "type": "string",
+      "maxLength": 280
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://",
+      "maxLength": 2048
+    },
+    "canonicalUrl": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://",
+      "maxLength": 2048
+    },
+    "summary": {
+      "type": "string",
+      "maxLength": 360
+    },
+    "language": {
+      "type": "string",
+      "pattern": "^[a-z]{2,3}(?:-[a-zA-Z]{2,4})?$"
+    },
+    "topics": {
+      "type": "array",
+      "uniqueItems": true,
+      "maxItems": 12,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_-]{0,47}$"
+      }
+    },
+    "region": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "label",
+        "precision"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_-]{1,24}$"
+        },
+        "label": {
+          "type": "string",
+          "maxLength": 120
+        },
+        "precision": {
+          "enum": [
+            "global",
+            "country",
+            "region",
+            "point"
+          ]
+        }
+      }
+    },
+    "publishedAt": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "eventAt": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "modifiedAt": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "retrievedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "kind": {
+      "enum": [
+        "article",
+        "official_statement",
+        "public_data",
+        "research"
+      ]
+    },
+    "evidenceType": {
+      "enum": [
+        "official_statement",
+        "primary_documentation",
+        "independent_reporting",
+        "secondary_reporting",
+        "uncorroborated_claim"
+      ]
+    },
+    "fingerprint": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{8}$"
+    },
+    "privacyClass": {
+      "const": "public"
+    },
+    "demo": {
+      "const": false
+    }
+  }
+}

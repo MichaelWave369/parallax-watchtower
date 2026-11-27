@@ -84,6 +84,9 @@ h1 { margin: 2px 0 0; font-size: clamp(2rem, 5vw, 4rem); line-height: 0.9; lette
 
 /* Full-bleed vector map. Scope canvas defaults so MapLibre can manage WebGL sizing. */
 .vector-map { position: absolute; inset: 0; min-height: 100%; width: 100%; }
+/* MapLibre's lazy CSS sets position:relative. Keep the canvas and controls inside
+   their actual atlas viewport regardless of stylesheet arrival order. */
+.canvas-wrap > .vector-map.maplibregl-map { position: absolute; inset: 0; height: 100%; min-height: 0; z-index: 1; }
 .vector-map .maplibregl-control-container { z-index: 3; }
 .map-attribution {
   position: absolute; bottom: 9px; right: 9px; max-width: calc(100% - 18px);
