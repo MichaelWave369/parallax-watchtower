@@ -1,0 +1,180 @@
+{
+  "checkedAt": "2026-11-27T01:31:37.443Z",
+  "console": [
+    {
+      "type": "error",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "type": "error",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "type": "error",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "type": "error",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "type": "error",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "type": "error",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "type": "error",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "type": "error",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "type": "error",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "type": "error",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "type": "error",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "type": "error",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "type": "error",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    }
+  ],
+  "requests": [
+    {
+      "url": "http://127.0.0.1:4173/parallax-watchtower/assets/maplibre-gl-worker-_7o9IRfC.js",
+      "status": 200,
+      "type": "script"
+    },
+    {
+      "url": "http://127.0.0.1:4173/parallax-watchtower/assets/maplibre-gl-worker-_7o9IRfC.js",
+      "status": 200,
+      "type": "script"
+    },
+    {
+      "url": "https://tiles.openfreemap.org/styles/liberty",
+      "status": 200,
+      "type": "fetch"
+    },
+    {
+      "url": "https://tiles.openfreemap.org/natural_earth/ne2sr/1/1/0.png",
+      "error": "net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "url": "https://tiles.openfreemap.org/natural_earth/ne2sr/1/0/0.png",
+      "error": "net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "url": "https://tiles.openfreemap.org/natural_earth/ne2sr/1/0/0.png",
+      "error": "net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "url": "https://tiles.openfreemap.org/natural_earth/ne2sr/1/1/0.png",
+      "error": "net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "url": "https://tiles.openfreemap.org/natural_earth/ne2sr/1/1/1.png",
+      "error": "net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "url": "https://tiles.openfreemap.org/natural_earth/ne2sr/1/0/1.png",
+      "error": "net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "url": "https://tiles.openfreemap.org/natural_earth/ne2sr/1/0/1.png",
+      "error": "net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "url": "https://tiles.openfreemap.org/natural_earth/ne2sr/1/1/1.png",
+      "error": "net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "url": "https://tiles.openfreemap.org/sprites/ofm_f384/ofm.json",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "url": "https://tiles.openfreemap.org/sprites/ofm_f384/ofm.png",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "url": "https://tiles.openfreemap.org/backup_planet",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "url": "http://127.0.0.1:4173/parallax-watchtower/assets/maplibre-gl-worker-_7o9IRfC.js",
+      "status": 200,
+      "type": "script"
+    },
+    {
+      "url": "http://127.0.0.1:4173/parallax-watchtower/assets/maplibre-gl-worker-_7o9IRfC.js",
+      "status": 200,
+      "type": "script"
+    }
+  ],
+  "workers": [
+    "http://127.0.0.1:4173/parallax-watchtower/assets/maplibre-gl-worker-_7o9IRfC.js",
+    "http://127.0.0.1:4173/parallax-watchtower/assets/maplibre-gl-worker-_7o9IRfC.js",
+    "http://127.0.0.1:4173/parallax-watchtower/assets/maplibre-gl-worker-_7o9IRfC.js",
+    "http://127.0.0.1:4173/parallax-watchtower/assets/maplibre-gl-worker-_7o9IRfC.js"
+  ],
+  "visuals": {
+    "vector": {
+      "width": 914,
+      "height": 551,
+      "colors": 388,
+      "dominantFraction": 0.6568681569614824,
+      "landPixels": 70568,
+      "oceanPixels": 329336,
+      "signalPixels": 45545
+    },
+    "offline": {
+      "width": 914,
+      "height": 551,
+      "colors": 392,
+      "dominantFraction": 0.6382805084846728,
+      "landPixels": 71692,
+      "oceanPixels": 320109,
+      "signalPixels": 45529
+    },
+    "globe": {
+      "width": 914,
+      "height": 551,
+      "colors": 493,
+      "dominantFraction": 0.6495113320916416,
+      "landPixels": 24649,
+      "oceanPixels": 43704,
+      "signalPixels": 51149
+    }
+  },
+  "environment": {
+    "browser": "141.0.7390.37",
+    "tlsValidation": "enabled",
+    "geography": "real external style/tiles; signal records are deterministic test fixtures",
+    "gpu": {
+      "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    }
+  },
+  "state": {
+    "mapState": "ready",
+    "mapProvider": "bundled",
+    "mapRenderer": "vector",
+    "mapView": "0.00000,14.00000,-0.05445",
+    "health": "ready · Active: bundled Natural Earth vector. Bundled Natural Earth vector geography rendered.",
+    "features": "360"
+  }
+}

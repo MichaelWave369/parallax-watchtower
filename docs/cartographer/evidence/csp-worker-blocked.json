@@ -1,0 +1,37 @@
+{
+  "violations": [
+    {
+      "directive": "worker-src",
+      "blocked": "http://127.0.0.1:4173/parallax-watchtower/assets/maplibre-gl-worker-_7o9IRfC.js"
+    },
+    {
+      "directive": "worker-src",
+      "blocked": "http://127.0.0.1:4173/parallax-watchtower/assets/maplibre-gl-worker-_7o9IRfC.js"
+    },
+    {
+      "directive": "worker-src",
+      "blocked": "http://127.0.0.1:4173/parallax-watchtower/assets/maplibre-gl-worker-_7o9IRfC.js"
+    },
+    {
+      "directive": "worker-src",
+      "blocked": "http://127.0.0.1:4173/parallax-watchtower/assets/maplibre-gl-worker-_7o9IRfC.js"
+    }
+  ],
+  "consoleMessages": [
+    "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+    "Refused to create a worker from 'http://127.0.0.1:4173/parallax-watchtower/assets/maplibre-gl-worker-_7o9IRfC.js' because it violates the following Content Security Policy directive: \"worker-src 'none'\".\n",
+    "Refused to create a worker from 'http://127.0.0.1:4173/parallax-watchtower/assets/maplibre-gl-worker-_7o9IRfC.js' because it violates the following Content Security Policy directive: \"worker-src 'none'\".\n",
+    "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+    "Error: Worker failed to load. Check that the worker URL is correct.\n    at Worker.<anonymous> (http://127.0.0.1:4173/parallax-watchtower/assets/SignalVectorMap-Pb5qYa_u.js:1:185538)",
+    "Error: Worker failed to load. Check that the worker URL is correct.\n    at Worker.<anonymous> (http://127.0.0.1:4173/parallax-watchtower/assets/SignalVectorMap-Pb5qYa_u.js:1:185538)",
+    "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+    "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+    "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+    "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+    "Refused to create a worker from 'http://127.0.0.1:4173/parallax-watchtower/assets/maplibre-gl-worker-_7o9IRfC.js' because it violates the following Content Security Policy directive: \"worker-src 'none'\".\n",
+    "Refused to create a worker from 'http://127.0.0.1:4173/parallax-watchtower/assets/maplibre-gl-worker-_7o9IRfC.js' because it violates the following Content Security Policy directive: \"worker-src 'none'\".\n",
+    "Error: Worker failed to load. Check that the worker URL is correct.\n    at Worker.<anonymous> (http://127.0.0.1:4173/parallax-watchtower/assets/SignalVectorMap-Pb5qYa_u.js:1:185538)",
+    "Error: Worker failed to load. Check that the worker URL is correct.\n    at Worker.<anonymous> (http://127.0.0.1:4173/parallax-watchtower/assets/SignalVectorMap-Pb5qYa_u.js:1:185538)"
+  ],
+  "diagnostics": "Map diagnostics (2)openfreemap, attempt 1: openfreemap: Worker failed to load. Check that the worker URL is correct.bundled, attempt 2: bundled: Worker failed to load. Check that the worker URL is correct."
+}

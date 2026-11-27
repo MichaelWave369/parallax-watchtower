@@ -30,3 +30,10 @@ jobs:
         run: npx playwright install --with-deps chromium
       - name: Smoke test published-path page and map recovery
         run: npm run test:browser
+      - name: Preserve geographic rendering evidence and failure traces
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cartographer-browser-evidence
+          path: test-results/
+          retention-days: 7

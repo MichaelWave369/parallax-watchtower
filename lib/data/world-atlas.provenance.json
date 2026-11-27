@@ -1,0 +1,17 @@
+{
+  "dataset": "Natural Earth 1:110m Admin-0 countries",
+  "sourceUrl": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/ca96624a56bd078437bca8184e78163e5039ad19/geojson/ne_110m_admin_0_countries.geojson",
+  "sourceCommit": "ca96624a56bd078437bca8184e78163e5039ad19",
+  "license": "Public domain",
+  "terms": "https://www.naturalearthdata.com/about/terms-of-use/",
+  "retrievedAt": "2026-11-27T01:05:11.945Z",
+  "features": 177,
+  "bytes": 222597,
+  "sha256": "9d39e64688edfde0fd63a9ea596f34355fd6c8f86cf2f5ecc9a240ddaab77bcf",
+  "transformations": [
+    "Retained reference names/labels and polygon geometry only",
+    "Coordinates rounded to4 decimal places",
+    "Ring orientation normalized for d3 spherical rendering"
+  ],
+  "limitations": "Generalized de facto boundaries, not street-level or legal boundary data. Country labels are basemap reference positions, not event locations."
+}

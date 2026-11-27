@@ -1,0 +1,41 @@
+{
+  "checkedAt": "2026-11-27T01:04:37.873Z",
+  "method": "Live HTTPS checks with platform CA validation enabled",
+  "rows": [
+    {
+      "url": "https://tiles.openfreemap.org/styles/dark",
+      "status": 200,
+      "contentType": "application/json",
+      "cors": "*",
+      "bytes": 20967,
+      "style": {
+        "version": 8,
+        "sources": {
+          "ne2_shaded": {
+            "maxzoom": 6,
+            "tileSize": 256,
+            "tiles": [
+              "https://tiles.openfreemap.org/natural_earth/ne2sr/{z}/{x}/{y}.png"
+            ],
+            "type": "raster"
+          },
+          "openmaptiles": {
+            "type": "vector",
+            "url": "https://tiles.openfreemap.org/backup_planet"
+          }
+        },
+        "glyphs": "https://tiles.openfreemap.org/fonts/{fontstack}/{range}.pbf",
+        "sprite": "https://tiles.openfreemap.org/sprites/ofm_f384/ofm",
+        "layers": 47
+      }
+    },
+    {
+      "url": "https://michaelwave369.github.io/parallax-watchtower/assets/maplibre-gl-worker.mjs?v=6.18.0",
+      "status": 404,
+      "contentType": "text/html; charset=utf-8",
+      "cors": "*",
+      "bytes": 9379,
+      "sample": "<!DOCTYPE html>\n<html>\n  <head>\n    <meta http-equiv=\"Content-type\" content=\"text/html; charset=utf-8\">\n    <meta http-equiv=\"Content-Security-Policy\" content=\"default-src 'none'; "
+    }
+  ]
+}
