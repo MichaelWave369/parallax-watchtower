@@ -1,0 +1,197 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://michaelwave369.github.io/parallax-watchtower/schemas/news-event.schema.json",
+  "title": "Watchtower reviewable event suggestion v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "id",
+    "title",
+    "description",
+    "articles",
+    "firstReportedAt",
+    "lastUpdatedAt",
+    "eventAt",
+    "location",
+    "originGroups",
+    "sourceCount",
+    "reportCount",
+    "independentCorroboration",
+    "possibleSyndication",
+    "evidenceState",
+    "unknowns",
+    "timeline",
+    "grouping"
+  ],
+  "properties": {
+    "schema": {
+      "const": "phi.watchtower.event.v1"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^event-[a-f0-9]{8}$"
+    },
+    "title": {
+      "type": "string",
+      "maxLength": 280
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 500
+    },
+    "articles": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 5000,
+      "items": {
+        "$ref": "news-record.schema.json"
+      }
+    },
+    "firstReportedAt": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "lastUpdatedAt": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "eventAt": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "location": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "label",
+        "precision"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_-]{1,24}$"
+        },
+        "label": {
+          "type": "string",
+          "maxLength": 120
+        },
+        "precision": {
+          "enum": [
+            "global",
+            "country",
+            "region",
+            "point"
+          ]
+        }
+      }
+    },
+    "originGroups": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "maxLength": 120
+      }
+    },
+    "sourceCount": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "reportCount": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "independentCorroboration": {
+      "const": "not_assessed"
+    },
+    "possibleSyndication": {
+      "type": "boolean"
+    },
+    "evidenceState": {
+      "enum": [
+        "single_origin",
+        "multiple_origins_unreviewed"
+      ]
+    },
+    "unknowns": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 500
+      }
+    },
+    "timeline": {
+      "type": "array",
+      "maxItems": 20000,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "type",
+          "at",
+          "recordId",
+          "sourceUrl"
+        ],
+        "properties": {
+          "type": {
+            "enum": [
+              "event",
+              "publication",
+              "modification",
+              "retrieval"
+            ]
+          },
+          "at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "recordId": {
+            "type": "string",
+            "maxLength": 160
+          },
+          "sourceUrl": {
+            "type": "string",
+            "format": "uri",
+            "pattern": "^https://",
+            "maxLength": 2048
+          }
+        }
+      }
+    },
+    "grouping": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "method",
+        "reason",
+        "reviewable"
+      ],
+      "properties": {
+        "method": {
+          "enum": [
+            "conservative_headline_time_topic_region",
+            "single_report"
+          ]
+        },
+        "reason": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "reviewable": {
+          "const": true
+        }
+      }
+    }
+  }
+}

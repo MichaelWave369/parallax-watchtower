@@ -1,0 +1,3504 @@
+{
+  "schema": "phi.watchtower.news.v1",
+  "generatedAt": "2026-11-27T00:09:46.540Z",
+  "sources": [
+    {
+      "id": "nasa-news",
+      "status": "ok",
+      "lastSuccessAt": "2026-11-27T00:09:46.540Z",
+      "lastFailureAt": null,
+      "attemptedAt": "2026-11-27T00:09:46.540Z",
+      "recordCount": 10,
+      "message": "Metadata retrieved; underlying claims are not automatically verified.",
+      "consecutiveFailures": 0,
+      "nextAttemptAt": "2026-11-27T06:09:46.540Z"
+    },
+    {
+      "id": "un-geneva",
+      "status": "ok",
+      "lastSuccessAt": "2026-11-27T00:09:46.540Z",
+      "lastFailureAt": null,
+      "attemptedAt": "2026-11-27T00:09:46.540Z",
+      "recordCount": 10,
+      "message": "Metadata retrieved; underlying claims are not automatically verified.",
+      "consecutiveFailures": 0,
+      "nextAttemptAt": "2026-11-27T06:09:46.540Z"
+    },
+    {
+      "id": "ecb-press",
+      "status": "ok",
+      "lastSuccessAt": "2026-11-27T00:09:46.540Z",
+      "lastFailureAt": null,
+      "attemptedAt": "2026-11-27T00:09:46.540Z",
+      "recordCount": 15,
+      "message": "Metadata retrieved; underlying claims are not automatically verified.",
+      "consecutiveFailures": 0,
+      "nextAttemptAt": "2026-11-27T06:09:46.540Z"
+    },
+    {
+      "id": "arxiv-ai",
+      "status": "ok",
+      "lastSuccessAt": "2026-11-27T00:09:46.540Z",
+      "lastFailureAt": null,
+      "attemptedAt": "2026-11-27T00:09:46.540Z",
+      "recordCount": 30,
+      "message": "Metadata retrieved; underlying claims are not automatically verified.",
+      "consecutiveFailures": 0,
+      "nextAttemptAt": "2026-11-27T06:09:46.540Z"
+    },
+    {
+      "id": "federal-register",
+      "status": "ok",
+      "lastSuccessAt": "2026-11-27T00:09:46.540Z",
+      "lastFailureAt": null,
+      "attemptedAt": "2026-11-27T00:09:46.540Z",
+      "recordCount": 20,
+      "message": "Metadata retrieved; underlying claims are not automatically verified.",
+      "consecutiveFailures": 0,
+      "nextAttemptAt": "2026-11-27T06:09:46.540Z"
+    },
+    {
+      "id": "usgs-earthquakes",
+      "status": "ok",
+      "lastSuccessAt": "2026-11-27T00:09:46.540Z",
+      "lastFailureAt": null,
+      "attemptedAt": "2026-11-27T00:09:46.540Z",
+      "recordCount": 30,
+      "message": "Metadata retrieved; underlying claims are not automatically verified.",
+      "consecutiveFailures": 0,
+      "nextAttemptAt": "2026-11-27T06:09:46.540Z"
+    }
+  ],
+  "records": [
+    {
+      "id": "nasa-news-aa745b97",
+      "sourceId": "nasa-news",
+      "publisher": "NASA",
+      "originGroup": "nasa",
+      "title": "APOD: 2026 November 26 – Eye in the Sky: The Milky Way over Lençóis",
+      "url": "https://science.nasa.gov/image-article/apod-2026-november-26-eye-in-the-sky-the-milky-way-over-lencois/",
+      "canonicalUrl": "https://science.nasa.gov/image-article/apod-2026-november-26-eye-in-the-sky-the-milky-way-over-lencois/",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "science",
+        "space",
+        "technology"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-26T05:05:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "official_statement",
+      "fingerprint": "6d6d7b3a",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "nasa-news-16d65a7e",
+      "sourceId": "nasa-news",
+      "publisher": "NASA",
+      "originGroup": "nasa",
+      "title": "Seeking Refuge on Resolution Island",
+      "url": "https://science.nasa.gov/earth/earth-observatory/seeking-refuge-on-resolution-island/",
+      "canonicalUrl": "https://science.nasa.gov/earth/earth-observatory/seeking-refuge-on-resolution-island/",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "science",
+        "space",
+        "technology"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-26T05:01:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "official_statement",
+      "fingerprint": "bf8bb63d",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "nasa-news-619ca262",
+      "sourceId": "nasa-news",
+      "publisher": "NASA",
+      "originGroup": "nasa",
+      "title": "NASA Enhances Supplier Program, Announces Mentor-Protégé Agreement",
+      "url": "https://www.nasa.gov/organizations/osbp/nasa-enhances-supplier-program-announces-mentor-protege-agreement/",
+      "canonicalUrl": "https://www.nasa.gov/organizations/osbp/nasa-enhances-supplier-program-announces-mentor-protege-agreement/",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "science",
+        "space",
+        "technology"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-25T19:06:56.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "official_statement",
+      "fingerprint": "aab67ab6",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "nasa-news-13abea97",
+      "sourceId": "nasa-news",
+      "publisher": "NASA",
+      "originGroup": "nasa",
+      "title": "NASA Eyes Crop Candidates for Future Menus",
+      "url": "https://science.nasa.gov/directorates/smd/nasa-eyes-crop-candidates-for-future-menus/",
+      "canonicalUrl": "https://science.nasa.gov/directorates/smd/nasa-eyes-crop-candidates-for-future-menus/",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "science",
+        "space",
+        "technology"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-25T17:53:42.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "official_statement",
+      "fingerprint": "cbb51f64",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "nasa-news-9d5b3f77",
+      "sourceId": "nasa-news",
+      "publisher": "NASA",
+      "originGroup": "nasa",
+      "title": "Childhood, Career Come Full Circle for Budget Analyst at NASA Goddard",
+      "url": "https://www.nasa.gov/centers-and-facilities/goddard/childhood-career-come-full-circle-for-budget-analyst-at-nasa-goddard/",
+      "canonicalUrl": "https://www.nasa.gov/centers-and-facilities/goddard/childhood-career-come-full-circle-for-budget-analyst-at-nasa-goddard/",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "science",
+        "space",
+        "technology"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-25T16:47:29.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "official_statement",
+      "fingerprint": "202d2749",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "nasa-news-d68246ad",
+      "sourceId": "nasa-news",
+      "publisher": "NASA",
+      "originGroup": "nasa",
+      "title": "Eye of the Sahara",
+      "url": "https://www.nasa.gov/image-article/eye-of-the-sahara/",
+      "canonicalUrl": "https://www.nasa.gov/image-article/eye-of-the-sahara/",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "science",
+        "space",
+        "technology"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-25T16:21:04.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "official_statement",
+      "fingerprint": "853d9a12",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "nasa-news-c0bd4984",
+      "sourceId": "nasa-news",
+      "publisher": "NASA",
+      "originGroup": "nasa",
+      "title": "NASA’s Hubble Views Ocean of Stars in Groundwork for Roman",
+      "url": "https://science.nasa.gov/missions/hubble/nasas-hubble-views-ocean-of-stars-in-groundwork-for-roman/",
+      "canonicalUrl": "https://science.nasa.gov/missions/hubble/nasas-hubble-views-ocean-of-stars-in-groundwork-for-roman/",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "science",
+        "space",
+        "technology"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-25T14:56:54.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "official_statement",
+      "fingerprint": "3fbd270c",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "nasa-news-548c8917",
+      "sourceId": "nasa-news",
+      "publisher": "NASA",
+      "originGroup": "nasa",
+      "title": "APOD: 2026 November 25 – SPHEREx Seeing Through Dust",
+      "url": "https://science.nasa.gov/image-article/apod-2026-november-25-spherex-seeing-through-dust/",
+      "canonicalUrl": "https://science.nasa.gov/image-article/apod-2026-november-25-spherex-seeing-through-dust/",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "science",
+        "space",
+        "technology"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-25T05:05:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "official_statement",
+      "fingerprint": "f70fe7a3",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "nasa-news-8860c291",
+      "sourceId": "nasa-news",
+      "publisher": "NASA",
+      "originGroup": "nasa",
+      "title": "Georgia’s Pecan Belt",
+      "url": "https://science.nasa.gov/earth/earth-observatory/georgias-pecan-belt/",
+      "canonicalUrl": "https://science.nasa.gov/earth/earth-observatory/georgias-pecan-belt/",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "science",
+        "space",
+        "technology"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-25T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "official_statement",
+      "fingerprint": "2fc06e96",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "nasa-news-2396225d",
+      "sourceId": "nasa-news",
+      "publisher": "NASA",
+      "originGroup": "nasa",
+      "title": "NASA+ Content Coming to Big Screen at Greenbelt, Maryland Cinema",
+      "url": "https://www.nasa.gov/nasa/nasa-content-coming-to-big-screen-at-greenbelt-maryland-cinema/",
+      "canonicalUrl": "https://www.nasa.gov/nasa/nasa-content-coming-to-big-screen-at-greenbelt-maryland-cinema/",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "science",
+        "space",
+        "technology"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-24T21:14:36.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "official_statement",
+      "fingerprint": "9a7e122d",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "un-geneva-49a971d6",
+      "sourceId": "un-geneva",
+      "publisher": "United Nations Geneva",
+      "originGroup": "un-geneva",
+      "title": "Experts of the Committee against Torture Commend Norway’s Ban on Conversion Therapy, Raise Questions on the Identification of Torture Survivors in the Asylum Process and the Use of Mechanical Restraints in Psychiatric Institutions",
+      "url": "https://www.ungeneva.org/en/news-media/meeting-summary/2026/11/examen-de-la-norvege-au-comite-contre-la-torture-les-experts-du",
+      "canonicalUrl": "https://www.ungeneva.org/en/news-media/meeting-summary/2026/11/examen-de-la-norvege-au-comite-contre-la-torture-les-experts-du",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "world",
+        "policy",
+        "humanitarian"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": null,
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "official_statement",
+      "fingerprint": "7a2416c1",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "un-geneva-87678294",
+      "sourceId": "un-geneva",
+      "publisher": "United Nations Geneva",
+      "originGroup": "un-geneva",
+      "title": "In Dialogue with the Republic of Moldova, Experts of the Committee against Torture Praise Protection Measures for Ukrainian Refugees, Ask about the Accommodation of Asylum Seekers and Prison Overcrowding",
+      "url": "https://www.ungeneva.org/en/news-media/meeting-summary/2026/11/examen-de-la-republique-de-moldova-au-comite-contre-la-torture",
+      "canonicalUrl": "https://www.ungeneva.org/en/news-media/meeting-summary/2026/11/examen-de-la-republique-de-moldova-au-comite-contre-la-torture",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "world",
+        "policy",
+        "humanitarian"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": null,
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "official_statement",
+      "fingerprint": "e59b0c93",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "un-geneva-15fa47f2",
+      "sourceId": "un-geneva",
+      "publisher": "United Nations Geneva",
+      "originGroup": "un-geneva",
+      "title": "Committee against Torture Opens Eighty-Fifth Session in Geneva",
+      "url": "https://www.ungeneva.org/en/news-media/meeting-summary/2026/11/le-comite-contre-la-torture-ouvre-les-travaux-de-sa-85e-session",
+      "canonicalUrl": "https://www.ungeneva.org/en/news-media/meeting-summary/2026/11/le-comite-contre-la-torture-ouvre-les-travaux-de-sa-85e-session",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "world",
+        "policy",
+        "humanitarian"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": null,
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "official_statement",
+      "fingerprint": "083a50eb",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "un-geneva-4d86b99f",
+      "sourceId": "un-geneva",
+      "publisher": "United Nations Geneva",
+      "originGroup": "un-geneva",
+      "title": "New Permanent Representative of Israel Presents Credentials to the Director-General of the United Nations Office at Geneva",
+      "url": "https://www.ungeneva.org/en/news-media/presentation-of-credentials/2026/11/new-permanent-representative-israel-presents",
+      "canonicalUrl": "https://www.ungeneva.org/en/news-media/presentation-of-credentials/2026/11/new-permanent-representative-israel-presents",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "world",
+        "policy",
+        "humanitarian"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": null,
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "official_statement",
+      "fingerprint": "35b36683",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "un-geneva-2dbb89e7",
+      "sourceId": "un-geneva",
+      "publisher": "United Nations Geneva",
+      "originGroup": "un-geneva",
+      "title": "Committee on Economic, Social and Cultural Rights Concludes Eightieth Session after Adopting Concluding Observations on Reports of Austria, Eswatini, Mexico and Pakistan",
+      "url": "https://www.ungeneva.org/en/news-media/meeting-summary/2026/11/le-comite-des-droits-economiques-sociaux-et-culturels-acheve-sa",
+      "canonicalUrl": "https://www.ungeneva.org/en/news-media/meeting-summary/2026/11/le-comite-des-droits-economiques-sociaux-et-culturels-acheve-sa",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "world",
+        "policy",
+        "humanitarian"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": null,
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "official_statement",
+      "fingerprint": "7eecf980",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "un-geneva-91cd16e0",
+      "sourceId": "un-geneva",
+      "publisher": "United Nations Geneva",
+      "originGroup": "un-geneva",
+      "title": "New Permanent Representative of Malawi Presents Credentials to the Director-General of the United Nations Office at Geneva",
+      "url": "https://www.ungeneva.org/en/news-media/presentation-of-credentials/2026/11/new-permanent-representative-malawi-presents",
+      "canonicalUrl": "https://www.ungeneva.org/en/news-media/presentation-of-credentials/2026/11/new-permanent-representative-malawi-presents",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "world",
+        "policy",
+        "humanitarian"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": null,
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "official_statement",
+      "fingerprint": "812508be",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "un-geneva-7c6bc8c2",
+      "sourceId": "un-geneva",
+      "publisher": "United Nations Geneva",
+      "originGroup": "un-geneva",
+      "title": "Le nouveau Représentant permanent d’El Salvador présente ses lettres de créance",
+      "url": "https://www.ungeneva.org/fr/news-media/presentation-of-credentials/2026/11/le-nouveau-representant-permanent-del-salvador",
+      "canonicalUrl": "https://www.ungeneva.org/fr/news-media/presentation-of-credentials/2026/11/le-nouveau-representant-permanent-del-salvador",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "world",
+        "policy",
+        "humanitarian"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": null,
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "official_statement",
+      "fingerprint": "98252647",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "un-geneva-346b81b4",
+      "sourceId": "un-geneva",
+      "publisher": "United Nations Geneva",
+      "originGroup": "un-geneva",
+      "title": "Seventh Review Conference of the High Contracting Parties to the Convention on Certain Conventional Weapons (CCW)",
+      "url": "https://www.ungeneva.org/en/news-media/press-release/2026/11/seventh-review-conference-high-contracting-parties-convention",
+      "canonicalUrl": "https://www.ungeneva.org/en/news-media/press-release/2026/11/seventh-review-conference-high-contracting-parties-convention",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "world",
+        "policy",
+        "humanitarian"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": null,
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "official_statement",
+      "fingerprint": "1d7f2d6c",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "un-geneva-a7a259e9",
+      "sourceId": "un-geneva",
+      "publisher": "United Nations Geneva",
+      "originGroup": "un-geneva",
+      "title": "Human Rights Committee and Committee on Economic, Social and Cultural Rights Celebrate Sixtieth Anniversaries of their Covenants",
+      "url": "https://www.ungeneva.org/en/news-media/meeting-summary/2026/11/le-comite-des-droits-economiques-sociaux-et-culturels-et-le",
+      "canonicalUrl": "https://www.ungeneva.org/en/news-media/meeting-summary/2026/11/le-comite-des-droits-economiques-sociaux-et-culturels-et-le",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "world",
+        "policy",
+        "humanitarian"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": null,
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "official_statement",
+      "fingerprint": "1142cc78",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "un-geneva-05fb279d",
+      "sourceId": "un-geneva",
+      "publisher": "United Nations Geneva",
+      "originGroup": "un-geneva",
+      "title": "Experts of the Committee on Economic, Social and Cultural Rights Welcome Austria’s Expansion of Housing First Services, Raise Questions on Access to the Labour Market for Asylum Seekers and the Education of Minority Children",
+      "url": "https://www.ungeneva.org/en/news-media/meeting-summary/2026/11/examen-de-lautriche-au-comite-des-droits-economiques-sociaux-et",
+      "canonicalUrl": "https://www.ungeneva.org/en/news-media/meeting-summary/2026/11/examen-de-lautriche-au-comite-des-droits-economiques-sociaux-et",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "world",
+        "policy",
+        "humanitarian"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": null,
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "official_statement",
+      "fingerprint": "b215efb5",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "ecb-press-0a4be006",
+      "sourceId": "ecb-press",
+      "publisher": "European Central Bank",
+      "originGroup": "ecb",
+      "title": "Meeting of 28-29 October 2026",
+      "url": "https://www.ecb.europa.eu//press/accounts/2026/html/ecb.mg261126~ccf28c8071.en.html",
+      "canonicalUrl": "https://www.ecb.europa.eu//press/accounts/2026/html/ecb.mg261126~ccf28c8071.en.html",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "economics",
+        "policy",
+        "markets"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-26T12:30:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "official_statement",
+      "fingerprint": "e52c4d6a",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "ecb-press-064f47d4",
+      "sourceId": "ecb-press",
+      "publisher": "European Central Bank",
+      "originGroup": "ecb",
+      "title": "ECB and Sveriges Riksbank conclude agreement for Sweden to join T2",
+      "url": "https://www.ecb.europa.eu//press/pr/date/2026/html/ecb.pr261125_1~6333a90f3a.en.html",
+      "canonicalUrl": "https://www.ecb.europa.eu//press/pr/date/2026/html/ecb.pr261125_1~6333a90f3a.en.html",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "economics",
+        "policy",
+        "markets"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-25T17:30:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "official_statement",
+      "fingerprint": "bacb0ff8",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "ecb-press-25c2f9ee",
+      "sourceId": "ecb-press",
+      "publisher": "European Central Bank",
+      "originGroup": "ecb",
+      "title": "Card payments edge past cash in shops; euro area consumers want both",
+      "url": "https://www.ecb.europa.eu//press/pr/date/2026/html/ecb.pr261125~26d1ade228.en.html",
+      "canonicalUrl": "https://www.ecb.europa.eu//press/pr/date/2026/html/ecb.pr261125~26d1ade228.en.html",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "economics",
+        "policy",
+        "markets"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-25T10:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "official_statement",
+      "fingerprint": "48c60848",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "ecb-press-e3036e60",
+      "sourceId": "ecb-press",
+      "publisher": "European Central Bank",
+      "originGroup": "ecb",
+      "title": "Boris Vujčić: Resilience in an age of shocks: lessons from central and eastern Europe",
+      "url": "https://www.ecb.europa.eu//press/key/date/2026/html/ecb.sp261124~17928e5456.en.html",
+      "canonicalUrl": "https://www.ecb.europa.eu//press/key/date/2026/html/ecb.sp261124~17928e5456.en.html",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "economics",
+        "policy",
+        "markets"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-24T11:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "official_statement",
+      "fingerprint": "734dace3",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "ecb-press-5d46b490",
+      "sourceId": "ecb-press",
+      "publisher": "European Central Bank",
+      "originGroup": "ecb",
+      "title": "Philip R. Lane: Climate change and monetary policy",
+      "url": "https://www.ecb.europa.eu//press/key/date/2026/html/ecb.sp261123~b5816801a0.en.pdf",
+      "canonicalUrl": "https://www.ecb.europa.eu//press/key/date/2026/html/ecb.sp261123~b5816801a0.en.pdf",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "economics",
+        "policy",
+        "markets"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-23T14:30:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "official_statement",
+      "fingerprint": "621fd152",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "ecb-press-04719c59",
+      "sourceId": "ecb-press",
+      "publisher": "European Central Bank",
+      "originGroup": "ecb",
+      "title": "ECB expands acceptance of DLT-based assets as eligible Eurosystem collateral",
+      "url": "https://www.ecb.europa.eu//press/pr/date/2026/html/ecb.pr261123~76b6f57b74.en.html",
+      "canonicalUrl": "https://www.ecb.europa.eu//press/pr/date/2026/html/ecb.pr261123~76b6f57b74.en.html",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "economics",
+        "policy",
+        "markets"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-23T10:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "official_statement",
+      "fingerprint": "81d898a0",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "ecb-press-42be349a",
+      "sourceId": "ecb-press",
+      "publisher": "European Central Bank",
+      "originGroup": "ecb",
+      "title": "Christine Lagarde: Acting in time",
+      "url": "https://www.ecb.europa.eu//press/key/date/2026/html/ecb.sp261120~e52bcc4db2.en.html",
+      "canonicalUrl": "https://www.ecb.europa.eu//press/key/date/2026/html/ecb.sp261120~e52bcc4db2.en.html",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "economics",
+        "policy",
+        "markets"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-20T08:30:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "official_statement",
+      "fingerprint": "fb8bc05a",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "ecb-press-ce84f249",
+      "sourceId": "ecb-press",
+      "publisher": "European Central Bank",
+      "originGroup": "ecb",
+      "title": "Boris Vujčić: Financial Stability Review - November 2026",
+      "url": "https://www.ecb.europa.eu//press/key/date/2026/html/ecb.sp261118~86f1e8147e.en.pdf",
+      "canonicalUrl": "https://www.ecb.europa.eu//press/key/date/2026/html/ecb.sp261118~86f1e8147e.en.pdf",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "economics",
+        "policy",
+        "markets"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-18T09:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "official_statement",
+      "fingerprint": "60c881fc",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "ecb-press-81418037",
+      "sourceId": "ecb-press",
+      "publisher": "European Central Bank",
+      "originGroup": "ecb",
+      "title": "Risks from AI valuations, fiscal imbalances and geoeconomic tensions weigh on financial stability outlook",
+      "url": "https://www.ecb.europa.eu//press/pr/date/2026/html/ecb.pr261118~83c5c60158.en.html",
+      "canonicalUrl": "https://www.ecb.europa.eu//press/pr/date/2026/html/ecb.pr261118~83c5c60158.en.html",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "economics",
+        "policy",
+        "markets"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-18T09:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "official_statement",
+      "fingerprint": "ff5f4784",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "ecb-press-58a658b5",
+      "sourceId": "ecb-press",
+      "publisher": "European Central Bank",
+      "originGroup": "ecb",
+      "title": "Philip R. Lane: The practice and science of monetary policy communication: the ECB experience",
+      "url": "https://www.ecb.europa.eu//press/key/date/2026/html/ecb.sp261117~7f5d3b1a0e.en.pdf",
+      "canonicalUrl": "https://www.ecb.europa.eu//press/key/date/2026/html/ecb.sp261117~7f5d3b1a0e.en.pdf",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "economics",
+        "policy",
+        "markets"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-17T18:30:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "official_statement",
+      "fingerprint": "be66d7cb",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "ecb-press-68c92ad6",
+      "sourceId": "ecb-press",
+      "publisher": "European Central Bank",
+      "originGroup": "ecb",
+      "title": "Frank Elderson: Smart supervision for small banks",
+      "url": "https://www.ecb.europa.eu//press/inter/date/2026/html/ecb.in261116_1~11dd7f62af.en.html",
+      "canonicalUrl": "https://www.ecb.europa.eu//press/inter/date/2026/html/ecb.in261116_1~11dd7f62af.en.html",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "economics",
+        "policy",
+        "markets"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-16T13:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "official_statement",
+      "fingerprint": "1059f2c0",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "ecb-press-624adcbf",
+      "sourceId": "ecb-press",
+      "publisher": "European Central Bank",
+      "originGroup": "ecb",
+      "title": "Boris Vujčić: Risks and resilience in the euro area financial system",
+      "url": "https://www.ecb.europa.eu//press/key/date/2026/html/ecb.sp261116~db374b56ab.en.html",
+      "canonicalUrl": "https://www.ecb.europa.eu//press/key/date/2026/html/ecb.sp261116~db374b56ab.en.html",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "economics",
+        "policy",
+        "markets"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-16T08:30:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "official_statement",
+      "fingerprint": "7c06c33c",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "ecb-press-f72151b7",
+      "sourceId": "ecb-press",
+      "publisher": "European Central Bank",
+      "originGroup": "ecb",
+      "title": "Isabel Schnabel: Made in Europe",
+      "url": "https://www.ecb.europa.eu//press/key/date/2026/html/ecb.sp261113~3883f1f187.en.html",
+      "canonicalUrl": "https://www.ecb.europa.eu//press/key/date/2026/html/ecb.sp261113~3883f1f187.en.html",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "economics",
+        "policy",
+        "markets"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-13T07:20:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "official_statement",
+      "fingerprint": "d3c74c37",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "ecb-press-bf09480a",
+      "sourceId": "ecb-press",
+      "publisher": "European Central Bank",
+      "originGroup": "ecb",
+      "title": "Philip R. Lane: The science and practice of monetary policy communication: the ECB experience",
+      "url": "https://www.ecb.europa.eu//press/key/date/2026/html/ecb.sp261110_1~9725b7aa07.en.html",
+      "canonicalUrl": "https://www.ecb.europa.eu//press/key/date/2026/html/ecb.sp261110_1~9725b7aa07.en.html",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "economics",
+        "policy",
+        "markets"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-10T16:45:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "official_statement",
+      "fingerprint": "a32bd3cd",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "ecb-press-4983663a",
+      "sourceId": "ecb-press",
+      "publisher": "European Central Bank",
+      "originGroup": "ecb",
+      "title": "Piero Cipollone: Cash and the digital euro: two sides of the same coin",
+      "url": "https://www.ecb.europa.eu//press/key/date/2026/html/ecb.sp261110~9422461bad.en.html",
+      "canonicalUrl": "https://www.ecb.europa.eu//press/key/date/2026/html/ecb.sp261110~9422461bad.en.html",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "economics",
+        "policy",
+        "markets"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-10T14:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "official_statement",
+      "fingerprint": "7fd2c28e",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "arxiv-ai-cb66445b",
+      "sourceId": "arxiv-ai",
+      "publisher": "arXiv",
+      "originGroup": "arxiv",
+      "title": "Context Scaling: A New Frontier of AI Scaling",
+      "url": "https://arxiv.org/abs/2611.33160",
+      "canonicalUrl": "https://arxiv.org/abs/2611.33160",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "science",
+        "technology",
+        "research"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-26T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "research",
+      "evidenceType": "uncorroborated_claim",
+      "fingerprint": "6c141de5",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "arxiv-ai-ca6642c8",
+      "sourceId": "arxiv-ai",
+      "publisher": "arXiv",
+      "originGroup": "arxiv",
+      "title": "Constraint-Aware Test-Time Scoring for LLM and VLM Candidate Selection",
+      "url": "https://arxiv.org/abs/2611.33161",
+      "canonicalUrl": "https://arxiv.org/abs/2611.33161",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "science",
+        "technology",
+        "research"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-26T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "research",
+      "evidenceType": "uncorroborated_claim",
+      "fingerprint": "5d3cae6b",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "arxiv-ai-ce664914",
+      "sourceId": "arxiv-ai",
+      "publisher": "arXiv",
+      "originGroup": "arxiv",
+      "title": "AutoformBench: A Lean Formalization Benchmark for Advanced Mathematics",
+      "url": "https://arxiv.org/abs/2611.33165",
+      "canonicalUrl": "https://arxiv.org/abs/2611.33165",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "science",
+        "technology",
+        "research"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-26T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "research",
+      "evidenceType": "uncorroborated_claim",
+      "fingerprint": "9f179f2a",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "arxiv-ai-417cc46c",
+      "sourceId": "arxiv-ai",
+      "publisher": "arXiv",
+      "originGroup": "arxiv",
+      "title": "General-Purpose Decision Models for AI Configuration Tuning",
+      "url": "https://arxiv.org/abs/2611.33190",
+      "canonicalUrl": "https://arxiv.org/abs/2611.33190",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "science",
+        "technology",
+        "research"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-26T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "research",
+      "evidenceType": "uncorroborated_claim",
+      "fingerprint": "7b2dcd47",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "arxiv-ai-0db228e7",
+      "sourceId": "arxiv-ai",
+      "publisher": "arXiv",
+      "originGroup": "arxiv",
+      "title": "What, Who, and When: Structured Harm Assessment for Mental Health Safety via Short Reasoning",
+      "url": "https://arxiv.org/abs/2611.33263",
+      "canonicalUrl": "https://arxiv.org/abs/2611.33263",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "science",
+        "technology",
+        "research"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-26T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "research",
+      "evidenceType": "uncorroborated_claim",
+      "fingerprint": "9ccadbe9",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "arxiv-ai-fa4eb96a",
+      "sourceId": "arxiv-ai",
+      "publisher": "arXiv",
+      "originGroup": "arxiv",
+      "title": "Certify What You Plant: Shortcut-Free Proof Depth in Logical Reasoning Data",
+      "url": "https://arxiv.org/abs/2611.33303",
+      "canonicalUrl": "https://arxiv.org/abs/2611.33303",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "science",
+        "technology",
+        "research"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-26T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "research",
+      "evidenceType": "uncorroborated_claim",
+      "fingerprint": "a17f53fa",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "arxiv-ai-f54eb18b",
+      "sourceId": "arxiv-ai",
+      "publisher": "arXiv",
+      "originGroup": "arxiv",
+      "title": "The Platonic Representation Hypothesis in Jacobian-Space: Language and Vision Models Agree Approximately Up to a Rotation",
+      "url": "https://arxiv.org/abs/2611.33304",
+      "canonicalUrl": "https://arxiv.org/abs/2611.33304",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "science",
+        "technology",
+        "research"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-26T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "research",
+      "evidenceType": "uncorroborated_claim",
+      "fingerprint": "5c5c2832",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "arxiv-ai-6b495b1f",
+      "sourceId": "arxiv-ai",
+      "publisher": "arXiv",
+      "originGroup": "arxiv",
+      "title": "Brand Recall and Category Accuracy in Language Models: An Audit of 1,000 B2B SaaS Brands",
+      "url": "https://arxiv.org/abs/2611.33322",
+      "canonicalUrl": "https://arxiv.org/abs/2611.33322",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "science",
+        "technology",
+        "research"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-26T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "research",
+      "evidenceType": "uncorroborated_claim",
+      "fingerprint": "7a3d999c",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "arxiv-ai-67380bb2",
+      "sourceId": "arxiv-ai",
+      "publisher": "arXiv",
+      "originGroup": "arxiv",
+      "title": "Confidence scores for gated automation of large language models",
+      "url": "https://arxiv.org/abs/2611.33394",
+      "canonicalUrl": "https://arxiv.org/abs/2611.33394",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "science",
+        "technology",
+        "research"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-26T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "research",
+      "evidenceType": "uncorroborated_claim",
+      "fingerprint": "9660c13d",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "arxiv-ai-9b88b490",
+      "sourceId": "arxiv-ai",
+      "publisher": "arXiv",
+      "originGroup": "arxiv",
+      "title": "Partial Routing: Trace-Tuned Delegation for Resource-Efficient Agentic Workflows",
+      "url": "https://arxiv.org/abs/2611.33402",
+      "canonicalUrl": "https://arxiv.org/abs/2611.33402",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "science",
+        "technology",
+        "research"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-26T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "research",
+      "evidenceType": "uncorroborated_claim",
+      "fingerprint": "dcbf9d58",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "arxiv-ai-a28afe2c",
+      "sourceId": "arxiv-ai",
+      "publisher": "arXiv",
+      "originGroup": "arxiv",
+      "title": "Collaborative Language Models for Semantic IoT Data Processing: Validation through Zero-Shot Human Activity Recognition",
+      "url": "https://arxiv.org/abs/2611.33411",
+      "canonicalUrl": "https://arxiv.org/abs/2611.33411",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "science",
+        "technology",
+        "research"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-26T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "research",
+      "evidenceType": "uncorroborated_claim",
+      "fingerprint": "652ccfd1",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "arxiv-ai-9f7beee9",
+      "sourceId": "arxiv-ai",
+      "publisher": "arXiv",
+      "originGroup": "arxiv",
+      "title": "Dynamic Reasoning in Next-Gen Detection and Response: An Empirical Study of LLM Triage, Reinforcement Tuning, and Adversarial Evasion",
+      "url": "https://arxiv.org/abs/2611.33470",
+      "canonicalUrl": "https://arxiv.org/abs/2611.33470",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "science",
+        "technology",
+        "research"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-26T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "research",
+      "evidenceType": "uncorroborated_claim",
+      "fingerprint": "914f0647",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "arxiv-ai-b09e9bee",
+      "sourceId": "arxiv-ai",
+      "publisher": "arXiv",
+      "originGroup": "arxiv",
+      "title": "CA-RAG: Constraint-Aligned Retrieval for Structurally Faithful Long-Form Generation",
+      "url": "https://arxiv.org/abs/2611.33497",
+      "canonicalUrl": "https://arxiv.org/abs/2611.33497",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "science",
+        "technology",
+        "research"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-26T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "research",
+      "evidenceType": "uncorroborated_claim",
+      "fingerprint": "9332b878",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "arxiv-ai-991d1111",
+      "sourceId": "arxiv-ai",
+      "publisher": "arXiv",
+      "originGroup": "arxiv",
+      "title": "Learning to Reason in Real-Time",
+      "url": "https://arxiv.org/abs/2611.33513",
+      "canonicalUrl": "https://arxiv.org/abs/2611.33513",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "science",
+        "technology",
+        "research"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-26T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "research",
+      "evidenceType": "uncorroborated_claim",
+      "fingerprint": "394b0f22",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "arxiv-ai-8b278863",
+      "sourceId": "arxiv-ai",
+      "publisher": "arXiv",
+      "originGroup": "arxiv",
+      "title": "PeerReveal: Learning to Generalize in AI Peer Review Detection",
+      "url": "https://arxiv.org/abs/2611.33555",
+      "canonicalUrl": "https://arxiv.org/abs/2611.33555",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "science",
+        "technology",
+        "research"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-26T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "research",
+      "evidenceType": "uncorroborated_claim",
+      "fingerprint": "44082147",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "arxiv-ai-a12e66ca",
+      "sourceId": "arxiv-ai",
+      "publisher": "arXiv",
+      "originGroup": "arxiv",
+      "title": "FIG-MAC: A Fine-grained Inspiration Graph Empowered Multi-Agent Collaboration for Automated Scientific Hypothesis Generation",
+      "url": "https://arxiv.org/abs/2611.33563",
+      "canonicalUrl": "https://arxiv.org/abs/2611.33563",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "science",
+        "technology",
+        "research"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-26T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "research",
+      "evidenceType": "uncorroborated_claim",
+      "fingerprint": "957e627c",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "arxiv-ai-8a0971bc",
+      "sourceId": "arxiv-ai",
+      "publisher": "arXiv",
+      "originGroup": "arxiv",
+      "title": "Aligned Machine: A Benchmark for Evaluating Multimodal Embedding Similarity via Human Comparative Judgements",
+      "url": "https://arxiv.org/abs/2611.33594",
+      "canonicalUrl": "https://arxiv.org/abs/2611.33594",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "science",
+        "technology",
+        "research"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-26T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "research",
+      "evidenceType": "uncorroborated_claim",
+      "fingerprint": "6016fbfb",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "arxiv-ai-c81f3602",
+      "sourceId": "arxiv-ai",
+      "publisher": "arXiv",
+      "originGroup": "arxiv",
+      "title": "Learning from Natural Images Untangles Number Sense",
+      "url": "https://arxiv.org/abs/2611.33615",
+      "canonicalUrl": "https://arxiv.org/abs/2611.33615",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "science",
+        "technology",
+        "research"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-26T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "research",
+      "evidenceType": "uncorroborated_claim",
+      "fingerprint": "83da9c42",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "arxiv-ai-c61f32dc",
+      "sourceId": "arxiv-ai",
+      "publisher": "arXiv",
+      "originGroup": "arxiv",
+      "title": "Controllable CAD Generation and Interactive Editing of Fluid Rotors",
+      "url": "https://arxiv.org/abs/2611.33617",
+      "canonicalUrl": "https://arxiv.org/abs/2611.33617",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "science",
+        "technology",
+        "research"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-26T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "research",
+      "evidenceType": "uncorroborated_claim",
+      "fingerprint": "cbce5903",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "arxiv-ai-c823b330",
+      "sourceId": "arxiv-ai",
+      "publisher": "arXiv",
+      "originGroup": "arxiv",
+      "title": "How Much Effort Does an AI Code Reviewer Need? Evidence from Claude 5.5 Models on Plausible-but-Wrong Patches",
+      "url": "https://arxiv.org/abs/2611.33639",
+      "canonicalUrl": "https://arxiv.org/abs/2611.33639",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "science",
+        "technology",
+        "research"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-26T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "research",
+      "evidenceType": "uncorroborated_claim",
+      "fingerprint": "fdf9dc49",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "arxiv-ai-472b36e2",
+      "sourceId": "arxiv-ai",
+      "publisher": "arXiv",
+      "originGroup": "arxiv",
+      "title": "SlicePlanner: Logic-Guided Agentic AI for Online QoS-Aware Network Slicing in Open RAN",
+      "url": "https://arxiv.org/abs/2611.33664",
+      "canonicalUrl": "https://arxiv.org/abs/2611.33664",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "science",
+        "technology",
+        "research"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-26T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "research",
+      "evidenceType": "uncorroborated_claim",
+      "fingerprint": "49a90cae",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "arxiv-ai-472d7579",
+      "sourceId": "arxiv-ai",
+      "publisher": "arXiv",
+      "originGroup": "arxiv",
+      "title": "Interactive Proofs as a Unified Framework for Evaluating and Leveraging Verifiable Proof Generation by LLM Agents",
+      "url": "https://arxiv.org/abs/2611.33676",
+      "canonicalUrl": "https://arxiv.org/abs/2611.33676",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "science",
+        "technology",
+        "research"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-26T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "research",
+      "evidenceType": "uncorroborated_claim",
+      "fingerprint": "5200e718",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "arxiv-ai-502d83a4",
+      "sourceId": "arxiv-ai",
+      "publisher": "arXiv",
+      "originGroup": "arxiv",
+      "title": "Faster and Better Query (FBQ): Learning Future-Position Probes from the First Generated Token",
+      "url": "https://arxiv.org/abs/2611.33679",
+      "canonicalUrl": "https://arxiv.org/abs/2611.33679",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "science",
+        "technology",
+        "research"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-26T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "research",
+      "evidenceType": "uncorroborated_claim",
+      "fingerprint": "1538e0ea",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "arxiv-ai-c3b38f5d",
+      "sourceId": "arxiv-ai",
+      "publisher": "arXiv",
+      "originGroup": "arxiv",
+      "title": "EVA: Evidence-seeking Visual Agent for Hallucination-Resistant Multimodal Reasoning",
+      "url": "https://arxiv.org/abs/2611.33706",
+      "canonicalUrl": "https://arxiv.org/abs/2611.33706",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "science",
+        "technology",
+        "research"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-26T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "research",
+      "evidenceType": "uncorroborated_claim",
+      "fingerprint": "bababf20",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "arxiv-ai-c2b38dca",
+      "sourceId": "arxiv-ai",
+      "publisher": "arXiv",
+      "originGroup": "arxiv",
+      "title": "P-FedSkill: A Personalized Federated Skill Learning Framework under Task Heterogeneity",
+      "url": "https://arxiv.org/abs/2611.33707",
+      "canonicalUrl": "https://arxiv.org/abs/2611.33707",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "science",
+        "technology",
+        "research"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-26T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "research",
+      "evidenceType": "uncorroborated_claim",
+      "fingerprint": "7e759efe",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "arxiv-ai-b5b13abc",
+      "sourceId": "arxiv-ai",
+      "publisher": "arXiv",
+      "originGroup": "arxiv",
+      "title": "PowerFix: Physics-Guided Iterative Repair for LLM-Assisted Power Converter Design",
+      "url": "https://arxiv.org/abs/2611.33712",
+      "canonicalUrl": "https://arxiv.org/abs/2611.33712",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "science",
+        "technology",
+        "research"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-26T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "research",
+      "evidenceType": "uncorroborated_claim",
+      "fingerprint": "8ff0ded3",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "arxiv-ai-b4b13929",
+      "sourceId": "arxiv-ai",
+      "publisher": "arXiv",
+      "originGroup": "arxiv",
+      "title": "KeyDeck: Multi-Paper-to-Slide Generation via Cross-Paper Synthesis and Reference-Guided Personalization",
+      "url": "https://arxiv.org/abs/2611.33715",
+      "canonicalUrl": "https://arxiv.org/abs/2611.33715",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "science",
+        "technology",
+        "research"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-26T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "research",
+      "evidenceType": "uncorroborated_claim",
+      "fingerprint": "4255bff8",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "arxiv-ai-b9af0271",
+      "sourceId": "arxiv-ai",
+      "publisher": "arXiv",
+      "originGroup": "arxiv",
+      "title": "Asset4D-Bench: Benchmarking Coding Agents for Editable 3D and 4D Reconstruction",
+      "url": "https://arxiv.org/abs/2611.33728",
+      "canonicalUrl": "https://arxiv.org/abs/2611.33728",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "science",
+        "technology",
+        "research"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-26T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "research",
+      "evidenceType": "uncorroborated_claim",
+      "fingerprint": "2f6bcc83",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "arxiv-ai-b0acb5af",
+      "sourceId": "arxiv-ai",
+      "publisher": "arXiv",
+      "originGroup": "arxiv",
+      "title": "JOVE ICE: Intent Guided Cloud Edge Device Collaboration for AI Glasses",
+      "url": "https://arxiv.org/abs/2611.33735",
+      "canonicalUrl": "https://arxiv.org/abs/2611.33735",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "science",
+        "technology",
+        "research"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-26T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "research",
+      "evidenceType": "uncorroborated_claim",
+      "fingerprint": "3064d9ba",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "arxiv-ai-b0bdfed0",
+      "sourceId": "arxiv-ai",
+      "publisher": "arXiv",
+      "originGroup": "arxiv",
+      "title": "WhatIf: Counterfactual World Models over Action-Grounded Causal Graphs for Robotic Manipulation",
+      "url": "https://arxiv.org/abs/2611.33745",
+      "canonicalUrl": "https://arxiv.org/abs/2611.33745",
+      "summary": "",
+      "language": "en",
+      "topics": [
+        "science",
+        "technology",
+        "research"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Location not specified",
+        "precision": "global"
+      },
+      "publishedAt": "2026-11-26T05:00:00.000Z",
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "research",
+      "evidenceType": "uncorroborated_claim",
+      "fingerprint": "c921b17a",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "federal-register-9092b55b",
+      "sourceId": "federal-register",
+      "publisher": "Office of the Federal Register",
+      "originGroup": "us-federal-register",
+      "title": "Expeditious Enforcement of Capital Sentences and the Pursuit of Justice for Victims of Heinous Crimes",
+      "url": "https://www.federalregister.gov/documents/2026/11/27/2026-24236/expeditious-enforcement-of-capital-sentences-and-the-pursuit-of-justice-for-victims-of-heinous",
+      "canonicalUrl": "https://www.federalregister.gov/documents/2026/11/27/2026-24236/expeditious-enforcement-of-capital-sentences-and-the-pursuit-of-justice-for-victims-of-heinous",
+      "summary": "Publication date: 2026-11-27 (day precision; exact time unavailable).",
+      "language": "en",
+      "topics": [
+        "policy",
+        "government"
+      ],
+      "region": {
+        "code": "US",
+        "label": "United States federal publication",
+        "precision": "country"
+      },
+      "publishedAt": null,
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "primary_documentation",
+      "fingerprint": "61105406",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "federal-register-ed6c3316",
+      "sourceId": "federal-register",
+      "publisher": "Office of the Federal Register",
+      "originGroup": "us-federal-register",
+      "title": "Sunshine Act Meetings",
+      "url": "https://www.federalregister.gov/documents/2026/11/27/2026-24202/sunshine-act-meetings",
+      "canonicalUrl": "https://www.federalregister.gov/documents/2026/11/27/2026-24202/sunshine-act-meetings",
+      "summary": "Publication date: 2026-11-27 (day precision; exact time unavailable).",
+      "language": "en",
+      "topics": [
+        "policy",
+        "government"
+      ],
+      "region": {
+        "code": "US",
+        "label": "United States federal publication",
+        "precision": "country"
+      },
+      "publishedAt": null,
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "primary_documentation",
+      "fingerprint": "5031087a",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "federal-register-e0224b6d",
+      "sourceId": "federal-register",
+      "publisher": "Office of the Federal Register",
+      "originGroup": "us-federal-register",
+      "title": "Lake Providence Port Commission-Feeder Line Application-Line of Delta Southern Railroad Located in East Carroll and Madison Parishes, LA",
+      "url": "https://www.federalregister.gov/documents/2026/11/27/2026-24165/lake-providence-port-commission-feeder-line-application-line-of-delta-southern-railroad-located-in",
+      "canonicalUrl": "https://www.federalregister.gov/documents/2026/11/27/2026-24165/lake-providence-port-commission-feeder-line-application-line-of-delta-southern-railroad-located-in",
+      "summary": "Publication date: 2026-11-27 (day precision; exact time unavailable).",
+      "language": "en",
+      "topics": [
+        "policy",
+        "government"
+      ],
+      "region": {
+        "code": "US",
+        "label": "United States federal publication",
+        "precision": "country"
+      },
+      "publishedAt": null,
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "primary_documentation",
+      "fingerprint": "2a90b07c",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "federal-register-b9656368",
+      "sourceId": "federal-register",
+      "publisher": "Office of the Federal Register",
+      "originGroup": "us-federal-register",
+      "title": "Permits; Foreign Fishing",
+      "url": "https://www.federalregister.gov/documents/2026/11/27/2026-24164/permits-foreign-fishing",
+      "canonicalUrl": "https://www.federalregister.gov/documents/2026/11/27/2026-24164/permits-foreign-fishing",
+      "summary": "Publication date: 2026-11-27 (day precision; exact time unavailable).",
+      "language": "en",
+      "topics": [
+        "policy",
+        "government"
+      ],
+      "region": {
+        "code": "US",
+        "label": "United States federal publication",
+        "precision": "country"
+      },
+      "publishedAt": null,
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "primary_documentation",
+      "fingerprint": "9bc26ff1",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "federal-register-8a36cc23",
+      "sourceId": "federal-register",
+      "publisher": "Office of the Federal Register",
+      "originGroup": "us-federal-register",
+      "title": "Notice of Proposed Information Collection Requests: IMLS Grants to States Five-Year State Plan Guidelines for State Library Administrative Agencies for Fiscal Years 2028-2032",
+      "url": "https://www.federalregister.gov/documents/2026/11/27/2026-24163/notice-of-proposed-information-collection-requests-imls-grants-to-states-five-year-state-plan",
+      "canonicalUrl": "https://www.federalregister.gov/documents/2026/11/27/2026-24163/notice-of-proposed-information-collection-requests-imls-grants-to-states-five-year-state-plan",
+      "summary": "Publication date: 2026-11-27 (day precision; exact time unavailable).",
+      "language": "en",
+      "topics": [
+        "policy",
+        "government"
+      ],
+      "region": {
+        "code": "US",
+        "label": "United States federal publication",
+        "precision": "country"
+      },
+      "publishedAt": null,
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "primary_documentation",
+      "fingerprint": "8bf13921",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "federal-register-1aac6d06",
+      "sourceId": "federal-register",
+      "publisher": "Office of the Federal Register",
+      "originGroup": "us-federal-register",
+      "title": "Administrative Declaration of an Economic Injury Disaster for the State of Idaho",
+      "url": "https://www.federalregister.gov/documents/2026/11/27/2026-24161/administrative-declaration-of-an-economic-injury-disaster-for-the-state-of-idaho",
+      "canonicalUrl": "https://www.federalregister.gov/documents/2026/11/27/2026-24161/administrative-declaration-of-an-economic-injury-disaster-for-the-state-of-idaho",
+      "summary": "Publication date: 2026-11-27 (day precision; exact time unavailable).",
+      "language": "en",
+      "topics": [
+        "policy",
+        "government"
+      ],
+      "region": {
+        "code": "US",
+        "label": "United States federal publication",
+        "precision": "country"
+      },
+      "publishedAt": null,
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "primary_documentation",
+      "fingerprint": "e11c4fc9",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "federal-register-b41a0f4e",
+      "sourceId": "federal-register",
+      "publisher": "Office of the Federal Register",
+      "originGroup": "us-federal-register",
+      "title": "Enhanced-Use Lease (EUL) of Department of Veterans Affairs (VA) Real Property at the Clement J. Zablocki VA Medical Center, Milwaukee, Wisconsin",
+      "url": "https://www.federalregister.gov/documents/2026/11/27/2026-24160/enhanced-use-lease-eul-of-department-of-veterans-affairs-va-real-property-at-the-clement-j-zablocki",
+      "canonicalUrl": "https://www.federalregister.gov/documents/2026/11/27/2026-24160/enhanced-use-lease-eul-of-department-of-veterans-affairs-va-real-property-at-the-clement-j-zablocki",
+      "summary": "Publication date: 2026-11-27 (day precision; exact time unavailable).",
+      "language": "en",
+      "topics": [
+        "policy",
+        "government"
+      ],
+      "region": {
+        "code": "US",
+        "label": "United States federal publication",
+        "precision": "country"
+      },
+      "publishedAt": null,
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "primary_documentation",
+      "fingerprint": "cc86fe8f",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "federal-register-7fcc73b1",
+      "sourceId": "federal-register",
+      "publisher": "Office of the Federal Register",
+      "originGroup": "us-federal-register",
+      "title": "Agency Information Collection Activities; Proposed Collection; Comment Request; Extension",
+      "url": "https://www.federalregister.gov/documents/2026/11/27/2026-24159/agency-information-collection-activities-proposed-collection-comment-request-extension",
+      "canonicalUrl": "https://www.federalregister.gov/documents/2026/11/27/2026-24159/agency-information-collection-activities-proposed-collection-comment-request-extension",
+      "summary": "Publication date: 2026-11-27 (day precision; exact time unavailable).",
+      "language": "en",
+      "topics": [
+        "policy",
+        "government"
+      ],
+      "region": {
+        "code": "US",
+        "label": "United States federal publication",
+        "precision": "country"
+      },
+      "publishedAt": null,
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "primary_documentation",
+      "fingerprint": "38bc9922",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "federal-register-51b02b41",
+      "sourceId": "federal-register",
+      "publisher": "Office of the Federal Register",
+      "originGroup": "us-federal-register",
+      "title": "Information Collection: Suspicious Activity Reporting Using the Protective Web Server",
+      "url": "https://www.federalregister.gov/documents/2026/11/27/2026-24158/information-collection-suspicious-activity-reporting-using-the-protective-web-server",
+      "canonicalUrl": "https://www.federalregister.gov/documents/2026/11/27/2026-24158/information-collection-suspicious-activity-reporting-using-the-protective-web-server",
+      "summary": "Publication date: 2026-11-27 (day precision; exact time unavailable).",
+      "language": "en",
+      "topics": [
+        "policy",
+        "government"
+      ],
+      "region": {
+        "code": "US",
+        "label": "United States federal publication",
+        "precision": "country"
+      },
+      "publishedAt": null,
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "primary_documentation",
+      "fingerprint": "046562ce",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "federal-register-d4515abf",
+      "sourceId": "federal-register",
+      "publisher": "Office of the Federal Register",
+      "originGroup": "us-federal-register",
+      "title": "Notice of Request for Extension of Currently Approved Information Collection",
+      "url": "https://www.federalregister.gov/documents/2026/11/27/2026-24157/notice-of-request-for-extension-of-currently-approved-information-collection",
+      "canonicalUrl": "https://www.federalregister.gov/documents/2026/11/27/2026-24157/notice-of-request-for-extension-of-currently-approved-information-collection",
+      "summary": "Publication date: 2026-11-27 (day precision; exact time unavailable).",
+      "language": "en",
+      "topics": [
+        "policy",
+        "government"
+      ],
+      "region": {
+        "code": "US",
+        "label": "United States federal publication",
+        "precision": "country"
+      },
+      "publishedAt": null,
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "primary_documentation",
+      "fingerprint": "d904d9e7",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "federal-register-c2a85d38",
+      "sourceId": "federal-register",
+      "publisher": "Office of the Federal Register",
+      "originGroup": "us-federal-register",
+      "title": "Fisheries of the Exclusive Economic Zone Off Alaska; Bering Sea and Aleutian Islands Management Area; 2026 Cost Recovery Fee Notice for the Western Alaska Community Development Quota and Trawl Limited Access Privilege Programs",
+      "url": "https://www.federalregister.gov/documents/2026/11/27/2026-24156/fisheries-of-the-exclusive-economic-zone-off-alaska-bering-sea-and-aleutian-islands-management-area",
+      "canonicalUrl": "https://www.federalregister.gov/documents/2026/11/27/2026-24156/fisheries-of-the-exclusive-economic-zone-off-alaska-bering-sea-and-aleutian-islands-management-area",
+      "summary": "Publication date: 2026-11-27 (day precision; exact time unavailable).",
+      "language": "en",
+      "topics": [
+        "policy",
+        "government"
+      ],
+      "region": {
+        "code": "US",
+        "label": "United States federal publication",
+        "precision": "country"
+      },
+      "publishedAt": null,
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "primary_documentation",
+      "fingerprint": "99928b3c",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "federal-register-8cbc61a4",
+      "sourceId": "federal-register",
+      "publisher": "Office of the Federal Register",
+      "originGroup": "us-federal-register",
+      "title": "Polytetramethylene Ether Glycol (PTMEG) From China, South Korea, Taiwan, and Vietnam; Scheduling of the Final Phase of Antidumping Duty Investigations; Correction",
+      "url": "https://www.federalregister.gov/documents/2026/11/27/2026-24155/polytetramethylene-ether-glycol-ptmeg-from-china-south-korea-taiwan-and-vietnam-scheduling-of-the",
+      "canonicalUrl": "https://www.federalregister.gov/documents/2026/11/27/2026-24155/polytetramethylene-ether-glycol-ptmeg-from-china-south-korea-taiwan-and-vietnam-scheduling-of-the",
+      "summary": "Publication date: 2026-11-27 (day precision; exact time unavailable).",
+      "language": "en",
+      "topics": [
+        "policy",
+        "government"
+      ],
+      "region": {
+        "code": "US",
+        "label": "United States federal publication",
+        "precision": "country"
+      },
+      "publishedAt": null,
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "primary_documentation",
+      "fingerprint": "384878e1",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "federal-register-9ca56d5e",
+      "sourceId": "federal-register",
+      "publisher": "Office of the Federal Register",
+      "originGroup": "us-federal-register",
+      "title": "Change in Bank Control Notices; Acquisitions of Shares of a Bank or Bank Holding Company",
+      "url": "https://www.federalregister.gov/documents/2026/11/27/2026-24154/change-in-bank-control-notices-acquisitions-of-shares-of-a-bank-or-bank-holding-company",
+      "canonicalUrl": "https://www.federalregister.gov/documents/2026/11/27/2026-24154/change-in-bank-control-notices-acquisitions-of-shares-of-a-bank-or-bank-holding-company",
+      "summary": "Publication date: 2026-11-27 (day precision; exact time unavailable).",
+      "language": "en",
+      "topics": [
+        "policy",
+        "government"
+      ],
+      "region": {
+        "code": "US",
+        "label": "United States federal publication",
+        "precision": "country"
+      },
+      "publishedAt": null,
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "primary_documentation",
+      "fingerprint": "1fda54f4",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "federal-register-f8e24b2a",
+      "sourceId": "federal-register",
+      "publisher": "Office of the Federal Register",
+      "originGroup": "us-federal-register",
+      "title": "Civil Penalties; Notice of Adjusted Maximum Amounts",
+      "url": "https://www.federalregister.gov/documents/2026/11/27/2026-24153/civil-penalties-notice-of-adjusted-maximum-amounts",
+      "canonicalUrl": "https://www.federalregister.gov/documents/2026/11/27/2026-24153/civil-penalties-notice-of-adjusted-maximum-amounts",
+      "summary": "Publication date: 2026-11-27 (day precision; exact time unavailable).",
+      "language": "en",
+      "topics": [
+        "policy",
+        "government"
+      ],
+      "region": {
+        "code": "US",
+        "label": "United States federal publication",
+        "precision": "country"
+      },
+      "publishedAt": null,
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "primary_documentation",
+      "fingerprint": "5d40846d",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "federal-register-1a387dec",
+      "sourceId": "federal-register",
+      "publisher": "Office of the Federal Register",
+      "originGroup": "us-federal-register",
+      "title": "National Institute of Environmental Health Sciences; Notice of Meeting",
+      "url": "https://www.federalregister.gov/documents/2026/11/27/2026-24152/national-institute-of-environmental-health-sciences-notice-of-meeting",
+      "canonicalUrl": "https://www.federalregister.gov/documents/2026/11/27/2026-24152/national-institute-of-environmental-health-sciences-notice-of-meeting",
+      "summary": "Publication date: 2026-11-27 (day precision; exact time unavailable).",
+      "language": "en",
+      "topics": [
+        "policy",
+        "government"
+      ],
+      "region": {
+        "code": "US",
+        "label": "United States federal publication",
+        "precision": "country"
+      },
+      "publishedAt": null,
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "primary_documentation",
+      "fingerprint": "3ec7c738",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "federal-register-1d09d79e",
+      "sourceId": "federal-register",
+      "publisher": "Office of the Federal Register",
+      "originGroup": "us-federal-register",
+      "title": "Fisheries of the Caribbean; Southeast Data, Assessment, and Review; Public Meeting",
+      "url": "https://www.federalregister.gov/documents/2026/11/27/2026-24151/fisheries-of-the-caribbean-southeast-data-assessment-and-review-public-meeting",
+      "canonicalUrl": "https://www.federalregister.gov/documents/2026/11/27/2026-24151/fisheries-of-the-caribbean-southeast-data-assessment-and-review-public-meeting",
+      "summary": "Publication date: 2026-11-27 (day precision; exact time unavailable).",
+      "language": "en",
+      "topics": [
+        "policy",
+        "government"
+      ],
+      "region": {
+        "code": "US",
+        "label": "United States federal publication",
+        "precision": "country"
+      },
+      "publishedAt": null,
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "primary_documentation",
+      "fingerprint": "1adfb457",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "federal-register-729161e0",
+      "sourceId": "federal-register",
+      "publisher": "Office of the Federal Register",
+      "originGroup": "us-federal-register",
+      "title": "Fisheries of the South Atlantic; Southeast Data, Assessment, and Review; Public Meeting",
+      "url": "https://www.federalregister.gov/documents/2026/11/27/2026-24150/fisheries-of-the-south-atlantic-southeast-data-assessment-and-review-public-meeting",
+      "canonicalUrl": "https://www.federalregister.gov/documents/2026/11/27/2026-24150/fisheries-of-the-south-atlantic-southeast-data-assessment-and-review-public-meeting",
+      "summary": "Publication date: 2026-11-27 (day precision; exact time unavailable).",
+      "language": "en",
+      "topics": [
+        "policy",
+        "government"
+      ],
+      "region": {
+        "code": "US",
+        "label": "United States federal publication",
+        "precision": "country"
+      },
+      "publishedAt": null,
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "primary_documentation",
+      "fingerprint": "f80a9679",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "federal-register-cf0c07cc",
+      "sourceId": "federal-register",
+      "publisher": "Office of the Federal Register",
+      "originGroup": "us-federal-register",
+      "title": "Heightened Import Disclosures for Supply Chain Visibility; Extension of Comment Period",
+      "url": "https://www.federalregister.gov/documents/2026/11/27/2026-24149/heightened-import-disclosures-for-supply-chain-visibility-extension-of-comment-period",
+      "canonicalUrl": "https://www.federalregister.gov/documents/2026/11/27/2026-24149/heightened-import-disclosures-for-supply-chain-visibility-extension-of-comment-period",
+      "summary": "Publication date: 2026-11-27 (day precision; exact time unavailable).",
+      "language": "en",
+      "topics": [
+        "policy",
+        "government"
+      ],
+      "region": {
+        "code": "US",
+        "label": "United States federal publication",
+        "precision": "country"
+      },
+      "publishedAt": null,
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "primary_documentation",
+      "fingerprint": "7fcb811a",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "federal-register-22134fb4",
+      "sourceId": "federal-register",
+      "publisher": "Office of the Federal Register",
+      "originGroup": "us-federal-register",
+      "title": "Agency Information Collection Activities; Extension; Ship's Stores Declaration (CBP Form 1303)",
+      "url": "https://www.federalregister.gov/documents/2026/11/27/2026-24148/agency-information-collection-activities-extension-ships-stores-declaration-cbp-form-1303",
+      "canonicalUrl": "https://www.federalregister.gov/documents/2026/11/27/2026-24148/agency-information-collection-activities-extension-ships-stores-declaration-cbp-form-1303",
+      "summary": "Publication date: 2026-11-27 (day precision; exact time unavailable).",
+      "language": "en",
+      "topics": [
+        "policy",
+        "government"
+      ],
+      "region": {
+        "code": "US",
+        "label": "United States federal publication",
+        "precision": "country"
+      },
+      "publishedAt": null,
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "primary_documentation",
+      "fingerprint": "e35952bf",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "federal-register-ee54ff6d",
+      "sourceId": "federal-register",
+      "publisher": "Office of the Federal Register",
+      "originGroup": "us-federal-register",
+      "title": "Agency Information Collection Activities; Revision; Exportation of Used Self-Propelled Vehicles",
+      "url": "https://www.federalregister.gov/documents/2026/11/27/2026-24147/agency-information-collection-activities-revision-exportation-of-used-self-propelled-vehicles",
+      "canonicalUrl": "https://www.federalregister.gov/documents/2026/11/27/2026-24147/agency-information-collection-activities-revision-exportation-of-used-self-propelled-vehicles",
+      "summary": "Publication date: 2026-11-27 (day precision; exact time unavailable).",
+      "language": "en",
+      "topics": [
+        "policy",
+        "government"
+      ],
+      "region": {
+        "code": "US",
+        "label": "United States federal publication",
+        "precision": "country"
+      },
+      "publishedAt": null,
+      "eventAt": null,
+      "modifiedAt": null,
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "official_statement",
+      "evidenceType": "primary_documentation",
+      "fingerprint": "3f565137",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "usgs-us6000udry",
+      "sourceId": "usgs-earthquakes",
+      "publisher": "U.S. Geological Survey",
+      "originGroup": "usgs",
+      "title": "M 5.1 - Bonin Islands, Japan region",
+      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000udry",
+      "canonicalUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000udry",
+      "summary": "Bonin Islands, Japan region",
+      "language": "en",
+      "topics": [
+        "hazards",
+        "earthquakes",
+        "environment"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Bonin Islands, Japan region",
+        "precision": "region"
+      },
+      "publishedAt": null,
+      "eventAt": "2026-11-26T19:33:08.628Z",
+      "modifiedAt": "2026-11-26T19:50:51.040Z",
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "public_data",
+      "evidenceType": "primary_documentation",
+      "fingerprint": "fdd599e6",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "usgs-us6000udqa",
+      "sourceId": "usgs-earthquakes",
+      "publisher": "U.S. Geological Survey",
+      "originGroup": "usgs",
+      "title": "M 4.5 - 95 km SSE of Sarangani, Philippines",
+      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000udqa",
+      "canonicalUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000udqa",
+      "summary": "95 km SSE of Sarangani, Philippines",
+      "language": "en",
+      "topics": [
+        "hazards",
+        "earthquakes",
+        "environment"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "95 km SSE of Sarangani, Philippines",
+        "precision": "region"
+      },
+      "publishedAt": null,
+      "eventAt": "2026-11-26T16:18:00.760Z",
+      "modifiedAt": "2026-11-26T16:42:40.040Z",
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "public_data",
+      "evidenceType": "primary_documentation",
+      "fingerprint": "369cd2b2",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "usgs-us6000udq5",
+      "sourceId": "usgs-earthquakes",
+      "publisher": "U.S. Geological Survey",
+      "originGroup": "usgs",
+      "title": "M 5.7 - Revilla Gigedo Islands region",
+      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000udq5",
+      "canonicalUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000udq5",
+      "summary": "Revilla Gigedo Islands region",
+      "language": "en",
+      "topics": [
+        "hazards",
+        "earthquakes",
+        "environment"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Revilla Gigedo Islands region",
+        "precision": "region"
+      },
+      "publishedAt": null,
+      "eventAt": "2026-11-26T15:26:44.294Z",
+      "modifiedAt": "2026-11-26T19:09:05.216Z",
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "public_data",
+      "evidenceType": "primary_documentation",
+      "fingerprint": "085d5ba8",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "usgs-us6000udmc",
+      "sourceId": "usgs-earthquakes",
+      "publisher": "U.S. Geological Survey",
+      "originGroup": "usgs",
+      "title": "M 5.2 - 265 km WNW of Houma, Tonga",
+      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000udmc",
+      "canonicalUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000udmc",
+      "summary": "265 km WNW of Houma, Tonga",
+      "language": "en",
+      "topics": [
+        "hazards",
+        "earthquakes",
+        "environment"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "265 km WNW of Houma, Tonga",
+        "precision": "region"
+      },
+      "publishedAt": null,
+      "eventAt": "2026-11-26T09:22:45.352Z",
+      "modifiedAt": "2026-11-26T09:34:36.040Z",
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "public_data",
+      "evidenceType": "primary_documentation",
+      "fingerprint": "a33d3dae",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "usgs-us6000udm8",
+      "sourceId": "usgs-earthquakes",
+      "publisher": "U.S. Geological Survey",
+      "originGroup": "usgs",
+      "title": "M 5.5 - 204 km S of Taliwang, Indonesia",
+      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000udm8",
+      "canonicalUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000udm8",
+      "summary": "204 km S of Taliwang, Indonesia",
+      "language": "en",
+      "topics": [
+        "hazards",
+        "earthquakes",
+        "environment"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "204 km S of Taliwang, Indonesia",
+        "precision": "region"
+      },
+      "publishedAt": null,
+      "eventAt": "2026-11-26T09:08:40.640Z",
+      "modifiedAt": "2026-11-26T11:16:25.729Z",
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "public_data",
+      "evidenceType": "primary_documentation",
+      "fingerprint": "607974b1",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "usgs-us6000udm5",
+      "sourceId": "usgs-earthquakes",
+      "publisher": "U.S. Geological Survey",
+      "originGroup": "usgs",
+      "title": "M 4.8 - 225 km S of Taliwang, Indonesia",
+      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000udm5",
+      "canonicalUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000udm5",
+      "summary": "225 km S of Taliwang, Indonesia",
+      "language": "en",
+      "topics": [
+        "hazards",
+        "earthquakes",
+        "environment"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "225 km S of Taliwang, Indonesia",
+        "precision": "region"
+      },
+      "publishedAt": null,
+      "eventAt": "2026-11-26T09:00:41.073Z",
+      "modifiedAt": "2026-11-26T12:34:23.040Z",
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "public_data",
+      "evidenceType": "primary_documentation",
+      "fingerprint": "69529036",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "usgs-us6000udki",
+      "sourceId": "usgs-earthquakes",
+      "publisher": "U.S. Geological Survey",
+      "originGroup": "usgs",
+      "title": "M 4.6 - 97 km SW of Puerto Madero, Mexico",
+      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000udki",
+      "canonicalUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000udki",
+      "summary": "97 km SW of Puerto Madero, Mexico",
+      "language": "en",
+      "topics": [
+        "hazards",
+        "earthquakes",
+        "environment"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "97 km SW of Puerto Madero, Mexico",
+        "precision": "region"
+      },
+      "publishedAt": null,
+      "eventAt": "2026-11-26T03:30:28.511Z",
+      "modifiedAt": "2026-11-26T04:28:59.040Z",
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "public_data",
+      "evidenceType": "primary_documentation",
+      "fingerprint": "3686bfd7",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "usgs-us6000udjz",
+      "sourceId": "usgs-earthquakes",
+      "publisher": "U.S. Geological Survey",
+      "originGroup": "usgs",
+      "title": "M 5.0 - 184 km N of Hicks Bay, New Zealand",
+      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000udjz",
+      "canonicalUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000udjz",
+      "summary": "184 km N of Hicks Bay, New Zealand",
+      "language": "en",
+      "topics": [
+        "hazards",
+        "earthquakes",
+        "environment"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "184 km N of Hicks Bay, New Zealand",
+        "precision": "region"
+      },
+      "publishedAt": null,
+      "eventAt": "2026-11-26T02:09:17.972Z",
+      "modifiedAt": "2026-11-26T02:24:33.040Z",
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "public_data",
+      "evidenceType": "primary_documentation",
+      "fingerprint": "1ec71102",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "usgs-us6000udjx",
+      "sourceId": "usgs-earthquakes",
+      "publisher": "U.S. Geological Survey",
+      "originGroup": "usgs",
+      "title": "M 5.2 - 183 km N of Hicks Bay, New Zealand",
+      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000udjx",
+      "canonicalUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000udjx",
+      "summary": "183 km N of Hicks Bay, New Zealand",
+      "language": "en",
+      "topics": [
+        "hazards",
+        "earthquakes",
+        "environment"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "183 km N of Hicks Bay, New Zealand",
+        "precision": "region"
+      },
+      "publishedAt": null,
+      "eventAt": "2026-11-26T01:48:44.213Z",
+      "modifiedAt": "2026-11-26T02:01:37.040Z",
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "public_data",
+      "evidenceType": "primary_documentation",
+      "fingerprint": "833fdbc5",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "usgs-us6000udib",
+      "sourceId": "usgs-earthquakes",
+      "publisher": "U.S. Geological Survey",
+      "originGroup": "usgs",
+      "title": "M 4.8 - 190 km N of Hicks Bay, New Zealand",
+      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000udib",
+      "canonicalUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000udib",
+      "summary": "190 km N of Hicks Bay, New Zealand",
+      "language": "en",
+      "topics": [
+        "hazards",
+        "earthquakes",
+        "environment"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "190 km N of Hicks Bay, New Zealand",
+        "precision": "region"
+      },
+      "publishedAt": null,
+      "eventAt": "2026-11-25T21:32:33.545Z",
+      "modifiedAt": "2026-11-25T21:51:37.040Z",
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "public_data",
+      "evidenceType": "primary_documentation",
+      "fingerprint": "5dbb3fa0",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "usgs-us6000udht",
+      "sourceId": "usgs-earthquakes",
+      "publisher": "U.S. Geological Survey",
+      "originGroup": "usgs",
+      "title": "M 4.7 - 13 km NW of Port-Vila, Vanuatu",
+      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000udht",
+      "canonicalUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000udht",
+      "summary": "13 km NW of Port-Vila, Vanuatu",
+      "language": "en",
+      "topics": [
+        "hazards",
+        "earthquakes",
+        "environment"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "13 km NW of Port-Vila, Vanuatu",
+        "precision": "region"
+      },
+      "publishedAt": null,
+      "eventAt": "2026-11-25T18:59:29.141Z",
+      "modifiedAt": "2026-11-26T08:04:47.100Z",
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "public_data",
+      "evidenceType": "primary_documentation",
+      "fingerprint": "a9feabe2",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "usgs-us6000udf2",
+      "sourceId": "usgs-earthquakes",
+      "publisher": "U.S. Geological Survey",
+      "originGroup": "usgs",
+      "title": "M 5.0 - 67 km NNE of Luwuk, Indonesia",
+      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000udf2",
+      "canonicalUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000udf2",
+      "summary": "67 km NNE of Luwuk, Indonesia",
+      "language": "en",
+      "topics": [
+        "hazards",
+        "earthquakes",
+        "environment"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "67 km NNE of Luwuk, Indonesia",
+        "precision": "region"
+      },
+      "publishedAt": null,
+      "eventAt": "2026-11-25T12:08:12.731Z",
+      "modifiedAt": "2026-11-25T12:25:40.040Z",
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "public_data",
+      "evidenceType": "primary_documentation",
+      "fingerprint": "0af97eec",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "usgs-us6000udef",
+      "sourceId": "usgs-earthquakes",
+      "publisher": "U.S. Geological Survey",
+      "originGroup": "usgs",
+      "title": "M 5.3 - 83 km ESE of Hengchun, Taiwan",
+      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000udef",
+      "canonicalUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000udef",
+      "summary": "83 km ESE of Hengchun, Taiwan",
+      "language": "en",
+      "topics": [
+        "hazards",
+        "earthquakes",
+        "environment"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "83 km ESE of Hengchun, Taiwan",
+        "precision": "region"
+      },
+      "publishedAt": null,
+      "eventAt": "2026-11-25T08:47:16.394Z",
+      "modifiedAt": "2026-11-25T09:04:00.040Z",
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "public_data",
+      "evidenceType": "primary_documentation",
+      "fingerprint": "9cad4d4b",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "usgs-us6000ude3",
+      "sourceId": "usgs-earthquakes",
+      "publisher": "U.S. Geological Survey",
+      "originGroup": "usgs",
+      "title": "M 5.2 - 175 km N of Hicks Bay, New Zealand",
+      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000ude3",
+      "canonicalUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000ude3",
+      "summary": "175 km N of Hicks Bay, New Zealand",
+      "language": "en",
+      "topics": [
+        "hazards",
+        "earthquakes",
+        "environment"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "175 km N of Hicks Bay, New Zealand",
+        "precision": "region"
+      },
+      "publishedAt": null,
+      "eventAt": "2026-11-25T06:34:08.672Z",
+      "modifiedAt": "2026-11-25T07:03:11.040Z",
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "public_data",
+      "evidenceType": "primary_documentation",
+      "fingerprint": "2e846510",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "usgs-us6000uddj",
+      "sourceId": "usgs-earthquakes",
+      "publisher": "U.S. Geological Survey",
+      "originGroup": "usgs",
+      "title": "M 4.7 - 178 km ESE of Kimbe, Papua New Guinea",
+      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000uddj",
+      "canonicalUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000uddj",
+      "summary": "178 km ESE of Kimbe, Papua New Guinea",
+      "language": "en",
+      "topics": [
+        "hazards",
+        "earthquakes",
+        "environment"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "178 km ESE of Kimbe, Papua New Guinea",
+        "precision": "region"
+      },
+      "publishedAt": null,
+      "eventAt": "2026-11-25T04:30:32.480Z",
+      "modifiedAt": "2026-11-25T05:07:57.040Z",
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "public_data",
+      "evidenceType": "primary_documentation",
+      "fingerprint": "74988bbb",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "usgs-us6000udd1",
+      "sourceId": "usgs-earthquakes",
+      "publisher": "U.S. Geological Survey",
+      "originGroup": "usgs",
+      "title": "M 5.9 - Balleny Islands region",
+      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000udd1",
+      "canonicalUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000udd1",
+      "summary": "Balleny Islands region",
+      "language": "en",
+      "topics": [
+        "hazards",
+        "earthquakes",
+        "environment"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Balleny Islands region",
+        "precision": "region"
+      },
+      "publishedAt": null,
+      "eventAt": "2026-11-25T01:38:45.672Z",
+      "modifiedAt": "2026-11-26T01:43:45.359Z",
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "public_data",
+      "evidenceType": "primary_documentation",
+      "fingerprint": "4a0f3585",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "usgs-us6000udck",
+      "sourceId": "usgs-earthquakes",
+      "publisher": "U.S. Geological Survey",
+      "originGroup": "usgs",
+      "title": "M 4.7 - 2 km NNW of Cabatuan, Philippines",
+      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000udck",
+      "canonicalUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000udck",
+      "summary": "2 km NNW of Cabatuan, Philippines",
+      "language": "en",
+      "topics": [
+        "hazards",
+        "earthquakes",
+        "environment"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "2 km NNW of Cabatuan, Philippines",
+        "precision": "region"
+      },
+      "publishedAt": null,
+      "eventAt": "2026-11-24T23:29:55.097Z",
+      "modifiedAt": "2026-11-25T08:51:18.433Z",
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "public_data",
+      "evidenceType": "primary_documentation",
+      "fingerprint": "d6495639",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "usgs-us6000udcc",
+      "sourceId": "usgs-earthquakes",
+      "publisher": "U.S. Geological Survey",
+      "originGroup": "usgs",
+      "title": "M 4.5 - 64 km W of San Juan, Peru",
+      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000udcc",
+      "canonicalUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000udcc",
+      "summary": "64 km W of San Juan, Peru",
+      "language": "en",
+      "topics": [
+        "hazards",
+        "earthquakes",
+        "environment"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "64 km W of San Juan, Peru",
+        "precision": "region"
+      },
+      "publishedAt": null,
+      "eventAt": "2026-11-24T22:36:30.355Z",
+      "modifiedAt": "2026-11-25T04:49:51.040Z",
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "public_data",
+      "evidenceType": "primary_documentation",
+      "fingerprint": "4e68c6e7",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "usgs-us6000udbn",
+      "sourceId": "usgs-earthquakes",
+      "publisher": "U.S. Geological Survey",
+      "originGroup": "usgs",
+      "title": "M 5.0 - 209 km SE of Kokopo, Papua New Guinea",
+      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000udbn",
+      "canonicalUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000udbn",
+      "summary": "209 km SE of Kokopo, Papua New Guinea",
+      "language": "en",
+      "topics": [
+        "hazards",
+        "earthquakes",
+        "environment"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "209 km SE of Kokopo, Papua New Guinea",
+        "precision": "region"
+      },
+      "publishedAt": null,
+      "eventAt": "2026-11-24T21:11:41.618Z",
+      "modifiedAt": "2026-11-24T21:29:53.040Z",
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "public_data",
+      "evidenceType": "primary_documentation",
+      "fingerprint": "ac40c4ee",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "usgs-us6000udb8",
+      "sourceId": "usgs-earthquakes",
+      "publisher": "U.S. Geological Survey",
+      "originGroup": "usgs",
+      "title": "M 4.6 - 49 km SW of Ovalle, Chile",
+      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000udb8",
+      "canonicalUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000udb8",
+      "summary": "49 km SW of Ovalle, Chile",
+      "language": "en",
+      "topics": [
+        "hazards",
+        "earthquakes",
+        "environment"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "49 km SW of Ovalle, Chile",
+        "precision": "region"
+      },
+      "publishedAt": null,
+      "eventAt": "2026-11-24T20:27:57.411Z",
+      "modifiedAt": "2026-11-24T20:50:23.040Z",
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "public_data",
+      "evidenceType": "primary_documentation",
+      "fingerprint": "eb57deda",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "usgs-us6000ud7z",
+      "sourceId": "usgs-earthquakes",
+      "publisher": "U.S. Geological Survey",
+      "originGroup": "usgs",
+      "title": "M 4.7 - 18 km ESE of Güvercinlik, Turkey",
+      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000ud7z",
+      "canonicalUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000ud7z",
+      "summary": "18 km ESE of Güvercinlik, Turkey",
+      "language": "en",
+      "topics": [
+        "hazards",
+        "earthquakes",
+        "environment"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "18 km ESE of Güvercinlik, Turkey",
+        "precision": "region"
+      },
+      "publishedAt": null,
+      "eventAt": "2026-11-24T15:39:43.392Z",
+      "modifiedAt": "2026-11-24T17:25:06.429Z",
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "public_data",
+      "evidenceType": "primary_documentation",
+      "fingerprint": "99ffb55e",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "usgs-us6000ud7h",
+      "sourceId": "usgs-earthquakes",
+      "publisher": "U.S. Geological Survey",
+      "originGroup": "usgs",
+      "title": "M 4.8 - 71 km W of Vallenar, Chile",
+      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000ud7h",
+      "canonicalUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000ud7h",
+      "summary": "71 km W of Vallenar, Chile",
+      "language": "en",
+      "topics": [
+        "hazards",
+        "earthquakes",
+        "environment"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "71 km W of Vallenar, Chile",
+        "precision": "region"
+      },
+      "publishedAt": null,
+      "eventAt": "2026-11-24T13:22:38.945Z",
+      "modifiedAt": "2026-11-24T13:41:08.040Z",
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "public_data",
+      "evidenceType": "primary_documentation",
+      "fingerprint": "b77d7246",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "usgs-us6000ud73",
+      "sourceId": "usgs-earthquakes",
+      "publisher": "U.S. Geological Survey",
+      "originGroup": "usgs",
+      "title": "M 5.0 - 24 km WNW of Piti Village, Guam",
+      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000ud73",
+      "canonicalUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000ud73",
+      "summary": "24 km WNW of Piti Village, Guam",
+      "language": "en",
+      "topics": [
+        "hazards",
+        "earthquakes",
+        "environment"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "24 km WNW of Piti Village, Guam",
+        "precision": "region"
+      },
+      "publishedAt": null,
+      "eventAt": "2026-11-24T11:55:13.018Z",
+      "modifiedAt": "2026-11-26T12:05:21.263Z",
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "public_data",
+      "evidenceType": "primary_documentation",
+      "fingerprint": "d46221aa",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "usgs-us6000ud6z",
+      "sourceId": "usgs-earthquakes",
+      "publisher": "U.S. Geological Survey",
+      "originGroup": "usgs",
+      "title": "M 5.2 - 93 km WSW of Puerto Madero, Mexico",
+      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000ud6z",
+      "canonicalUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000ud6z",
+      "summary": "93 km WSW of Puerto Madero, Mexico",
+      "language": "en",
+      "topics": [
+        "hazards",
+        "earthquakes",
+        "environment"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "93 km WSW of Puerto Madero, Mexico",
+        "precision": "region"
+      },
+      "publishedAt": null,
+      "eventAt": "2026-11-24T11:51:44.702Z",
+      "modifiedAt": "2026-11-24T12:07:58.040Z",
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "public_data",
+      "evidenceType": "primary_documentation",
+      "fingerprint": "a5b33f69",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "usgs-us6000ud6h",
+      "sourceId": "usgs-earthquakes",
+      "publisher": "U.S. Geological Survey",
+      "originGroup": "usgs",
+      "title": "M 6.4 - Mauritius - Reunion region",
+      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000ud6h",
+      "canonicalUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000ud6h",
+      "summary": "Mauritius - Reunion region",
+      "language": "en",
+      "topics": [
+        "hazards",
+        "earthquakes",
+        "environment"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "Mauritius - Reunion region",
+        "precision": "region"
+      },
+      "publishedAt": null,
+      "eventAt": "2026-11-24T11:06:14.036Z",
+      "modifiedAt": "2026-11-25T11:14:23.434Z",
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "public_data",
+      "evidenceType": "primary_documentation",
+      "fingerprint": "e3625a7b",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "usgs-us6000ud3m",
+      "sourceId": "usgs-earthquakes",
+      "publisher": "U.S. Geological Survey",
+      "originGroup": "usgs",
+      "title": "M 4.5 - 9 km NNW of La Tronosa, Panama",
+      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000ud3m",
+      "canonicalUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000ud3m",
+      "summary": "9 km NNW of La Tronosa, Panama",
+      "language": "en",
+      "topics": [
+        "hazards",
+        "earthquakes",
+        "environment"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "9 km NNW of La Tronosa, Panama",
+        "precision": "region"
+      },
+      "publishedAt": null,
+      "eventAt": "2026-11-24T01:55:57.417Z",
+      "modifiedAt": "2026-11-24T10:14:43.256Z",
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "public_data",
+      "evidenceType": "primary_documentation",
+      "fingerprint": "7edf8fbb",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "usgs-us6000ud3i",
+      "sourceId": "usgs-earthquakes",
+      "publisher": "U.S. Geological Survey",
+      "originGroup": "usgs",
+      "title": "M 5.3 - 67 km WNW of Mangan, India",
+      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000ud3i",
+      "canonicalUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000ud3i",
+      "summary": "67 km WNW of Mangan, India",
+      "language": "en",
+      "topics": [
+        "hazards",
+        "earthquakes",
+        "environment"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "67 km WNW of Mangan, India",
+        "precision": "region"
+      },
+      "publishedAt": null,
+      "eventAt": "2026-11-24T01:32:42.417Z",
+      "modifiedAt": "2026-11-25T13:21:20.688Z",
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "public_data",
+      "evidenceType": "primary_documentation",
+      "fingerprint": "8b56e14b",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "usgs-us6000ud2y",
+      "sourceId": "usgs-earthquakes",
+      "publisher": "U.S. Geological Survey",
+      "originGroup": "usgs",
+      "title": "M 4.6 - 130 km SSW of Merizo Village, Guam",
+      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000ud2y",
+      "canonicalUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000ud2y",
+      "summary": "130 km SSW of Merizo Village, Guam",
+      "language": "en",
+      "topics": [
+        "hazards",
+        "earthquakes",
+        "environment"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "130 km SSW of Merizo Village, Guam",
+        "precision": "region"
+      },
+      "publishedAt": null,
+      "eventAt": "2026-11-23T21:25:33.408Z",
+      "modifiedAt": "2026-11-24T00:26:33.040Z",
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "public_data",
+      "evidenceType": "primary_documentation",
+      "fingerprint": "d0f42dcc",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "usgs-us6000ucz2",
+      "sourceId": "usgs-earthquakes",
+      "publisher": "U.S. Geological Survey",
+      "originGroup": "usgs",
+      "title": "M 4.7 - South Sandwich Islands region",
+      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000ucz2",
+      "canonicalUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000ucz2",
+      "summary": "South Sandwich Islands region",
+      "language": "en",
+      "topics": [
+        "hazards",
+        "earthquakes",
+        "environment"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "South Sandwich Islands region",
+        "precision": "region"
+      },
+      "publishedAt": null,
+      "eventAt": "2026-11-23T15:10:57.877Z",
+      "modifiedAt": "2026-11-23T16:34:34.040Z",
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "public_data",
+      "evidenceType": "primary_documentation",
+      "fingerprint": "1654d47d",
+      "privacyClass": "public",
+      "demo": false
+    },
+    {
+      "id": "usgs-us6000ucyd",
+      "sourceId": "usgs-earthquakes",
+      "publisher": "U.S. Geological Survey",
+      "originGroup": "usgs",
+      "title": "M 4.8 - 209 km SSE of Tobi Village, Palau",
+      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000ucyd",
+      "canonicalUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000ucyd",
+      "summary": "209 km SSE of Tobi Village, Palau",
+      "language": "en",
+      "topics": [
+        "hazards",
+        "earthquakes",
+        "environment"
+      ],
+      "region": {
+        "code": "GLOBAL",
+        "label": "209 km SSE of Tobi Village, Palau",
+        "precision": "region"
+      },
+      "publishedAt": null,
+      "eventAt": "2026-11-23T11:24:31.100Z",
+      "modifiedAt": "2026-11-23T11:41:12.040Z",
+      "retrievedAt": "2026-11-27T00:09:46.540Z",
+      "kind": "public_data",
+      "evidenceType": "primary_documentation",
+      "fingerprint": "c4684a26",
+      "privacyClass": "public",
+      "demo": false
+    }
+  ]
+}

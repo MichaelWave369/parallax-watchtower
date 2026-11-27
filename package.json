@@ -1,6 +1,6 @@
 {
   "name": "watchtower-live",
-  "version": "0.1.0",
+  "version": "2.0.0-alpha.1",
   "private": false,
   "type": "module",
   "homepage": "https://michaelwave369.github.io/parallax-watchtower/",
@@ -9,21 +9,26 @@
     "build": "vite build --base=/parallax-watchtower/",
     "preview": "vite preview",
     "test": "node --test tests/*.test.mjs",
-    "test:browser": "playwright test"
+    "test:browser": "playwright test",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@vitejs/plugin-react": "latest",
-    "vite": "latest",
-    "react": "18.3.1",
-    "react-dom": "18.3.1",
-    "typescript": "5.7.2",
     "@types/node": "22.12.0",
     "@types/react": "18.3.18",
     "@types/react-dom": "18.3.5",
+    "@vitejs/plugin-react": "6.3.0",
+    "maplibre-gl": "6.18.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
     "satellite.js": "6.0.2",
-    "maplibre-gl": "6.18.0"
+    "saxes": "6.0.0",
+    "typescript": "5.7.2",
+    "vite": "8.4.0"
   },
   "devDependencies": {
-    "@playwright/test": "1.56.1"
+    "@axe-core/playwright": "4.14.1",
+    "@playwright/test": "1.56.1",
+    "ajv": "8.20.0",
+    "ajv-formats": "3.0.1"
   }
 }
