@@ -31,7 +31,7 @@ test('watchlist search requires every term and supports named topics without reg
 });
 test('saved workspaces preserve desk, time window, density and observation filters',()=>{
   const p=normalizeNewsPreferences({savedViews:[{id:'v1',name:'Regional review',query:'Japan',topic:'earthquakes',region:'GLOBAL',desk:'hazards',timeWindow:'24',compact:true,includeObservations:true}]});
-  assert.deepEqual(p.savedViews[0],{id:'v1',name:'Regional review',query:'Japan',topic:'earthquakes',region:'GLOBAL',desk:'hazards',timeWindow:'24',compact:true,includeObservations:true});
+  assert.deepEqual(p.savedViews[0],{id:'v1',name:'Regional review',query:'Japan',topic:'earthquakes',region:'GLOBAL',language:'',sourceId:'',desk:'hazards',timeWindow:'24',compact:true,includeObservations:true});
 });
 test('conflicting import identities fail atomically and cannot attach existing notes to a different receipt',()=>{
   const first=row({id:'shared'}), second=row({id:'shared',url:'https://www.nasa.gov/different-receipt'});
@@ -46,4 +46,18 @@ test('large public archives roundtrip inside the same UTF-8 size limit with expl
   assert.ok(new TextEncoder().encode(text).byteLength<=3000000);
   assert.ok(pack.omittedCount>0); assert.equal(pack.count+pack.omittedCount,2000);
   assert.equal(readNewsArchiveImport(text,now).length,pack.count);
+});
+
+test('language and publisher filters survive saved views and older preferences migrate to all',()=>{
+ const old=normalizeNewsPreferences({});assert.equal(old.language,'');assert.equal(old.sourceId,'');
+ const p=normalizeNewsPreferences({language:'es',sourceId:'ips-headlines',savedViews:[{id:'v1',name:'Spanish',language:'es',sourceId:'ips-headlines'}]});
+ assert.equal(p.language,'es');assert.equal(p.sourceId,'ips-headlines');assert.equal(p.savedViews[0].language,'es');assert.equal(p.savedViews[0].sourceId,'ips-headlines');
+ const bad=normalizeNewsPreferences({language:'<script>',sourceId:'https:// unsafe'});assert.equal(bad.language,'');assert.equal(bad.sourceId,'');
+});
+test('search handles canonical Unicode equivalence without altering source text',()=>{
+ const report=row({title:'Café y política',language:'es'});
+ assert.equal(matchesNewsQuery(report,'CAFE\u0301 POLI\u0301TICA'),true);
+ assert.equal(matchesNewsQuery(report,'cafe'),false);
+ assert.equal(matchesNewsQuery(row({title:'日本の研究'}),'日本'),true);
+ assert.equal(report.title,'Café y política');
 });
