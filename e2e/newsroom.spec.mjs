@@ -188,3 +188,15 @@ test('manual saved-source comparison stays attributed and note drafts cannot cro
   await expect(page.locator('.nr-comparison')).toContainText('User-selected comparison; no relationship is inferred.');
   await expect(page.locator('.nr-comparison')).toContainText('3 origin families. Independence not assessed');
 });
+
+test('coverage matrix exposes regional blind spots and shared record count', async ({page})=>{
+ await setup(page);
+ await desk(page,'Source Observatory').click();
+ const matrix=page.getByRole('region',{name:'Planetary coverage matrix'});
+ await expect(matrix).toBeVisible();
+ await expect(matrix.locator('.nr-coverage-cell').filter({hasText:'Africa'}).first()).toContainText('No dedicated remit');
+ await expect(matrix.locator('.nr-coverage-cell').filter({hasText:'Global / space'})).toContainText('4 declared feed(s)');
+ await expect(matrix).toContainText('5 recently retrieved records of 5');
+ await page.setViewportSize({width:390,height:844});
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBe(true);
+});
