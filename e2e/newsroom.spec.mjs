@@ -246,3 +246,25 @@ test('observed metadata revisions survive reload and remain outside public archi
  expect(exported.records.find(r=>r.id===old.id).title).toBe(revised.title);
  expect(exported.revisions).toBeUndefined();
 });
+
+test('visit comparison distinguishes newly listed and revised metadata and supports review reset',async({page})=>{
+ const {data}=await setup(page);
+ await expect.poll(()=>page.evaluate(()=>new Promise(resolve=>{
+   const req=indexedDB.open('watchtower-news-v1',1);
+   req.onsuccess=()=>{const db=req.result;const tx=db.transaction('state');const get=tx.objectStore('state').get('snapshot');tx.oncomplete=()=>{db.close();resolve(get.result?.records?.length||0);};};
+ }))).toBe(5);
+ const at=new Date(Date.parse(data.generatedAt)+1000).toISOString();
+ const revised={...data.records[0],title:'TEST FIXTURE: Changed metadata',retrievedAt:at};
+ const added={...data.records[0],id:'test-new-receipt',title:'TEST FIXTURE: Newly listed metadata',url:'https://www.nasa.gov/news/test-new-receipt',canonicalUrl:'https://www.nasa.gov/news/test-new-receipt',retrievedAt:at};
+ const records=[...data.records.map(r=>r.id===revised.id?revised:r),added];
+ const snapshot={...data,generatedAt:at,records,sources:data.sources.map(s=>({...s,recordCount:records.filter(r=>r.sourceId===s.id).length}))};
+ await page.route('**/data/news.v1.json',route=>route.fulfill({json:snapshot}));
+ await page.reload();
+ const panel=page.locator('.nr-visit-changes');
+ await expect(panel.locator('summary')).toContainText('1 newly listed · 1 revised');
+ await panel.locator('summary').click();
+ await expect(panel.getByRole('link',{name:'TEST FIXTURE: Newly listed metadata'})).toBeVisible();
+ await expect(panel.getByRole('link',{name:'After: TEST FIXTURE: Changed metadata'})).toBeVisible();
+ await panel.getByRole('button',{name:'Mark current snapshot reviewed'}).click();
+ await expect(panel.locator('summary')).toContainText('0 newly listed · 0 revised');
+});

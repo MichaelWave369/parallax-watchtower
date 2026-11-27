@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { NEWS_SOURCES } from '../lib/newsSources.mjs';
+import { compareNewsVisits } from '../lib/newsVisits.mjs';
 import { mergeNewsRevisions, revisionsForRecord } from '../lib/newsRevisions.mjs';
 import { buildCoverage } from '../lib/newsCoverage.mjs';
 import { normalizeNewsRecord, validateNewsSnapshot, validateNewsHealth } from '../lib/newsContract.mjs';
@@ -56,6 +57,8 @@ export function NewsCommandCenter({ onOpenAtlas }: { onOpenAtlas: () => void }) 
   const [archive, setArchive] = useState<NewsRecord[]>([]);
   const [revisions, setRevisions] = useState<NewsRecord[]>([]);
   const [snapshot, setSnapshot] = useState<Snapshot | null>(null);
+  const [visitBaseline, setVisitBaseline] = useState<Snapshot | null>(null);
+  const [visitCurrent, setVisitCurrent] = useState<Snapshot | null>(null);
   const [health, setHealth] = useState<any>(null);
   const [now, setNow] = useState(clock);
   const [loading, setLoading] = useState(true);
@@ -106,6 +109,7 @@ export function NewsCommandCenter({ onOpenAtlas }: { onOpenAtlas: () => void }) 
         const good = validateNewsSnapshot(news.value, Date.parse(time)) as Snapshot | null;
         if (good) {
           setSnapshot(good);
+          setVisitCurrent(good);
           setRevisions(old => mergeNewsRevisions(old, good.records, { now: Date.parse(time), retentionDays: preferencesRef.current.retentionDays }) as NewsRecord[]);
           setArchive(old => mergeNewsArchive(old, good.records, { now: Date.parse(time), retentionDays: preferencesRef.current.retentionDays }));
           setNetworkNote('Shared snapshot loaded. Retrieval success does not verify an event.');
@@ -121,7 +125,7 @@ export function NewsCommandCenter({ onOpenAtlas }: { onOpenAtlas: () => void }) 
         setArchive(mergeNewsArchive([], stored.archive, { retentionDays: prefs.retentionDays }));
         const cached = validateNewsSnapshot(stored.snapshot);
         setRevisions(mergeNewsRevisions(stored.revisions, cached?.records || [], { retentionDays: preferencesRef.current.retentionDays }) as NewsRecord[]);
-        if (cached) setSnapshot(cached as Snapshot);
+        if (cached) { setSnapshot(cached as Snapshot); setVisitBaseline(cached as Snapshot); }
       } catch { if (!disposed) setStorageNote('Local history is unavailable. Records will remain in memory for this session.'); }
       if (!disposed) { initialized.current = true; await refresh(); }
     })();
@@ -177,6 +181,7 @@ export function NewsCommandCenter({ onOpenAtlas }: { onOpenAtlas: () => void }) 
   const selected = (filtered.find(row => row.id === selectedId) || filtered[0]) as NewsRecord | undefined;
   const selectedEvent: any = selected ? events.find((event: any) => event.articles.some((row: NewsRecord) => row.id === selected.id)) : null;
   const brief = useMemo(() => makeNewsBriefing(filtered, { now: Date.parse(now), windowHours: prefs.timeWindow === '24' ? 24 : 168, maxItems: 30 }), [filtered, now, prefs.timeWindow]);
+  const visitChanges = useMemo(() => compareNewsVisits(visitBaseline, visitCurrent, Date.parse(now)), [visitBaseline, visitCurrent, now]);
   const observedRevisions = revisionsForRecord(revisions, selected) as NewsRecord[];
   const notes = selected ? prefs.notes.filter(note => note.recordId === selected.id) : [];
   const compareRows: NewsRecord[] = [...(selectedEvent?.articles || (selected ? [selected] : []))];
@@ -231,7 +236,7 @@ export function NewsCommandCenter({ onOpenAtlas }: { onOpenAtlas: () => void }) 
     finally { setImporting(false); }
   }
   function clearArchive() {
-    setArchive([]); setRevisions([]); setSnapshot(null); setHealth(null); update({ pins: [], separateIds: [], notes: [] });
+    setArchive([]); setRevisions([]); setSnapshot(null); setVisitBaseline(null); setVisitCurrent(null); setHealth(null); update({ pins: [], separateIds: [], notes: [] });
     setActionNote('Local news history and research annotations cleared. A future refresh can load the public snapshot again.');
   }
 
@@ -257,6 +262,18 @@ export function NewsCommandCenter({ onOpenAtlas }: { onOpenAtlas: () => void }) 
       <div className="nr-main">
         <header className="nr-desk-heading"><div><div className="nr-overline">PHI369 LABS / WORLD DESK</div><h2>{deskName}</h2><p>{prefs.desk === 'sources' ? 'Availability, permissions, provenance, and limits for every connected adapter.' : 'Understand the report. Inspect the source. Keep the uncertainty.'}</p></div><span className="nr-edition">EDITION 01<br /><strong>PUBLIC INTELLIGENCE</strong></span></header>
         <div className="nr-metrics"><div><span>PUBLIC RECORDS</span><strong>{records.length.toString().padStart(2, '0')}</strong><small>{dedup.duplicates.length} duplicates collapsed</small></div><div><span>REPORT GROUPS</span><strong>{events.length.toString().padStart(2, '0')}</strong><small>Heuristic · reviewable</small></div><div><span>SOURCE RETRIEVAL</span><strong>{healthy}<em> / {NEWS_SOURCES.length}</em></strong><small>{snapshot ? stamp(snapshot.generatedAt) : 'No successful snapshot'}</small></div></div>
+        {prefs.desk === 'global' && <details className="nr-visit-changes"><summary>Changes since previous visit{visitChanges.state === 'ready' ? ` (${visitChanges.added.length} newly listed · ${visitChanges.revised.length} revised)` : ''}</summary>
+<p className="nr-muted">Comparison with the last locally saved shared snapshot when this newsroom opened. Newly listed means absent from that snapshot, not newly published or independently confirmed. Missing items are not retractions.</p>
+{visitChanges.state === 'ready' ? <>
+<p>Baseline: {stamp(visitChanges.baselineAt)} · Current: {stamp(visitChanges.currentAt)}</p>
+<p>{visitChanges.same} matching metadata receipts · {visitChanges.ignored} excluded or ambiguous observations</p>
+{visitChanges.added.length === 0 && visitChanges.revised.length === 0 && <p>No newly listed or revised metadata in this comparison.</p>}
+{visitChanges.added.length > 0 && <section><h3>Newly listed ({visitChanges.added.length})</h3><ul>{visitChanges.added.map(row => <li key={row.sourceId + row.canonicalUrl}><a href={row.url} target="_blank" rel="noopener noreferrer" lang={row.language === 'und' ? undefined : row.language} dir="auto">{row.title}</a><span>{row.publisher} · Retrieved {stamp(row.retrievedAt)}</span></li>)}</ul></section>}
+{visitChanges.revised.length > 0 && <section><h3>Revised metadata ({visitChanges.revised.length})</h3><ul>{visitChanges.revised.map(change => <li key={change.after.sourceId + change.after.canonicalUrl}><span>Before: {change.before.title}</span><a href={change.after.url} target="_blank" rel="noopener noreferrer" dir="auto">After: {change.after.title}</a><span>{change.after.publisher} · Retrieved {stamp(change.after.retrievedAt)}</span><span>Metadata changed; not necessarily a correction.</span></li>)}</ul></section>}
+<button className="nr-button" onClick={() => setVisitBaseline(visitCurrent)}>Mark current snapshot reviewed</button>
+</> : <p>{visitChanges.state === 'baseline-needed' ? 'No previous snapshot is available for comparison. Review this snapshot to establish a baseline.' : visitChanges.state === 'older-snapshot' ? 'The received snapshot predates the baseline. No change claims are made.' : 'A successful shared snapshot load is required for comparison.'}</p>}
+{visitChanges.state === 'baseline-needed' && <button className="nr-button" onClick={() => setVisitBaseline(visitCurrent)}>Mark current snapshot reviewed</button>}
+</details>}
         {prefs.desk === 'sources' ? <div className="nr-observatory">
           <p className="nr-muted">Adapter availability describes retrieval. It is not a rating of the publisher or independent confirmation of its claims. Only these adapters are in the news cache; the atlas has a separate source ledger.</p>
           <section className="nr-coverage-matrix" aria-label="Planetary coverage matrix">
