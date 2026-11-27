@@ -12,14 +12,19 @@ permissions:
 
 concurrency:
   group: pages
+  queue: max
   cancel-in-progress: false
 
 jobs:
   build:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
