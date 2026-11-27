@@ -54,10 +54,10 @@ export function DiscoveryInbox({ signals }: Props) {
   }, []);
 
   // Reuse Watchtower's already-loaded public signals. No new feed fetches occur here.
-  const leads = useMemo(() => {
+  const leads = useMemo<Lead[]>(() => {
     const encountered = new Set<string>();
-    return signals.map((signal) => candidateFromSignal(signal)).filter((lead): lead is NonNullable<ReturnType<typeof candidateFromSignal>> => {
-      if (!lead) return false;
+    return signals.map((signal) => candidateFromSignal(signal)).filter((lead): lead is Lead & { sourceTimestamp: string } => {
+      if (!lead || typeof lead.sourceUrl !== "string") return false;
       const key = receiptKey(lead.sourceUrl);
       if (!key || encountered.has(key)) return false;
       encountered.add(key);

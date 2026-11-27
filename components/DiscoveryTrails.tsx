@@ -7,6 +7,11 @@ type Lead = {
   sourceName: string; sourceUrl: string; sourceTimestamp: string | null;
   capturedAt: string; status: string; reviewNote: string;
 };
+type TemporalWindow = {
+  id: string; period: "day" | "week"; from: string; through: string;
+  candidates: Lead[]; counts: { earthquake: number; wildfire: number };
+  hasBothSources: boolean; label: string;
+};
 type Props = {
   candidates: Lead[]; cacheState: string; generatedAt: string | null;
   savedKeys: Set<string | null>; onQueue: (lead: Lead) => void;
@@ -16,7 +21,7 @@ export function DiscoveryTrails({ candidates, cacheState, generatedAt, savedKeys
   const [period, setPeriod] = useState<"day" | "week">("week");
   const [selectedId, setSelectedId] = useState("");
   const [message, setMessage] = useState("");
-  const windows = useMemo(() => groupTemporalTrails(candidates, period), [candidates, period]);
+  const windows = useMemo<TemporalWindow[]>(() => groupTemporalTrails(candidates, period), [candidates, period]);
   const selected = windows.find((item) => item.id === selectedId) ??
     windows.find((item) => item.hasBothSources) ?? windows[0];
   const crossSourceWindows = windows.filter((item) => item.hasBothSources).length;

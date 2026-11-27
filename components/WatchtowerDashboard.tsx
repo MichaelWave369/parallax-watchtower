@@ -7,6 +7,11 @@ import { MapRenderBoundary } from "./MapRenderBoundary";
 import { ExplorePanel } from "./ExplorePanel";
 import { IncidentRoom } from "./IncidentRoom";
 import { DiscoveryInbox } from "./DiscoveryInbox";
+import { readBoundedJson } from "../lib/browserRequests.mjs";
+import { buildGdeltProxyUrl, normalizeGdeltArticles, safeNewsReceipt } from "../lib/legacyNews.mjs";
+import { normalizeMarketSignals } from "../lib/legacyMarket.mjs";
+import { normalizeWatchZone, readSavedWatchZones } from "../lib/watchZoneValidation.mjs";
+const NewsCommandCenter = lazy(() => import("./NewsCommandCenter").then(module => ({ default: module.NewsCommandCenter })));
 
 // Defer MapLibre/WebGL entirely until the visitor opens Map mode.
 // An unsupported browser must still render WATCHTOWER's header, controls and Lite Atlas.
@@ -87,10 +92,8 @@ function defaultAlertRules(): AlertRule[] {
 }
 
 function safeInitialSavedZones(): WatchZone[] {
-  try {
-    const parsed = JSON.parse(localStorage.getItem(WATCH_ZONES_STORAGE_KEY) ?? "[]");
-    return Array.isArray(parsed) ? parsed.filter((z) => typeof z?.name === "string" && Number.isFinite(z.lat) && Number.isFinite(z.lon) && Number.isFinite(z.radiusKm)).map((z) => ({ ...z, source: "saved" })) : [];
-  } catch { return []; }
+  try { return readSavedWatchZones(localStorage.getItem(WATCH_ZONES_STORAGE_KEY)); }
+  catch { return []; }
 }
 
 function safeInitialAlertRules(): AlertRule[] {
@@ -108,25 +111,6 @@ function safeInitialAlertRules(): AlertRule[] {
   } catch { return defaultAlertRules(); }
 }
 
-function parseGdeltDate(raw?: string) {
-  if (!raw) return new Date().toISOString();
-  const asDate = new Date(raw);
-  if (!Number.isNaN(Number(asDate))) return asDate.toISOString();
-  const digits = raw.replace(/\D/g, "");
-  if (digits.length >= 14) return new Date(Date.UTC(Number(digits.slice(0, 4)), Number(digits.slice(4, 6)) - 1, Number(digits.slice(6, 8)), Number(digits.slice(8, 10)), Number(digits.slice(10, 12)), Number(digits.slice(12, 14)))).toISOString();
-  return new Date().toISOString();
-}
-
-function inferNewsLocation(article: GdeltArticle) {
-  const text = `${article.title ?? ""} ${article.url ?? ""} ${article.domain ?? ""}`.toLowerCase();
-  if (text.includes("shasta")) return { lat: 41.4099, lon: -122.1949, radiusKm: 90, locationLabel: "Mt. Shasta / Siskiyou lens" };
-  if (text.includes("corning") || text.includes("tehama")) return { lat: 39.9277, lon: -122.1792, radiusKm: 80, locationLabel: "Corning / Tehama lens" };
-  if (text.includes("redding") || text.includes("shasta county")) return { lat: 40.5865, lon: -122.3917, radiusKm: 90, locationLabel: "Redding / Shasta County lens" };
-  if (text.includes("sacramento")) return { lat: 38.5816, lon: -121.4944, radiusKm: 90, locationLabel: "Sacramento lens" };
-  if (text.includes("california") || text.includes("wildfire") || text.includes("earthquake")) return { lat: 39.6, lon: -121.9, radiusKm: 350, locationLabel: "Northern California approximate lens" };
-  return {};
-}
-
 function gdeltDirectUrl() {
   const url = new URL(GDELT_DOC_URL);
   url.searchParams.set("query", NEWS_QUERY);
@@ -137,46 +121,20 @@ function gdeltDirectUrl() {
   return url.toString();
 }
 
-function gdeltProxyUrl(rawProxyUrl: string) {
-  const trimmed = rawProxyUrl.trim();
-  if (!trimmed) return "";
-  const url = new URL(trimmed, window.location.origin);
-  url.searchParams.set("query", NEWS_QUERY);
-  url.searchParams.set("maxrecords", "20");
-  return url.toString();
-}
-
 async function fetchNewsSignals(now: string, proxyUrl: string) {
   const endpoints = [] as { name: string; url: string; mode: "proxy" | "direct" }[];
-  const proxy = gdeltProxyUrl(proxyUrl);
-  if (proxy) endpoints.push({ name: "Proxy GDELT News Adapter", url: proxy, mode: "proxy" });
+  try {
+    const proxy = buildGdeltProxyUrl(proxyUrl, window.location.origin);
+    if (proxy) endpoints.push({ name: "Proxy GDELT News Adapter", url: proxy, mode: "proxy" });
+  } catch { /* An invalid stored proxy cannot suppress the fixed direct adapter. */ }
   endpoints.push({ name: "GDELT News Adapter", url: gdeltDirectUrl(), mode: "direct" });
   let lastError = "No news endpoint attempted";
 
   for (const endpoint of endpoints) {
     const started = Date.now();
     try {
-      const res = await fetch(endpoint.url, { cache: "no-store" });
-      if (!res.ok) throw new Error(`${endpoint.name} returned ${res.status}`);
-      const json = await res.json();
-      const articles: GdeltArticle[] = Array.isArray(json.articles) ? json.articles : [];
-      const records: SignalRecord[] = articles.slice(0, 20).map((article, index) => {
-        const location = inferNewsLocation(article);
-        return {
-          id: `gdelt-${endpoint.mode}-${index}-${encodeURIComponent(article.url ?? article.title ?? String(index)).slice(0, 64)}`,
-          type: "news",
-          title: article.title ?? "Untitled public news signal",
-          summary: article.sourceCommonName ?? article.domain ?? "GDELT public news article",
-          source: endpoint.name,
-          sourceUrl: article.url,
-          timestamp: parseGdeltDate(article.seendate),
-          confidence: location.lat ? "reported" : "approximate",
-          confidenceNotes: location.lat ? `Public article via ${endpoint.mode} path with approximate place lens` : `Public article via ${endpoint.mode} path; no precise location inferred`,
-          privacyClass: "public",
-          facts: { sourceMode: endpoint.mode, domain: article.domain, sourceCommonName: article.sourceCommonName, language: article.language, sourceCountry: article.sourceCountry, seendate: article.seendate },
-          ...location
-        };
-      });
+      const json = await readBoundedJson(endpoint.url, { maxBytes: 2000000 });
+      const records = normalizeGdeltArticles(json.articles, endpoint.mode) as SignalRecord[];
       return { records, ledger: { name: endpoint.name, status: records.length ? "fresh" as SourceStatus : "stale" as SourceStatus, lastChecked: now, message: `${records.length} public news records in ${Date.now() - started}ms via ${endpoint.mode}` }, log: `${endpoint.name} returned ${records.length} records` };
     } catch (error) {
       lastError = error instanceof Error ? error.message : `${endpoint.name} failed`;
@@ -187,29 +145,9 @@ async function fetchNewsSignals(now: string, proxyUrl: string) {
 
 async function fetchMarketSignals(now: string) {
   const started = Date.now();
-  const res = await fetch(MARKET_URL, { cache: "no-store" });
-  if (!res.ok) throw new Error(`CoinGecko returned ${res.status}`);
-  const json = await res.json();
-  const names: Record<string, string> = { bitcoin: "BTC", ethereum: "ETH", solana: "SOL" };
-  const records: SignalRecord[] = Object.entries(names).map(([id, symbol]) => {
-    const price = Number(json?.[id]?.usd ?? 0);
-    const change = Number(json?.[id]?.usd_24h_change ?? 0);
-    const updated = json?.[id]?.last_updated_at ? new Date(Number(json[id].last_updated_at) * 1000).toISOString() : now;
-    return {
-      id: `coingecko-${id}`,
-      type: "market",
-      title: `${symbol} market pulse: $${price.toLocaleString(undefined, { maximumFractionDigits: symbol === "BTC" ? 0 : 2 })}`,
-      summary: `${change >= 0 ? "+" : ""}${change.toFixed(2)}% over 24h`,
-      source: "CoinGecko Market Adapter",
-      sourceUrl: "https://www.coingecko.com/",
-      timestamp: updated,
-      confidence: "reported",
-      confidenceNotes: "Public market API snapshot; not financial advice",
-      privacyClass: "public",
-      facts: { symbol, priceUsd: price, change24hPct: Number(change.toFixed(3)), provider: "CoinGecko" }
-    };
-  });
-  return { records, ledger: { name: "CoinGecko Market Adapter", status: "fresh" as SourceStatus, lastChecked: now, message: `${records.length} market records in ${Date.now() - started}ms` }, log: `CoinGecko market adapter returned ${records.length} records` };
+  const json = await readBoundedJson(MARKET_URL);
+  const records = normalizeMarketSignals(json, Date.parse(now)) as SignalRecord[];
+  return { records, ledger: { name: "CoinGecko Market Adapter", status: records.length ? "fresh" as SourceStatus : "stale" as SourceStatus, lastChecked: now, message: `${records.length} market records in ${Date.now() - started}ms` }, log: `CoinGecko market adapter returned ${records.length} records` };
 }
 
 function worldPoint(lat: number, lon: number, zoom: number) {
@@ -243,8 +181,9 @@ function ActualMapCanvas({ signals, selectedId, onSelect, zone, radiusKm }: { si
     canvas.height = Math.floor(h * dpr);
     canvas.style.width = `${w}px`;
     canvas.style.height = `${h}px`;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
+    const context = canvas.getContext("2d");
+    if (!context) return;
+    const ctx: CanvasRenderingContext2D = context;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     const zoom = zoomForRadius(radiusKm);
     const center = worldPoint(zone.lat, zone.lon, zoom);
@@ -323,9 +262,10 @@ function ActualMapCanvas({ signals, selectedId, onSelect, zone, radiusKm }: { si
 }
 
 export function WatchtowerDashboard({ defaultZone }: Props) {
+  const loadBusy = useRef(false);
   const [signals, setSignals] = useState<SignalRecord[]>([]);
   const [mapMode, setMapMode] = useState<"map" | "globe" | "lite">("lite");
-  const [workspace, setWorkspace] = useState<"signals" | "explore" | "incidents" | "discovery">("signals");
+  const [workspace, setWorkspace] = useState<"command" | "signals" | "explore" | "incidents" | "discovery">("command");
   const [selectedId, setSelectedId] = useState<string>();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string>();
@@ -360,16 +300,27 @@ export function WatchtowerDashboard({ defaultZone }: Props) {
     { name: "ISS Position API", status: "stale", message: "Waiting for first pull" },
     { name: "CelesTrak cached OMM", status: "stale", message: "Waiting for first scheduled catalog refresh" }
   ]);
-  const [watchtowerLog, setWatchtowerLog] = useState<string[]>(["Watchtower booted with actual OSM tile background"]);
+  const [watchtowerLog, setWatchtowerLog] = useState<string[]>(["Watchtower booted with the tile-free Lite Atlas available"]);
 
   const builtInLenses: WatchZone[] = [defaultZone, { name: "Mt. Shasta Watch Lens", lat: 41.4099, lon: -122.1949, radiusKm: 200, source: "built-in" }, { name: "Northern California Lens", lat: 39.6, lon: -121.9, radiusKm: 350, source: "built-in" }, { name: "West Coast Lens", lat: 38.5, lon: -123.5, radiusKm: 900, source: "built-in" }];
   const lenses = [...builtInLenses, ...savedZones];
 
   function pushLog(message: string) { setWatchtowerLog((old) => [`${new Date().toLocaleTimeString()} — ${message}`, ...old].slice(0, 8)); }
-  function persistZones(nextZones: WatchZone[]) { const normalized = nextZones.map((z) => ({ name: z.name, lat: z.lat, lon: z.lon, radiusKm: z.radiusKm, source: "saved" as const })); setSavedZones(normalized); try { localStorage.setItem(WATCH_ZONES_STORAGE_KEY, JSON.stringify(normalized)); } catch { setFieldNote("Could not persist watch zones"); } }
-  function persistAlertRules(nextRules: AlertRule[]) { setAlertRules(nextRules); try { localStorage.setItem(ALERT_RULES_STORAGE_KEY, JSON.stringify(nextRules)); } catch { setFieldNote("Could not persist alert rules"); } }
+  function persistZones(nextZones: WatchZone[]) {
+    const normalized = nextZones.map(normalizeWatchZone).filter((zone): zone is NonNullable<typeof zone> => zone !== null).slice(-12);
+    setSavedZones(normalized);
+    try { localStorage.setItem(WATCH_ZONES_STORAGE_KEY, JSON.stringify(normalized)); return true; }
+    catch { setFieldNote("Could not persist watch zones. Changes apply to this session only."); return false; }
+  }
+  function persistAlertRules(nextRules: AlertRule[]) {
+    setAlertRules(nextRules);
+    try { localStorage.setItem(ALERT_RULES_STORAGE_KEY, JSON.stringify(nextRules)); return true; }
+    catch { setFieldNote("Could not persist alert rules. Changes apply to this session only."); return false; }
+  }
 
   async function load() {
+    if (loadBusy.current) return;
+    loadBusy.current = true;
     setLoading(true);
     setError(undefined);
     const now = new Date().toISOString();
@@ -390,9 +341,7 @@ export function WatchtowerDashboard({ defaultZone }: Props) {
 
     try {
       const started = Date.now();
-      const res = await fetch(USGS_URL, { cache: "no-store" });
-      if (!res.ok) throw new Error(`USGS returned ${res.status}`);
-      const json = await res.json();
+      const json = await readBoundedJson(USGS_URL, { maxBytes: 5000000 });
       quakes = (json.features ?? []).filter((f: any) => f.properties?.type === "earthquake").map((f: any) => ({
         id: `usgs-${f.id}`, type: "earthquake", title: f.properties.title ?? `M ${f.properties.mag ?? "?"} earthquake`, summary: f.properties.place ?? undefined, source: "USGS Earthquake Feed", sourceUrl: f.properties.url ?? undefined, timestamp: new Date(f.properties.time).toISOString(), lat: f.geometry?.coordinates?.[1], lon: f.geometry?.coordinates?.[0], depthKm: f.geometry?.coordinates?.[2], magnitude: typeof f.properties.mag === "number" ? f.properties.mag : undefined, confidence: "verified_official", confidenceNotes: f.properties.status === "reviewed" ? "USGS reviewed event" : "USGS automatic event", privacyClass: "public", facts: { usgsId: f.id, status: f.properties.status, magType: f.properties.magType, feltReports: f.properties.felt, cdi: f.properties.cdi, mmi: f.properties.mmi, alert: f.properties.alert, tsunamiFlag: f.properties.tsunami, significance: f.properties.sig, network: f.properties.net, code: f.properties.code }
       }));
@@ -406,28 +355,16 @@ export function WatchtowerDashboard({ defaultZone }: Props) {
     }
 
     try { const result = await fetchNewsSignals(now, proxyUrl); newsRecords = result.records; newsLedger = result.ledger; pushLog(result.log); }
-    catch (err) { const message = err instanceof Error ? err.message : "GDELT load failed"; newsRecords = [{ id: "fallback-news-shasta", type: "news", title: "Fallback news lens: Mt. Shasta infrastructure watch", summary: "News did not load in this browser session, so Watchtower kept a safe placeholder record.", source: "Fallback News Adapter", timestamp: now, lat: 41.4099, lon: -122.1949, radiusKm: 90, locationLabel: "Mt. Shasta fallback lens", confidence: "approximate", confidenceNotes: "Fallback record only", privacyClass: "public", facts: { adapter: "fallback", reason: message } }]; newsLedger = { name: proxyUrl.trim() ? "Proxy GDELT News Adapter" : "GDELT News Adapter", status: "down", lastChecked: now, message: `Fallback active: ${message}` }; pushLog(`News adapter failed: ${message}`); }
+    catch (err) { const message = err instanceof Error ? err.message : "GDELT load failed"; newsRecords = []; newsLedger = { name: proxyUrl.trim() ? "Proxy GDELT News Adapter" : "GDELT News Adapter", status: "down", lastChecked: now, message: `Source unavailable: ${message}` }; pushLog(`News adapter failed: ${message}`); }
 
     try { const result = await fetchMarketSignals(now); marketRecords = result.records; marketLedger = result.ledger; pushLog(result.log); }
-    catch (err) { const message = err instanceof Error ? err.message : "market load failed"; marketRecords = [{ id: "fallback-market", type: "market", title: "Fallback market pulse", summary: "Market source did not load; live market adapter stayed claim-safe.", source: "Fallback Market Adapter", timestamp: now, confidence: "approximate", confidenceNotes: "Fallback record only; not financial advice", privacyClass: "public", facts: { reason: message } }]; marketLedger = { name: "CoinGecko Market Adapter", status: "down", lastChecked: now, message: `Fallback active: ${message}` }; pushLog(`Market adapter failed: ${message}`); }
+    catch (err) { const message = err instanceof Error ? err.message : "market load failed"; marketRecords = []; marketLedger = { name: "CoinGecko Market Adapter", status: "down", lastChecked: now, message: `Source unavailable: ${message}` }; pushLog(`Market adapter failed: ${message}`); }
 
     const [wildfireResult, kpResult, issResult, orbitResult] = await Promise.allSettled([
-      fetch(EONET_WILDFIRES_URL, { cache: "no-store" }).then(async (res) => {
-        if (!res.ok) throw new Error(`NASA EONET returned ${res.status}`);
-        return normalizeEonetWildfires(await res.json()) as SignalRecord[];
-      }),
-      fetch(NOAA_KP_URL, { cache: "no-store" }).then(async (res) => {
-        if (!res.ok) throw new Error(`NOAA Kp returned ${res.status}`);
-        return normalizeNoaaKp(await res.json()) as SignalRecord[];
-      }),
-      fetch(ISS_POSITION_URL, { cache: "no-store" }).then(async (res) => {
-        if (!res.ok) throw new Error(`ISS provider returned ${res.status}`);
-        return normalizeIssPosition(await res.json()) as SignalRecord[];
-      }),
-      fetch(import.meta.env.BASE_URL + "data/orbits.json", { cache: "no-store" }).then(async (res) => {
-        if (!res.ok) throw new Error("Cached orbital catalog returned " + res.status);
-        return propagateOrbitalSnapshot(await res.json()) as SignalRecord[];
-      })
+      readBoundedJson(EONET_WILDFIRES_URL).then(json => normalizeEonetWildfires(json) as SignalRecord[]),
+      readBoundedJson(NOAA_KP_URL).then(json => normalizeNoaaKp(json) as SignalRecord[]),
+      readBoundedJson(ISS_POSITION_URL).then(json => normalizeIssPosition(json) as SignalRecord[]),
+      readBoundedJson(import.meta.env.BASE_URL + "data/orbits.json").then(json => propagateOrbitalSnapshot(json) as SignalRecord[])
     ]);
     if (wildfireResult.status === "fulfilled") {
       wildfireRecords = wildfireResult.value;
@@ -472,9 +409,16 @@ export function WatchtowerDashboard({ defaultZone }: Props) {
     setFieldNote(`Loaded ${quakes.length} quakes, ${wildfireRecords.length} wildfires, ${spaceWeatherRecords.length} Kp records, ${satelliteRecords.length} ISS, ${orbitRecords.length} predicted orbits, ${newsRecords.length} news and ${marketRecords.length} market records`);
     setSourceLedger([usgsLedger, wildfireLedger, issLedger, orbitLedger, spaceWeatherLedger, newsLedger, marketLedger]);
     setLoading(false);
+    loadBusy.current = false;
   }
 
-  useEffect(() => { load(); const timer = window.setInterval(load, 60000); return () => window.clearInterval(timer); }, [proxyUrl]);
+  const liveWorkspace = workspace === "signals" || workspace === "discovery";
+  useEffect(() => {
+    if (!liveWorkspace) return;
+    void load();
+    const timer = window.setInterval(() => { if (document.visibilityState === "visible") void load(); }, 60000);
+    return () => window.clearInterval(timer);
+  }, [proxyUrl, liveWorkspace]);
 
   const visible = useMemo(() => signals.filter((s) => {
     if (!enabled.includes(s.type)) return false;
@@ -522,9 +466,34 @@ export function WatchtowerDashboard({ defaultZone }: Props) {
 
   function toggle(type: SignalType) { setEnabled((old) => old.includes(type) ? old.filter((t) => t !== type) : [...old, type]); }
   function useMyLocation() { navigator.geolocation?.getCurrentPosition((p) => setActiveZone({ name: "My Local Lens", lat: p.coords.latitude, lon: p.coords.longitude, radiusKm, source: "custom" })); }
-  function saveProxy() { const saved = proxyInput.trim(); try { saved ? localStorage.setItem(PROXY_STORAGE_KEY, saved) : localStorage.removeItem(PROXY_STORAGE_KEY); } catch { setFieldNote("Could not persist news proxy"); } setProxyUrl(saved); setFieldNote(saved ? "News proxy saved" : "News proxy cleared"); pushLog(saved ? "News proxy URL saved" : "News proxy URL cleared"); }
-  function persistCurrentZone(zone: WatchZone) { const clean = { name: zone.name.trim() || "Custom Watch Zone", lat: zone.lat, lon: zone.lon, radiusKm: zone.radiusKm, source: "saved" as const }; if (!Number.isFinite(clean.lat) || !Number.isFinite(clean.lon) || !Number.isFinite(clean.radiusKm)) { setFieldNote("Watch zone has invalid coordinates"); return; } const next = [...savedZones.filter((z) => z.name !== clean.name), clean].slice(-12); setSavedZones(next); localStorage.setItem(WATCH_ZONES_STORAGE_KEY, JSON.stringify(next)); setActiveZone(clean); setRadiusKm(clean.radiusKm); setFieldNote(`Saved watch zone: ${clean.name}`); pushLog(`Saved watch zone ${clean.name}`); }
-  function addAlertRule() { const threshold = Number(ruleThreshold); const radius = Number(ruleRadius); if (!Number.isFinite(threshold) || threshold <= 0) { setFieldNote("Alert threshold must be positive"); return; } const rule: AlertRule = { id: crypto.randomUUID(), name: ruleName.trim() || "Custom alert rule", scope: ruleScope, threshold, radiusKm: ruleScope === "local_magnitude" && Number.isFinite(radius) ? radius : undefined, enabled: true }; const next = [...alertRules, rule].slice(-16); setAlertRules(next); localStorage.setItem(ALERT_RULES_STORAGE_KEY, JSON.stringify(next)); setFieldNote(`Saved alert rule: ${rule.name}`); }
+  function saveProxyValue(value: string) {
+    const saved = value.trim();
+    try { buildGdeltProxyUrl(saved, window.location.origin); }
+    catch (error) { setFieldNote(error instanceof Error ? error.message : "Invalid news proxy URL."); return; }
+    let persisted = true;
+    try { saved ? localStorage.setItem(PROXY_STORAGE_KEY, saved) : localStorage.removeItem(PROXY_STORAGE_KEY); }
+    catch { persisted = false; }
+    setProxyUrl(saved);
+    setFieldNote(persisted ? (saved ? "News proxy saved" : "News proxy cleared") : "Could not persist news proxy. Changes apply to this session only.");
+    pushLog(saved ? "News proxy configured for this session" : "News proxy cleared for this session");
+  }
+  function saveProxy() { saveProxyValue(proxyInput); }
+  function persistCurrentZone(zone: WatchZone) {
+    const clean = normalizeWatchZone({ ...zone, name: zone.name.trim() || "Custom Watch Zone" });
+    if (!clean) { setFieldNote("Watch zone requires latitude -90 to 90, longitude -180 to 180, and radius above 0 through 20000 km."); return; }
+    const next = [...savedZones.filter(z => z.name !== clean.name), clean];
+    const persisted = persistZones(next);
+    setActiveZone(clean); setRadiusKm(clean.radiusKm);
+    if (persisted) setFieldNote(`Saved watch zone: ${clean.name}`);
+    pushLog(`Using watch zone ${clean.name}`);
+  }
+  function addAlertRule() {
+    const threshold = Number(ruleThreshold), radius = Number(ruleRadius);
+    if (!Number.isFinite(threshold) || threshold <= 0) { setFieldNote("Alert threshold must be positive"); return; }
+    const rule: AlertRule = { id: crypto.randomUUID(), name: ruleName.trim() || "Custom alert rule", scope: ruleScope, threshold,
+      radiusKm: ruleScope === "local_magnitude" && Number.isFinite(radius) ? radius : undefined, enabled: true };
+    if (persistAlertRules([...alertRules, rule].slice(-16))) setFieldNote(`Saved alert rule: ${rule.name}`);
+  }
   async function copyFieldReport() { const report = `Watchtower Live field report\nLens: ${activeZone.name}\nVisible signals: ${visible.length}\nLocal radius hits: ${localHits}\nLocal M3+: ${localM3}\nVisible M5+: ${regionalM5}\nNews signals: ${newsCount}\nMarket signals: ${marketCount}\nNASA EONET wildfire events: ${wildfireCount}\nNOAA Kp records: ${spaceWeatherCount}\nISS position samples: ${satelliteCount}\nSGP4 predicted orbit positions: ${orbitCount}\nTriggered alert rules: ${triggeredAlerts.length}\nMax magnitude: ${maxMag.toFixed(1)}\nUpdated: ${lastUpdated ?? "pending"}`; await navigator.clipboard?.writeText(report); setFieldNote("Field report copied to clipboard"); }
 
   function buildFieldPackJson() {
@@ -561,20 +530,21 @@ export function WatchtowerDashboard({ defaultZone }: Props) {
     }
   }
 
-  return <main className="shell">
-    <header className="header"><div className="brand"><div className="mark">⌂</div><div><div className="eyebrow">PHI369 · GLOBAL SIGNAL ATLAS</div><h1>WATCHTOWER <span className="live-word">LIVE</span></h1><div className="subtitle">Public signals with receipts. Earthquakes, wildfires, ISS samples, predicted satellite orbits, space weather, news and markets.</div></div></div><div className="stats"><div className="stat"><strong>{visible.length}</strong><span>Visible signals</span></div><div className="stat"><strong>{localHits}</strong><span>Local radius hits</span></div><div className="stat"><strong>{maxMag.toFixed(1)}</strong><span>Max magnitude</span></div></div></header>
-    <div className="status-strip"><span className="pill good">Watchtower running</span><span className="pill">Feeds {loading ? "loading" : "loaded"}</span><span className="pill">Vector map + globe + Lite fallback</span><span className="pill">News {proxyUrl.trim() ? "proxy-ready" : "direct/fallback"}</span><span className="pill">Market {marketCount ? "live/fallback" : "pending"}</span><span className="pill">{fieldNote}</span></div>
-    {error && <p className="error">{error}</p>}
+  return <main className={`shell ${workspace === "command" ? "command-shell" : ""}`}>
+    <header className="header"><div className="brand"><div className="mark">⌂</div><div><div className="eyebrow">PHI369 LABS · PUBLIC NEWS & INTELLIGENCE</div><h1>WATCHTOWER <span className="live-word">LIVE</span></h1><div className="subtitle">Source-backed reporting. Public signals. Independent inquiry.</div></div></div>{workspace === "command" ? <div className="command-header-note">GLOBAL NEWSROOM / LOCAL RESEARCH<br /><strong>RECEIPTS OVER HYPE</strong></div> : <div className="stats"><div className="stat"><strong>{visible.length}</strong><span>Visible signals</span></div><div className="stat"><strong>{localHits}</strong><span>Local radius hits</span></div><div className="stat"><strong>{maxMag.toFixed(1)}</strong><span>Max magnitude</span></div></div>}</header>
+    {workspace !== "command" && <div className="status-strip"><span className="pill good">Watchtower running</span><span className="pill">Feeds {loading ? "loading" : "loaded"}</span><span className="pill">Vector map + globe + Lite fallback</span><span className="pill">News {proxyUrl.trim() ? "proxy-ready" : "direct"}</span><span className="pill">Market {marketCount ? "available" : "pending"}</span><span className="pill">{fieldNote}</span></div>}
+    {workspace !== "command" && error && <p className="error">{error}</p>}
     <nav className="workspace-switch" aria-label="Watchtower workspace">
+      <button type="button" className="workspace-tab" aria-pressed={workspace === "command"} onClick={() => setWorkspace("command")}>News Command</button>
       <button type="button" className="workspace-tab" aria-pressed={workspace === "signals"} onClick={() => setWorkspace("signals")}>Live signals</button>
       <button type="button" className="workspace-tab" aria-pressed={workspace === "explore"} onClick={() => setWorkspace("explore")}>Explore · 50 sources</button>
       <button type="button" className="workspace-tab" aria-pressed={workspace === "incidents"} onClick={() => setWorkspace("incidents")}>Incident Room</button>
       <button type="button" className="workspace-tab" aria-pressed={workspace === "discovery"} onClick={() => setWorkspace("discovery")}>Discovery Inbox</button>
     </nav>
-    {workspace === "signals" ? <section className="grid"><aside className="panel panel-pad"><h2 className="panel-title">Controls</h2><div className="control-group"><div className="label">Signal layers</div><div className="toggle-row">{(["earthquake", "wildfire", "satellite", "orbit", "space_weather", "news", "market"] as SignalType[]).map((t) => <button className={`toggle ${enabled.includes(t) ? "" : "off"}`} key={t} onClick={() => toggle(t)}>{t}</button>)}</div><p className="small">EONET wildfire points are not burn perimeters. ISS is a sampled position; orbits are SGP4 predictions from cached public data. NOAA Kp is global and unmapped.</p></div><div className="control-group zone-card"><div className="label">Connected field tools</div><p className="small">Open public camera and environmental dashboards. These are separate apps, not secretly merged feeds.</p><a className="federated-link" href={buildPeekabooPublicViewsUrl(activeZone)} target="_blank" rel="noopener noreferrer">PEEKABOO · open public views near {activeZone.name} ↗</a><a className="federated-link" href="https://michaelwave369.github.io/schumann-live-react/" target="_blank" rel="noopener noreferrer">EIRM · resonance &amp; space weather ↗</a></div><div className="control-group"><div className="label">Time window</div><div className="toggle-row"><button className={`toggle ${timeWindow === "24h" ? "" : "off"}`} onClick={() => setTimeWindow("24h")}>24h</button><button className={`toggle ${timeWindow === "7d" ? "" : "off"}`} onClick={() => setTimeWindow("7d")}>7d</button></div></div><div className="control-group"><div className="label">Search field</div><input className="toggle" style={{ width: "100%" }} value={query} placeholder="place, source, keyword" onChange={(e) => setQuery(e.target.value)}/></div><div className="control-group"><div className="label">Minimum earthquake magnitude</div><input className="slider" type="range" min="0" max="7" step="0.1" value={minMag} onChange={(e) => setMinMag(Number(e.target.value))}/><p className="small">M {minMag.toFixed(1)}+</p></div><div className="control-group zone-card"><div className="label">Local lens</div><strong>{activeZone.name}</strong><p className="small">{activeZone.lat.toFixed(4)}, {activeZone.lon.toFixed(4)}</p><select className="toggle" value={activeZone.name} onChange={(e) => { const z = lenses.find((l) => l.name === e.target.value); if (z) { setActiveZone(z); setRadiusKm(z.radiusKm); setZoneName(z.name); setZoneLat(String(z.lat)); setZoneLon(String(z.lon)); setZoneRadius(String(z.radiusKm)); } }}>{lenses.map((z) => <option key={`${z.name}-${z.lat}-${z.lon}`}>{z.name}</option>)}</select><div className="zone-row"><button className="btn" onClick={useMyLocation}>Use my location</button><button className="btn" onClick={() => { setActiveZone(defaultZone); setRadiusKm(defaultZone.radiusKm); }}>Reset Corning</button></div><label className="checkline"><input type="checkbox" checked={localOnly} onChange={(e) => setLocalOnly(e.target.checked)}/> show local radius only</label><input className="slider" type="range" min="25" max="900" step="25" value={radiusKm} onChange={(e) => setRadiusKm(Number(e.target.value))}/><p className="small">{radiusKm} km radius</p></div><div className="control-group zone-card"><div className="label">Watch Zones</div><input className="toggle" style={{ width: "100%", marginBottom: 8 }} value={zoneName} placeholder="Zone name" onChange={(e) => setZoneName(e.target.value)}/><div className="zone-row"><input className="toggle" value={zoneLat} placeholder="lat" onChange={(e) => setZoneLat(e.target.value)}/><input className="toggle" value={zoneLon} placeholder="lon" onChange={(e) => setZoneLon(e.target.value)}/></div><input className="toggle" style={{ width: "100%", marginTop: 8 }} value={zoneRadius} placeholder="radius km" onChange={(e) => setZoneRadius(e.target.value)}/><div className="zone-row"><button className="btn" onClick={() => persistCurrentZone({ name: zoneName, lat: Number(zoneLat), lon: Number(zoneLon), radiusKm: Number(zoneRadius) })}>Save custom</button><button className="btn" onClick={() => persistCurrentZone({ ...activeZone, name: `${activeZone.name} Saved`, radiusKm })}>Save current</button></div>{savedZones.map((zone) => <p className="small" key={zone.name}><strong>{zone.name}</strong><br />{zone.lat.toFixed(4)}, {zone.lon.toFixed(4)} • {zone.radiusKm} km<br /><button className="btn" onClick={() => { setActiveZone(zone); setRadiusKm(zone.radiusKm); }}>Activate</button> <button className="btn" onClick={() => { const next = savedZones.filter((z) => z.name !== zone.name); setSavedZones(next); localStorage.setItem(WATCH_ZONES_STORAGE_KEY, JSON.stringify(next)); }}>Remove</button></p>)}</div><div className="control-group zone-card"><div className="label">Alert Rules</div><input className="toggle" style={{ width: "100%", marginBottom: 8 }} value={ruleName} placeholder="Rule name" onChange={(e) => setRuleName(e.target.value)}/><select className="toggle" style={{ width: "100%" }} value={ruleScope} onChange={(e) => setRuleScope(e.target.value as AlertScope)}><option value="local_magnitude">Local magnitude threshold</option><option value="visible_magnitude">Visible magnitude threshold</option><option value="news_count">News count threshold</option></select><div className="zone-row"><input className="toggle" value={ruleThreshold} placeholder="threshold" onChange={(e) => setRuleThreshold(e.target.value)}/><input className="toggle" value={ruleRadius} placeholder="radius km" onChange={(e) => setRuleRadius(e.target.value)}/></div><button className="btn" style={{ width: "100%", marginTop: 8 }} onClick={addAlertRule}>Save alert rule</button>{evaluatedAlerts.map(({ rule, count, detail, triggered }) => <p className="small" key={rule.id}><span className={`badge ${triggered ? "verified_official" : rule.enabled ? "reported" : "unknown"}`}>{triggered ? "triggered" : rule.enabled ? "quiet" : "paused"}</span><br /><strong>{rule.name}</strong><br />{detail}<br />Hits: {count}<br /><button className="btn" onClick={() => { const next = alertRules.map((r) => r.id === rule.id ? { ...r, enabled: !r.enabled } : r); setAlertRules(next); localStorage.setItem(ALERT_RULES_STORAGE_KEY, JSON.stringify(next)); }}>{rule.enabled ? "Pause" : "Enable"}</button> <button className="btn" onClick={() => { const next = alertRules.filter((r) => r.id !== rule.id); setAlertRules(next); localStorage.setItem(ALERT_RULES_STORAGE_KEY, JSON.stringify(next)); }}>Remove</button></p>)}</div><div className="control-group zone-card"><div className="label">News Proxy Mode</div><p className="small">Optional Netlify/Vercel function URL for GDELT.</p><input className="toggle" style={{ width: "100%" }} value={proxyInput} placeholder="https://your-site.netlify.app/.netlify/functions/gdelt-proxy" onChange={(e) => setProxyInput(e.target.value)}/><div className="zone-row"><button className="btn" onClick={saveProxy}>Save proxy</button><button className="btn" onClick={() => { setProxyInput(""); setProxyUrl(""); localStorage.removeItem(PROXY_STORAGE_KEY); }}>Clear</button></div></div><div className="control-group zone-card"><div className="label">Alert preview</div>{alertCards.map((card) => <p className="small" key={card.title}><strong>{card.title}: {card.value}</strong><br />{card.detail}</p>)}<button className="btn" onClick={copyFieldReport}>Copy field report</button></div><div className="control-group zone-card"><div className="label">Φ FieldPack v1 · Ecosystem bridge</div><p className="small">Export a portable JSON evidence envelope for future PhiOS, PhiStream and companion-app imports. Only visible public signals with HTTPS source receipts qualify; this does not sync anything automatically.</p><div className="toggle-row"><button className="btn" onClick={downloadFieldPack}>Download FieldPack JSON</button><button className="btn" onClick={copyFieldPack}>Copy FieldPack JSON</button></div><p className="small" role="status">{packNote}</p><a className="federated-link" href={import.meta.env.BASE_URL + "data/field-sources.v1.json"} target="_blank" rel="noopener noreferrer">View public source manifest ↗</a></div><div className="control-group zone-card"><div className="label">Source Ledger</div>{sourceLedger.map((source) => <p className="small" key={source.name}><span className={`badge ${source.status === "fresh" ? "verified_official" : source.status === "demo" ? "reported" : "unknown"}`}>{source.status}</span><br /><strong>{source.name}</strong><br />{source.message}<br />{source.lastChecked ? ageLabel(source.lastChecked) : "not checked"}</p>)}</div><div className="control-group zone-card"><div className="label">Watchtower Log</div>{watchtowerLog.map((entry) => <p className="small" key={entry}>{entry}</p>)}</div><ul className="boundary-list"><li>Consent-based location only</li><li>Public/official sources preferred</li><li>Receipts over hype</li><li>Correlation does not equal causation</li><li>Market snapshots are not financial advice</li></ul></aside><section className="panel map-panel"><div className="map-head"><div><h2 className="panel-title">{mapMode === "globe" ? "Global Earth Lens" : mapMode === "lite" ? "Lite Atlas · Tile-Free" : "Vector Map · Clustered Signals"}</h2><div className="small">{mapMode === "globe" ? "Orthographic Earth projection. Drag to rotate; public geocoded events only." : mapMode === "lite" ? "No external tiles. Local grid with public event points for WebGL/network-limited devices." : "MapLibre with OpenFreeMap vector tiles. Pan, zoom or click a cluster to expand; click an event for its receipt."}</div><div className="toggle-row" role="group" aria-label="Map display mode"><button className={`toggle ${mapMode === "map" ? "" : "off"}`} onClick={() => setMapMode("map")}>Map</button><button className={`toggle ${mapMode === "globe" ? "" : "off"}`} onClick={() => setMapMode("globe")}>Globe</button><button className={`toggle ${mapMode === "lite" ? "" : "off"}`} onClick={() => setMapMode("lite")}>Lite</button></div></div><div className="legend"><span className="badge verified_official">Verified official</span><span className="badge reported">Reported</span></div></div><div className="canvas-wrap"><span className="map-chip">{visible.filter((s) => s.lat !== undefined && s.lon !== undefined).length} mapped source signals {mapMode === "map" ? "· clustered by proximity" : "· select markers for receipts"}</span>{mapMode === "globe" ? <GlobeCanvas signals={visible} selectedId={selected?.id} onSelect={setSelectedId} zone={activeZone}/> : mapMode === "lite" ? <ActualMapCanvas signals={visible} selectedId={selected?.id} onSelect={setSelectedId} zone={activeZone} radiusKm={radiusKm}/> : <MapRenderBoundary onCrash={(error) => { setFieldNote("Map renderer crashed: " + error.message + ". Lite Atlas restored."); setMapMode("lite"); }}>
+    {workspace === "command" ? <Suspense fallback={<p role="status">Opening the newsroom…</p>}><NewsCommandCenter onOpenAtlas={() => setWorkspace("signals")} /></Suspense> : workspace === "signals" ? <section className="grid"><aside className="panel panel-pad"><h2 className="panel-title">Controls</h2><div className="control-group"><div className="label">Signal layers</div><div className="toggle-row">{(["earthquake", "wildfire", "satellite", "orbit", "space_weather", "news", "market"] as SignalType[]).map((t) => <button className={`toggle ${enabled.includes(t) ? "" : "off"}`} key={t} onClick={() => toggle(t)}>{t}</button>)}</div><p className="small">EONET wildfire points are not burn perimeters. ISS is a sampled position; orbits are SGP4 predictions from cached public data. NOAA Kp is global and unmapped.</p></div><div className="control-group zone-card"><div className="label">Connected field tools</div><p className="small">Open public camera and environmental dashboards. These are separate apps, not secretly merged feeds.</p><a className="federated-link" href={buildPeekabooPublicViewsUrl(activeZone)} target="_blank" rel="noopener noreferrer">PEEKABOO · open public views near {activeZone.name} ↗</a><a className="federated-link" href="https://michaelwave369.github.io/schumann-live-react/" target="_blank" rel="noopener noreferrer">EIRM · resonance &amp; space weather ↗</a></div><div className="control-group"><div className="label">Time window</div><div className="toggle-row"><button className={`toggle ${timeWindow === "24h" ? "" : "off"}`} onClick={() => setTimeWindow("24h")}>24h</button><button className={`toggle ${timeWindow === "7d" ? "" : "off"}`} onClick={() => setTimeWindow("7d")}>7d</button></div></div><div className="control-group"><div className="label">Search field</div><input className="toggle" style={{ width: "100%" }} value={query} placeholder="place, source, keyword" onChange={(e) => setQuery(e.target.value)}/></div><div className="control-group"><div className="label">Minimum earthquake magnitude</div><input className="slider" type="range" min="0" max="7" step="0.1" value={minMag} onChange={(e) => setMinMag(Number(e.target.value))}/><p className="small">M {minMag.toFixed(1)}+</p></div><div className="control-group zone-card"><div className="label">Local lens</div><strong>{activeZone.name}</strong><p className="small">{activeZone.lat.toFixed(4)}, {activeZone.lon.toFixed(4)}</p><select className="toggle" value={activeZone.name} onChange={(e) => { const z = lenses.find((l) => l.name === e.target.value); if (z) { setActiveZone(z); setRadiusKm(z.radiusKm); setZoneName(z.name); setZoneLat(String(z.lat)); setZoneLon(String(z.lon)); setZoneRadius(String(z.radiusKm)); } }}>{lenses.map((z) => <option key={`${z.name}-${z.lat}-${z.lon}`}>{z.name}</option>)}</select><div className="zone-row"><button className="btn" onClick={useMyLocation}>Use my location</button><button className="btn" onClick={() => { setActiveZone(defaultZone); setRadiusKm(defaultZone.radiusKm); }}>Reset Corning</button></div><label className="checkline"><input type="checkbox" checked={localOnly} onChange={(e) => setLocalOnly(e.target.checked)}/> show local radius only</label><input className="slider" type="range" min="25" max="900" step="25" value={radiusKm} onChange={(e) => setRadiusKm(Number(e.target.value))}/><p className="small">{radiusKm} km radius</p></div><div className="control-group zone-card"><div className="label">Watch Zones</div><input className="toggle" style={{ width: "100%", marginBottom: 8 }} value={zoneName} placeholder="Zone name" onChange={(e) => setZoneName(e.target.value)}/><div className="zone-row"><input className="toggle" value={zoneLat} placeholder="lat" onChange={(e) => setZoneLat(e.target.value)}/><input className="toggle" value={zoneLon} placeholder="lon" onChange={(e) => setZoneLon(e.target.value)}/></div><input className="toggle" style={{ width: "100%", marginTop: 8 }} value={zoneRadius} placeholder="radius km" onChange={(e) => setZoneRadius(e.target.value)}/><div className="zone-row"><button className="btn" onClick={() => persistCurrentZone({ name: zoneName, lat: zoneLat.trim() ? Number(zoneLat) : NaN, lon: zoneLon.trim() ? Number(zoneLon) : NaN, radiusKm: zoneRadius.trim() ? Number(zoneRadius) : NaN })}>Save custom</button><button className="btn" onClick={() => persistCurrentZone({ ...activeZone, name: `${activeZone.name} Saved`, radiusKm })}>Save current</button></div>{savedZones.map((zone) => <p className="small" key={zone.name}><strong>{zone.name}</strong><br />{zone.lat.toFixed(4)}, {zone.lon.toFixed(4)} • {zone.radiusKm} km<br /><button className="btn" onClick={() => { setActiveZone(zone); setRadiusKm(zone.radiusKm); }}>Activate</button> <button className="btn" onClick={() => { const next = savedZones.filter((z) => z.name !== zone.name); persistZones(next); }}>Remove</button></p>)}</div><div className="control-group zone-card"><div className="label">Alert Rules</div><input className="toggle" style={{ width: "100%", marginBottom: 8 }} value={ruleName} placeholder="Rule name" onChange={(e) => setRuleName(e.target.value)}/><select className="toggle" style={{ width: "100%" }} value={ruleScope} onChange={(e) => setRuleScope(e.target.value as AlertScope)}><option value="local_magnitude">Local magnitude threshold</option><option value="visible_magnitude">Visible magnitude threshold</option><option value="news_count">News count threshold</option></select><div className="zone-row"><input className="toggle" value={ruleThreshold} placeholder="threshold" onChange={(e) => setRuleThreshold(e.target.value)}/><input className="toggle" value={ruleRadius} placeholder="radius km" onChange={(e) => setRuleRadius(e.target.value)}/></div><button className="btn" style={{ width: "100%", marginTop: 8 }} onClick={addAlertRule}>Save alert rule</button>{evaluatedAlerts.map(({ rule, count, detail, triggered }) => <p className="small" key={rule.id}><span className={`badge ${triggered ? "verified_official" : rule.enabled ? "reported" : "unknown"}`}>{triggered ? "triggered" : rule.enabled ? "quiet" : "paused"}</span><br /><strong>{rule.name}</strong><br />{detail}<br />Hits: {count}<br /><button className="btn" onClick={() => { const next = alertRules.map((r) => r.id === rule.id ? { ...r, enabled: !r.enabled } : r); persistAlertRules(next); }}>{rule.enabled ? "Pause" : "Enable"}</button> <button className="btn" onClick={() => { const next = alertRules.filter((r) => r.id !== rule.id); persistAlertRules(next); }}>Remove</button></p>)}</div><div className="control-group zone-card"><div className="label">News Proxy Mode</div><p className="small">Optional Netlify/Vercel function URL for GDELT.</p><input className="toggle" style={{ width: "100%" }} value={proxyInput} placeholder="https://your-site.netlify.app/.netlify/functions/gdelt-proxy" onChange={(e) => setProxyInput(e.target.value)}/><div className="zone-row"><button className="btn" onClick={saveProxy}>Save proxy</button><button className="btn" onClick={() => { setProxyInput(""); saveProxyValue(""); }}>Clear</button></div></div><div className="control-group zone-card"><div className="label">Alert preview</div>{alertCards.map((card) => <p className="small" key={card.title}><strong>{card.title}: {card.value}</strong><br />{card.detail}</p>)}<button className="btn" onClick={copyFieldReport}>Copy field report</button></div><div className="control-group zone-card"><div className="label">Φ FieldPack v1 · Ecosystem bridge</div><p className="small">Export a portable JSON evidence envelope for future PhiOS, PhiStream and companion-app imports. Only visible public signals with HTTPS source receipts qualify; this does not sync anything automatically.</p><div className="toggle-row"><button className="btn" onClick={downloadFieldPack}>Download FieldPack JSON</button><button className="btn" onClick={copyFieldPack}>Copy FieldPack JSON</button></div><p className="small" role="status">{packNote}</p><a className="federated-link" href={import.meta.env.BASE_URL + "data/field-sources.v1.json"} target="_blank" rel="noopener noreferrer">View public source manifest ↗</a></div><div className="control-group zone-card"><div className="label">Source Ledger</div>{sourceLedger.map((source) => <p className="small" key={source.name}><span className={`badge ${source.status === "fresh" ? "verified_official" : source.status === "demo" ? "reported" : "unknown"}`}>{source.status}</span><br /><strong>{source.name}</strong><br />{source.message}<br />{source.lastChecked ? ageLabel(source.lastChecked) : "not checked"}</p>)}</div><div className="control-group zone-card"><div className="label">Watchtower Log</div>{watchtowerLog.map((entry) => <p className="small" key={entry}>{entry}</p>)}</div><ul className="boundary-list"><li>Consent-based location only</li><li>Public/official sources preferred</li><li>Receipts over hype</li><li>Correlation does not equal causation</li><li>Market snapshots are not financial advice</li></ul></aside><section className="panel map-panel"><div className="map-head"><div><h2 className="panel-title">{mapMode === "globe" ? "Global Earth Lens" : mapMode === "lite" ? "Lite Atlas · Tile-Free" : "Vector Map · Clustered Signals"}</h2><div className="small">{mapMode === "globe" ? "Orthographic Earth projection. Drag to rotate; public geocoded events only." : mapMode === "lite" ? "No external tiles. Local grid with public event points for WebGL/network-limited devices." : "MapLibre with OpenFreeMap vector tiles. Pan, zoom or click a cluster to expand; click an event for its receipt."}</div><div className="toggle-row" role="group" aria-label="Map display mode"><button className={`toggle ${mapMode === "map" ? "" : "off"}`} onClick={() => setMapMode("map")}>Map</button><button className={`toggle ${mapMode === "globe" ? "" : "off"}`} onClick={() => setMapMode("globe")}>Globe</button><button className={`toggle ${mapMode === "lite" ? "" : "off"}`} onClick={() => setMapMode("lite")}>Lite</button></div></div><div className="legend"><span className="badge verified_official">Verified official</span><span className="badge reported">Reported</span></div></div><div className="canvas-wrap"><span className="map-chip">{visible.filter((s) => s.lat !== undefined && s.lon !== undefined).length} mapped source signals {mapMode === "map" ? "· clustered by proximity" : "· select markers for receipts"}</span>{mapMode === "globe" ? <GlobeCanvas signals={visible} selectedId={selected?.id} onSelect={setSelectedId} zone={activeZone}/> : mapMode === "lite" ? <ActualMapCanvas signals={visible} selectedId={selected?.id} onSelect={setSelectedId} zone={activeZone} radiusKm={radiusKm}/> : <MapRenderBoundary onCrash={(error) => { setFieldNote("Map renderer crashed: " + error.message + ". Lite Atlas restored."); setMapMode("lite"); }}>
   <Suspense fallback={<div className="vector-map-loading" role="status">Loading vector map. Lite Atlas remains available.</div>}>
     <SignalVectorMap signals={visible} selectedId={selected?.id} onSelect={setSelectedId} zone={activeZone} radiusKm={radiusKm} onUnavailable={(reason) => { setFieldNote(reason); setMapMode("lite"); }}/>
   </Suspense>
-</MapRenderBoundary>}</div></section><aside className="panel panel-pad"><h2 className="panel-title">Signal Feed</h2><div className="feed-list">{visible.slice(0, 42).map((s) => <button key={s.id} className={`feed-item ${s.id === selected?.id ? "active" : ""}`} onClick={() => setSelectedId(s.id)}><div className="feed-title">{s.magnitude ? `M ${s.magnitude.toFixed(1)} - ` : ""}{s.title}</div><div className="small">{s.source} • {ageLabel(s.timestamp)} • {s.locationLabel ?? s.summary ?? new Date(s.timestamp).toLocaleString()}</div><span className={`badge ${s.confidence}`}>{s.confidence.replace("_", " ")}</span></button>)}</div>{selected && <div className="receipt"><h2 className="panel-title">Event Receipt</h2><dl><dt>Title</dt><dd>{selected.title}</dd><dt>Source</dt><dd>{selected.source}</dd><dt>Time</dt><dd>{new Date(selected.timestamp).toLocaleString()}</dd><dt>Age</dt><dd>{ageLabel(selected.timestamp)}</dd><dt>Confidence</dt><dd>{selected.confidenceNotes ?? selected.confidence}</dd><dt>Location</dt><dd>{selected.locationLabel ?? ""} {selected.lat?.toFixed(4) ?? "unmapped"}, {selected.lon?.toFixed(4) ?? ""}</dd><dt>Distance</dt><dd>{selected.lat !== undefined && selected.lon !== undefined ? `${distanceKm(activeZone.lat, activeZone.lon, selected.lat, selected.lon).toFixed(1)} km from ${activeZone.name}` : "n/a"}</dd><dt>Magnitude</dt><dd>{selected.magnitude ?? "n/a"}</dd><dt>Depth</dt><dd>{selected.depthKm ?? "n/a"} km</dd><dt>Privacy</dt><dd>{selected.privacyClass}</dd><dt>Receipt</dt><dd>{selected.sourceUrl ? <a href={selected.sourceUrl} target="_blank">Open source</a> : "fallback/demo record"}</dd>{selected.facts && Object.entries(selected.facts).filter(([, value]) => value !== undefined && value !== null && value !== "").flatMap(([key, value]) => [<dt key={`${key}-dt`}>{key}</dt>, <dd key={`${key}-dd`}>{String(value)}</dd>])}</dl></div>}</aside></section> : workspace === "explore" ? <ExplorePanel /> : workspace === "incidents" ? <IncidentRoom /> : <DiscoveryInbox signals={signals} />}
+</MapRenderBoundary>}</div></section><aside className="panel panel-pad"><h2 className="panel-title">Signal Feed</h2><div className="feed-list">{visible.slice(0, 42).map((s) => <button key={s.id} className={`feed-item ${s.id === selected?.id ? "active" : ""}`} onClick={() => setSelectedId(s.id)}><div className="feed-title">{s.magnitude ? `M ${s.magnitude.toFixed(1)} - ` : ""}{s.title}</div><div className="small">{s.source} • {ageLabel(s.timestamp)} • {s.locationLabel ?? s.summary ?? new Date(s.timestamp).toLocaleString()}</div><span className={`badge ${s.confidence}`}>{s.confidence.replace("_", " ")}</span></button>)}</div>{selected && <div className="receipt"><h2 className="panel-title">Event Receipt</h2><dl><dt>Title</dt><dd>{selected.title}</dd><dt>Source</dt><dd>{selected.source}</dd><dt>Time</dt><dd>{new Date(selected.timestamp).toLocaleString()}</dd><dt>Age</dt><dd>{ageLabel(selected.timestamp)}</dd><dt>Confidence</dt><dd>{selected.confidenceNotes ?? selected.confidence}</dd><dt>Location</dt><dd>{selected.locationLabel ?? ""} {selected.lat?.toFixed(4) ?? "unmapped"}, {selected.lon?.toFixed(4) ?? ""}</dd><dt>Distance</dt><dd>{selected.lat !== undefined && selected.lon !== undefined ? `${distanceKm(activeZone.lat, activeZone.lon, selected.lat, selected.lon).toFixed(1)} km from ${activeZone.name}` : "n/a"}</dd><dt>Magnitude</dt><dd>{selected.magnitude ?? "n/a"}</dd><dt>Depth</dt><dd>{selected.depthKm ?? "n/a"} km</dd><dt>Privacy</dt><dd>{selected.privacyClass}</dd><dt>Receipt</dt><dd>{safeNewsReceipt(selected.sourceUrl) ? <a href={safeNewsReceipt(selected.sourceUrl)!} target="_blank" rel="noopener noreferrer">Open source</a> : "fallback/demo record"}</dd>{selected.facts && Object.entries(selected.facts).filter(([, value]) => value !== undefined && value !== null && value !== "").flatMap(([key, value]) => [<dt key={`${key}-dt`}>{key}</dt>, <dd key={`${key}-dd`}>{String(value)}</dd>])}</dl></div>}</aside></section> : workspace === "explore" ? <ExplorePanel /> : workspace === "incidents" ? <IncidentRoom /> : <DiscoveryInbox signals={signals} />}
   </main>;
 }

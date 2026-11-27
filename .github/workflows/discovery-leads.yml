@@ -33,7 +33,7 @@ jobs:
         with:
           node-version: 22
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       - name: Validate adapters and discovery rules
         run: npm test
       - name: Read two official public feeds once

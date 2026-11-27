@@ -13,8 +13,9 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "plugins": [{ "name": "next" }]
+    "tsBuildInfoFile": "./node_modules/.cache/watchtower.tsbuildinfo",
+    "types": ["vite/client", "node"]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": ["src", "components", "vite.config.ts"],
+  "exclude": ["node_modules", "dist"]
 }

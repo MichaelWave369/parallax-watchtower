@@ -10,3 +10,7 @@ dist/
 coverage/
 .vercel/
 .netlify/
+
+test-results/
+playwright-report/
+*.tsbuildinfo

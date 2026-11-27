@@ -29,8 +29,9 @@ export function GlobeCanvas({ signals, selectedId, onSelect, zone }: Props) {
       const dpr = Math.min(2, window.devicePixelRatio || 1);
       canvas.width = Math.round(width * dpr);
       canvas.height = Math.round(height * dpr);
-      const ctx = canvas.getContext("2d");
-      if (!ctx) return;
+      const context = canvas.getContext("2d");
+      if (!context) return;
+      const ctx: CanvasRenderingContext2D = context;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       const cx = width / 2, cy = height / 2;
       const radius = Math.max(1, Math.min(width, height) * 0.43);

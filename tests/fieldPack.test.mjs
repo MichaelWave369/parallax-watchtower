@@ -67,3 +67,14 @@ test("import-side validator rejects corrupted/malicious metadata", () => {
   assert.equal(inspectFieldPack({ ...original, records: [{ ...original.records[0], evidenceUrl: "file:///etc/passwd" }] }).valid, false);
   assert.equal(inspectFieldPack({ ...original, scope: { browserLocationIncluded: true, watchZoneCoordinatesIncluded: false } }).valid, false);
 });
+
+test('both FieldPack export and import reject private, IP, credentialed and nonstandard-port receipts',()=>{
+  for(const sourceUrl of ['https://127.0.0.1/private','https://192.168.1.1/admin','https://[::1]/private',
+    'https://2130706433/private','https://localhost/private','https://device.local/private',
+    'https://service.internal/private','https://user:secret@earthquake.usgs.gov/private','https://earthquake.usgs.gov:8443/private']) {
+    assert.equal(makeFieldPack([{...quake,sourceUrl}],[],now).count,0,sourceUrl);
+    const original=makeFieldPack([quake],[],now);
+    assert.equal(inspectFieldPack({...original,records:[{...original.records[0],evidenceUrl:sourceUrl}]}).valid,false,sourceUrl);
+  }
+  assert.equal(makeFieldPack([quake],[],now).count,1);
+});
